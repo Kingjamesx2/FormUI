@@ -1,0 +1,79 @@
+/* Container for the form */
+form.search-bar {
+  display: flex;
+  // justify-content: center; /* Center the search bar */
+  position: relative;
+  left: 70px;
+  margin-top: 5px;
+  width: calc(100% - 140px); /* Adjust width to account for left position */
+  max-width: 100%; /* Ensure the form doesn't exceed the screen width */
+}
+
+/* Container for the input field */
+.search-input-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px; /* Make the input field longer */
+}
+
+/* Input field styles */
+input {
+  width: 100%;  
+  padding: 0.5em 1em 0.5em 2.5em; /* Add padding to accommodate the icon */
+  font-size: 1em;
+  border-radius: 25px; /* Add border radius */
+  border: 1px solid #ccc; /* Add border color */
+  outline: none;
+}
+
+/* Search icon styles */
+.search-icon {
+  position: absolute;
+  left: 20px; /* Adjust position from the left */
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c377773; /* Icon color */
+  pointer-events: none;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  form.search-bar {
+    left: 0;
+    width: 100%; /* Full width on smaller screens */
+  }
+
+  .search-input-container {
+    max-width: 100%; /* Ensure input container is full width */
+  }
+
+  input {
+    font-size: 0.9em; /* Slightly smaller font size on smaller screens */
+    padding: 0.5em 0.75em 0.5em 2em; /* Adjust padding */
+  }
+
+  .search-icon {
+    left: 10px; /* Adjust icon position */
+  }
+}
+
+/* Media query for very small screens */
+@media (max-width: 480px) {
+  form.search-bar {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center elements */
+  }
+
+  .search-input-container {
+    width: 90%; /* Reduce width on very small screens */
+  }
+
+  input {
+    font-size: 0.8em; /* Further reduce font size */
+    padding: 0.5em 0.5em 0.5em 1.5em; /* Adjust padding */
+  }
+
+  .search-icon {
+    left: 5px; /* Further adjust icon position */
+  }
+}
