@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { Container } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
@@ -15,7 +15,7 @@ export const AnnualAcademicReportStep1 = () => {
       question: "Faculty",
       handleSetAnswer: (e: SelectChangeEvent<string>) => {
         const selectedValue = e.target.value;
-        setState([selectedValue, "", ""]);
+        setState((prevState) => [selectedValue, "", ""]);
         console.log(selectedValue);
       },
       type: "dropdown",
@@ -44,26 +44,21 @@ export const AnnualAcademicReportStep1 = () => {
       value: state[0],
     },
     {
-      question:
-        "List all units/departments/centres/institutes within the Faculty",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      question: "List all units/departments/centres/institutes within the Faculty",
+      handleSetAnswer: (e: ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value;
-        setState([state[0], value, state[2]]);
+        setState((prevState) => [prevState[0], value, prevState[2]]);
         console.log(value);
       },
       type: "textarea",
       value: state[1],
     },
     {
-      question: "Faculty Mission Statement ",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
+      question: "Faculty Mission Statement",
+      handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        console.log(e.target.value);
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[2] = value;
-          return newState;
-        });
+        setState((prevState) => [prevState[0], prevState[1], value]);
+        console.log(value);
       },
       type: "input",
       value: state[2],
@@ -78,16 +73,17 @@ export const AnnualAcademicReportStep1 = () => {
             <UBTextArea
               key={index}
               question={q.question}
-              SetAnswer={q.handleSetAnswer}
+              SetAnswer={q.handleSetAnswer as (e: ChangeEvent<HTMLTextAreaElement>) => void}
               value={q.value}
             />
           );
         } else if (q.type === "dropdown") {
           return (
             <UbDropdown
+              key={index}
               label={q.question}
               options={q.options}
-              handleSetValue={q.handleSetAnswer}
+              handleSetValue={q.handleSetAnswer as (e: SelectChangeEvent<string>) => void}
               value={q.value}
             />
           );
@@ -96,7 +92,7 @@ export const AnnualAcademicReportStep1 = () => {
             <UBTextField
               key={index}
               question={q.question}
-              SetAnswer={q.handleSetAnswer}
+              SetAnswer={q.handleSetAnswer as (e: ChangeEvent<HTMLInputElement>) => void}
               value={q.value}
             />
           );

@@ -1,10 +1,10 @@
 // FormOne.stories.tsx
 import type { Meta, StoryObj } from "@storybook/react";
-import  { AnnualAcademicReport } from '../../pages/Reports/AnnualAcademicReport';
+import  { AnnualNonAcademicReport } from '../../pages/Reports/AnnualNonAcademicReport';
 
-const meta: Meta<typeof AnnualAcademicReport> = {
-  title: 'pages/Reports/AnnualAcademicReport', 
-  component: AnnualAcademicReport,
+const meta: Meta<typeof AnnualNonAcademicReport> = {
+  title: 'pages/Reports/AnnualNonAcademicReport', 
+  component: AnnualNonAcademicReport,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',

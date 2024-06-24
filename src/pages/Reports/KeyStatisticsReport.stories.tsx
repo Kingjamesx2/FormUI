@@ -1,10 +1,10 @@
 // FormOne.stories.tsx
 import type { Meta, StoryObj } from "@storybook/react";
-import  { AnnualAcademicReport } from '../../pages/Reports/AnnualAcademicReport';
+import  { KeyStatisticsTemplate } from './KeyStatisticsReport';
 
-const meta: Meta<typeof AnnualAcademicReport> = {
-  title: 'pages/Reports/AnnualAcademicReport', 
-  component: AnnualAcademicReport,
+const meta: Meta<typeof KeyStatisticsTemplate> = {
+  title: 'pages/Reports/KeyStatisticsTemplate', 
+  component: KeyStatisticsTemplate,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
