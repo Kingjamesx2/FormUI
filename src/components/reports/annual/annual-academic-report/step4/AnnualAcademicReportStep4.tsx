@@ -5,7 +5,7 @@ import { UBStudentIntership } from "./UBStudentIntership";
 import { UBDegreesConferred } from "./UBDegreesConferred";
 import { UBStudentSuccess } from "./UBStudentSuccess";
 import { UBActivitiesForTheYear } from "./UBActivitiesForTheYear";
-
+import { UBPaper } from "../../../../common/UBPaper/UBPaper";
 
 export const AnnualAcademicReportStep4 = () => {
   const question = "";
@@ -13,10 +13,12 @@ export const AnnualAcademicReportStep4 = () => {
 
   return (
     <Container>
-      <UBStudentIntership />
-      <UBDegreesConferred/>
-      <UBStudentSuccess />
-      <UBActivitiesForTheYear/>
+      <UBPaper>
+        <UBStudentIntership />
+        <UBDegreesConferred />
+        <UBStudentSuccess />
+        <UBActivitiesForTheYear />
+      </UBPaper>
     </Container>
   );
 };

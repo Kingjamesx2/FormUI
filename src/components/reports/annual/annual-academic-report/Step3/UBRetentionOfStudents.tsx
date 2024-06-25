@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
+import UBPaper from "../../../../common/UBPaper/UBPaper";
 
 
 const initialState = ["", ""];
@@ -45,6 +46,7 @@ export const UBRetentionOfStudents: React.FC = () => {
   return (
     <div>
       <Container sx={{ width: 1, m: 1, p: 1 }}>
+      
         <h3>Retention of Students</h3>
         {questions.map((q, index) => (
           <UBTextField
@@ -54,7 +56,7 @@ export const UBRetentionOfStudents: React.FC = () => {
             value={q.value}
           />
         ))}
-      </Container>{" "}
+        </Container>{" "}
     </div>
   );
 };

@@ -4,17 +4,16 @@ import { Container } from "@mui/material";
 import { UBStrategicGoals } from "./UBStrategicGoals";
 import { UBAccomplishments } from "./UBAccomplishments";
 import { UBresearch } from "./UBResearch";
-
+import { UBPaper } from "../../../../common/UBPaper/UBPaper";
 
 export const AnnualAcademicReportStep2 = () => {
-  const question = "";
-  const handleSetAnswer = () => {};
-
   return (
     <Container>
-      <UBStrategicGoals />
-      <UBAccomplishments />
-      <UBresearch />
+      <UBPaper>
+        <UBStrategicGoals />
+        <UBAccomplishments />
+        <UBresearch />
+      </UBPaper>
     </Container>
   );
 };

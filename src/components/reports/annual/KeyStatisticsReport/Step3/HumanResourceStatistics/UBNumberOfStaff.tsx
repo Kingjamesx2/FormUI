@@ -1,21 +1,19 @@
 import React, { useState } from "react";
-import { Container } from "@mui/material";
-import { SelectChangeEvent } from "@mui/material/Select";
-import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
-import UbDropdown from "../../../../UbDropdown/UbDropdown";
-import { UBTextField } from "../../../../common/UBTextField/UBTextField";
-import UBPaper from "../../../../common/UBPaper/UBPaper";
+import Container from "@mui/material/Container";
+import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
+import { UBTextArea } from "../../../../../common/Textarea/UBTextArea";
+import { UbDropdown } from "../../../../../UbDropdown/UbDropdown";
 
 
-const initialState = ["", "", ""];
+const initialState = ["","",""];
 
-export const UBStudentSuccess = () => {
+export const UBNumberOfStaff: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
 
   const questions = [
     {
-      question: "1. List internships that the Faculty offers and indicate partnership agencies/organizations.",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
+      question: "Education and Arts",
+      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value;
         console.log(e.target.value);
         setState((prevState) => {
@@ -24,12 +22,12 @@ export const UBStudentSuccess = () => {
           return newState;
         });
       },
-      type: "textarea",
+      type: "input",
       value: state[0],
     },
     {
-        question: "2. List clubs, associations, teams, etc. affiliated with the Faculty.",
-        handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
+        question: "Management and Social Science",
+        handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
           const value = e.target.value;
           console.log(e.target.value);
           setState((prevState) => {
@@ -38,12 +36,12 @@ export const UBStudentSuccess = () => {
             return newState;
           });
         },
-        type: "textarea",
+        type: "input",
         value: state[1],
       },
       {
-        question: "3. Identify three students that model the Faculty ideals in their academic and community life. Provide a brief explanation.",
-        handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
+        question: "Health Science",
+        handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
           const value = e.target.value;
           console.log(e.target.value);
           setState((prevState) => {
@@ -52,15 +50,47 @@ export const UBStudentSuccess = () => {
             return newState;
           });
         },
-        type: "textarea",
+        type: "input",
         value: state[2],
       },
+      {
+        question: "Science and Technology",
+        handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          const value = e.target.value;
+          console.log(e.target.value);
+          setState((prevState) => {
+            const newState = [...prevState];
+            newState[2] = value;
+            return newState;
+          });
+        },
+        type: "input",
+        value: state[2],
+      },
+      {
+        question: "total",
+        handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          const value = e.target.value;
+          console.log(e.target.value);
+          setState((prevState) => {
+            const newState = [...prevState];
+            newState[2] = value;
+            return newState;
+          });
+        },
+        type: "input",
+        value: state[2],
+      },
+   
   ];
 
   return (
+    <div>
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-    <h3>Student Success</h3>
-    {questions.map((q, index) => {
+      <h3>
+      7. Number of Staff Academic Year 2021/2022    
+       </h3>
+      {questions.map((q, index) => {
         if (q.type === "textarea") {
           return (
             <UBTextArea
@@ -90,8 +120,10 @@ export const UBStudentSuccess = () => {
           );
         }
       })}
-  </Container>
+    </Container>
+    </div>
   );
 };
 
-export default UBStudentSuccess;
+
+export default UBNumberOfStaff;

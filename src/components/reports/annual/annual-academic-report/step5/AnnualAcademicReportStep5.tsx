@@ -5,17 +5,18 @@ import { UBAdministrativeDepartmentData } from "./UBAdministrativeDepartmentData
 import { UBFinancial } from "./UBFinancial";
 import { UBFacultyMeetings } from "./UBFacultyMeetings";
 import { UBOtherComponents } from "./UBOtherComponents";
+import { UBPaper } from "../../../../common/UBPaper/UBPaper";
 
 export const AnnualAcademicReportStep5 = () => {
-  const question = "";
-  const handleSetAnswer = () => {};
 
   return (
     <Container>
-      <UBAdministrativeDepartmentData />
-      <UBFinancial />
-      <UBFacultyMeetings />
-      <UBOtherComponents />
+      <UBPaper>
+        <UBAdministrativeDepartmentData />
+        <UBFinancial />
+        <UBFacultyMeetings />
+        <UBOtherComponents />
+      </UBPaper>
     </Container>
   );
 };

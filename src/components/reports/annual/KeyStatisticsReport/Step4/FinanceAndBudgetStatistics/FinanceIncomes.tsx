@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import Container from "@mui/material/Container";
-import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
-import UbDropdown from "../../../../UbDropdown/UbDropdown";
-import { UBTextField } from "../../../../common/UBTextField/UBTextField";
-import UBPaper from "../../../../common/UBPaper/UBPaper";
+import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
+import { UBTextArea } from "../../../../../common/Textarea/UBTextArea";
+import { UbDropdown } from "../../../../../UbDropdown/UbDropdown";
 
+const initialState = ["", "", ""];
 
-const initialState = ["", "", "", "", ""];
-
-export const UBresearch: React.FC = () => {
+export const FinanceIncomes: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
 
   const questions = [
     {
-      question: "1. List significant accomplishments of the Faculty.",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
+      question: "Funding from Government of Belize (GoB)",
+      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value;
         console.log(e.target.value);
         setState((prevState) => {
@@ -23,13 +21,12 @@ export const UBresearch: React.FC = () => {
           return newState;
         });
       },
-      type: "textarea",
+      type: "input",
       value: state[0],
     },
     {
-      question:
-        "2. Explain/Describe how each of the above has advanced Faculty goals as well as those of the University.",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
+      question: "Tuition Fees",
+      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value;
         console.log(e.target.value);
         setState((prevState) => {
@@ -38,13 +35,12 @@ export const UBresearch: React.FC = () => {
           return newState;
         });
       },
-      type: "textarea",
+      type: "input",
       value: state[1],
     },
     {
-      question:
-        "3. Identify the most impactful change/initiative by your faculty for the academic year and give reasons why.",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
+      question: "Contracts",
+      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value;
         console.log(e.target.value);
         setState((prevState) => {
@@ -53,30 +49,71 @@ export const UBresearch: React.FC = () => {
           return newState;
         });
       },
-      type: "textarea",
+      type: "input",
       value: state[2],
     },
     {
-      question:
-        "4. What were the opportunities gained from this academic year that can be applicable to the upcoming academic year? Please be as specific as possible.",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
+      question: "Research Grants",
+      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value;
         console.log(e.target.value);
         setState((prevState) => {
           const newState = [...prevState];
-          newState[3] = value;
+          newState[2] = value;
           return newState;
         });
       },
-      type: "textarea",
-      value: state[3],
+      type: "input",
+      value: state[2],
+    },
+    {
+      question: "Endowment and Investment Income",
+      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const value = e.target.value;
+        console.log(e.target.value);
+        setState((prevState) => {
+          const newState = [...prevState];
+          newState[2] = value;
+          return newState;
+        });
+      },
+      type: "input",
+      value: state[2],
+    },
+    {
+      question: "Other",
+      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const value = e.target.value;
+        console.log(e.target.value);
+        setState((prevState) => {
+          const newState = [...prevState];
+          newState[2] = value;
+          return newState;
+        });
+      },
+      type: "input",
+      value: state[2],
+    },
+    {
+      question: "Total",
+      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const value = e.target.value;
+        console.log(e.target.value);
+        setState((prevState) => {
+          const newState = [...prevState];
+          newState[2] = value;
+          return newState;
+        });
+      },
+      type: "input",
+      value: state[2],
     },
   ];
 
   return (
     <div>
       <Container sx={{ width: 1, m: 1, p: 1 }}>
-        <h3>Research & Partnership</h3>
+        <h3>8. Finance - Income Bz$ </h3>
         {questions.map((q, index) => {
           if (q.type === "textarea") {
             return (
@@ -107,9 +144,9 @@ export const UBresearch: React.FC = () => {
             );
           }
         })}
-      </Container>{" "}
+      </Container>
     </div>
   );
 };
 
-export default UBresearch;
+export default FinanceIncomes;

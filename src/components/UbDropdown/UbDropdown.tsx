@@ -24,7 +24,7 @@ export const UbDropdown: React.FC<IDropdownProps> = ({
 }) => {
   return (
     <div>
-      <FormControl sx={{ m: 1, minWidth: 80, width: "100%" }}>
+      <FormControl sx={{ m: 1, minWidth: 80, width: "40%" }}>
         <InputLabel id="demo-simple-select-autowidth-label">{label}</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"

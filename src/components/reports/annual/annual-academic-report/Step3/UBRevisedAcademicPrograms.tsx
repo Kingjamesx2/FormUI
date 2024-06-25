@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
-
+import  UBPaper  from "../../../../common/UBPaper/UBPaper";
 
 const initialState = ["", "", "", "", ""];
 
@@ -59,7 +59,7 @@ export const UBRevisedAcademicPrograms: React.FC = () => {
   return (
     <div>
       <Container sx={{ width: 1, m: 1, p: 1 }}>
-        <h3>Research & Partnership</h3>
+        <h3>Number of new and revised academic programs</h3>
         {questions.map((q, index) => (
           <UBTextField
             key={index}

@@ -12,12 +12,21 @@ interface IUBTextAreaProps {
   minRows?: number;
 }
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+const QuestionItem = styled(Paper)(({ theme }) => ({
+  backgroundColor: "transparent",
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "left",
-  color: theme.palette.text.secondary,
+  boxShadow: "none",
+}));
+
+const AnswerItem = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  // padding: theme.spacing(1),
+  textAlign: "left",
+  padding: "10px",
+
 }));
 
 export const UBTextArea: React.FC<IUBTextAreaProps> = ({
@@ -28,19 +37,20 @@ export const UBTextArea: React.FC<IUBTextAreaProps> = ({
   minRows = 8,
 }) => {
   return (
-    <Stack sx={{ backgroundColor: '#FFF', my: 2 }}>
-      <Item sx={{ my: 1 }}>{question}</Item>
-      <Item>
+    <div>
+      <QuestionItem sx={{ my: 1 }}>{question}</QuestionItem>
+      <AnswerItem>
         <TextareaAutosize
           maxRows={maxRows}
           minRows={minRows}
-          style={{ width: "100%", margin: '1px', boxSizing: 'border-box' }}
+          style={{ width: "100%", boxSizing: 'border-box' }}
           value={value}
           onChange={SetAnswer}
           placeholder="Type your answer here"
         />
-      </Item>
-    </Stack>
+      </AnswerItem>
+      </div>
+
   );
 };
 

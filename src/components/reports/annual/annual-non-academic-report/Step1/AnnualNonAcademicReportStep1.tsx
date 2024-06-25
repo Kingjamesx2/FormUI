@@ -4,7 +4,7 @@ import { SelectChangeEvent } from "@mui/material/Select";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
-
+import { UBContainerFluid } from "../../../../common/UBContainerFluid/UBContainerFluid";
 const initialState = ["FST", "", ""];
 
 
@@ -90,7 +90,7 @@ export const AnnualNonAcademicReportStep1: React.FC = () =>{
       ];
     
       return (
-        <Container sx={{ width: 1, m: 1, p: 1 }}>
+        <UBContainerFluid>
           {questions.map((q, index) => {
             if (q.type === "textarea") {
               return (
@@ -122,7 +122,7 @@ export const AnnualNonAcademicReportStep1: React.FC = () =>{
               );
             }
           })}
-        </Container>
+        </UBContainerFluid>
      );
 }
 

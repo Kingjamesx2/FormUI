@@ -3,6 +3,8 @@ import Container from "@mui/material/Container";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
+import  UBPaper  from "../../../../common/UBPaper/UBPaper";
+
 
 const initialState = ["", "", "", ""];
 
@@ -72,7 +74,6 @@ export const UBAccomplishments: React.FC = () => {
   ];
 
   return (
-    <div>
       <Container sx={{ width: 1, m: 1, p: 1 }}>
         <h3>Accomplishments for the reporting period</h3>
         {questions.map((q, index) => {
@@ -106,6 +107,7 @@ export const UBAccomplishments: React.FC = () => {
         }
       })}
       </Container>
-    </div>
   );
 };
+
+export default UBAccomplishments;
