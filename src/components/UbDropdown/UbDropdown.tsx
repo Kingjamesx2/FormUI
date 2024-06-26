@@ -25,8 +25,9 @@ export const UbDropdown: React.FC<IDropdownProps> = ({
 }) => {
   return (
     <Box 
-      sx={{ 
-        m: 1, 
+      sx={{  
+        mt: 2,
+        ml: 0,
         width: { xs: "100%", sm: "60%", md: "40%" }, 
         borderRadius: 1,
       }}

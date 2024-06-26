@@ -30,7 +30,7 @@ export const UBOtherComponents: React.FC = () => {
   return (
     <div>
       <Container sx={{ width: 1, m: 1, p: 1 }}>
-        <h3>Other Components</h3>
+        <h3><center>Other Components</center></h3>
         {questions.map((q, index) => {
         if (q.type === "textarea") {
           return (

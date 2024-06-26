@@ -1,16 +1,21 @@
 import React, { useState, ChangeEvent } from "react";
 import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { useTheme } from "@mui/material/styles";
-import { useMediaQuery } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const initialState = ["FST", "", ""];
 
 export const Faculty = () => {
   const [state, setState] = useState<string[]>(initialState);
+  const [summary, setSummary] = useState<string>("The annual report provides a comprehensive summary of the University’s activities for the academic year, which is from August to July. The specific outputs/outcomes are based on the Annual Implementation Plan for the period under review.");
+
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const questions = [
     {
@@ -59,23 +64,32 @@ export const Faculty = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      {questions.map((q, index) => {
+      <Box
+        sx={{
+          backgroundColor: '#FFD954',
+          p: isSmallScreen ? 1 : 2,
+          ml: isSmallScreen ? 0 : 2,
+          mb: isSmallScreen ? 2 : -3,
+          width: isSmallScreen ? '100%' : '94.23%',
+        }}
+      >
+        <Box sx={{ mb: 5, p: 1 }}>
+          {summary}
+        </Box>
+        <UbDropdown
+          label={questions[0].question}
+          options={questions[0].options}
+          handleSetValue={questions[0].handleSetAnswer as (e: SelectChangeEvent<string>) => void}
+          value={questions[0].value}
+        />
+      </Box>
+      {questions.slice(1).map((q, index) => {
         if (q.type === "textarea") {
           return (
             <UBTextArea
               key={index}
               question={q.question}
               SetAnswer={q.handleSetAnswer as (e: ChangeEvent<HTMLTextAreaElement>) => void}
-              value={q.value}
-            />
-          );
-        } else if (q.type === "dropdown") {
-          return (
-            <UbDropdown
-              key={index}
-              label={q.question}
-              options={q.options}
-              handleSetValue={q.handleSetAnswer as (e: SelectChangeEvent<string>) => void}
               value={q.value}
             />
           );

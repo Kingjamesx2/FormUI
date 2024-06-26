@@ -22,7 +22,7 @@ export const UBTextField: FC<IUBTextField> = ({
   const theme = useTheme();
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", width: "80%" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", width: "94.23%", backgroundColor: '#FFD954', ml: 2, p: 2, borderRadius: '8px'  }}>
       <FormControl
         fullWidth
         sx={{ m: 1 }}
@@ -30,6 +30,7 @@ export const UBTextField: FC<IUBTextField> = ({
         style={{
           width: width ? `${width}px` : "100%",
           maxWidth: "100%",
+          borderRadius: '8px',
           [theme.breakpoints.down("sm")]: {
             width: "100%", // Full width on small screens
           },
@@ -38,7 +39,13 @@ export const UBTextField: FC<IUBTextField> = ({
           },
         }}
       >
-        <InputLabel htmlFor="standard-adornment-amount">{question}</InputLabel>
+        <InputLabel 
+          htmlFor="standard-adornment-amount" 
+          sx={{ fontSize: '20px', color: "black"
+           }} // Adjust the font size here
+        >
+          {question}
+        </InputLabel>
         <Input
           id="standard-adornment-amount"
           value={value}
