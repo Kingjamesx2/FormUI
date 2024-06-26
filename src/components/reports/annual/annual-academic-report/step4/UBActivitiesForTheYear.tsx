@@ -72,10 +72,7 @@ export const UBActivitiesForTheYear = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3>
-        Activities for the year - List activities conducted during the year
-        under review.
-      </h3>
+      <h3>Activities for the year - List activities conducted during the year under review.</h3>
       {questions.map((q, index) => {
         if (q.type === "textarea") {
           return (

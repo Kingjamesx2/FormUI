@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Container } from "@mui/material";
-import { SelectChangeEvent } from "@mui/material/Select";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
@@ -19,12 +18,12 @@ export const UBStudentIntership = () => {
         console.log(e.target.value);
         setState((prevState) => {
           const newState = [...prevState];
-          newState[2] = value;
+          newState[0] = value;
           return newState;
         });
       },
       type: "textarea",
-      value: state[2],
+      value: state[0],
     },
   ];
 

@@ -3,6 +3,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Box from "@mui/material/Box";
 
 interface IOption {
   value: string;
@@ -23,8 +24,14 @@ export const UbDropdown: React.FC<IDropdownProps> = ({
   handleSetValue,
 }) => {
   return (
-    <div>
-      <FormControl sx={{ m: 1, minWidth: 80, width: "40%" }}>
+    <Box 
+      sx={{ 
+        m: 1, 
+        width: { xs: "100%", sm: "60%", md: "40%" }, 
+        borderRadius: 1,
+      }}
+    >
+      <FormControl fullWidth>
         <InputLabel id="demo-simple-select-autowidth-label">{label}</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
@@ -35,11 +42,11 @@ export const UbDropdown: React.FC<IDropdownProps> = ({
           label={label}
         >
           {options.map((o) => (
-            <MenuItem value={o.value}>{o.label}</MenuItem>
+            <MenuItem key={o.value} value={o.value}>{o.label}</MenuItem>
           ))}
         </Select>
       </FormControl>
-    </div>
+    </Box>
   );
 };
 

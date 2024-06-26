@@ -11,12 +11,10 @@ export const AnnualAcademicReportStep5 = () => {
 
   return (
     <Container>
-      <UBPaper>
         <UBAdministrativeDepartmentData />
         <UBFinancial />
         <UBFacultyMeetings />
         <UBOtherComponents />
-      </UBPaper>
     </Container>
   );
 };

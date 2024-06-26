@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
-import UBPaper from "../../../../common/UBPaper/UBPaper";
 
-const initialState = ["", "", "", "", ""];
+const initialState = ["", "", ""];
 
 export const UBCourses: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);

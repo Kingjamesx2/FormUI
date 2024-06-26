@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { Container } from "@mui/material";
-import { SelectChangeEvent } from "@mui/material/Select";
-import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
-import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
-import UBPaper from "../../../../common/UBPaper/UBPaper";
 
 const initialState = ["", ""];
 

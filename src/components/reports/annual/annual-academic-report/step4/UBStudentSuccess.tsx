@@ -93,5 +93,4 @@ export const UBStudentSuccess = () => {
   </Container>
   );
 };
-
 export default UBStudentSuccess;

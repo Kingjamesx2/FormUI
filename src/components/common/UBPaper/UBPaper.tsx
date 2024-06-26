@@ -13,7 +13,7 @@ const DemoPaper = styled(Paper)(({ theme }) => ({
   whiteSpace: "nowrap", // Prevent text from wrapping if you want the paper to expand with text
   backgroundColor: "#FFD954", // Set background color to yellow
   [theme.breakpoints.down('sm')]: {
-    width: '100%',
+    width: '50%',
     textAlign: 'center', // Center align text on small screens
   },
   [theme.breakpoints.up('md')]: {

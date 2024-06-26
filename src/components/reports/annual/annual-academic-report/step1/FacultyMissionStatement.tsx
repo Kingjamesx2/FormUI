@@ -1,11 +1,10 @@
 import React, { useState, ChangeEvent } from "react";
 import Container from "@mui/material/Container";
-import { SelectChangeEvent } from "@mui/material/Select";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 
-const initialState = ["FST", "", ""];
+const initialState = ["", "", ""];
 
 export const FacultyMissionStatement = () => {
   const [state, setState] = useState<string[]>(initialState);
@@ -19,13 +18,12 @@ export const FacultyMissionStatement = () => {
         console.log(value);
       },
       type: "input",
-      value: state[2],
+      value: state[0],
     },
   ];
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3>Faculty Mission Statement</h3>
         {questions.map((q, index) => {
           if (q.type === "textarea") {
             return (

@@ -11,8 +11,6 @@ const initialState = ["FST", "", ""];
 
 export const Faculty = () => {
   const [state, setState] = useState<string[]>(initialState);
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const questions = [
     {
@@ -60,13 +58,7 @@ export const Faculty = () => {
   ];
 
   return (
-    <Container
-      sx={{
-        m: isSmallScreen ? 0.5 : 1,
-        p: isSmallScreen ? 0.5 : 1,
-        width: '100%',
-      }}
-    >
+    <Container sx={{ width: 1, m: 1, p: 1 }}>
       {questions.map((q, index) => {
         if (q.type === "textarea") {
           return (

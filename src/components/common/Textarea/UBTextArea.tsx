@@ -1,7 +1,7 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
-import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 
 interface IUBTextAreaProps {
@@ -13,20 +13,24 @@ interface IUBTextAreaProps {
 }
 
 const QuestionItem = styled(Paper)(({ theme }) => ({
-  backgroundColor: "transparent",
+  backgroundColor: "#FFD954",
   ...theme.typography.body2,
-  padding: theme.spacing(1),
+  padding: theme.spacing(2),
   textAlign: "left",
   boxShadow: "none",
+  marginBottom: theme.spacing(0), // Reduced margin bottom
+  borderBottomLeftRadius: '0',
+  borderBottomRightRadius: '0',
 }));
 
 const AnswerItem = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#FFD954",
   ...theme.typography.body2,
-  // padding: theme.spacing(1),
   textAlign: "left",
   padding: "10px",
-
+  marginTop: theme.spacing(0), // Reduced margin top
+  borderTopLeftRadius: '0',
+  borderTopRightRadius: '0',
 }));
 
 export const UBTextArea: React.FC<IUBTextAreaProps> = ({
@@ -36,21 +40,30 @@ export const UBTextArea: React.FC<IUBTextAreaProps> = ({
   maxRows = 20,
   minRows = 8,
 }) => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <div>
-      <QuestionItem sx={{ my: 1 }}>{question}</QuestionItem>
+    <div style={{ padding: isSmallScreen ? "8px" : "16px" }}>
+      <QuestionItem sx={{ fontSize: isSmallScreen ? "0.875rem" : "1rem" }}>
+        {question}
+      </QuestionItem>
       <AnswerItem>
         <TextareaAutosize
           maxRows={maxRows}
           minRows={minRows}
-          style={{ width: "100%", boxSizing: 'border-box' }}
+          style={{
+            width: "100%",
+            boxSizing: 'border-box',
+            fontSize: isSmallScreen ? "0.875rem" : "0.8rem",
+            padding: isSmallScreen ? "8px" : "16px"
+          }}
           value={value}
           onChange={SetAnswer}
           placeholder="Type your answer here"
         />
       </AnswerItem>
-      </div>
-
+    </div>
   );
 };
 

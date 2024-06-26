@@ -7,18 +7,12 @@ import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
 
 export const AnnualAcademicReportStep1: React.FC = () => {
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
+  
   return (
-    <div>
-      <Container maxWidth="lg" sx={{ padding: isSmallScreen ? '8px' : '16px' }}>
-        <UBPaper>
-          <Faculty />
+      <Container>
+          <Faculty />          
           <FacultyMissionStatement />
-        </UBPaper>
       </Container>
-    </div>
   );
 };
 
