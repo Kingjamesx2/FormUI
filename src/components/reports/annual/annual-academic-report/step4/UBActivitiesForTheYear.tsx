@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Container } from "@mui/material";
+import { Container, IconButton, Box } from "@mui/material";
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBUploadFile } from "../../../../common/UBUploadFile/UBUploadFile";
-import Box from "@mui/material/Box";
 
 const initialState = ["", "", "", ""];
 
@@ -54,6 +54,11 @@ export const UBActivitiesForTheYear = () => {
     },
   ];
 
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    handleSetAnswer(3, files ? files[0].name : null);
+  };
+
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
       <h3>
@@ -63,7 +68,7 @@ export const UBActivitiesForTheYear = () => {
         </center>
       </h3>
       {questions.map((q, index) => (
-        <Box key={index} mb={-4.5}>
+        <Box key={index} mb={4.5}>
           {q.type === "textarea" ? (
             <UBTextArea
               question={q.question}
@@ -71,11 +76,19 @@ export const UBActivitiesForTheYear = () => {
               value={q.value}
             />
           ) : q.type === "uploadFile" ? (
-            <UBUploadFile
-              label={q.question}
-              handleSetValue={q.handleSetAnswer}
-              value={q.value}
-            />
+            <>
+              <label>{q.question}</label>
+              <IconButton component="label">
+                <AddPhotoAlternateIcon />
+                <input
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  onChange={handleImageUpload}
+                />
+              </IconButton>
+              {q.value && <span>{q.value}</span>}
+            </>
           ) : (
             <UBTextField
               question={q.question}

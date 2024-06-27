@@ -16,4 +16,4 @@ const steps = [
 
 export const AnnualAcademicReport = () => <UBStepper steps={steps} />;
 
-export default AnnualAcademicReport
+export default AnnualAcademicReport;

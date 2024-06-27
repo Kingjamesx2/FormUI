@@ -9,10 +9,21 @@ import Box from "@mui/material/Box";
 
 
 
-const initialState = ["", "", ""];
+const initialState = ["", "", "", "", "", "", ""];
 
 export const UBStudentSuccess = () => {
   const [state, setState] = useState<string[]>(initialState);
+
+  const handleStudentChange = (index: number, field: "name" | "reason") => (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const value = e.target.value;
+    setState((prevState) => {
+      const newState = [...prevState];
+      newState[index] = value;
+      return newState;
+    });
+  };
 
   const questions = [
     {
@@ -44,18 +55,15 @@ export const UBStudentSuccess = () => {
         value: state[1],
       },
       {
-        question: "3. Identify three students that model the Faculty ideals in their academic and community life. Provide a brief explanation.",
-        handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
-          const value = e.target.value;
-          console.log(e.target.value);
-          setState((prevState) => {
-            const newState = [...prevState];
-            newState[2] = value;
-            return newState;
-          });
-        },
-        type: "textarea",
-        value: state[2],
+        question:
+          "3. Identify three students that model the Faculty ideals in their academic and community life. Provide a brief explanation.",
+        handleSetAnswer: handleStudentChange,
+        type: "studentInputs",
+        values: [
+          { name: state[2], reason: state[3] },
+          { name: state[4], reason: state[5] },
+          { name: state[6], reason: state[7] },
+        ],
       },
   ];
 
@@ -77,6 +85,24 @@ export const UBStudentSuccess = () => {
               handleSetValue={q.handleSetAnswer}
               value={q.value}
             />
+          ) : q.type === "studentInputs" ? (
+            <>
+              <p>{q.question}</p>
+              {q.values.map((student, idx) => (
+                <div key={idx}>
+                  <UBTextField
+                    question={`Student ${idx + 1} Name:`}
+                    SetAnswer={handleStudentChange(idx * 2, "name")}
+                    value={student.name}
+                  />
+                  <UBTextField
+                    question={`Reason for Student ${idx + 1}:`}
+                    SetAnswer={handleStudentChange(idx * 2 + 1, "reason")}
+                    value={student.reason}
+                  />
+                </div>
+              ))}
+            </>
           ) : (
             <UBTextField
               question={q.question}
