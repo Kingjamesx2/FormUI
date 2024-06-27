@@ -26,7 +26,7 @@ export const UBFinancial: React.FC = () => {
       value: state[0],
     },
     {
-      question: "3. Identify the most impactful change/initiative by your faculty for the academic year and give reasons why.",
+      question: "Identify the most impactful change/initiative by your faculty for the academic year and give reasons why.",
       handleSetAnswerRadio: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setState((prevState) => {
@@ -48,7 +48,7 @@ export const UBFinancial: React.FC = () => {
     <Container sx={{ width: 1, m: 1, p: 1 }}>
       <h3><center>Financial/Budget</center></h3>
       {questions.map((q, index) => (
-        <Box key={index} mb={4}>
+        <Box key={index} mb={-4}>
           {q.type === "textarea" ? (
             <UBTextArea
               question={q.question}

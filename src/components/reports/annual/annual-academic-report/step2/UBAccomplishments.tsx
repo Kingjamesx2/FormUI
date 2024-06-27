@@ -6,7 +6,7 @@ import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import Box from "@mui/material/Box";
 import { UBRadioButton } from "../../../../common/UBRadioButton/UBRadioButton";
 
-const initialState = ["", "", "", "", ""];
+const initialState = ["", "", "", "", "", ""];
 
 export const UBAccomplishments: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
@@ -50,14 +50,6 @@ export const UBAccomplishments: React.FC = () => {
           return newState;
         });
       },
-      handleSetAnswerText: (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[2] = value;
-          return newState;
-        });
-      },
       type: "radiobutton",
       options: [
         { value: "Teaching and Learning", label: "Teaching and Learning" },
@@ -66,8 +58,20 @@ export const UBAccomplishments: React.FC = () => {
         { value: "National development", label: "National development" },
       ],
       value: state[2],
-      additionalText: true,
-      textValue: state[3],
+    },
+    {
+      question:
+        "Why",
+      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setState((prevState) => {
+          const newState = [...prevState];
+          newState[3] = value;
+          return newState;
+        });
+      },
+      type: "input",
+      value: state[3],
     },
     {
       question:
@@ -89,7 +93,7 @@ export const UBAccomplishments: React.FC = () => {
     <Container sx={{ width: 1, m: 1, p: 1 }}>
       <h3><center>Accomplishments for the reporting period</center></h3>
       {questions.map((q, index) => (
-        <Box key={index} mb={4}>
+        <Box key={index} mb={-4.7} >
           {q.type === "textarea" ? (
             <UBTextArea
               question={q.question}
@@ -110,16 +114,11 @@ export const UBAccomplishments: React.FC = () => {
                 options={q.options}
                 handleSetValue={q.handleSetAnswerRadio}
                 value={q.value}
+                
               />
-              {q.additionalText && (
-                <UBTextField
-                  question="Please specify:"
-                  SetAnswer={q.handleSetAnswerText}
-                  value={q.textValue}
-                />
-              )}
             </>
           ) : (
+            
             <UBTextField
               question={q.question}
               SetAnswer={q.handleSetAnswer}

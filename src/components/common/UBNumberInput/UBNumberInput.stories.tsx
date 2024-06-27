@@ -1,9 +1,9 @@
 // InfoTable.stories.tsx
 import type { Meta, StoryObj } from "@storybook/react";
-import InfoTable from "./InfoTable";
+import InfoTable from "./UBNumberInput";
 
 const meta: Meta<typeof InfoTable> = {
-  title: 'components/common/InfoTable', 
+  title: 'components/common/UBNumberInput', 
   component: InfoTable,
   tags: ['autodocs'],
   parameters: {

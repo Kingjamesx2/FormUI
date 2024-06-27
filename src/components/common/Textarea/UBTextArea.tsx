@@ -29,8 +29,8 @@ const AnswerItem = styled(Paper)(({ theme }) => ({
   textAlign: "left",
   padding: "10px",
   marginTop: theme.spacing(0), // Reduced margin top
-  borderTopLeftRadius: '0',
-  borderTopRightRadius: '0',
+  borderBottomLeftRadius: '10',
+  borderBottomRightRadius: '10',
 }));
 
 export const UBTextArea: React.FC<IUBTextAreaProps> = ({

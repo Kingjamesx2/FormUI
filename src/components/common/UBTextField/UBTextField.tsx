@@ -22,7 +22,7 @@ export const UBTextField: FC<IUBTextField> = ({
   const theme = useTheme();
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", width: "94.23%", backgroundColor: '#FFD954', ml: 2, p: 2, borderRadius: '8px'  }}>
+    <Box sx={{ display: "flex", flexDirection: "column", width: "94.23%", backgroundColor: '#FFD954', ml: 2, p: 2, borderRadius: '10px'  }}>
       <FormControl
         fullWidth
         sx={{ m: 1 }}

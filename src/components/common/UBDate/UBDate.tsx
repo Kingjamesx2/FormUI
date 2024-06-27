@@ -6,7 +6,7 @@ import { Box } from "@mui/material";
 
 export const UBDate: React.FC = () => {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", width: "94.23%", backgroundColor: '#FFD954', ml: 2, p: 2, borderRadius: '8px'  }}>
+    <Box sx={{ display: "flex", flexDirection: "column", width: "94.23%", backgroundColor: '#', ml: 2, p: 2, borderRadius: '10px'  }}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           label=""

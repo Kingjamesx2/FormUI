@@ -1,71 +1,82 @@
 import React, { useState, ChangeEvent } from "react";
 import { Container } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { UBTextArea } from "../../../../../../components/common/Textarea/UBTextArea"
+import { UBTextArea } from "../../../../../../components/common/Textarea/UBTextArea";
 import UbDropdown from "../../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const initialState = ["FST", "", ""];
 
+export const AcademicYear: React.FC = () => {
+  const [state, setState] = useState<string[]>(initialState);
+  const [summary, setSummary] = useState<string>(
+    "The annual report provides a comprehensive summary of the University’s activities for the academic year, which is from August to July. The specific outputs/outcomes are based on the Annual Implementation Plan for the period under review."
+  );
+  const [submissionDeadline, setSubmissionDeadline] = useState<string>(
+    "Submission Deadline: Please return completed form to the Office of The Vice President by August 1, 2022"
+  );
 
-
-export const AcademicYear: React.FC = () =>{
-    const [state, setState] = useState<string[]>(initialState);
-
-    const questions = [
+  const questions = [
+    {
+      question: "Academic Year",
+      handleSetAnswer: (e: SelectChangeEvent<string>) => {
+        const selectedValue = e.target.value;
+        setState((prevState) => [selectedValue, "", ""]);
+        console.log(selectedValue);
+      },
+      type: "dropdown",
+      options: [
         {
-          question: "Academic Year",
-          handleSetAnswer: (e: SelectChangeEvent<string>) => {
-            const selectedValue = e.target.value;
-            setState((prevState) => [selectedValue, "", ""]);
-            console.log(selectedValue);
-          },
-          type: "dropdown",
-          options: [
-            {
-              value: "FEA",
-              label: "Faculty of Education and Arts",
-              dean: "Dr Nadine Tun",
-            },
-            {
-              value: "FMSS",
-              label: "Faculty of Management and Social Sciences",
-              dean: "Dr Somanandevi Thiagarajan",
-            },
-            {
-              value: "FHS",
-              label: "Faculty of Health Sciences",
-              dean: "Dr Lisa Johnson",
-            },
-            {
-              value: "FST",
-              label: "Faculty of Science & Technology",
-              dean: "Dr. Apolonio Aguilar",
-            },
-          ],
-          value: state[0],
+          value: "none",
+          label: "none",
         },
-      ];
-    
-      return (
-        <Container sx={{ width: 1, m: 1, p: 1 }}>
-      
-      {questions.map((q, index) => {
+        {
+          value: "2021/2022",
+          label: "2021/2022",
+        },
+        {
+          value: "2022/2023",
+          label: "2022/2023",
+        },
+        {
+          value: "2023/2024",
+          label: "2023/2024",
+        },
+      ],
+      value: state[0],
+    },
+  ];
+
+  return (
+    <Container sx={{ width: 1, m: 1, p: 1 }}>
+      <Box>
+        <UbDropdown
+          label={questions[0].question}
+          options={questions[0].options}
+          handleSetValue={
+            questions[0].handleSetAnswer as (
+              e: SelectChangeEvent<string>
+            ) => void
+          }
+          value={questions[0].value}
+        />
+      </Box>
+      <Box sx={{ mb: 5, p: 1 }}>{summary}</Box>
+      <Box sx={{ mb: 5, p: 1 }}>{submissionDeadline}</Box>
+      {questions.slice(1).map((q, index) => {
         if (q.type === "textarea") {
           return (
             <UBTextArea
               key={index}
               question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        } else if (q.type === "dropdown") {
-          return (
-            <UbDropdown
-              label={q.question}
-              options={q.options}
-              handleSetValue={q.handleSetAnswer}
+              SetAnswer={
+                q.handleSetAnswer as (
+                  e: ChangeEvent<HTMLTextAreaElement>
+                ) => void
+              }
               value={q.value}
             />
           );
@@ -74,14 +85,16 @@ export const AcademicYear: React.FC = () =>{
             <UBTextField
               key={index}
               question={q.question}
-              SetAnswer={q.handleSetAnswer}
+              SetAnswer={
+                q.handleSetAnswer as (e: ChangeEvent<HTMLInputElement>) => void
+              }
               value={q.value}
             />
           );
         }
       })}
     </Container>
-     );
-}
+  );
+};
 
 export default AcademicYear;

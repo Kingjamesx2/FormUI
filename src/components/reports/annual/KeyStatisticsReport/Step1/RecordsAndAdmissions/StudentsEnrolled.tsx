@@ -4,11 +4,15 @@ import { SelectChangeEvent } from "@mui/material/Select";
 import { UBTextArea } from "../../../../../../components/common/Textarea/UBTextArea"
 import UbDropdown from "../../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
+import Box from "@mui/material/Box";
 
 const initialState = ["FST", "", ""];
 
 export const StudentsEnrolled: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
+  const [studentsEnrolled, setStudentsEnrolled] = useState<string>(
+    "1. Students Enrolled Academic Year 2023/2024"
+  );
 
   const questions = [
     {
@@ -19,7 +23,7 @@ export const StudentsEnrolled: React.FC = () => {
         console.log(value);
       },
       type: "input",
-      value: state[2],
+      value: state[0],
     },
 
     {
@@ -30,7 +34,7 @@ export const StudentsEnrolled: React.FC = () => {
         console.log(value);
       },
       type: "input",
-      value: state[2],
+      value: state[1],
     },
 
     {
@@ -51,29 +55,31 @@ export const StudentsEnrolled: React.FC = () => {
           console.log(value);
         },
         type: "input",
-        value: state[2],
+        value: state[3],
       },
   ];
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3>1. Students Enrolled Academic Year 2023/2024</h3>
-      {questions.map((q, index) => {
+      <h2><center>I. Records and Admissions</center></h2>
+      <Box>
+        <Box sx={{ mb: 2, p: 1 }}>
+          {studentsEnrolled}
+        </Box>
+        <UbDropdown
+          label={questions[0].question}
+          options={questions[0].options}
+          handleSetValue={questions[0].handleSetAnswer as (e: SelectChangeEvent<string>) => void}
+          value={questions[0].value}
+        />
+      </Box>
+      {questions.slice(1).map((q, index) => {
         if (q.type === "textarea") {
           return (
             <UBTextArea
               key={index}
               question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        } else if (q.type === "dropdown") {
-          return (
-            <UbDropdown
-              label={q.question}
-              options={q.options}
-              handleSetValue={q.handleSetAnswer}
+              SetAnswer={q.handleSetAnswer as (e: ChangeEvent<HTMLTextAreaElement>) => void}
               value={q.value}
             />
           );
@@ -82,7 +88,7 @@ export const StudentsEnrolled: React.FC = () => {
             <UBTextField
               key={index}
               question={q.question}
-              SetAnswer={q.handleSetAnswer}
+              SetAnswer={q.handleSetAnswer as (e: ChangeEvent<HTMLInputElement>) => void}
               value={q.value}
             />
           );

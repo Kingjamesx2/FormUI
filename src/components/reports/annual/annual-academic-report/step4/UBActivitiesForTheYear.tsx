@@ -68,7 +68,7 @@ export const UBActivitiesForTheYear = () => {
         </center>
       </h3>
       {questions.map((q, index) => (
-        <Box key={index} mb={4.5}>
+        <Box key={index}  mb={-4.5}>
           {q.type === "textarea" ? (
             <UBTextArea
               question={q.question}
