@@ -22,21 +22,22 @@ export const UBTextField: FC<IUBTextField> = ({
   const theme = useTheme();
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", width: "94.23%", backgroundColor: '#FFD954', ml: 2, p: 2, borderRadius: '10px'  }}>
+    <Box  style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      
+    }}    
+    sx={{ borderRadius: '10px'  }}>
       <FormControl
         fullWidth
-        sx={{ m: 1 }}
         variant="standard"
         style={{
           width: width ? `${width}px` : "100%",
           maxWidth: "100%",
           borderRadius: '8px',
-          [theme.breakpoints.down("sm")]: {
-            width: "100%", // Full width on small screens
-          },
-          [theme.breakpoints.up("md")]: {
-            width: width ? `${width}px` : "100%", // Custom width on medium and larger screens
-          },
+          marginTop: "5%",
+          marginLeft: "1%", // Adjust the margin here
         }}
       >
         <InputLabel 

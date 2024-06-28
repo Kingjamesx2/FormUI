@@ -5,6 +5,7 @@ import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import Box from "@mui/material/Box";
 import { UBRadioButton } from "../../../../common/UBRadioButton/UBRadioButton";
+import Stack from '@mui/material/Stack';
 
 const initialState = ["", "", "", "", "", ""];
 
@@ -93,7 +94,7 @@ export const UBAccomplishments: React.FC = () => {
     <Container sx={{ width: 1, m: 1, p: 1 }}>
       <h3><center>Accomplishments for the reporting period</center></h3>
       {questions.map((q, index) => (
-        <Box key={index} mb={-4.7} >
+        <Stack key={index} mb={-4.7} >
           {q.type === "textarea" ? (
             <UBTextArea
               question={q.question}
@@ -125,7 +126,7 @@ export const UBAccomplishments: React.FC = () => {
               value={q.value}
             />
           )}
-        </Box>
+        </Stack>
       ))}
     </Container>
   );

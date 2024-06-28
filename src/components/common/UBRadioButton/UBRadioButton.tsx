@@ -1,45 +1,65 @@
 import React from "react";
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import Box from "@mui/material/Box";
+import { Box, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 
-interface IUBRadioButton {
+interface IUBRadioButtonProp {
   label: string;
-  options: { value: string, label: string }[];
-  handleSetValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
-  containerStyle?: React.CSSProperties;
+  handleSetValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  options: { value: string; label: string }[];
 }
 
-export const UBRadioButton: React.FC<IUBRadioButton> = ({ label, options, handleSetValue, value }) => {
+export const UBRadioButton: React.FC<IUBRadioButtonProp> = ({
+  label,
+  value,
+  handleSetValue,
+  options,
+}) => {
   return (
-    <Box sx={{ 
-      display: "flex", 
-      flexDirection: "column", 
-      width: "95.67%", 
-      backgroundColor: '#FFD954', 
-      ml: 2, 
-      pt: 6,
-      pl: 2,
-      pb: 3, 
-      borderRadius: '8px' 
-    }}>
-    <FormControl>
-      <FormLabel>{label}</FormLabel>
-      <RadioGroup value={value} onChange={handleSetValue}>
-        {options.map((option, index) => (
-          <FormControlLabel
-            key={index}
-            value={option.value}
-            control={<Radio />}
-            label={option.label}
-          />
-        ))}
-      </RadioGroup>
-    </FormControl>
+    <Box
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "5%",
+      }}
+      sx={{
+        borderRadius: '8px',
+      }}
+    >
+      <FormControl
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginLeft: "9%",
+          width: "30%"
+        }}
+      >
+        <FormLabel>{label}</FormLabel>
+        <RadioGroup value={value} onChange={handleSetValue}>
+          {options.map((option, index) => (
+            <FormControlLabel
+              key={index}
+              value={option.value}
+              control={<Radio />}
+              label={
+                <span style={{ whiteSpace: 'normal', overflow: 'visible', textOverflow: 'clip' }}>
+                  {option.label}
+                </span>
+              }
+              sx={{
+                '& .MuiFormControlLabel-label': {
+                  whiteSpace: 'normal',
+                  overflow: 'visible',
+                  textOverflow: 'clip',
+                },
+              }}
+            />
+          ))}
+        </RadioGroup>
+      </FormControl>
     </Box>
   );
 };
+
+export default UBRadioButton;

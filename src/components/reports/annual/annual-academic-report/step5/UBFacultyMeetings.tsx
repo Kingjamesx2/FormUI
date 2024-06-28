@@ -68,13 +68,7 @@ export const UBFacultyMeetings: React.FC = () => {
         <center>Faculty meetings</center>
       </h3>
       {questions.map((q, index) => (
-        <Box key={index} mb={-2}
-        sx={{
-          backgroundColor: '#FFD954',
-          p: 2,
-          borderTopLeftRadius: 20
-        }}
-        >
+        <Box key={index} mb={4}>
           {q.type === "textarea" ? (
             <UBTextArea
               question={q.question}

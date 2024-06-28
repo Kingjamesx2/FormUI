@@ -1,54 +1,56 @@
-import * as React from "react";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import Box from "@mui/material/Box";
+import React from "react";
+import { Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { Margin } from "@mui/icons-material";
 
-interface IOption {
+interface ISelectComponentProps {
+  label: string;
   value: string;
-  label: string;
+  handleSetValue: (event: React.ChangeEvent<{ value: unknown }>) => void;
+  options: { value: string; label: string }[];
 }
 
-interface IDropdownProps {
-  label: string;
-  options?: IOption[];
-  value?: string | undefined;
-  handleSetValue?: (event: SelectChangeEvent) => void;
-}
-
-export const UbDropdown: React.FC<IDropdownProps> = ({
+const SelectComponent: React.FC<ISelectComponentProps> = ({
   label,
-  options = [],
   value,
   handleSetValue,
+  options,
 }) => {
   return (
-    <Box 
-      sx={{  
-        mt: 2,
-        ml: 0,
-        width: { xs: "100%", sm: "60%", md: "40%" }, 
-        borderRadius: 1,
+    <Box
+      style={{
+        display: "flex",
+        justifyContent: "left",
+        alignItems: "left",
       }}
     >
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-autowidth-label">{label}</InputLabel>
-        <Select
-          labelId="demo-simple-select-autowidth-label"
-          id="demo-simple-select-autowidth"
-          value={value}
-          onChange={handleSetValue}
-          autoWidth
-          label={label}
-        >
-          {options.map((o) => (
-            <MenuItem key={o.value} value={o.value}>{o.label}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <Box
+        style={{
+          width: "50%", // Set the width to a shorter value
+          marginLeft: "15%"
+        }}
+      >
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-autowidth-label">
+            {label}
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            value={value}
+            onChange={handleSetValue}
+            autoWidth
+            label={label}
+          >
+            {options.map((o) => (
+              <MenuItem key={o.value} value={o.value}>
+                {o.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
     </Box>
   );
 };
 
-export default UbDropdown;
+export default SelectComponent;

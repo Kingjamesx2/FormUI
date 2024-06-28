@@ -63,16 +63,8 @@ export const Faculty = () => {
   ];
 
   return (
-    <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <Box
-        sx={{
-          backgroundColor: '#FFD954',
-          p: isSmallScreen ? 1 : 2,
-          ml: isSmallScreen ? 0 : 2,
-          mb: isSmallScreen ? 2 : -3,
-          width: isSmallScreen ? '100%' : '94.23%',
-        }}
-      >
+    <Container>
+      <Box>
         <Box sx={{ mb: 5, p: 1 }}>
           {summary}
         </Box>

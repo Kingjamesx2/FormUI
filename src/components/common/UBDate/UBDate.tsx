@@ -6,17 +6,26 @@ import { Box } from "@mui/material";
 
 export const UBDate: React.FC = () => {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", width: "94.23%", backgroundColor: '#', ml: 2, p: 2, borderRadius: '10px'  }}>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
-          label=""
-          slotProps={{
-            textField: {
+    <Box
+    sx={{
+      display: "flex",
+      justifyContent: "left",
+      alignItems: "Left",
+    }}
+  >
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DatePicker
+        label=""
+        slotProps={{
+          textField: {
+            sx: {
+              marginLeft: 20.5, // Adjust the margin for the TextField here
             },
-          }}
-        />
-      </LocalizationProvider>
-    </Box>
+          },
+        }}
+      />
+    </LocalizationProvider>
+  </Box>
   );
 };
 
