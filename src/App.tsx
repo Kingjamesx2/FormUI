@@ -1,21 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Add from './components/Add'
-import List from './components/List'
+// App.tsx
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import AnnualAcademicReport from './pages/Reports/AnnualAcademicReport';
+import AnnualNonAcademicReport from './pages/Reports/AnnualNonAcademicReport';
+import KeyStatisticsTemplate from './pages/Reports/KeyStatisticsReport';
 
-function App() {
-
+const App: React.FC = () => {
   return (
-    <>
-      
-        < Add />
-        < List />
-    </>
-  )
-}
+    <Router>
+      <Routes>
+        <Route path="/" element={<div>Home Page</div>} />
+        <Route path="/annual-academic-report" element={<AnnualAcademicReport />} />
+        <Route path="/annual-non-academic-report" element={<AnnualNonAcademicReport />} />
+        <Route path="/key-statistics-report" element={<KeyStatisticsTemplate />} />
+      </Routes>
+    </Router>
+  );
+};
 
-export default App
-
-
+export default App;
