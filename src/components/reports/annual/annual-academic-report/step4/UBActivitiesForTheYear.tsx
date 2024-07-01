@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { Container, IconButton, Box } from "@mui/material";
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBUploadFile } from "../../../../common/UBUploadFile/UBUploadFile";
+import Grid from "@mui/material/Grid";
+import Stack from '@mui/material/Stack';
+
 
 const initialState = ["", "", "", ""];
+
 
 export const UBActivitiesForTheYear = () => {
   const [state, setState] = useState<string[]>(initialState);
 
-  const handleSetAnswer = (
-    index: number,
-    value: string | FileList | null
-  ) => {
+  const handleSetAnswer = (index: number, value: string | FileList | null) => {
     setState((prevState) => {
       const newState = [...prevState];
       newState[index] = value as string; // Assuming value is a string or file name/path
@@ -34,7 +35,7 @@ export const UBActivitiesForTheYear = () => {
       question: "Name of person/s in the pictures",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) =>
         handleSetAnswer(1, e.target.value),
-      type: "textarea",
+      type: "input",
       value: state[1],
     },
     {
@@ -61,14 +62,14 @@ export const UBActivitiesForTheYear = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3>
+      <h3 style={{ marginTop: "70px", marginBottom: "-20px" }}>
         <center>
           Activities for the year - List activities conducted during the year
           under review.
         </center>
       </h3>
       {questions.map((q, index) => (
-        <Box key={index}  mb={-4.5}>
+        <Box key={index} mb={-4.5} sx={{ flexGrow: 1 }}>
           {q.type === "textarea" ? (
             <UBTextArea
               question={q.question}
@@ -90,11 +91,13 @@ export const UBActivitiesForTheYear = () => {
               {q.value && <span>{q.value}</span>}
             </>
           ) : (
-            <UBTextField
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
+            <Box style={{ marginBottom: "60px", marginTop: "10px" }}>
+                <UBTextField 
+                  question={q.question}
+                  SetAnswer={q.handleSetAnswer}
+                  value={q.value}
+                />
+            </Box>
           )}
         </Box>
       ))}

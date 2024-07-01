@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
-
+import { Box } from "@mui/material";
 
 
 const initialState = [""];
@@ -29,36 +29,49 @@ export const UBOtherComponents: React.FC = () => {
 ];
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-        {questions.map((q, index) => {
-          if (q.type === "textarea") {
-            return (
-              <UBTextArea
-                key={index}
-                question={q.question}
-                SetAnswer={q.handleSetAnswer}
-                value={q.value}
-              />
-            );
-          } else if (q.type === "dropdown") {
-            return (
-              <UbDropdown
+       <h3 style={{ marginBottom: "-10px", marginTop: "50px" }}>
+        <center>Other Components</center>
+      </h3>
+      {questions.map((q, index) => (
+        <Box key={index} mb={-4}>
+          {q.type === "textarea" ? (
+            <UBTextArea
+              question={q.question}
+              SetAnswer={q.handleSetAnswer}
+              value={q.value}
+            />
+          ) : q.type === "dropdown" ? (
+            <UbDropdown
+              label={q.question}
+              options={q.options}
+              handleSetValue={q.handleSetAnswer}
+              value={q.value}
+            />
+          ) : q.type === "radiobutton" ? (
+            <Box sx={{marginTop: "-50px"}}>
+              <UBRadioButton
                 label={q.question}
                 options={q.options}
-                handleSetValue={q.handleSetAnswer}
+                handleSetValue={q.handleSetAnswerRadio}
                 value={q.value}
               />
-            );
-          } else if (q.type === "input") {
-            return (
-              <UBTextField
-                key={index}
-                question={q.question}
-                SetAnswer={q.handleSetAnswer}
-                value={q.value}
-              />
-            );
-          }
-        })}
+              {q.additionalText && (
+                <UBTextField
+                  question="Please specify:"
+                  SetAnswer={q.handleSetAnswerText}
+                  value={q.textValue}
+                />
+              )}
+            </Box>
+          ) : (
+            <UBTextField
+              question={q.question}
+              SetAnswer={q.handleSetAnswer}
+              value={q.value}
+            />
+          )}
+        </Box>
+      ))}
     </Container>
   );
 };

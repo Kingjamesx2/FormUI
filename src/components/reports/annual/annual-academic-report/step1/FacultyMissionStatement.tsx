@@ -3,11 +3,15 @@ import Container from "@mui/material/Container";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
+import { Box } from "@mui/material";
+import { red } from "@mui/material/colors";
+import { Flex } from "antd";
 
 const initialState = ["", "", ""];
 
 export const FacultyMissionStatement = () => {
   const [state, setState] = useState<string[]>(initialState);
+  const [deadline, setDeadline] = useState<string>("* Deadline is Friday of the first week in August");
 
   const questions = [
     {
@@ -45,15 +49,23 @@ export const FacultyMissionStatement = () => {
             );
           } else if (q.type === "input") {
             return (
+              <Box sx={{mt: "-50px", ml: "-15px"}}>
               <UBTextField
                 key={index}
                 question={q.question}
                 SetAnswer={q.handleSetAnswer}
                 value={q.value}
               />
+              </Box>
             );
+            <Box sx={{ mb: 5, p: 1 }}>
+            {deadline}
+          </Box>
           }
         })}
+         <Box sx={{ mb: 5, p: 1, mt: 4, ml:18, color: 'red', width: "60%"}}>
+            {deadline}
+          </Box>
     </Container>
   );
 };

@@ -74,9 +74,8 @@ export const UBresearch: React.FC = () => {
   ];
 
   return (
-    <div>
-      <Container sx={{ width: 1, m: 1, p: 1 }}>
-        <h3><center>Research & Partnership</center></h3>
+      <Container sx={{ width: 1, m: 1, mb: "100px", p: 1 }}>
+        <h3 style={{marginBottom: "-20px", marginTop: "60px"}}><center>Research & Partnership</center></h3>
         {questions.map((q, index) => (
         <Box key={index} mb={-4.7}>
           {q.type === "textarea" ? (
@@ -101,8 +100,7 @@ export const UBresearch: React.FC = () => {
           )}
         </Box>
       ))}
-      </Container>{" "}
-    </div>
+      </Container>
   );
 };
 

@@ -21,7 +21,7 @@ export const UBDate: React.FC = () => {
         slotProps={{
           textField: {
             sx: {
-              marginLeft: 9.5, // Adjust the margin for the TextField here
+              marginLeft: 20.5, // Adjust the margin for the TextField here
             },
           },
         }}

@@ -56,7 +56,7 @@ export const UBCourses: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3><center>Courses</center></h3>
+      <h3 style={{ marginTop: "60px", marginBottom: "-40px"}}><center>Courses</center></h3>
       {questions.map((q, index) => (
         <Box key={index} mb={-2}>
           {q.type === "textarea" ? (

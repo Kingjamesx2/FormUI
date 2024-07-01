@@ -12,6 +12,7 @@ const initialState = ["FST", "", ""];
 
 export const AnnualNonAcademicReportStep1: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
+  const [summary, setSummary] = useState<string>("The annual report provides a comprehensive summary of the University’s activities for the academic year, which is from August to July. The specific outputs/outcomes is based on the Annual Implementation Plan forthe period under review.");
 
   const questions = [
     {
@@ -91,33 +92,40 @@ export const AnnualNonAcademicReportStep1: React.FC = () => {
   ];
 
   return (
-    <Container sx={{ width: 1, m: 1, p: 1 }}>
-    {questions.map((q, index) => (
-      <Box key={index} mb={4.7} mt={4}>
-        {q.type === "textarea" ? (
-          <UBTextArea
+    <Container>
+    <Box>
+      <Box sx={{ml:21, mt: 10, mb: 5, p: 1, border: "1px solid black", width: "68%", }}>
+        {summary}
+      </Box>
+      <UbDropdown
+        label={questions[0].question}
+        options={questions[0].options}
+        handleSetValue={questions[0].handleSetAnswer as (e: SelectChangeEvent<string>) => void}
+        value={questions[0].value}
+      />
+    </Box>
+    {questions.slice(1).map((q, index) => {
+      if (q.type === "textarea") {
+        return (
+          <Box sx={{mt: "-25px"}}>            <UBTextArea
+            key={index}
             question={q.question}
-            SetAnswer={q.handleSetAnswer}
-            value={q.value}
-          />
-        ) : q.type === "dropdown" ? (
-          <UbDropdown
-            label={q.question}
-            options={q.options}
-            handleSetValue={q.handleSetAnswer}
-            value={q.value}
-          />
-        ) : (
-          <Box mt={-5}>
-          <UBTextField
-            question={q.question}
-            SetAnswer={q.handleSetAnswer}
+            SetAnswer={q.handleSetAnswer as (e: ChangeEvent<HTMLTextAreaElement>) => void}
             value={q.value}
           />
           </Box>
-        )}
-      </Box>
-    ))}
+        );
+      } else if (q.type === "input") {
+        return (
+          <UBTextField
+            key={index}
+            question={q.question}
+            SetAnswer={q.handleSetAnswer as (e: ChangeEvent<HTMLInputElement>) => void}
+            value={q.value}
+          />
+        );
+      }
+    })}
   </Container>
   );
 }

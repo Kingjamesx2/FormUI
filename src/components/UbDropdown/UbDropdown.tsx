@@ -41,11 +41,11 @@ export const UbDropdown: React.FC<IUbDropdownProps> = ({
             autoWidth
             label={label}
           >
-            {options.map((o) => (
+            {/* {options.map((o) => (
               <MenuItem key={o.value} value={o.value}>
                 {o.label}
               </MenuItem>
-            ))}
+            ))} */}
           </Select>
         </FormControl>
       </Box>

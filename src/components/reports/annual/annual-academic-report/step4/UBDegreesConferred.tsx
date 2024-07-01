@@ -45,7 +45,7 @@ export const UBDegreesConferred = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3>
+      <h3 style={{ marginBottom: "-30px"}}>
         <center>Degrees conferred</center>
       </h3>
       {questions.map((q, index) => (

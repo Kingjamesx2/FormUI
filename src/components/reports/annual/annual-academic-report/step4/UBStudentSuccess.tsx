@@ -53,7 +53,8 @@ export const UBStudentSuccess = () => {
       value: state[1],
     },
     {
-      question: "3. Identify three students that model the Faculty ideals in their academic and community life. Provide a brief explanation.",
+      question:
+        "3. Identify three students that model the Faculty ideals in their academic and community life. Provide a brief explanation.",
       type: "header",
     },
     {
@@ -96,7 +97,7 @@ export const UBStudentSuccess = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3>
+      <h3 style={{ marginBottom: "-20px", marginTop: "70px" }}>
         <center>Student Success</center>
       </h3>
       {questions.map((q, index) => (
@@ -115,7 +116,9 @@ export const UBStudentSuccess = () => {
               value={q.value}
             />
           ) : q.type === "header" ? (
-            <h4>{q.question}</h4>
+            <h3 style={{ marginTop: "70px"}}>
+              <center>{q.question}</center>
+            </h3>
           ) : (
             <UBTextField
               question={q.question}

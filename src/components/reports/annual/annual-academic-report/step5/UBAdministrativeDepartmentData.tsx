@@ -59,7 +59,7 @@ export const UBAdministrativeDepartmentData: React.FC = () => {
   return (
   
       <Container sx={{ width: 1, m: 1, p: 1 }}>
-        <h3>
+        <h3  style={{ marginBottom: "-20px", marginTop: "70px" }}>
           <center>
             Administrative Department Data (Inclusive of the Head of Department)
           </center>

@@ -13,7 +13,8 @@ export const UBFinancial: React.FC = () => {
 
   const questions = [
     {
-      question: "a. State sources of funding, for example, department activities, research fund",
+      question:
+        "a. State sources of funding, for example, department activities, research fund",
       handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value;
         setState((prevState) => {
@@ -26,7 +27,8 @@ export const UBFinancial: React.FC = () => {
       value: state[0],
     },
     {
-      question: "b. Has there been significant changes in the department’s budget?",
+      question:
+        "b. Has there been significant changes in the department’s budget?",
       handleSetAnswerRadio: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setState((prevState) => {
@@ -41,44 +43,56 @@ export const UBFinancial: React.FC = () => {
         { value: "no", label: "no" },
       ],
       value: state[2],
-    }
+    },
   ];
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-        {questions.map((q, index) => {
-          if (q.type === "textarea") {
-            return (
-              <UBTextArea
-                key={index}
-                question={q.question}
-                SetAnswer={q.handleSetAnswer}
-                value={q.value}
-              />
-            );
-          } else if (q.type === "dropdown") {
-            return (
-              <UbDropdown
+      <h3 style={{ marginBottom: "-10px", marginTop: "50px" }}>
+        <center>Financial/Budget</center>
+      </h3>
+      {questions.map((q, index) => (
+        <Box key={index} mb={-4}>
+          {q.type === "textarea" ? (
+            <UBTextArea
+              question={q.question}
+              SetAnswer={q.handleSetAnswer}
+              value={q.value}
+            />
+          ) : q.type === "dropdown" ? (
+            <UbDropdown
+              label={q.question}
+              options={q.options}
+              handleSetValue={q.handleSetAnswer}
+              value={q.value}
+            />
+          ) : q.type === "radiobutton" ? (
+            <Box sx={{marginTop: "-50px"}}>
+              <UBRadioButton
                 label={q.question}
                 options={q.options}
-                handleSetValue={q.handleSetAnswer}
+                handleSetValue={q.handleSetAnswerRadio}
                 value={q.value}
               />
-            );
-          } else if (q.type === "input") {
-            return (
-              <UBTextField
-                key={index}
-                question={q.question}
-                SetAnswer={q.handleSetAnswer}
-                value={q.value}
-              />
-            );
-          }
-        })}
+              {q.additionalText && (
+                <UBTextField
+                  question="Please specify:"
+                  SetAnswer={q.handleSetAnswerText}
+                  value={q.textValue}
+                />
+              )}
+            </Box>
+          ) : (
+            <UBTextField
+              question={q.question}
+              SetAnswer={q.handleSetAnswer}
+              value={q.value}
+            />
+          )}
+        </Box>
+      ))}
     </Container>
   );
 };
-
 
 export default UBFinancial;

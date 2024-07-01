@@ -1,98 +1,114 @@
 import React, { useState } from "react";
-import { Container, IconButton, Box } from "@mui/material";
+import { Container, Box } from "@mui/material";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
-import { UBUploadFile } from "../../../../common/UBUploadFile/UBUploadFile";
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
+import RemoveCircleOutlinedIcon from '@mui/icons-material/RemoveCircleOutlined';
+import IconButton from '@mui/material/IconButton';
 
-const initialState = ["", "", "", ""];
+const initialQuestionState = {
+  nameOfEvent: "",
+  personInPictures: "",
+  summaryOfEvents: "",
+  image: "",
+};
 
 export const UBActivitiesForTheYear = () => {
-  const [state, setState] = useState<string[]>(initialState);
+  const [containers, setContainers] = useState([initialQuestionState]);
 
   const handleSetAnswer = (
-    index: number,
+    containerIndex: number,
+    questionKey: keyof typeof initialQuestionState,
     value: string | FileList | null
   ) => {
-    setState((prevState) => {
-      const newState = [...prevState];
-      newState[index] = value as string; // Assuming value is a string or file name/path
-      return newState;
+    setContainers((prevContainers) => {
+      const newContainers = [...prevContainers];
+      newContainers[containerIndex] = {
+        ...newContainers[containerIndex],
+        [questionKey]: value as string, // Assuming value is a string or file name/path
+      };
+      return newContainers;
     });
   };
 
-  const questions = [
-    {
-      question: "Name Of event: ",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) =>
-        handleSetAnswer(0, e.target.value),
-      type: "input",
-      value: state[0],
-    },
-    {
-      question: "Name of person/s in the pictures",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) =>
-        handleSetAnswer(1, e.target.value),
-      type: "textarea",
-      value: state[1],
-    },
-    {
-      question: "Summary of Events",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) =>
-        handleSetAnswer(2, e.target.value),
-      type: "textarea",
-      value: state[2],
-    },
-    {
-      question: "Add Image",
-      handleSetAnswer: (files: FileList | null) => {
-        handleSetAnswer(3, files ? files[0].name : null); // Assuming handling file name here
-      },
-      type: "uploadFile",
-      value: state[3],
-    },
-  ];
+  const addContainer = () => {
+    setContainers((prevContainers) => [...prevContainers, initialQuestionState]);
+  };
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const removeContainer = (index: number) => {
+    if (index > 0) { // Ensure the first container is not removed
+      setContainers((prevContainers) =>
+        prevContainers.filter((_, i) => i !== index)
+      );
+    }
+  };
+
+  const handleImageUpload = (containerIndex: number, event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
-    handleSetAnswer(3, files ? files[0].name : null);
+    handleSetAnswer(containerIndex, "image", files ? files[0].name : null);
   };
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3 style={{marginTop: "20px", marginBottom: "-10px"}}><center>Activities for the year - List activities conducted during the year under review.</center></h3>
-      {questions.map((q, index) => (
-        <Box key={index}  mb={-4.5}>
-          {q.type === "textarea" ? (
-            <UBTextArea
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
-          ) : q.type === "uploadFile" ? (
-            <>
-              <label>{q.question}</label>
+      <h3 style={{ marginTop: "20px", marginBottom: "-20px" }}>
+        <center>Activities for the year - List activities conducted during the year under review.</center>
+      </h3>
+      {containers.map((container, containerIndex) => (
+        <Box key={containerIndex} mb={"-80px"} p={2}>
+          <Box mb={-4.5} display="flex" alignItems="center">
+            <Box flex={1} mr={2}>
+              <UBTextField
+                question="Name Of event: "
+                SetAnswer={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleSetAnswer(containerIndex, "nameOfEvent", e.target.value)
+                }
+                value={container.nameOfEvent}
+              />
+            </Box>
+            <Box>
+              <label>Add Image</label>
               <IconButton component="label">
                 <AddPhotoAlternateIcon />
                 <input
                   type="file"
                   accept="image/*"
                   hidden
-                  onChange={handleImageUpload}
+                  onChange={(e) => handleImageUpload(containerIndex, e)}
                 />
               </IconButton>
-              {q.value && <span>{q.value}</span>}
-            </>
-          ) : (
-            <Box style={{marginBottom: "20px"}}>
-            <UBTextField
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
+              {container.image && <span>{container.image}</span>}
             </Box>
-          )}
+          </Box>
+          <Box mb={-4.5}>
+            <UBTextField
+              question="Name of person/s in the pictures"
+              SetAnswer={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleSetAnswer(containerIndex, "personInPictures", e.target.value)
+              }
+              value={container.personInPictures}
+            />
+          </Box>
+          <Box mb={-4.5}>
+            <UBTextArea
+              question="Summary of Events"
+              SetAnswer={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleSetAnswer(containerIndex, "summaryOfEvents", e.target.value)
+              }
+              value={container.summaryOfEvents}
+            />
+          </Box>
+          <Box display="flex" justifyContent="center" sx={{ mt: '40px' }}>
+            <IconButton onClick={addContainer}>
+              <AddCircleRoundedIcon />
+            </IconButton>
+            {containerIndex > 0 && (
+              <IconButton onClick={() => removeContainer(containerIndex)}>
+                <RemoveCircleOutlinedIcon />
+              </IconButton>
+            )}
+          </Box>
         </Box>
       ))}
     </Container>

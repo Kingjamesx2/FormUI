@@ -14,8 +14,8 @@ export const Faculty = () => {
   const [state, setState] = useState<string[]>(initialState);
   const [summary, setSummary] = useState<string>("The annual report provides a comprehensive summary of the University’s activities for the academic year, which is from August to July. The specific outputs/outcomes are based on the Annual Implementation Plan for the period under review.");
 
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  // const theme = useTheme();
+  // const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const questions = [
     {
@@ -65,7 +65,7 @@ export const Faculty = () => {
   return (
     <Container>
       <Box>
-        <Box sx={{ mb: 5, p: 1 }}>
+        <Box sx={{ml:21, mt: 10, mb: 5, p: 1, border: "1px solid black", width: "70%", }}>
           {summary}
         </Box>
         <UbDropdown
@@ -78,12 +78,13 @@ export const Faculty = () => {
       {questions.slice(1).map((q, index) => {
         if (q.type === "textarea") {
           return (
-            <UBTextArea
+            <Box sx={{mt: "-25px"}}>            <UBTextArea
               key={index}
               question={q.question}
               SetAnswer={q.handleSetAnswer as (e: ChangeEvent<HTMLTextAreaElement>) => void}
               value={q.value}
             />
+            </Box>
           );
         } else if (q.type === "input") {
           return (
