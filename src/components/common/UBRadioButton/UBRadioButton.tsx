@@ -20,7 +20,7 @@ export const UBRadioButton: React.FC<IUBRadioButtonProp> = ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "5%",
+        marginTop: "10%",
       }}
       sx={{
         borderRadius: '8px',
@@ -31,8 +31,8 @@ export const UBRadioButton: React.FC<IUBRadioButtonProp> = ({
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          marginLeft: "9%",
-          width: "30%"
+          width: "70%",
+          border:"1px solid black"
         }}
       >
         <FormLabel>{label}</FormLabel>

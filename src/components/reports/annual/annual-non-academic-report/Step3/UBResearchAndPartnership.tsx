@@ -72,7 +72,7 @@ export const UBResearchAndPartnership = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-    <h3>Research & Partnerships</h3>
+    <h2 style={{ marginBottom: "-10px"}}><center>Research & Partnerships</center></h2>
     {questions.map((q, index) => (
           <Box key={index} mb={-4.5}>
             {q.type === "textarea" ? (

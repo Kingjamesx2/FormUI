@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './UserPosition.scss';
 
 // Define the interface for the component props
 interface UserPositionProps {

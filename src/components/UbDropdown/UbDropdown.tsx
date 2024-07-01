@@ -2,14 +2,14 @@ import React from "react";
 import { Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { Margin } from "@mui/icons-material";
 
-interface ISelectComponentProps {
+interface IUbDropdownProps {
   label: string;
   value: string;
   handleSetValue: (event: React.ChangeEvent<{ value: unknown }>) => void;
   options: { value: string; label: string }[];
 }
 
-const SelectComponent: React.FC<ISelectComponentProps> = ({
+export const UbDropdown: React.FC<IUbDropdownProps> = ({
   label,
   value,
   handleSetValue,
@@ -53,4 +53,4 @@ const SelectComponent: React.FC<ISelectComponentProps> = ({
   );
 };
 
-export default SelectComponent;
+export default UbDropdown;

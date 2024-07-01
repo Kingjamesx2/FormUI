@@ -5,6 +5,8 @@ import AnnualNonAcademicReportStep2 from "./../../components/reports/annual/annu
 import AnnualNonAcademicReportStep3 from "./../../components/reports/annual/annual-non-academic-report/Step3/AnnualNonAcademicReportStep3";
 import AnnualNonAcademicReportStep4 from "./../../components/reports/annual/annual-non-academic-report/Step4/AnnualNonAcademicReportStep4";
 import AnnualNonAcademicReportStep5 from "./../../components/reports/annual/annual-non-academic-report/Step5/AnnualNonAcademicReportStep5";
+import Header from '../../components/common/Header/Header';  // Import the Header component
+
 
 const steps = [
   { label: "Step 1", stepComponent: <AnnualNonAcademicReportStep1 /> },
@@ -14,6 +16,14 @@ const steps = [
   { label: "Step 5", stepComponent: <AnnualNonAcademicReportStep5 /> },
 ];
 
-export const AnnualNonAcademicReport = () => <UBStepper steps={steps} />;
+export const AnnualNonAcademicReport = () => (
+  <>
+    <Header
+      logo="./../icons/UB_Logo.png"
+      title="UB Annual Report Template Non-Academic Division"
+    />
+    <UBStepper steps={steps} />
+  </>
+);
 
 export default AnnualNonAcademicReport

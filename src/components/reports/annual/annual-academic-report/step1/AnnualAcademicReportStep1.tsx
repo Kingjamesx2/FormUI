@@ -5,11 +5,11 @@ import { FacultyMissionStatement } from "./FacultyMissionStatement";
 import { UBPaper } from "../../../../common/UBPaper/UBPaper";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
-
 export const AnnualAcademicReportStep1: React.FC = () => {
   
   return (
       <Container>
+          
           <Faculty />          
           <FacultyMissionStatement />
       </Container>

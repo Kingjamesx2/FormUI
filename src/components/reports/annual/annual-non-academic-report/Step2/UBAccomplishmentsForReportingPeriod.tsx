@@ -3,6 +3,8 @@ import Container from "@mui/material/Container";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
+import Box from "@mui/material/Box";
+
 
 const initialState = ["", "", "", "", ""];
 
@@ -72,41 +74,34 @@ export const UBAccomplishmentsForReportingPeriod: React.FC = () => {
   ];
 
   return (
-    <div>
-      <Container sx={{ width: 1, m: 1, p: 1 }}>
-        <h3>Accomplishments for the reporting period</h3>
-        {questions.map((q, index) => {
-          if (q.type === "textarea") {
-            return (
+    <Container sx={{ width: 1, m: 1, p: 1 }}>
+      <h2 style={{ marginTop: "75px", marginBottom: "-20px"}}><center>Accomplishments for the reporting period</center></h2>
+      {questions.map((q, index) => (
+          <Box key={index} mb={-4.5}>
+            {q.type === "textarea" ? (
               <UBTextArea
-                key={index}
                 question={q.question}
                 SetAnswer={q.handleSetAnswer}
                 value={q.value}
               />
-            );
-          } else if (q.type === "dropdown") {
-            return (
+            ) : q.type === "dropdown" ? (
               <UbDropdown
                 label={q.question}
                 options={q.options}
                 handleSetValue={q.handleSetAnswer}
                 value={q.value}
               />
-            );
-          } else if (q.type === "input") {
-            return (
+            ) : (
               <UBTextField
-                key={index}
                 question={q.question}
                 SetAnswer={q.handleSetAnswer}
                 value={q.value}
               />
-            );
-          }
-        })}
-      </Container>{" "}
-    </div>
+            )}
+          </Box>
+        ))}
+    </Container>
+
   );
 };
 

@@ -58,7 +58,7 @@ export const UBStudentSuccess = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-    <h3><center>Student Success</center></h3>
+    <h2 style={{ marginTop: "75px", marginBottom: "-20px"}}><center>Student Success</center></h2>
     {questions.map((q, index) => (
           <Box key={index} mb={-4.5}>
             {q.type === "textarea" ? (

@@ -67,37 +67,36 @@ export const StudentsEnrolled: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3>2. Student Enrolment Trend (Academic Level)</h3>
-      {questions.map((q, index) => {
-        if (q.type === "textarea") {
-          return (
-            <UBTextArea
-              key={index}
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        } else if (q.type === "dropdown") {
-          return (
-            <UbDropdown
-              label={q.question}
-              options={q.options}
-              handleSetValue={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        } else if (q.type === "input") {
-          return (
-            <UBTextField
-              key={index}
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        }
-      })}
+        {questions.map((q, index) => {
+          if (q.type === "textarea") {
+            return (
+              <UBTextArea
+                key={index}
+                question={q.question}
+                SetAnswer={q.handleSetAnswer}
+                value={q.value}
+              />
+            );
+          } else if (q.type === "dropdown") {
+            return (
+              <UbDropdown
+                label={q.question}
+                options={q.options}
+                handleSetValue={q.handleSetAnswer}
+                value={q.value}
+              />
+            );
+          } else if (q.type === "input") {
+            return (
+              <UBTextField
+                key={index}
+                question={q.question}
+                SetAnswer={q.handleSetAnswer}
+                value={q.value}
+              />
+            );
+          }
+        })}
     </Container>
   );
 };

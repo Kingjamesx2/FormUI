@@ -11,6 +11,8 @@ export const UBDate: React.FC = () => {
       display: "flex",
       justifyContent: "left",
       alignItems: "Left",
+      // border: "1px solid black",
+      width: "70%"
     }}
   >
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -19,7 +21,7 @@ export const UBDate: React.FC = () => {
         slotProps={{
           textField: {
             sx: {
-              marginLeft: 20.5, // Adjust the margin for the TextField here
+              marginLeft: 9.5, // Adjust the margin for the TextField here
             },
           },
         }}

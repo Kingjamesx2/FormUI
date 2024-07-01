@@ -74,7 +74,7 @@ export const UBStrategicGoals: React.FC = () => {
 
   return (
       <Container sx={{ width: 1, m: 1, p: 1 }}>
-        <h3><center>Strategic Goals</center></h3>
+        <h2 style={{ marginBottom: "-10px"}}><center>Strategic Goals</center></h2>
         {questions.map((q, index) => (
           <Box key={index} mb={-4.5}>
             {q.type === "textarea" ? (

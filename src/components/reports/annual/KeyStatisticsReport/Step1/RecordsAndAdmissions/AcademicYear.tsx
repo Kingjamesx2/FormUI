@@ -52,47 +52,36 @@ export const AcademicYear: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <Box>
-        <UbDropdown
-          label={questions[0].question}
-          options={questions[0].options}
-          handleSetValue={
-            questions[0].handleSetAnswer as (
-              e: SelectChangeEvent<string>
-            ) => void
+        {questions.map((q, index) => {
+          if (q.type === "textarea") {
+            return (
+              <UBTextArea
+                key={index}
+                question={q.question}
+                SetAnswer={q.handleSetAnswer}
+                value={q.value}
+              />
+            );
+          } else if (q.type === "dropdown") {
+            return (
+              <UbDropdown
+                label={q.question}
+                options={q.options}
+                handleSetValue={q.handleSetAnswer}
+                value={q.value}
+              />
+            );
+          } else if (q.type === "input") {
+            return (
+              <UBTextField
+                key={index}
+                question={q.question}
+                SetAnswer={q.handleSetAnswer}
+                value={q.value}
+              />
+            );
           }
-          value={questions[0].value}
-        />
-      </Box>
-      <Box sx={{ mb: 5, p: 1 }}>{summary}</Box>
-      <Box sx={{ mb: 5, p: 1 }}>{submissionDeadline}</Box>
-      {questions.slice(1).map((q, index) => {
-        if (q.type === "textarea") {
-          return (
-            <UBTextArea
-              key={index}
-              question={q.question}
-              SetAnswer={
-                q.handleSetAnswer as (
-                  e: ChangeEvent<HTMLTextAreaElement>
-                ) => void
-              }
-              value={q.value}
-            />
-          );
-        } else if (q.type === "input") {
-          return (
-            <UBTextField
-              key={index}
-              question={q.question}
-              SetAnswer={
-                q.handleSetAnswer as (e: ChangeEvent<HTMLInputElement>) => void
-              }
-              value={q.value}
-            />
-          );
-        }
-      })}
+        })}
     </Container>
   );
 };

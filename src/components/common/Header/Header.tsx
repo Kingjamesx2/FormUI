@@ -3,6 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import UBLogo  from './../../icons/UB_Logo.png' 
 
 interface HeaderProps {
   logo: string;
@@ -11,10 +12,10 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ logo, title }) => {
   return (
-    <AppBar position="static" sx={{ bgcolor: '#fff', mb: 5 }}>
+    <AppBar position="static" sx={{ bgcolor: '#fff' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'center' }}>
-          <img src={logo} alt="" />
+          <img src={UBLogo} alt="" width="10%"/>
           <Typography
             variant="h6"
             component="a"

@@ -58,11 +58,7 @@ export const UBAdministrativeDepartmentData: React.FC = () => {
   return (
     <div>
       <Container sx={{ width: 1, m: 1, p: 1 }}>
-        <h3>
-          <center>
-            Administrative Department Data (Inclusive of the Head of Department)
-          </center>
-        </h3>
+        <h3 style={{marginTop: "50px", marginBottom: "-10px"}}><center>Administrative Department Data (Inclusive of the Head of Department)</center></h3>
         {questions.map((q, index) => (
           <Box key={index} mb={-4.7}>
             {q.type === "textarea" ? (

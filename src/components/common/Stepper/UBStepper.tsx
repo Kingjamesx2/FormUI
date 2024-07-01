@@ -80,10 +80,6 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
 
   return (
     <div className="form">
-      <Header
-        logo="./../icons/UB_Logo.png"
-        title="UB Annual Report Template Academic Division"
-      />
       <Stack sx={{ width: "100%" }}>
         <Stepper nonLinear activeStep={activeStep} sx={stepStyle(isSmallScreen)}>
           {steps.map((step, index) => (

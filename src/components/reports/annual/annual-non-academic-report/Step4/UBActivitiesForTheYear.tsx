@@ -61,12 +61,7 @@ export const UBActivitiesForTheYear = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3>
-        <center>
-          Activities for the year - List activities conducted during the year
-          under review.
-        </center>
-      </h3>
+      <h3 style={{marginTop: "20px", marginBottom: "-10px"}}><center>Activities for the year - List activities conducted during the year under review.</center></h3>
       {questions.map((q, index) => (
         <Box key={index}  mb={-4.5}>
           {q.type === "textarea" ? (
@@ -90,11 +85,13 @@ export const UBActivitiesForTheYear = () => {
               {q.value && <span>{q.value}</span>}
             </>
           ) : (
+            <Box style={{marginBottom: "20px"}}>
             <UBTextField
               question={q.question}
               SetAnswer={q.handleSetAnswer}
               value={q.value}
             />
+            </Box>
           )}
         </Box>
       ))}

@@ -26,6 +26,9 @@ export const UBTextField: FC<IUBTextField> = ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
+      width: "70%",
+      // marginTop: "10%",
+      margin: "auto"
       
     }}    
     sx={{ borderRadius: '10px'  }}>
@@ -36,8 +39,10 @@ export const UBTextField: FC<IUBTextField> = ({
           width: width ? `${width}px` : "100%",
           maxWidth: "100%",
           borderRadius: '8px',
-          marginTop: "5%",
+          marginTop: "10%",
           marginLeft: "1%", // Adjust the margin here
+          // border: "1px solid black"
+
         }}
       >
         <InputLabel 

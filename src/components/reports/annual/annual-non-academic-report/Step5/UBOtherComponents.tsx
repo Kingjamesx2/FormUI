@@ -28,41 +28,38 @@ export const UBOtherComponents: React.FC = () => {
     },
 ];
   return (
-    <div>
-      <Container sx={{ width: 1, m: 1, p: 1 }}>
-        <h3><center>Other Components</center></h3>
+    <Container sx={{ width: 1, m: 1, p: 1 }}>
         {questions.map((q, index) => {
-        if (q.type === "textarea") {
-          return (
-            <UBTextArea
-              key={index}
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        } else if (q.type === "dropdown") {
-          return (
-            <UbDropdown
-              label={q.question}
-              options={q.options}
-              handleSetValue={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        } else if (q.type === "input") {
-          return (
-            <UBTextField
-              key={index}
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        }
-      })}
-      </Container>
-    </div>
+          if (q.type === "textarea") {
+            return (
+              <UBTextArea
+                key={index}
+                question={q.question}
+                SetAnswer={q.handleSetAnswer}
+                value={q.value}
+              />
+            );
+          } else if (q.type === "dropdown") {
+            return (
+              <UbDropdown
+                label={q.question}
+                options={q.options}
+                handleSetValue={q.handleSetAnswer}
+                value={q.value}
+              />
+            );
+          } else if (q.type === "input") {
+            return (
+              <UBTextField
+                key={index}
+                question={q.question}
+                SetAnswer={q.handleSetAnswer}
+                value={q.value}
+              />
+            );
+          }
+        })}
+    </Container>
   );
 };
 
