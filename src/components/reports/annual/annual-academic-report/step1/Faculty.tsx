@@ -65,10 +65,10 @@ export const Faculty = () => {
   return (
     <Container>
       <Box>
-        <Box sx={{ml:"15%", mt: 10, p: 2, border: "1px solid black", width: "67%", backgroundColor: "#FFD954"}}>
+        <Box sx={{ml:"15%", mt: "10%", p: "2%", width: "66%", backgroundColor: "#FFD954", borderTopLeftRadius: "5px", borderTopRightRadius: "5px"}}>
           {summary}
         </Box>
-        <Box sx={{ border: "1px solid", width: "70%",marginTop: "-2px", marginLeft: "15%",paddingBottom: "2%", paddingTop: "3%", backgroundColor: "#FFD954", borderBottomLeftRadius: "none", borderBottomRightRadius: "none"}}>
+        <Box sx={{width: "70%",marginTop: "-2px", marginLeft: "15%",paddingBottom: "2%", paddingTop: "3%", backgroundColor: "#FFD954", borderBottomLeftRadius: "none", borderBottomRightRadius: "none"}}>
         <UbDropdown
           label={questions[0].question}
           options={questions[0].options}

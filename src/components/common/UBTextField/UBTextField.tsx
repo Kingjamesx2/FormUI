@@ -26,34 +26,32 @@ export const UBTextField: FC<IUBTextField> = ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      width: "70%",
+      width: "71%",
       marginTop: "10%",
       margin: "auto",
       padding: "2% "
       
     }}    
-    sx={{ borderRadius: '10px'  }}>
+    sx={{ borderRadius: '' }}>
       <FormControl
         fullWidth
         variant="standard"
         style={{
           width: width ? `${width}px` : "100%",
           maxWidth: "100%",
-          borderRadius: '8px',
-          marginTop: "10%",
-          marginLeft: "1%", // Adjust the margin here
-          border: "1px solid black"
-
+          borderRadius: '5px',
+          padding: "2%",
+          // border: "1px solid black",
+          backgroundColor: "#FFD954"
         }}
       >
         <InputLabel 
           htmlFor="standard-adornment-amount" 
-          sx={{ fontSize: '20px', color: "black"
-           }} // Adjust the font size here
-        >
+          sx={{ fontSize: '20px', color: "black", m: "3% 0% 8% 3%"}}>
           {question}
         </InputLabel>
         <Input
+        sx={{ ml: "2%"}}
           id="standard-adornment-amount"
           value={value}
           onChange={SetAnswer}

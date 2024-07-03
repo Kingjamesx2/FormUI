@@ -44,9 +44,9 @@ export const UBRetentionOfStudents: React.FC = () => {
   return (
     <div>
       <Container sx={{ width: 1, m: 1, p: 1 }}>
-        <h3><center>Retention of Students</center></h3>
+        <h3 style={{ marginBottom: "1%"}}><center>Retention of Students</center></h3>
         {questions.map((q, index) => (
-          <Box key={index} mb={-2}>
+          <Box key={index} mb={"-5.3%"}>
             {q.type === "textarea" ? (
               <UBTextArea
                 question={q.question}

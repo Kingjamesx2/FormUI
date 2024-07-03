@@ -46,9 +46,9 @@ export const UBFinancial: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3  style={{ marginBottom: "-20px", marginTop: "70px" }}><center>Financial/Budget</center></h3>
+      <h3  style={{ marginBottom: "-2%", marginTop: "7%" }}><center>Financial/Budget</center></h3>
       {questions.map((q, index) => (
-        <Box key={index} mb={-4}>
+        <Box key={index} mb={"-4%"}>
           {q.type === "textarea" ? (
             <UBTextArea
               question={q.question}
@@ -63,7 +63,7 @@ export const UBFinancial: React.FC = () => {
               value={q.value}
             />
           ) : q.type === "radiobutton" ? (
-            <Box sx={{marginTop: "-50px"}}>
+            <Box sx={{marginTop: "-8%"}}>
               <UBRadioButton
                 label={q.question}
                 options={q.options}

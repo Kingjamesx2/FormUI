@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import { Box, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Grid } from "@mui/material";
 
 interface IUBRadioButtonProp {
   label: string;
@@ -31,34 +31,37 @@ export const UBRadioButton: React.FC<IUBRadioButtonProp> = ({
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          width: "70%",
+          width: "65%",
           padding: "3%",
-          border:"1px solid black",
+          border: "1px solid black",
           backgroundColor: "#FFD954",
-          borderRadius: "20px"
+          borderRadius: "5px"
         }}
       >
-        <FormLabel>{label}</FormLabel>
+        <FormLabel sx={{ color:"black", pb:"2%"}}>{label}</FormLabel>
         <RadioGroup value={value} onChange={handleSetValue}>
-          {options.map((option, index) => (
-            <FormControlLabel
-              key={index}
-              value={option.value}
-              control={<Radio />}
-              label={
-                <span style={{ whiteSpace: 'normal', overflow: 'visible', textOverflow: 'clip' }}>
-                  {option.label}
-                </span>
-              }
-              sx={{
-                '& .MuiFormControlLabel-label': {
-                  whiteSpace: 'normal',
-                  overflow: 'visible',
-                  textOverflow: 'clip',
-                },
-              }}
-            />
-          ))}
+          <Grid container spacing={2}>
+            {options.map((option, index) => (
+              <Grid item xs={6} key={index}>
+                <FormControlLabel
+                  value={option.value}
+                  control={<Radio />}
+                  label={
+                    <span style={{ whiteSpace: 'normal', overflow: 'visible', textOverflow: 'clip' }}>
+                      {option.label}
+                    </span>
+                  }
+                  sx={{
+                    '& .MuiFormControlLabel-label': {
+                      whiteSpace: 'normal',
+                      overflow: 'visible',
+                      textOverflow: 'clip',
+                    },
+                  }}
+                />
+              </Grid>
+            ))}
+          </Grid>
         </RadioGroup>
       </FormControl>
     </Box>

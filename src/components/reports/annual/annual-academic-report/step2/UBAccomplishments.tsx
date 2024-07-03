@@ -94,7 +94,7 @@ export const UBAccomplishments: React.FC = () => {
     <Container sx={{ width: 1, m: 1, p: 1 }}>
       <h3 style= {{ marginBottom: "-20px", marginTop: "50px"}}><center>Accomplishments for the Reporting Period</center></h3>
       {questions.map((q, index) => (
-        <Stack key={index} mb={-4.7} >
+        <Box key={index} mb={-4.7} >
           {q.type === "textarea" ? (
             <UBTextArea
               question={q.question}
@@ -109,17 +109,16 @@ export const UBAccomplishments: React.FC = () => {
               value={q.value}
             />
           ) : q.type === "radiobutton" ? (
-            <Box sx={{mt: "%", backgroundColor: ""}}>
+            <Box sx={{ mt: "-9%"}}>
               <UBRadioButton
                 label={q.question}
                 options={q.options}
                 handleSetValue={q.handleSetAnswerRadio}
                 value={q.value}
-                
               />
-            </Box>
+              </Box>
           ) : (
-            <Box sx={{mt: '-10px', mb: '30px'}}>
+            <Box sx={{mt: '-5%', mb: '-5%'}}>
             <UBTextField
               question={q.question}
               SetAnswer={q.handleSetAnswer}
@@ -127,7 +126,7 @@ export const UBAccomplishments: React.FC = () => {
             />
             </Box>
           )}
-        </Stack>
+        </Box>
       ))}
     </Container>
   );

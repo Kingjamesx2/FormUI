@@ -45,11 +45,11 @@ export const UBDegreesConferred = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3 style={{ marginBottom: "-30px"}}>
+      <h3 style={{ marginBottom: "1%"}}>
         <center>Degrees conferred</center>
       </h3>
       {questions.map((q, index) => (
-        <Box key={index} mb={-2}>
+        <Box key={index} mb={"-5%"}>
           {q.type === "textarea" ? (
             <UBTextArea
               question={q.question}

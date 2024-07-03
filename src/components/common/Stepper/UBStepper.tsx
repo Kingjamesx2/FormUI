@@ -6,9 +6,11 @@ import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import StepLabel from "@mui/material/StepLabel";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { Header } from './../Header/Header';
 import "./FormOne.scss";
+import { CenterFocusStrong } from "@mui/icons-material";
 
 // Define the interface for the component props
 interface IStep {
@@ -23,23 +25,27 @@ interface IUBStepperProps {
 const stepStyle = (isSmallScreen: boolean) => ({
   padding: 2,
   flexDirection: isSmallScreen ? "column" : "row",
-  "& .Mui-active": {
-    "&.MuiStepIcon-root": {
-      color: "warning.main",
-      fontSize: "2rem",
-    },
-    "& .MuiStepConnector-line": {
-      borderColor: "warning.main",
-    },
+  "& .MuiStepLabel-label": {
+    color: "white",
   },
-  "& .Mui-completed": {
-    "&.MuiStepIcon-root": {
-      color: "secondary.main",
-      fontSize: "2rem",
-    },
-    "& .MuiStepConnector-line": {
-      borderColor: "secondary.main",
-    },
+  "& .MuiStepIcon-root": {
+    color: "#3B153F",
+    borderRadius: "50%",
+    fontSize: "1rem",
+  },
+  "& .Mui-active .MuiStepIcon-root": {
+    color: "#3B153F",
+    fontSize: "2rem",
+  },
+  "& .Mui-active .MuiStepConnector-line": {
+    borderColor: "warning.main",
+  },
+  "& .Mui-completed .MuiStepIcon-root": {
+    color: "secondary.main",
+    fontSize: "2rem",
+  },
+  "& .Mui-completed .MuiStepConnector-line": {
+    borderColor: "secondary.main",
   },
 });
 
@@ -58,11 +64,16 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
   const allStepsCompleted = () => completedSteps() === totalSteps();
 
   const handleNext = () => {
-    const newActiveStep =
-      isLastStep() && !allStepsCompleted()
-        ? steps.findIndex((_, i) => !(i in completed))
-        : activeStep + 1;
-    setActiveStep(newActiveStep);
+    if (isLastStep() && allStepsCompleted()) {
+      // Handle submit logic here
+      console.log("Form submitted");
+    } else {
+      const newActiveStep =
+        isLastStep() && !allStepsCompleted()
+          ? steps.findIndex((_, i) => !(i in completed))
+          : activeStep + 1;
+      setActiveStep(newActiveStep);
+    }
   };
 
   const handleBack = () => {
@@ -81,39 +92,15 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
   return (
     <div className="form">
       <Stack sx={{ width: "100%" }}>
-        <Stepper nonLinear activeStep={activeStep} sx={stepStyle(isSmallScreen)}>
-          {steps.map((step, index) => (
-            <Step key={step.label} completed={completed[index]}>
-              {!isLastStep() ? (
-                <StepButton onClick={handleStep(index)}>{step.label}</StepButton>
-              ) : (
-                <StepButton
-                  sx={
-                    isLastStep()
-                      ? {
-                          "& .MuiSvgIcon-root": {
-                            color: "warning.main",
-                            fontSize: "2rem",
-                          },
-                        }
-                      : allStepsCompleted()
-                        ? {
-                            "& .MuiSvgIcon-root": {
-                              color: "secondary.main",
-                              fontSize: "2rem",
-                            },
-                          }
-                        : { color: "rgba(0, 0, 0, 0.38)" }
-                  }
-                  icon={<VisibilityIcon />}
-                  onClick={handleStep(index)}
-                >
-                  {step.label}
+          <Stepper nonLinear activeStep={activeStep} sx={stepStyle(isSmallScreen)} style={{display: "flex", justifyContent: "center", width: "90%", marginLeft: "5%", marginTop: "2%", marginBottom: "-2%"}}>
+            {steps.map((step, index) => (
+              <Step key={step.label} completed={completed[index]}>
+                <StepButton onClick={handleStep(index)}>
+                  {/* <StepLabel>{step.label}</StepLabel> */}
                 </StepButton>
-              )}
-            </Step>
-          ))}
-        </Stepper>
+              </Step>
+            ))}
+          </Stepper>
 
         <Box
           sx={{
@@ -156,7 +143,7 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
                   mb: 2,
                 }}
               >
-                Next
+                {isLastStep() ? 'Submit' : 'Next'}
               </Button>
             </Stack>
           </React.Fragment>

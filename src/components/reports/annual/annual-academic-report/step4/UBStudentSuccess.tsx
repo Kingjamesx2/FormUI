@@ -101,13 +101,15 @@ export const UBStudentSuccess = () => {
         <center>Student Success</center>
       </h3>
       {questions.map((q, index) => (
-        <Box key={index} mb={-4.7}>
+        <Box key={index} >
           {q.type === "textarea" ? (
+            <Box mb={-4.7}>
             <UBTextArea
               question={q.question}
               SetAnswer={q.handleSetAnswer}
               value={q.value}
             />
+            </Box>
           ) : q.type === "dropdown" ? (
             <UbDropdown
               label={q.question}
@@ -116,15 +118,17 @@ export const UBStudentSuccess = () => {
               value={q.value}
             />
           ) : q.type === "header" ? (
-            <h3 style={{ marginTop: "70px"}}>
-              <center>{q.question}</center>
-            </h3>
+            <p style={{ marginTop: "10%", marginBottom: "-4%", marginLeft:"14.4%", padding: "2% 2% 2% 1.5%", border:"1px solid black", width: "67.6%", backgroundColor: "#FFD954"}}>
+              {q.question}
+            </p>
           ) : (
+            <Box mb={"-5%"}>
             <UBTextField
               question={q.question}
               SetAnswer={q.handleSetAnswer}
               value={q.value}
             />
+            </Box>
           )}
         </Box>
       ))}

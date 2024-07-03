@@ -4,8 +4,6 @@ import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { Box } from "@mui/material";
-import { red } from "@mui/material/colors";
-import { Flex } from "antd";
 
 const initialState = ["", "", ""];
 
@@ -49,7 +47,7 @@ export const FacultyMissionStatement = () => {
             );
           } else if (q.type === "input") {
             return (
-              <Box sx={{mt: "0%", ml: "15%", pb: "4%", border: "1px solid", width: "70%", backgroundColor: "#FFD954", borderRadius: "20px"}}>
+              <Box sx={{mt: "-2%", ml: "14%", pb: "2%", width: "70%", backgroundColor: "#FFD954", borderTopRightRadius: "5px", borderTopLeftRadius: "5px", }}>
               <UBTextField
                 key={index}
                 question={q.question}
@@ -60,7 +58,7 @@ export const FacultyMissionStatement = () => {
             );
           }
         })}
-         <Box sx={{ mb: 5, p: 1, mt: 4, ml: "10%", color: 'red', width: "60%"}}>
+         <Box sx={{ mb: "2%", p: "2%", mt: "%", ml: "14%", color: 'red', width: "66.1%", backgroundColor: "#FFD954", borderBottomLeftRadius: "5px", borderBottomRightRadius: "5px"}}>
             {deadline}
           </Box>
     </Container>

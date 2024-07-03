@@ -60,7 +60,7 @@ export const UBRevisedAcademicPrograms: React.FC = () => {
   return (
     <div>
       <Container sx={{ width: 1, m: 1, p: 1 }}>
-        <h3  style={{marginBottom: "-20px", marginTop: "60px"}}><center>Number of new and revised academic programs</center></h3>
+        <h3  style={{marginBottom: "5%", marginTop: "60px"}}><center>Number of new and revised academic programs</center></h3>
         {questions.map((q, index) => (
         <Box key={index} mb={-4.7}>
           {q.type === "textarea" ? (
@@ -77,7 +77,7 @@ export const UBRevisedAcademicPrograms: React.FC = () => {
               value={q.value}
             />
           ) : (
-            <Box sx={{ mb: "20px", mt: "-30px"}}>
+            <Box sx={{ mb: "-5%", mt: "-30px"}}>
             <UBTextField
               question={q.question}
               SetAnswer={q.handleSetAnswer}
