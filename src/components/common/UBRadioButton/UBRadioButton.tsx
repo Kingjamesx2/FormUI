@@ -32,7 +32,10 @@ export const UBRadioButton: React.FC<IUBRadioButtonProp> = ({
           justifyContent: "center",
           alignItems: "center",
           width: "70%",
-          border:"1px solid black"
+          padding: "3%",
+          border:"1px solid black",
+          backgroundColor: "#FFD954",
+          borderRadius: "20px"
         }}
       >
         <FormLabel>{label}</FormLabel>

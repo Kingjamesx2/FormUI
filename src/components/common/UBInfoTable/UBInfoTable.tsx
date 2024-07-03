@@ -1,51 +1,96 @@
-import React from 'react';
+import React, { useState } from "react";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
 
-interface EnrollmentData {
-  year: string;
-  associate: string;
-  undergraduate: string;
-  graduate: string;
-  other: string;
-  total: string;
+interface IUBTableData {
+  degree: string;
+  [key: string]: string | number;
 }
 
-const enrollmentTrends: EnrollmentData[] = [
-  { year: '2021/2022', associate: '', undergraduate: '', graduate: '', other: '', total: '' },
-  { year: '2022/2023', associate: '', undergraduate: '', graduate: '', other: '', total: '' },
-  { year: '2023/2024', associate: '', undergraduate: '', graduate: '', other: '', total: '' },
-];
+interface UBInfoTableProps {
+  columns: string[];
+  initialRows: IUBTableData[];
+}
 
-const EnrollmentTable: React.FC = () => {
+const ResponsiveTableContainer = styled(TableContainer)({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '70%',
+  margin: 'auto',
+  marginTop: '50px',
+  overflowX: 'auto', // Ensures the table can scroll horizontally if needed
+});
+
+export const UBInfoTable: React.FC<UBInfoTableProps> = ({ columns, initialRows }) => {
+  const [rows, setRows] = useState<IUBTableData[]>([...initialRows]);
+
+  const handleInputChange = (degree: string, column: string, value: string) => {
+    const updatedRows = rows.map((row) =>
+      row.degree === degree ? { ...row, [column]: value } : row
+    );
+    setRows(updatedRows);
+  };
+
+  const totals = columns.reduce<{ [key: string]: number }>((acc, column) => {
+    if (column !== 'Degree Program' && column !== 'Faculty' && column !== 'Finance-Income Bz$' && column !== 'Finance-Expenditures Bz$' && column !== 'Students Enrolled Academic Year 2023/2024' && column !== 'Origin of Students(Number)' && column !== 'Campus Statistics (Number of Students) Academic Year 2023-2024') {
+      acc[column] = rows.reduce((sum, row) => sum + (parseFloat(row[column] as string) || 0), 0);
+    }
+    return acc;
+  }, {});
+  
+  const totalRow = { degree: 'Total', ...totals };
+
   return (
-    <div style={{ backgroundColor: '#e3cafa', padding: '20px', borderRadius: '15px' }}>
-      <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-        <thead>
-          <tr>
-            <th>Degree Program</th>
-            {enrollmentTrends.map((trend, index) => (
-              <th key={index}>{trend.year}</th>
+    <ResponsiveTableContainer component={Paper}>
+      <Table sx={{ minWidth: 550 }} aria-label="dynamic table">
+        <TableHead>
+          <TableRow>
+            {columns.map((column) => (
+              <TableCell key={column} align={column === 'Degree Program' || column === 'Faculty' || column === 'Finance-Income Bz$' || column === 'Finance-Expenditures Bz$' || column === 'Students Enrolled Academic Year 2023/2024' || column === 'Origin of Students(Number)' || column === 'Campus Statistics (Number of Students) Academic Year 2023-2024' ? 'left' : 'right'}>
+                {column}
+              </TableCell>
             ))}
-          </tr>
-        </thead>
-        <tbody>
-          {['Associate', 'Undergraduate', 'Graduate (MBA - 19 + MEDL - 47)', 'Other', 'Total'].map((program, rowIndex) => (
-            <tr key={rowIndex}>
-              <td>{program}</td>
-              {enrollmentTrends.map((trend, colIndex) => (
-                <td key={colIndex}>
-                  {program === 'Associate' && trend.associate}
-                  {program === 'Undergraduate' && trend.undergraduate}
-                  {program === 'Graduate (MBA - 19 + MEDL - 47)' && trend.graduate}
-                  {program === 'Other' && trend.other}
-                  {program === 'Total' && trend.total}
-                </td>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.degree} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              {columns.map((column) => (
+                <TableCell key={column} align={column === 'Degree Program' || column === 'Faculty' || column === 'Finance-Income Bz$' || column === 'Finance-Expenditures Bz$' || column === 'Students Enrolled Academic Year 2023/2024' || column === 'Origin of Students(Number)' || column === 'Campus Statistics (Number of Students) Academic Year 2023-2024' ? 'left' : 'right'}>
+                  {column === 'Degree Program' || column === 'Faculty' || column === 'Finance-Income Bz$' || column === 'Finance-Expenditures Bz$' || column === 'Students Enrolled Academic Year 2023/2024' || column === 'Origin of Students(Number)' || column === 'Campus Statistics (Number of Students) Academic Year 2023-2024' ? (
+                    row.degree
+                  ) : (
+                    <TextField
+                      type="number"
+                      value={row[column] as string}
+                      onChange={(e) => handleInputChange(row.degree, column, e.target.value)}
+                      variant="outlined"
+                      size="small"
+                    />
+                  )}
+                </TableCell>
               ))}
-            </tr>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
-    </div>
+          <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+            {columns.map((column) => (
+              <TableCell key={column} align={column === 'Degree Program' ? 'left' : 'right'}>
+                {column === 'Degree Program' ? 'Total' : totalRow[column]}
+              </TableCell>
+            ))}
+          </TableRow>
+        </TableBody>
+      </Table>
+    </ResponsiveTableContainer>
   );
 };
 
-export default EnrollmentTable;
+export default UBInfoTable;

@@ -65,20 +65,23 @@ export const Faculty = () => {
   return (
     <Container>
       <Box>
-        <Box sx={{ml:21, mt: 10, mb: 5, p: 1, border: "1px solid black", width: "70%", }}>
+        <Box sx={{ml:"15%", mt: 10, p: 2, border: "1px solid black", width: "67%", backgroundColor: "#FFD954"}}>
           {summary}
         </Box>
+        <Box sx={{ border: "1px solid", width: "70%",marginTop: "-2px", marginLeft: "15%",paddingBottom: "2%", paddingTop: "3%", backgroundColor: "#FFD954", borderBottomLeftRadius: "none", borderBottomRightRadius: "none"}}>
         <UbDropdown
           label={questions[0].question}
           options={questions[0].options}
           handleSetValue={questions[0].handleSetAnswer as (e: SelectChangeEvent<string>) => void}
           value={questions[0].value}
         />
+        </Box>
       </Box>
       {questions.slice(1).map((q, index) => {
         if (q.type === "textarea") {
           return (
-            <Box sx={{mt: "-25px"}}>            <UBTextArea
+            <Box sx={{mt: "-50px", mb: "40px"}}>            
+            <UBTextArea
               key={index}
               question={q.question}
               SetAnswer={q.handleSetAnswer as (e: ChangeEvent<HTMLTextAreaElement>) => void}

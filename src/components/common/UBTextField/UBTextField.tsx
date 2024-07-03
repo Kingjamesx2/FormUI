@@ -27,8 +27,9 @@ export const UBTextField: FC<IUBTextField> = ({
       justifyContent: "center",
       alignItems: "center",
       width: "70%",
-      // marginTop: "10%",
-      margin: "auto"
+      marginTop: "10%",
+      margin: "auto",
+      padding: "2% "
       
     }}    
     sx={{ borderRadius: '10px'  }}>
@@ -41,7 +42,7 @@ export const UBTextField: FC<IUBTextField> = ({
           borderRadius: '8px',
           marginTop: "10%",
           marginLeft: "1%", // Adjust the margin here
-          // border: "1px solid black"
+          border: "1px solid black"
 
         }}
       >

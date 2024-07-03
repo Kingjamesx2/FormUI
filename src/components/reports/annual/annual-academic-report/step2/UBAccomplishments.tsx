@@ -109,7 +109,7 @@ export const UBAccomplishments: React.FC = () => {
               value={q.value}
             />
           ) : q.type === "radiobutton" ? (
-            <Box sx={{mt: "-60px"}}>
+            <Box sx={{mt: "%", backgroundColor: ""}}>
               <UBRadioButton
                 label={q.question}
                 options={q.options}

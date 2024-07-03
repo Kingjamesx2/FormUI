@@ -1,27 +1,28 @@
 import React, { useState, ChangeEvent } from "react";
-import { Container, Box } from "@mui/material";
-import { UBTextArea } from "../../../../../../components/common/Textarea/UBTextArea";
+import { Container, Box, Typography } from "@mui/material";
+import { UBTextArea } from "../../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
-import UBInfoTable from "../../../../../../components/common/UBInfoTable/UBInfoTable";
+import UBInfoTable from "../../../../../common/UBInfoTable/UBInfoTable";
 
 const initialState = ["", "", ""];
 
-const columns = ['Faculty', 'Full-time faculty', 'Adjunct faculty', 'Non-teaching staff'];
+const columns = ['Campus Statistics (Number of Students) Academic Year 2023-2024', ''];
 const initialRows = [
-  { degree: 'Education and Arts', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
-  { degree: 'Management and Social Sciences', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
-  { degree: 'Health Sciences', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
-  { degree: 'Science and Technology', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
+  { degree: 'Belize City', '': '' },
+  { degree: 'Belmopan', '': ''},
+  { degree: 'Punta Gorda', '': '' },
+  { degree: 'Central Farm', '': '' },
+  { degree: 'Satellite Programs(please specify)', '': '' },
+
 ];
 
-export const UBNumberOfStaff: React.FC = () => {
+export const UBCampusStatistics: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
-  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("7. Number of Staff Academic Year 2021/2022");
-
+  
   const questions = [
     {
-      question: "7. Number of Staff Academic Year 2021/2022",
+      question: "2021/2022",
       handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setState((prevState) => [prevState[0], prevState[1], value]);
@@ -34,15 +35,12 @@ export const UBNumberOfStaff: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <Box sx={{ mt: "10%", width: "70%", ml: "15%", mb: "-30px" }}>
-        {enrollmentTrend}
-      </Box>
       {questions.map((q, index) => {
         if (q.type === "textarea") {
           return (
             <UBTextArea
               key={index}
-              question={q.question}
+              question={q.year}
               SetAnswer={q.handleSetAnswer}
               value={q.value}
             />
@@ -51,7 +49,7 @@ export const UBNumberOfStaff: React.FC = () => {
           return (
             <UbDropdown
               key={index}
-              label={q.question}
+              label={q.year}
               options={q.options}
               handleSetValue={q.handleSetAnswer}
               value={q.value}
@@ -59,17 +57,22 @@ export const UBNumberOfStaff: React.FC = () => {
           );
         } else if (q.type === "table") {
           return (
-            <UBInfoTable
-              key={index}
-              columns={columns}
-              initialRows={initialRows}
-            />
+            <Box key={index} sx={{ mb: 2 }}>
+              <Typography variant="h6" sx={{ mb: 1 }}>
+                {q.year}
+              </Typography>
+              <UBInfoTable
+                columns={columns}
+                initialRows={initialRows}
+              />
+              
+            </Box>
           );
         } else if (q.type === "input") {
           return (
             <UBTextField
               key={index}
-              question={q.question}
+              question={q.year}
               SetAnswer={q.handleSetAnswer}
               value={q.value}
             />
@@ -81,4 +84,4 @@ export const UBNumberOfStaff: React.FC = () => {
   );
 };
 
-export default UBNumberOfStaff;
+export default UBCampusStatistics;

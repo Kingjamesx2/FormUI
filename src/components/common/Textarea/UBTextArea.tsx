@@ -16,7 +16,7 @@ interface IUBTextAreaProps {
 }
 
 const QuestionItem = styled(Paper)(({ theme }) => ({
-  backgroundColor: "",
+  backgroundColor: "#FFD954",
   ...theme.typography.body2,
   padding: theme.spacing(2),
   textAlign: "left",
@@ -28,8 +28,8 @@ const QuestionItem = styled(Paper)(({ theme }) => ({
 }));
 
 const AnswerItem = styled(Paper)(({ theme }) => ({
-  // backgroundColor: theme.palette.mode === "" ? "" : "",
-  // ...theme.typography.body2,
+  backgroundColor: theme.palette.mode === "dark" ? "white" : "#FFD954",
+  ...theme.typography.body2,
   textAlign: "left",
   padding: "10px",
   marginTop: theme.spacing(-2), // Reduced margin top

@@ -1,10 +1,10 @@
-// InfoTable.stories.tsx
+// UBInfoTable.stories.tsx
 import type { Meta, StoryObj } from "@storybook/react";
-import InfoTable from "./UBInfoTable";
+import UBInfoTable from "./UBInfoTable";
 
-const meta: Meta<typeof InfoTable> = {
+const meta: Meta<typeof UBInfoTable> = {
   title: 'components/common/UBInfoTable', 
-  component: InfoTable,
+  component: UBInfoTable,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
@@ -17,6 +17,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
     args: {
-      
+
     },
   };

@@ -1,27 +1,27 @@
 import React, { useState, ChangeEvent } from "react";
 import { Container, Box } from "@mui/material";
-import { UBTextArea } from "../../../../../../components/common/Textarea/UBTextArea";
+import { UBTextArea } from "../../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
-import UBInfoTable from "../../../../../../components/common/UBInfoTable/UBInfoTable";
+import UBInfoTable from "../../../../../common/UBInfoTable/UBInfoTable";
 
 const initialState = ["", "", ""];
 
-const columns = ['Faculty', 'Full-time faculty', 'Adjunct faculty', 'Non-teaching staff'];
+const columns = ['Faculty', '2021/2022', '2022/2023', '2023/2024'];
 const initialRows = [
-  { degree: 'Education and Arts', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
-  { degree: 'Management and Social Sciences', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
-  { degree: 'Health Sciences', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
-  { degree: 'Science and Technology', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
+  { degree: 'Education and Arts', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
+  { degree: 'Management and Social Science', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
+  { degree: 'Health Science', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
+  { degree: 'Science and Technology', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
 ];
 
-export const UBNumberOfStaff: React.FC = () => {
+export const StudentsEnrollmentTrendPerFaculty: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
-  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("7. Number of Staff Academic Year 2021/2022");
+  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Per Faculty)");
 
   const questions = [
     {
-      question: "7. Number of Staff Academic Year 2021/2022",
+      question: "",
       handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setState((prevState) => [prevState[0], prevState[1], value]);
@@ -81,4 +81,4 @@ export const UBNumberOfStaff: React.FC = () => {
   );
 };
 
-export default UBNumberOfStaff;
+export default StudentsEnrollmentTrendPerFaculty;

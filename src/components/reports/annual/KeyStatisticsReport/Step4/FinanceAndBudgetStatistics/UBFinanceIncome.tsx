@@ -1,27 +1,29 @@
 import React, { useState, ChangeEvent } from "react";
 import { Container, Box } from "@mui/material";
-import { UBTextArea } from "../../../../../../components/common/Textarea/UBTextArea";
+import { UBTextArea } from "../../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
-import UBInfoTable from "../../../../../../components/common/UBInfoTable/UBInfoTable";
+import UBInfoTable from "../../../../../common/UBInfoTable/UBInfoTable";
 
 const initialState = ["", "", ""];
 
-const columns = ['Faculty', 'Full-time faculty', 'Adjunct faculty', 'Non-teaching staff'];
+const columns = ['Finance-Income Bz$', ''];
 const initialRows = [
-  { degree: 'Education and Arts', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
-  { degree: 'Management and Social Sciences', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
-  { degree: 'Health Sciences', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
-  { degree: 'Science and Technology', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
+  { degree: 'Funding from the Government of Belize', '': ''},
+  { degree: 'Tuition Fees', '': ''},
+  { degree: 'Contracts', '': ''},
+  { degree: 'research Grants', '': ''},
+  { degree: 'Endowment and Investment Income', '': ''},
+  { degree: 'Other', '': ''},
 ];
 
-export const UBNumberOfStaff: React.FC = () => {
+export const UBFinanceIncome: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
-  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("7. Number of Staff Academic Year 2021/2022");
+  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Academic Level)");
 
   const questions = [
     {
-      question: "7. Number of Staff Academic Year 2021/2022",
+      question: "2. Student Enrolment Trend (Academic Level)",
       handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setState((prevState) => [prevState[0], prevState[1], value]);
@@ -81,4 +83,4 @@ export const UBNumberOfStaff: React.FC = () => {
   );
 };
 
-export default UBNumberOfStaff;
+export default UBFinanceIncome;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
-import { Margin } from "@mui/icons-material";
+import { BorderAll, Margin } from "@mui/icons-material";
 
 interface IUbDropdownProps {
   label: string;
@@ -26,7 +26,7 @@ export const UbDropdown: React.FC<IUbDropdownProps> = ({
       <Box
         style={{
           width: "50%", // Set the width to a shorter value
-          marginLeft: "15%"
+          marginLeft: "2%"
         }}
       >
         <FormControl fullWidth>
@@ -41,11 +41,11 @@ export const UbDropdown: React.FC<IUbDropdownProps> = ({
             autoWidth
             label={label}
           >
-            {/* {options.map((o) => (
+            {options.map((o) => (
               <MenuItem key={o.value} value={o.value}>
                 {o.label}
               </MenuItem>
-            ))} */}
+            ))}
           </Select>
         </FormControl>
       </Box>

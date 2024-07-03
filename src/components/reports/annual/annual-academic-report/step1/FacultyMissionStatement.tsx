@@ -49,7 +49,7 @@ export const FacultyMissionStatement = () => {
             );
           } else if (q.type === "input") {
             return (
-              <Box sx={{mt: "-50px", ml: "-15px"}}>
+              <Box sx={{mt: "0%", ml: "15%", pb: "4%", border: "1px solid", width: "70%", backgroundColor: "#FFD954", borderRadius: "20px"}}>
               <UBTextField
                 key={index}
                 question={q.question}
@@ -58,12 +58,9 @@ export const FacultyMissionStatement = () => {
               />
               </Box>
             );
-            <Box sx={{ mb: 5, p: 1 }}>
-            {deadline}
-          </Box>
           }
         })}
-         <Box sx={{ mb: 5, p: 1, mt: 4, ml:18, color: 'red', width: "60%"}}>
+         <Box sx={{ mb: 5, p: 1, mt: 4, ml: "10%", color: 'red', width: "60%"}}>
             {deadline}
           </Box>
     </Container>
