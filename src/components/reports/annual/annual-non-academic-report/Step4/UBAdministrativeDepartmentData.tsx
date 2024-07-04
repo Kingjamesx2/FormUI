@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Container from "@mui/material/Container";
-import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
-import Box from "@mui/material/Box";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
+import Box from "@mui/material/Box";
+import UbDropdown from "../../../../UbDropdown/UbDropdown";
+
 
 const initialState = ["", "", ""];
 
@@ -56,11 +57,15 @@ export const UBAdministrativeDepartmentData: React.FC = () => {
   ];
 
   return (
-    <div>
+  
       <Container sx={{ width: 1, m: 1, p: 1 }}>
-        <h3 style={{marginTop: "50px", marginBottom: "-10px"}}><center>Administrative Department Data (Inclusive of the Head of Department)</center></h3>
+        <h3  style={{ marginBottom: "1%", marginTop: "7%" }}>
+          <center>
+            Administrative Department Data (Inclusive of the Head of Department)
+          </center>
+        </h3>
         {questions.map((q, index) => (
-          <Box key={index} mb={-4.7}>
+          <Box key={index} mb={"-4.8%"}>
             {q.type === "textarea" ? (
               <UBTextArea
                 question={q.question}
@@ -84,8 +89,9 @@ export const UBAdministrativeDepartmentData: React.FC = () => {
           </Box>
         ))}
       </Container>
-    </div>
+   
   );
 };
+
 
 export default UBAdministrativeDepartmentData;

@@ -90,3 +90,5 @@ export const UBFinancial: React.FC = () => {
     </Container>
   );
 };
+
+export default UBFinancial;

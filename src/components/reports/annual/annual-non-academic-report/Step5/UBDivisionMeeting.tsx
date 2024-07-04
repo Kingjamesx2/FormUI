@@ -71,14 +71,14 @@ export const UBFacultyMeetings: React.FC = () => {
   };
 
   return (
-    <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3 style={{ marginBottom: "40px", marginTop: "50px" }}>
+    <Container>
+        <h3 style={{ marginBottom: "4%", marginTop: "5%" }}>
         <center>Division Meetings</center>
       </h3>
       {containers.map((container) => (
-        <Box key={container.id} mb={4}>
+        <Box key={container.id} mb={"2%"}>
           {questions(container.id, container.state).map((q, index) => (
-            <Box key={index} mb={4}>
+            <Box key={index} mb={"-1%"}>
               {q.type === "textarea" ? (
                 <UBTextArea
                   question={q.question}
@@ -86,30 +86,16 @@ export const UBFacultyMeetings: React.FC = () => {
                   value={q.value}
                 />
               ) : q.type === "dropdown" ? (
+                <Box sx={{mb: "-4%", ml: "14.4%", pb:"5%", pt:"5%", width: "71%", backgroundColor:"#FFD954", borderRadius: "5px 5px 0 0"}}>
                 <UbDropdown
                   label={q.question}
                   options={q.options}
                   handleSetValue={q.handleSetAnswer}
                   value={q.value}
                 />
-              ) : q.type === "radiobutton" ? (
-                <Box sx={{ marginTop: "-50px" }}>
-                  <UBRadioButton
-                    label={q.question}
-                    options={q.options}
-                    handleSetValue={q.handleSetAnswerRadio}
-                    value={q.value}
-                  />
-                  {q.additionalText && (
-                    <UBTextField
-                      question="Please specify:"
-                      SetAnswer={q.handleSetAnswerText}
-                      value={q.textValue}
-                    />
-                  )}
                 </Box>
               ) : (
-                <Box sx={{marginTop: "-60px"}}>
+                <Box sx={{ marginTop: "-4%", ml:"14.5%", pb: "4%", width: "71%" , backgroundColor: "#FFD954", borderRadius: "0 0 5px 5px"}}>
                 <UBTextField
                   question={q.question}
                   SetAnswer={q.handleSetAnswer}
@@ -122,11 +108,11 @@ export const UBFacultyMeetings: React.FC = () => {
         </Box>
       ))}
        <Box sx={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-        <IconButton onClick={handleAddContainer} color="primary">
-          <AddCircleRoundedIcon fontSize="large" />
+        <IconButton onClick={handleAddContainer}>
+          <AddCircleRoundedIcon fontSize="medium" />
         </IconButton>
-        <IconButton onClick={handleRemoveContainer} color="primary">
-          <RemoveCircleOutlinedIcon fontSize="large" />
+        <IconButton onClick={handleRemoveContainer}>
+          <RemoveCircleOutlinedIcon fontSize="medium" />
         </IconButton>
       </Box>
     </Container>

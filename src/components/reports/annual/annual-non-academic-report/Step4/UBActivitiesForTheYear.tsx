@@ -52,13 +52,13 @@ export const UBActivitiesForTheYear = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3 style={{ marginTop: "20px", marginBottom: "-20px" }}>
+      <h3 style={{ marginTop: "5%", marginBottom: "1%" }}>
         <center>Activities for the year - List activities conducted during the year under review.</center>
       </h3>
       {containers.map((container, containerIndex) => (
-        <Box key={containerIndex} mb={"-80px"} p={2}>
-          <Box mb={-4.5} display="flex" alignItems="center">
-            <Box flex={1} mr={2}>
+        <Box key={containerIndex} mb={"5%"} p={"2%"} >
+          <Box mb={"-4.4%"} display="flex" alignItems="Left" sx={{width: "69.9%", border: "1px solid", backgroundColor: "#FFD954", ml: "14.4%", borderTopLeftRadius: "5px", borderTopRightRadius: "5px"}}>
+            <Box sx={{ display: "flex",  ml: "-10%", mb: "4%", width: "80%", }}>
               <UBTextField
                 question="Name Of event: "
                 SetAnswer={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -67,7 +67,7 @@ export const UBActivitiesForTheYear = () => {
                 value={container.nameOfEvent}
               />
             </Box>
-            <Box>
+            <Box sx={{ ml:"-5%", mt: "1.5%"}}>
               <label>Add Image</label>
               <IconButton component="label">
                 <AddPhotoAlternateIcon />
@@ -81,7 +81,7 @@ export const UBActivitiesForTheYear = () => {
               {container.image && <span>{container.image}</span>}
             </Box>
           </Box>
-          <Box mb={-4.5}>
+          <Box mb={"-4.5%"} sx={{ ml:"0.2%" , width: "98.5%"}}>
             <UBTextField
               question="Name of person/s in the pictures"
               SetAnswer={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -90,7 +90,7 @@ export const UBActivitiesForTheYear = () => {
               value={container.personInPictures}
             />
           </Box>
-          <Box mb={-4.5}>
+          <Box mb={"-4.5%"} mt={"-7.2%"} ml={"-0.41%"} width={"99.84%"}>
             <UBTextArea
               question="Summary of Events"
               SetAnswer={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -99,7 +99,7 @@ export const UBActivitiesForTheYear = () => {
               value={container.summaryOfEvents}
             />
           </Box>
-          <Box display="flex" justifyContent="center" sx={{ mt: '40px' }}>
+          <Box display="flex" justifyContent="center" sx={{ mt: '5%' }}>
             <IconButton onClick={addContainer}>
               <AddCircleRoundedIcon />
             </IconButton>

@@ -13,8 +13,7 @@ export const UBFinancial: React.FC = () => {
 
   const questions = [
     {
-      question:
-        "a. State sources of funding, for example, department activities, research fund",
+      question: "a. State sources of funding, for example, department activities, research fund",
       handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value;
         setState((prevState) => {
@@ -27,8 +26,7 @@ export const UBFinancial: React.FC = () => {
       value: state[0],
     },
     {
-      question:
-        "b. Has there been significant changes in the department’s budget?",
+      question: "Identify the most impactful change/initiative by your faculty for the academic year and give reasons why.",
       handleSetAnswerRadio: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setState((prevState) => {
@@ -43,16 +41,14 @@ export const UBFinancial: React.FC = () => {
         { value: "no", label: "no" },
       ],
       value: state[2],
-    },
+    }
   ];
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3 style={{ marginBottom: "-10px", marginTop: "50px" }}>
-        <center>Financial/Budget</center>
-      </h3>
+      <h3  style={{ marginBottom: "-2%", marginTop: "7%" }}><center>Financial/Budget</center></h3>
       {questions.map((q, index) => (
-        <Box key={index} mb={-4}>
+        <Box key={index} mb={"-4%"}>
           {q.type === "textarea" ? (
             <UBTextArea
               question={q.question}
@@ -67,7 +63,7 @@ export const UBFinancial: React.FC = () => {
               value={q.value}
             />
           ) : q.type === "radiobutton" ? (
-            <Box sx={{marginTop: "-50px"}}>
+            <Box sx={{marginTop: "-8%"}}>
               <UBRadioButton
                 label={q.question}
                 options={q.options}
