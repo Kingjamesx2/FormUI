@@ -70,6 +70,8 @@ export const UBTextArea: React.FC<IUBTextAreaProps> = ({
             style={{
               width: "100%",
               boxSizing: "border-box",
+              backgroundColor: "white", // Set background to white
+
             }}
             value={value}
             onChange={SetAnswer}

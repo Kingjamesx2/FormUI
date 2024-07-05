@@ -14,8 +14,8 @@ import { CenterFocusStrong } from "@mui/icons-material";
 
 // Define the interface for the component props
 interface IStep {
-    label: string;
-    stepComponent: JSX.Element
+  label: string;
+  stepComponent: JSX.Element
 }
 
 interface IUBStepperProps {
@@ -91,16 +91,26 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
 
   return (
     <div className="form">
-      <Stack sx={{ width: "100%" }}>
-          <Stepper nonLinear activeStep={activeStep} sx={stepStyle(isSmallScreen)} style={{display: "flex", justifyContent: "center", width: "90%", marginLeft: "5%", marginTop: "2%", marginBottom: "-2%"}}>
-            {steps.map((step, index) => (
-              <Step key={step.label} completed={completed[index]}>
-                <StepButton onClick={handleStep(index)}>
-                  {/* <StepLabel>{step.label}</StepLabel> */}
-                </StepButton>
-              </Step>
-            ))}
-          </Stepper>
+      <Stack sx={{ width: "100vw" }}>
+        <Stepper
+          nonLinear
+          activeStep={activeStep}
+          sx={stepStyle(isSmallScreen)}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "60%",
+            margin: "3% 0 0 18%",
+          }}
+        >
+          {steps.map((step, index) => (
+            <Step key={step.label} completed={completed[index]}>
+              <StepButton onClick={handleStep(index)}>
+                {/* <StepLabel>{step.label}</StepLabel> */}
+              </StepButton>
+            </Step>
+          ))}
+        </Stepper>
 
         <Box
           sx={{
@@ -129,7 +139,7 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
                 color="inherit"
                 disabled={activeStep === 0}
                 onClick={handleBack}
-                sx={{ mr: 1, color: "#fff" }}
+                sx={{ ml: "5%", color: "#fff" }}
               >
                 Back
               </Button>
@@ -137,7 +147,7 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
               <Button
                 onClick={handleNext}
                 sx={{
-                  mr: 1,
+                  mr: "5%",
                   bgcolor: "#FFD954",
                   color: "black",
                   mb: 2,

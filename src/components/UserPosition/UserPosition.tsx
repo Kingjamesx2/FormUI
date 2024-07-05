@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './UserPosition.scss';
+import { Link } from "react-router-dom";
 
 // Define the interface for the component props
 interface UserPositionProps {
@@ -25,10 +26,12 @@ export const UserPosition: React.FC<UserPositionProps> = ({ name, position, prof
       </div>
       <div className="profile-picture" onClick={toggleDropdown}> 
         <img src={profilePicture} alt={name} />
-        {dropdownOpen && ( 
+        {dropdownOpen && (
+          <Link to="/Login">
           <ul className="dropdown-menu"> 
             <li>Logout</li> 
           </ul>
+          </Link>
         )}
       </div>
     </div>

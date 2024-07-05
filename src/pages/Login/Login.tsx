@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -14,6 +13,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import UBLogo from './../../components/icons/UB_Logo.png';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { Link } from 'react-router-dom';
+
+
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -44,6 +46,7 @@ export const Login: React.FC = () => {
           sx={{
             backgroundColor: '#6C3777',
             minHeight: '100vh',
+            minWidth: '100vw',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -56,23 +59,24 @@ export const Login: React.FC = () => {
               border: '1px solid',
               backgroundColor: '#fff',
               borderRadius: '5%',
-              padding: '0 0 3% 0',
+              padding: '3%',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
             }}
           >
             <CssBaseline />
             <Box
               sx={{
-                marginTop: 4,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
               }}
             >
-              <Box sx={{}}>
-                {/* <LockOutlinedIcon /> */}
+              <Box sx={{ mb: 2 }}>
                 <img
                   src={UBLogo}
-                  alt="Ub Logo"
+                  alt="UB Logo"
                   style={{
                     width: '100px',
                     height: '70px',
@@ -108,22 +112,24 @@ export const Login: React.FC = () => {
                   control={<Checkbox value="remember" color="primary" />}
                   label="Remember me"
                 />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{
-                    mt: 3,
-                    mb: 2,
-                    backgroundColor: '#6C3777',
-                    color: '#fff',
-                    '&:hover': {
-                      backgroundColor: '#5a2f64',
-                    },
-                  }}
-                >
-                  Sign In
-                </Button>
+                <Link to="/" style={{ textDecoration: 'none' }}>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{
+                      mt: 3,
+                      mb: 2,
+                      backgroundColor: '#6C3777',
+                      color: '#fff',
+                      '&:hover': {
+                        backgroundColor: '#5a2f64',
+                      },
+                    }}
+                  >
+                    Login
+                  </Button>
+                </Link>
                 <GoogleLogin
                   onSuccess={handleGoogleSuccess}
                   onFailure={handleGoogleFailure}

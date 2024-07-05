@@ -21,6 +21,8 @@ import UserPosition from '../../components/UserPosition/UserPosition';
 import UbLogo from '../../components/icons/UB_Logo.png';
 import FormCard from '../../components/common/Card/FormCard';
 import SelectAutoWidth from '../../components/SelectAutoWidth/SelectAutoWidth';
+import { Link } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 
 const drawerWidth: number = 240;
 
@@ -96,88 +98,89 @@ export const Dashboard: React.FC = () => {
   const isSmallScreen = useMediaQuery('(max-width:600px)');
 
   return (
-    <div>
-      <ThemeProvider theme={defaultTheme}>
-        <Box sx={{ display: 'flex' }}>
-          <CssBaseline />
-          <AppBar position="absolute" open={open}>
-            <Toolbar
-              sx={{
-                pr: '22px',
-                backgroundColor: '#6C3777',
-              }}
-            >
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={toggleDrawer}
-                sx={{
-                  marginRight: '36px',
-                  ...(open && { display: 'none' }),
-                }}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography
-                component="h1"
-                variant="h6"
-                color="inherit"
-                noWrap
-                sx={{ flexGrow: 1 }}
-              >
-                <SearchBar onSearch={handleSearch} showIconOnly={isSmallScreen} />
-              </Typography>
-              <UserPosition
-                name="James Faber"
-                position="Software Engineer"
-                profilePicture="src/components/icons/jamesFaber.jpeg"
-              />
-            </Toolbar>
-          </AppBar>
-          <Drawer variant="permanent" open={open}>
-            <Toolbar
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                px: [1],
-              }}
-            >
-              <img
-                src={UbLogo}
-                alt="Ub Logo"
-                style={{
-                  width: open ? '150px' : '100px',
-                  height: open ? '120px' : '70px',
-                  transition: 'width 0.3s, height 0.3s',
-                }}
-              />
-              <IconButton onClick={toggleDrawer}>
-                <ChevronLeftIcon />
-              </IconButton>
-            </Toolbar>
-            <Divider />
-            <List component="nav">
-              <ListItems />
-            </List>
-          </Drawer>
-          <Box
-            component="main"
+    <ThemeProvider theme={defaultTheme}>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="absolute" open={open}>
+          <Toolbar
             sx={{
-              backgroundColor: (theme) =>
-                theme.palette.mode === 'light'
-                  ? theme.palette.grey[100]
-                  : theme.palette.grey[900],
-              flexGrow: 1,
-              height: '100vh',
-              overflow: 'auto',
+              pr: '22px',
+              backgroundColor: '#6C3777',
             }}
           >
-            <Toolbar />
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={toggleDrawer}
+              sx={{
+                marginRight: '36px',
+                ...(open && { display: 'none' }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              sx={{ flexGrow: 1 }}
+            >
+              <SearchBar onSearch={handleSearch} showIconOnly={isSmallScreen} />
+            </Typography>
+            <UserPosition
+              name="James Faber"
+              position="Software Engineer"
+              profilePicture="src/components/icons/jamesFaber.jpeg"
+            />
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <Toolbar
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              px: [1],
+            }}
+          >
+            <img
+              src={UbLogo}
+              alt="Ub Logo"
+              style={{
+                width: open ? '150px' : '100px',
+                height: open ? '120px' : '70px',
+                transition: 'width 0.3s, height 0.3s',
+              }}
+            />
+            <IconButton onClick={toggleDrawer}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </Toolbar>
+          <Divider />
+          <List component="nav">
+            <Link to="/" style={{ textDecoration: 'none', color: "black" }}>
+              <ListItems />
+            </Link>
+          </List>
+        </Drawer>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'light'
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: '100vh',
+            overflow: 'auto',
+          }}
+        >
+          <Toolbar />
 
 
-            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 4, width: "100%", overflowX: "hidden" }}>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
@@ -192,39 +195,38 @@ export const Dashboard: React.FC = () => {
             </Grid>
           </Container>
 
-            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={4} lg={3}>
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={4} lg={3}>
+                <Link to="/AnnualAcademicReport" style={{ textDecoration: 'none' }}>
                   <FormCard
                     formPreview="src/components/icons/formPreview.png"
-                    title="UB Annual Report Template Academic Division"
+                    title="UB Annual Report Template Academic Division"
                   />
-                </Grid>
-                <Grid item xs={12} md={4} lg={3}>
+                </Link>
+              </Grid>
+
+              <Grid item xs={12} md={4} lg={3}>
+                <Link to="/AnnualNonAcademicReport" style={{ textDecoration: 'none' }}>
                   <FormCard
                     formPreview="src/components/icons/formPreview.png"
                     title="UB Annual Report Template Non-Academic Division"
                   />
-                </Grid>
-                <Grid item xs={12} md={4} lg={3}>
-                  {/* <Paper sx={{ 
-                    p: 2,
-                    display: 'flex', 
-                    flexDirection: 'column',
-                    height: 240,
-                    }}>
-                  </Paper> */}
+                </Link>
+              </Grid>
+              <Grid item xs={12} md={4} lg={3}>
+                <Link to="/AnnualNonAcademicReport" style={{ textDecoration: 'none' }}>
                   <FormCard
                     formPreview="src/components/icons/formPreview.png"
                     title="University of Belize Key Statistics Template"
                   />
-                </Grid>
+                </Link>
               </Grid>
-            </Container>
-          </Box>
+            </Grid>
+          </Container>
         </Box>
-      </ThemeProvider>
-    </div>
+      </Box>
+    </ThemeProvider>
   );
 }
 

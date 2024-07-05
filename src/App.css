@@ -3,9 +3,13 @@
 #root {
   font-family: "Open Sans", sans-serif;
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  /* margin: 0 auto; */
+  /* padding: 2rem; */
   text-align: center;
+}
+
+h3{
+  color: #fff;
 }
 
 .logo {
@@ -44,7 +48,7 @@
   color: #888;
 }
 
-@font-face {
+/* @font-face {
   font-family: Open Sans;
   src: url("./OpenSans-Italic-VariableFont_wdth,wght.ttf");
-}
+} */
