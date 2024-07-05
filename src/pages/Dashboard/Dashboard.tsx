@@ -21,6 +21,7 @@ import UserPosition from '../../components/UserPosition/UserPosition';
 import UbLogo from '../../components/icons/UB_Logo.png';
 import FormCard from '../../components/common/Card/FormCard';
 import SelectAutoWidth from '../../components/SelectAutoWidth/SelectAutoWidth';
+
 const drawerWidth: number = 240;
 
 interface AppBarProps extends MuiAppBarProps {
