@@ -7,6 +7,7 @@ import UBInfoTable from "../../../../../common/UBInfoTable/UBInfoTable";
 
 const initialState = ["", "", ""];
 
+
 const columns = ['Students Enrolled Academic Year 2023/2024', ''];
 const initialRows = [
   { degree: 'Associates', '': ''},
@@ -16,11 +17,13 @@ const initialRows = [
 
 export const UBStudentsEnrolled: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
-  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("");
+  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Academic Level)");
+
+
 
   const questions = [
     {
-      question: "2. Student Enrolment Trend (Academic Level)",
+      question: "",
       handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setState((prevState) => [prevState[0], prevState[1], value]);
@@ -33,7 +36,7 @@ export const UBStudentsEnrolled: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3><center>I. Records and Admissions</center></h3>
+      <h3 style={{marginBottom: "-2%"}}><center>I. Records and Admissions</center></h3>
       {questions.map((q, index) => {
         if (q.type === "textarea") {
           return (

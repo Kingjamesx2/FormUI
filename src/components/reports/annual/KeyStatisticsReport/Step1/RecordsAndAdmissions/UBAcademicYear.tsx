@@ -51,7 +51,7 @@ export const UBAcademicYear: React.FC = () => {
   return (
     <Container>
       <Box>
-        <Box sx={{ mt: "20px", mb: "20px" }}>
+        <Box sx={{ ml: "15%", mt: "7%", mb: "2%", pb: "2%", pt: "3%", width: "72%", backgroundColor: "#FFD954", borderRadius: "5px 5px 0 0" }}>
           <UbDropdown
             label={questions[0].question}
             options={questions[0].options}
@@ -59,10 +59,10 @@ export const UBAcademicYear: React.FC = () => {
             value={questions[0].value}
           />
         </Box>
-        <Box sx={{ mb: "30px", display: "flex", justifyContent: "left", width: "70%", ml: "15%"}}>
+        <Box sx={{ mb: "3%", display: "flex", justifyContent: "left", width: "70%", ml: "15%", mt: "-2.5%", pb: "2%", pt: "3%", pl: "2%", backgroundColor: "#FFD954" }}>
           {departmentHead}
         </Box>
-        <Box sx={{ color: "red", display: "flex", justifyContent: "left", width: "70%", ml: "15%" }}>
+        <Box sx={{ color: "red", display: "flex", justifyContent: "left", width: "70%", ml: "15%", mt: "-3%", pb: "2%", pt: "3%", pl: "2%", backgroundColor: "#FFD954", borderRadius: "0 0 5px 5px" }}>
           {submissionDeadline}
         </Box>
       </Box>
@@ -70,7 +70,8 @@ export const UBAcademicYear: React.FC = () => {
       {questions.slice(1).map((q, index) => {
         if (q.type === "textarea") {
           return (
-            <Box sx={{ mt: "-25px" }}>            <UBTextArea
+            <Box sx={{ mt: "-25px" }}>            
+            <UBTextArea
               key={index}
               question={q.question}
               SetAnswer={q.handleSetAnswer as (e: ChangeEvent<HTMLTextAreaElement>) => void}

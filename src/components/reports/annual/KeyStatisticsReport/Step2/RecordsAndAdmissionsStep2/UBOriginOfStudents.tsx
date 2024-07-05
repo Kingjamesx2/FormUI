@@ -7,7 +7,7 @@ import UBInfoTable from "../../../../../common/UBInfoTable/UBInfoTable";
 
 const initialState = ["", "", ""];
 
-const columns = ['Origin of Students(Number)', ''];
+const columns = ['5. Origin of Students(Number)', ''];
 const initialRows = [
   { degree: 'Belize', '': ''},
   { degree: 'Central American Countries', '': ''},

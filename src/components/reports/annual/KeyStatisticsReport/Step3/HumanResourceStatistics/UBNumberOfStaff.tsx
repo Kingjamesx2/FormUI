@@ -17,7 +17,7 @@ const initialRows = [
 
 export const UBNumberOfStaff: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
-  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("7. Number of Staff Academic Year 2021/2022");
+  const [numberStaff, setNumberStaff] = useState<string>("7. Number of Staff Academic Year 2021/2022");
 
   const questions = [
     {
@@ -34,8 +34,9 @@ export const UBNumberOfStaff: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <Box sx={{ mt: "10%", width: "70%", ml: "15%", mb: "-30px" }}>
-        {enrollmentTrend}
+      <h3 style={{ margin: "5% 0 -4% 0"}}><center> II. Human Resource Statistics</center></h3>
+      <Box sx={{ mt: "6%", width: "68%", ml: "15%", mb: "-6%", pt: "3%", pb: "2%", pl: "2%", backgroundColor: "#FFD954", fontWeight: "bold", borderRadius: "5px 5px 0 0" }}>
+        {numberStaff}
       </Box>
       {questions.map((q, index) => {
         if (q.type === "textarea") {

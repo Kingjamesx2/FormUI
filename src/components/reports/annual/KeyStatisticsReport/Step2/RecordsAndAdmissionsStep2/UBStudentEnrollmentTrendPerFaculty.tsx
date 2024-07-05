@@ -17,7 +17,7 @@ const initialRows = [
 
 export const StudentsEnrollmentTrendPerFaculty: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
-  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Per Faculty)");
+  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("3. Student Enrolment Trend (Per Faculty)");
 
   const questions = [
     {
@@ -34,7 +34,7 @@ export const StudentsEnrollmentTrendPerFaculty: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <Box sx={{ mt: "10%", width: "70%", ml: "15%", mb: "-30px" }}>
+      <Box sx={{ mt: "3%", width: "68%", ml: "15%", mb: "-5%", pt: "3%", pb:"2%", pl: "2%", backgroundColor: "#FFD954", fontWeight: "bold", borderRadius: "5px 5px 0 0"}}>
         {enrollmentTrend}
       </Box>
       {questions.map((q, index) => {

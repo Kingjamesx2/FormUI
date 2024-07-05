@@ -25,27 +25,46 @@ const ResponsiveTableContainer = styled(TableContainer)({
   alignItems: 'center',
   width: '70%',
   margin: 'auto',
-  marginTop: '50px',
-  overflowX: 'auto', // Ensures the table can scroll horizontally if needed
+  marginTop: '5%',
+  overflowX: 'auto',
+  backgroundColor: '#FFD954', // Yellow background color
+});
+
+const StyledTableCell = styled(TableCell)({
+  backgroundColor: '#FFD954', // Yellow background color for table cells
 });
 
 export const UBInfoTable: React.FC<UBInfoTableProps> = ({ columns, initialRows }) => {
   const [rows, setRows] = useState<IUBTableData[]>([...initialRows]);
 
   const handleInputChange = (degree: string, column: string, value: string) => {
-    const updatedRows = rows.map((row) =>
-      row.degree === degree ? { ...row, [column]: value } : row
-    );
-    setRows(updatedRows);
+    const newValue = parseFloat(value);
+    if (newValue >= 0) {
+      const updatedRows = rows.map((row) =>
+        row.degree === degree ? { ...row, [column]: value } : row
+      );
+      setRows(updatedRows);
+    }
   };
 
   const totals = columns.reduce<{ [key: string]: number }>((acc, column) => {
-    if (column !== 'Degree Program' && column !== 'Faculty' && column !== 'Finance-Income Bz$' && column !== 'Finance-Expenditures Bz$' && column !== 'Students Enrolled Academic Year 2023/2024' && column !== 'Origin of Students(Number)' && column !== 'Campus Statistics (Number of Students) Academic Year 2023-2024') {
+    if (
+      column !== 'Degree Program' &&
+      column !== 'Faculty' &&
+      column !== '8. Finance-Income Bz$' &&
+      column !== '9. Finance-Expenditures Bz$' &&
+      column !== 'Students Enrolled Academic Year 2023/2024' &&
+      column !== '5. Origin of Students(Number)' &&
+      column !== 'Faculty (2021/2022)' &&
+      column !== 'Faculty (2022/2023)' &&
+      column !== 'Faculty (2023/2024)' &&
+      column !== '6. Campus Statistics (Number of Students) Academic Year 2023-2024'
+    ) {
       acc[column] = rows.reduce((sum, row) => sum + (parseFloat(row[column] as string) || 0), 0);
     }
     return acc;
   }, {});
-  
+
   const totalRow = { degree: 'Total', ...totals };
 
   return (
@@ -54,9 +73,13 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({ columns, initialRows }
         <TableHead>
           <TableRow>
             {columns.map((column) => (
-              <TableCell key={column} align={column === 'Degree Program' || column === 'Faculty' || column === 'Finance-Income Bz$' || column === 'Finance-Expenditures Bz$' || column === 'Students Enrolled Academic Year 2023/2024' || column === 'Origin of Students(Number)' || column === 'Campus Statistics (Number of Students) Academic Year 2023-2024' ? 'left' : 'right'}>
+              <StyledTableCell
+                key={column}
+                align={column === 'Degree Program' || column === 'Faculty' || column === '8. Finance-Income Bz$' || column === '9. Finance-Expenditures Bz$' || column === 'Students Enrolled Academic Year 2023/2024' || column === '5. Origin of Students(Number)' || column === '6. Campus Statistics (Number of Students) Academic Year 2023-2024' || column === 'Faculty (2021/2022)' || column === 'Faculty (2022/2023)' || column === 'Faculty (2023/2024)' ? 'left' : 'right'}
+                sx={{ fontWeight: 'bold' }}
+              >
                 {column}
-              </TableCell>
+              </StyledTableCell>
             ))}
           </TableRow>
         </TableHead>
@@ -64,9 +87,13 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({ columns, initialRows }
           {rows.map((row) => (
             <TableRow key={row.degree} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               {columns.map((column) => (
-                <TableCell key={column} align={column === 'Degree Program' || column === 'Faculty' || column === 'Finance-Income Bz$' || column === 'Finance-Expenditures Bz$' || column === 'Students Enrolled Academic Year 2023/2024' || column === 'Origin of Students(Number)' || column === 'Campus Statistics (Number of Students) Academic Year 2023-2024' ? 'left' : 'right'}>
-                  {column === 'Degree Program' || column === 'Faculty' || column === 'Finance-Income Bz$' || column === 'Finance-Expenditures Bz$' || column === 'Students Enrolled Academic Year 2023/2024' || column === 'Origin of Students(Number)' || column === 'Campus Statistics (Number of Students) Academic Year 2023-2024' ? (
-                    row.degree
+                <StyledTableCell
+                  key={column}
+                  align={column === 'Degree Program' || column === 'Faculty' || column === '8. Finance-Income Bz$' || column === '9. Finance-Expenditures Bz$' || column === 'Students Enrolled Academic Year 2023/2024' || column === '5. Origin of Students(Number)' || column === '6. Campus Statistics (Number of Students) Academic Year 2023-2024' || column === 'Faculty (2021/2022)' || column === 'Faculty (2022/2023)' || column === 'Faculty (2023/2024)' ? 'left' : 'right'}
+                  sx={{ fontWeight: column === 'Degree Program' ? 'bold' : 'normal' }}
+                >
+                  {column === 'Degree Program' || column === 'Faculty' || column === '8. Finance-Income Bz$' || column === '9. Finance-Expenditures Bz$' || column === 'Students Enrolled Academic Year 2023/2024' || column === '5. Origin of Students(Number)' || column === '6. Campus Statistics (Number of Students) Academic Year 2023-2024' || column === 'Faculty (2021/2022)' || column === 'Faculty (2022/2023)' || column === 'Faculty (2023/2024)'? (
+                    <span style={{ fontWeight: 'bold' }}>{row.degree}</span>
                   ) : (
                     <TextField
                       type="number"
@@ -74,17 +101,22 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({ columns, initialRows }
                       onChange={(e) => handleInputChange(row.degree, column, e.target.value)}
                       variant="outlined"
                       size="small"
+                      inputProps={{ min: 0 }}
                     />
                   )}
-                </TableCell>
+                </StyledTableCell>
               ))}
             </TableRow>
           ))}
           <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
             {columns.map((column) => (
-              <TableCell key={column} align={column === 'Degree Program' ? 'left' : 'right'}>
+              <StyledTableCell
+                key={column}
+                align={column === 'Degree Program' ? 'left' : 'right'}
+                sx={{ fontWeight: 'bold' }}
+              >
                 {column === 'Degree Program' ? 'Total' : totalRow[column]}
-              </TableCell>
+              </StyledTableCell>
             ))}
           </TableRow>
         </TableBody>

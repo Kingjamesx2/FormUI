@@ -7,7 +7,7 @@ import UBInfoTable from "../../../../../common/UBInfoTable/UBInfoTable";
 
 const initialState = ["", "", ""];
 
-const columns = ['Campus Statistics (Number of Students) Academic Year 2023-2024', ''];
+const columns = ['6. Campus Statistics (Number of Students) Academic Year 2023-2024', ''];
 const initialRows = [
   { degree: 'Belize City', '': '' },
   { degree: 'Belmopan', '': ''},

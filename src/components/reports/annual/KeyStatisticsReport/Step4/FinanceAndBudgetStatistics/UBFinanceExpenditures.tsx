@@ -7,7 +7,7 @@ import UBInfoTable from "../../../../../common/UBInfoTable/UBInfoTable";
 
 const initialState = ["", "", ""];
 
-const columns = ['Finance-Expenditures Bz$', ''];
+const columns = ['9. Finance-Expenditures Bz$', ''];
 const initialRows = [
   { degree: 'Teaching Staff Costs', '': ''},
   { degree: 'Non-Teaching Staff Costs', '': ''},
@@ -34,9 +34,9 @@ export const UBFinanceExpenditures: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <Box sx={{ mt: "10%", width: "70%", ml: "15%", mb: "-30px" }}>
+      {/* <Box sx={{ mt: "10%", width: "70%", ml: "15%", mb: "-30px" }}>
         {enrollmentTrend}
-      </Box>
+      </Box> */}
       {questions.map((q, index) => {
         if (q.type === "textarea") {
           return (
@@ -59,11 +59,13 @@ export const UBFinanceExpenditures: React.FC = () => {
           );
         } else if (q.type === "table") {
           return (
+            <Box sx={{ mt: "-5%"}}>
             <UBInfoTable
               key={index}
               columns={columns}
               initialRows={initialRows}
             />
+            </Box>
           );
         } else if (q.type === "input") {
           return (

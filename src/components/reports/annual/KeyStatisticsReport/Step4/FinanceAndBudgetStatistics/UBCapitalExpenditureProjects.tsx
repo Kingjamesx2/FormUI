@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../../common/Textarea/UBTextArea";
 import { UbDropdown } from "../../../../../UbDropdown/UbDropdown";
@@ -30,16 +31,17 @@ export const CapitalExpenditureProjects: React.FC = () => {
   return (
     <div>
       <Container sx={{ width: 1, m: 1, p: 1 }}>
-        <h3>9. Finance - Expenditures (Bz$)</h3>
         {questions.map((q, index) => {
           if (q.type === "textarea") {
             return (
+              <Box sx={{ mt:"-5%"}}>
               <UBTextArea
                 key={index}
                 question={q.question}
                 SetAnswer={q.handleSetAnswer}
                 value={q.value}
               />
+              </Box>
             );
           } else if (q.type === "dropdown") {
             return (
