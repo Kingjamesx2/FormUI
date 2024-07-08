@@ -1,10 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import UBFormSlice from '../pages/Reports/UBForm.slice';
+import annualReportReducer from './features/annualReportSlice';
+import annualNonReportReducer from './features/annualNonReportSlice';
 
 export const store = configureStore({
   reducer: {
-    UBFormSlice
+    annualReport: annualReportReducer,
+    annualNonReport: annualNonReportReducer,
+    // statisticReport: KeyStatisticsReport,
   },
 });
 

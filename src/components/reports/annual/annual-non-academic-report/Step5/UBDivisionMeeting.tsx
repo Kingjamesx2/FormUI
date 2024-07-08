@@ -3,7 +3,6 @@ import Container from "@mui/material/Container";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
-import UBRadioButton from "../../../../common/UBRadioButton/UBRadioButton";
 import Box from "@mui/material/Box";
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import RemoveCircleOutlinedIcon from '@mui/icons-material/RemoveCircleOutlined';
@@ -30,14 +29,24 @@ export const UBFacultyMeetings: React.FC = () => {
   };
 
   const questions = (containerId: number, state: string[]) => [
-    {
-      question: "Type of Meeting",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        handleSetAnswer(containerId, 0, e.target.value);
+     {
+      question: "Type of meeting",
+      handleSetAnswer: (e: React.ChangeEvent<{ value: unknown }>) => {
+        const selectedValue = e.target.value as string;
+        handleSetAnswer(containerId, 0, selectedValue);
       },
       type: "dropdown",
+      options: [
+        {
+          value: "Online",
+          label: "Online",
+        },
+        {
+          value: "Face to face",
+          label: "Face to Face",
+        },
+      ],
       value: state[0],
-      options: ["Option 1", "Option 2"], // Add appropriate options
     },
     {
       question: "Date of Meeting: ",

@@ -47,12 +47,12 @@ export const UBResearchAndPartnership = () => {
           console.log(e.target.value);
           setState((prevState) => {
             const newState = [...prevState];
-            newState[1] = value;
+            newState[2] = value;
             return newState;
           });
         },
         type: "textarea",
-        value: state[1],
+        value: state[2],
       },
       {
         question: "4. List any scholarships, fellowships or exchange programmes received or offered by the Faculty.",
@@ -61,18 +61,18 @@ export const UBResearchAndPartnership = () => {
           console.log(e.target.value);
           setState((prevState) => {
             const newState = [...prevState];
-            newState[1] = value;
+            newState[3] = value;
             return newState;
           });
         },
         type: "textarea",
-        value: state[1],
+        value: state[3],
       },
   ];
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-    <h2 style={{ marginBottom: "-10px"}}><center>Research & Partnerships</center></h2>
+    <h3 style={{ marginBottom: "-10px"}}><center>Research & Partnerships</center></h3>
     {questions.map((q, index) => (
           <Box key={index} mb={-4.5}>
             {q.type === "textarea" ? (

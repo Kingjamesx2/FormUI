@@ -1,21 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import StepLabel from "@mui/material/StepLabel";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
-import { Header } from './../Header/Header';
 import "./FormOne.scss";
-import { CenterFocusStrong } from "@mui/icons-material";
 
 // Define the interface for the component props
 interface IStep {
   label: string;
-  stepComponent: JSX.Element
+  stepComponent: JSX.Element;
 }
 
 interface IUBStepperProps {
@@ -54,6 +51,7 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
   const [completed, setCompleted] = useState<{ [k: number]: boolean }>({});
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const navigate = useNavigate();
 
   const totalSteps = () => steps.length;
 
@@ -67,6 +65,8 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
     if (isLastStep() && allStepsCompleted()) {
       // Handle submit logic here
       console.log("Form submitted");
+      window.alert("Form submitted");
+      navigate("/");
     } else {
       const newActiveStep =
         isLastStep() && !allStepsCompleted()

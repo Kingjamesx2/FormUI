@@ -1,6 +1,8 @@
 // App.tsx
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { store } from './store/store';
+import { Provider } from 'react-redux';
 import Login from './pages/Login/Login';
 import Dashboard from './pages/Dashboard/Dashboard';
 import AnnualAcademicReport from './pages/Reports/AnnualAcademicReport';
@@ -10,7 +12,7 @@ import KeyStatisticsTemplate from './pages/Reports/KeyStatisticsReport';
 
 const App: React.FC = () => {
   return (
-    <div>
+    <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route index element={< Dashboard />} />
@@ -20,7 +22,7 @@ const App: React.FC = () => {
           <Route path="/KeyStatisticsTemplate" element={< KeyStatisticsTemplate />} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </Provider>
 
   );
 };

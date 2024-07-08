@@ -47,18 +47,18 @@ export const UBStudentSuccess = () => {
           console.log(e.target.value);
           setState((prevState) => {
             const newState = [...prevState];
-            newState[1] = value;
+            newState[2] = value;
             return newState;
           });
         },
         type: "textarea",
-        value: state[1],
+        value: state[2],
       },
   ];
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-    <h2 style={{ marginTop: "75px", marginBottom: "-20px"}}><center>Student Success</center></h2>
+    <h3 style={{ marginTop: "75px", marginBottom: "-20px"}}><center>Student Success</center></h3>
     {questions.map((q, index) => (
           <Box key={index} mb={-4.5}>
             {q.type === "textarea" ? (

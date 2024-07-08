@@ -16,7 +16,7 @@ export const FacultyMissionStatement = () => {
       question: "Faculty Mission Statement",
       handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        setState((prevState) => [prevState[0], prevState[1], value]);
+        setState((prevState) => [value, prevState[1], prevState[2]]);
         console.log(value);
       },
       type: "input",
@@ -26,41 +26,64 @@ export const FacultyMissionStatement = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-        {questions.map((q, index) => {
-          if (q.type === "textarea") {
-            return (
-              <UBTextArea
-                key={index}
-                question={q.question}
-                SetAnswer={q.handleSetAnswer}
-                value={q.value}
-              />
-            );
-          } else if (q.type === "dropdown") {
-            return (
-              <UbDropdown
-                label={q.question}
-                options={q.options}
-                handleSetValue={q.handleSetAnswer}
-                value={q.value}
-              />
-            );
-          } else if (q.type === "input") {
-            return (
-              <Box sx={{mt: "-2%", ml: "14%", pb: "2%", width: "70%", backgroundColor: "#FFD954", borderTopRightRadius: "5px", borderTopLeftRadius: "5px", }}>
+      {questions.map((q, index) => {
+        if (q.type === "textarea") {
+          return (
+            <UBTextArea
+              key={index}
+              question={q.question}
+              SetAnswer={q.handleSetAnswer}
+              value={q.value}
+            />
+          );
+        } else if (q.type === "dropdown") {
+          return (
+            <UbDropdown
+              key={index}
+              label={q.question}
+              options={q.options}
+              handleSetValue={q.handleSetAnswer}
+              value={q.value}
+            />
+          );
+        } else if (q.type === "input") {
+          return (
+            <Box
+              key={index}
+              sx={{
+                mt: "-2%",
+                ml: "14%",
+                pb: "2%",
+                width: "70%",
+                backgroundColor: "#FFD954",
+                borderTopRightRadius: "5px",
+                borderTopLeftRadius: "5px",
+              }}
+            >
               <UBTextField
-                key={index}
                 question={q.question}
                 SetAnswer={q.handleSetAnswer}
                 value={q.value}
               />
-              </Box>
-            );
-          }
-        })}
-         <Box sx={{ mb: "2%", p: "2%", mt: "%", ml: "14%", color: 'red', width: "66.1%", backgroundColor: "#FFD954", borderBottomLeftRadius: "5px", borderBottomRightRadius: "5px"}}>
-            {deadline}
-          </Box>
+            </Box>
+          );
+        }
+      })}
+      <Box
+        sx={{
+          mb: "2%",
+          p: "2%",
+          mt: "%",
+          ml: "14%",
+          color: "red",
+          width: "66.1%",
+          backgroundColor: "#FFD954",
+          borderBottomLeftRadius: "5px",
+          borderBottomRightRadius: "5px",
+        }}
+      >
+        {deadline}
+      </Box>
     </Container>
   );
 };

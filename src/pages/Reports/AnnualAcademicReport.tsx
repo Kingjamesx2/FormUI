@@ -8,7 +8,7 @@ import AnnualAcademicReportStep5 from "../../components/reports/annual/annual-ac
 import Header from '../../components/common/Header/Header';  // Import the Header component
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-// import { updateStep1Data, updateStep2Data, updateStep3Data, updateStep4Data, updateStep5Data } from '../../store/store';
+import { setCurrentStep } from '../../store/features/annualReportSlice';
 
 
 const steps = [
@@ -20,13 +20,13 @@ const steps = [
 ];
 
 export const AnnualAcademicReport: React.FC = () => {
-  // const dispatch = useDispatch();
-  // const formState = useSelector((state: RootState) => state.form);
 
-  // // Example function to handle step1 data update
-  // const handleStep1DataUpdate = (data: any) => {
-  //   dispatch(updateStep1Data(data));
-  // };
+  const dispatch = useDispatch();
+  const currentStep = useSelector((state: RootState) => state.annualReport.currentStep);
+
+  const handleStepChange = (step: number) => {
+    dispatch(setCurrentStep(step));
+  };
 
   return (
     <>
