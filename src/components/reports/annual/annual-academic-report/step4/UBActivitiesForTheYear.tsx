@@ -56,7 +56,7 @@ export const UBActivitiesForTheYear = () => {
         <center>Activities for the year - List activities conducted during the year under review.</center>
       </h3>
       {containers.map((container, containerIndex) => (
-        <Box key={containerIndex} mb={"5%"} p={"2%"} >
+        <Box key={containerIndex} mb={"-2%"} p={"2%"} >
           <Box mb={"-4.4%"} display="flex" alignItems="Left" sx={{width: "69.9%", border: "1px solid", backgroundColor: "#FFD954", ml: "14.4%", borderTopLeftRadius: "5px", borderTopRightRadius: "5px"}}>
             <Box sx={{ display: "flex",  ml: "-10%", mb: "4%", width: "80%", }}>
               <UBTextField
@@ -68,7 +68,7 @@ export const UBActivitiesForTheYear = () => {
               />
             </Box>
             <Box sx={{ ml:"-5%", mt: "1.5%"}}>
-              <label>Add Image</label>
+              <label>Picture of events</label>
               <IconButton component="label">
                 <AddPhotoAlternateIcon />
                 <input
@@ -90,6 +90,15 @@ export const UBActivitiesForTheYear = () => {
               value={container.personInPictures}
             />
           </Box>
+          <Box mb={"-4.5%"} sx={{ ml:"0.2%" , width: "98.5%"}}>
+            <UBTextField
+              question="Month of Event"
+              SetAnswer={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleSetAnswer(containerIndex, "personInPictures", e.target.value)
+              }
+              value={container.personInPictures}
+            />
+          </Box>
           <Box mb={"-4.5%"} mt={"-7.2%"} ml={"-0.41%"} width={"99.84%"}>
             <UBTextArea
               question="Summary of Events"
@@ -101,11 +110,11 @@ export const UBActivitiesForTheYear = () => {
           </Box>
           <Box display="flex" justifyContent="center" sx={{ mt: '5%' }}>
             <IconButton onClick={addContainer}>
-              <AddCircleRoundedIcon />
+              <AddCircleRoundedIcon sx={{color: "#FFD954"}}/>
             </IconButton>
             {containerIndex > 0 && (
               <IconButton onClick={() => removeContainer(containerIndex)}>
-                <RemoveCircleOutlinedIcon />
+                <RemoveCircleOutlinedIcon sx={{color: "#FFD954"}}/>
               </IconButton>
             )}
           </Box>

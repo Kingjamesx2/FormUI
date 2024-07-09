@@ -16,12 +16,13 @@ export const UBDegreesConferred = () => {
         "a. Total number of degrees conferred for most recent academic year",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        console.log(e.target.value);
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[0] = value;
-          return newState;
-        });
+        if (/^\d*$/.test(value)) {
+          setState((prevState) => {
+            const newState = [...prevState];
+            newState[0] = value;
+            return newState;
+          });
+        }
       },
       type: "input",
       value: state[0],
@@ -31,12 +32,13 @@ export const UBDegreesConferred = () => {
         "b. Total number of degrees conferred for most recent academic year per department and/or program.",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        console.log(e.target.value);
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[1] = value;
-          return newState;
-        });
+        if (/^\d*$/.test(value)) {
+          setState((prevState) => {
+            const newState = [...prevState];
+            newState[1] = value;
+            return newState;
+          });
+        }
       },
       type: "input",
       value: state[1],
@@ -45,7 +47,7 @@ export const UBDegreesConferred = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3 style={{ marginBottom: "1%"}}>
+      <h3 style={{ marginBottom: "1%" }}>
         <center>Degrees conferred</center>
       </h3>
       {questions.map((q, index) => (

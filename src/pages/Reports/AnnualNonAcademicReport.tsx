@@ -8,7 +8,7 @@ import AnnualNonAcademicReportStep5 from "./../../components/reports/annual/annu
 import Header from '../../components/common/Header/Header';  // Import the Header component
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { setCurrentStep } from '../../store/features/annualNonReportSlice';
+// import { setCurrentStep } from '../../store/features/annualNonReportSlice';
 
 
 const steps = [
@@ -22,8 +22,7 @@ const steps = [
 export const AnnualNonAcademicReport = () => {
   const dispatch = useDispatch();
   const currentStep = useSelector((state: RootState) => state.annualNonReport.currentStep);
-
- 
+  return (
  <>
     <Header
       logo="./../icons/UB_Logo.png"
@@ -31,6 +30,7 @@ export const AnnualNonAcademicReport = () => {
     />
     <UBStepper steps={steps} />
   </>
+  );
 };
 
-export default AnnualNonAcademicReport
+export default AnnualNonAcademicReport;

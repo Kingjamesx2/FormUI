@@ -5,7 +5,7 @@ import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import Box from "@mui/material/Box";
 import { UBRadioButton } from "../../../../common/UBRadioButton/UBRadioButton";
-import Stack from '@mui/material/Stack';
+import Stack from "@mui/material/Stack";
 
 const initialState = ["", "", "", "", "", ""];
 
@@ -54,15 +54,24 @@ export const UBAccomplishments: React.FC = () => {
       type: "radiobutton",
       options: [
         { value: "Teaching and Learning", label: "Teaching and Learning" },
-        { value: "Institutional Development (partnerships, funding, visibility etc.)", label: "Institutional Development (partnerships, funding, visibility etc.)" },
-        { value: "Training, webinars, conference and/or projects of improvement and other majorachievements for your department.", label: "Training, webinars, conference and/or projects of improvement and other major achievements for your department." },
+        {
+          value:
+            "Institutional Development (partnerships, funding, visibility etc.)",
+          label:
+            "Institutional Development (partnerships, funding, visibility etc.)",
+        },
+        {
+          value:
+            "Training, webinars, conference and/or projects of improvement and other majorachievements for your department.",
+          label:
+            "Training, webinars, conference and/or projects of improvement and other major achievements for your department.",
+        },
         { value: "National development", label: "National development" },
       ],
       value: state[2],
     },
     {
-      question:
-        "Why",
+      question: "",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setState((prevState) => {
@@ -71,7 +80,7 @@ export const UBAccomplishments: React.FC = () => {
           return newState;
         });
       },
-      type: "input",
+      type: "textarea",
       value: state[3],
     },
     {
@@ -92,9 +101,19 @@ export const UBAccomplishments: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3 style= {{ marginBottom: "-20px", marginTop: "50px"}}><center>Accomplishments for the Reporting Period</center></h3>
+      <h3 style={{ marginBottom: "-20px", marginTop: "50px" }}>
+        <center>Accomplishments for the Reporting Period</center>
+      </h3>
       {questions.map((q, index) => (
-        <Box key={index} mb={-4.7} >
+        <Box
+          key={index}
+          mb={-4.7}
+          sx={
+            q.question === ""
+              ? { ml: "-0.7%", mt: "-6%", width: "101.4%" }
+              : {}
+          }
+        >
           {q.type === "textarea" ? (
             <UBTextArea
               question={q.question}
@@ -109,21 +128,21 @@ export const UBAccomplishments: React.FC = () => {
               value={q.value}
             />
           ) : q.type === "radiobutton" ? (
-            <Box sx={{ mt: "-9%"}}>
+            <Box sx={{ mt: "-9%" }}>
               <UBRadioButton
                 label={q.question}
                 options={q.options}
                 handleSetValue={q.handleSetAnswerRadio}
                 value={q.value}
               />
-              </Box>
+            </Box>
           ) : (
-            <Box sx={{mt: '-5%', mb: '-5%'}}>
-            <UBTextField
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
+            <Box sx={{ mt: "-5%", mb: "-5%" }}>
+              <UBTextField
+                question={q.question}
+                SetAnswer={q.handleSetAnswer}
+                value={q.value}
+              />
             </Box>
           )}
         </Box>

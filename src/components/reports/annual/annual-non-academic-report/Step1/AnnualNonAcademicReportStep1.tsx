@@ -77,7 +77,7 @@ export const AnnualNonAcademicReportStep1: React.FC = () => {
           dean: "Dr. Apolonio Aguilar",
         },
       ],
-      value: state[0],
+      value: state[1],
     },
     {
       question: "State your Mission Statement ",
@@ -86,18 +86,18 @@ export const AnnualNonAcademicReportStep1: React.FC = () => {
         setState((prevState) => [prevState[0], prevState[1], value]);
         console.log(value);
       },
-      type: "input",
+      type: "textarea",
       value: state[2],
     },
   ];
 
   return (
-    <Container>
+    <Container sx={{ width: 1, m: 1, p: 1 }}>
       <Box>
         <Box sx={{ml:"15%", mt: "10%", p: "2%", width: "66%", backgroundColor: "#FFD954", borderTopLeftRadius: "5px", borderTopRightRadius: "5px"}}>
           {summary}
         </Box>
-        <Box sx={{width: "70%",marginTop: "-2px", marginLeft: "15%",paddingBottom: "2%", paddingTop: "3%", backgroundColor: "#FFD954", borderBottomLeftRadius: "none", borderBottomRightRadius: "none"}}>
+        <Box sx={{width: "70%", marginLeft: "15%",paddingBottom: "2%", paddingTop: "3%", backgroundColor: "#FFD954", borderBottomLeftRadius: "none", borderBottomRightRadius: "none"}}>
         <UbDropdown
           label={questions[0].question}
           options={questions[0].options}

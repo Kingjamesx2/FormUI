@@ -33,7 +33,6 @@ export const UBRadioButton: React.FC<IUBRadioButtonProp> = ({
           alignItems: "center",
           width: "65%",
           padding: "3%",
-          border: "1px solid black",
           backgroundColor: "#FFD954",
           borderRadius: "5px"
         }}

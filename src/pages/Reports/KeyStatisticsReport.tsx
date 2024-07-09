@@ -15,7 +15,8 @@ const steps = [
 
 ];
 
-export const KeyStatisticsTemplate = () => (
+export const KeyStatisticsReport: React.FC = () => {
+  return (
   <>
     <Header
       logo="./../icons/UB_Logo.png"
@@ -23,5 +24,6 @@ export const KeyStatisticsTemplate = () => (
     />
     <UBStepper steps={steps} />
   </>
-);
-export default KeyStatisticsTemplate
+  );
+};
+export default KeyStatisticsReport;

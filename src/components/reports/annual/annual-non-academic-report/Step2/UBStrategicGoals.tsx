@@ -57,7 +57,7 @@ export const UBStrategicGoals: React.FC = () => {
     },
     {
       question:
-        "4. List goals for the upcoming academic year.",
+        "4. List your strategic goals for the upcoming academic year.",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         console.log(e.target.value);
@@ -74,7 +74,7 @@ export const UBStrategicGoals: React.FC = () => {
 
   return (
       <Container sx={{ width: 1, m: 1, p: 1 }}>
-        <h2 style={{ marginBottom: "-10px"}}><center>Strategic Goals</center></h2>
+        <h3 style={{ marginBottom: "-10px"}}><center>Strategic Goals</center></h3>
         {questions.map((q, index) => (
           <Box key={index} mb={-4.5}>
             {q.type === "textarea" ? (

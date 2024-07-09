@@ -12,14 +12,15 @@ export const UBCourses: React.FC = () => {
   const questions = [
     {
       question: "1. Total number of new courses added to the Faculty",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        console.log(e.target.value);
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[0] = value;
-          return newState;
-        });
+        if (/^\d*$/.test(value)) {
+          setState((prevState) => {
+            const newState = [...prevState];
+            newState[0] = value;
+            return newState;
+          });
+        }
       },
       type: "input",
       value: state[0],
@@ -28,12 +29,13 @@ export const UBCourses: React.FC = () => {
       question: "2. Number of courses offered through online",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        console.log(e.target.value);
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[1] = value;
-          return newState;
-        });
+        if (/^\d*$/.test(value)) {
+          setState((prevState) => {
+            const newState = [...prevState];
+            newState[1] = value;
+            return newState;
+          });
+        }
       },
       type: "input",
       value: state[1],
@@ -42,12 +44,13 @@ export const UBCourses: React.FC = () => {
       question: "3. Number of courses offered through face to face",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        console.log(e.target.value);
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[2] = value;
-          return newState;
-        });
+        if (/^\d*$/.test(value)) {
+          setState((prevState) => {
+            const newState = [...prevState];
+            newState[2] = value;
+            return newState;
+          });
+        }
       },
       type: "input",
       value: state[2],

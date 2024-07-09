@@ -35,9 +35,8 @@ export const UBFacultyMeetings: React.FC = () => {
       handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         handleSetAnswer(containerId, 0, e.target.value);
       },
-      type: "dropdown",
+      type: "input",
       value: state[0],
-      options: ["Option 1", "Option 2"], // Add appropriate options
     },
     {
       question: "Date of Meeting: ",
@@ -72,11 +71,11 @@ export const UBFacultyMeetings: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3 style={{ marginBottom: "4%", marginTop: "5%" }}>
+      <h3 style={{ marginBottom: "6%", marginTop: "5%" }}>
         <center>Faculty Meetings</center>
       </h3>
       {containers.map((container) => (
-        <Box key={container.id} mb={"2%"}>
+        <Box key={container.id} mb={"4.7%"}>
           {questions(container.id, container.state).map((q, index) => (
             <Box key={index} mb={"-1%"}>
               {q.type === "textarea" ? (
@@ -95,7 +94,7 @@ export const UBFacultyMeetings: React.FC = () => {
                 />
                 </Box>
               ) : (
-                <Box sx={{ marginTop: "-4%", ml:"14.5%", pb: "4%", width: "71%" , backgroundColor: "#FFD954", borderRadius: "0 0 5px 5px"}}>
+                <Box sx={{ marginTop: "-4%", ml:"14.5%", pb: "4%", width: "71%" , backgroundColor: "#FFD954", borderRadius: "5px 5px 5px 5px"}}>
                 <UBTextField
                   question={q.question}
                   SetAnswer={q.handleSetAnswer}
@@ -109,10 +108,10 @@ export const UBFacultyMeetings: React.FC = () => {
       ))}
        <Box sx={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
         <IconButton onClick={handleAddContainer}>
-          <AddCircleRoundedIcon fontSize="medium" />
+          <AddCircleRoundedIcon fontSize="medium" sx={{color: "#FFD954"}}/>
         </IconButton>
         <IconButton onClick={handleRemoveContainer}>
-          <RemoveCircleOutlinedIcon fontSize="medium" />
+          <RemoveCircleOutlinedIcon fontSize="medium" sx={{color: "#FFD954"}}/>
         </IconButton>
       </Box>
     </Container>

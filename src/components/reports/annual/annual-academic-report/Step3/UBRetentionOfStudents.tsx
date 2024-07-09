@@ -9,6 +9,7 @@ const initialState = ["", ""];
 
 export const UBRetentionOfStudents: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
+  const [retention, setRetention] = useState<string>("1. List retention initiatives for the following:");
 
   const questions = [
     {
@@ -45,6 +46,7 @@ export const UBRetentionOfStudents: React.FC = () => {
     <div>
       <Container sx={{ width: 1, m: 1, p: 1 }}>
         <h3 style={{ marginBottom: "1%"}}><center>Retention of Students</center></h3>
+        <Box sx={{border: "1px solid", width: "71%", ml: "14.4%",mb:"-3%", pb: "2%", pt:"2%", backgroundColor: "#FFD954", borderRadius: "5px 5px 0 0"}}>{retention}</Box>
         {questions.map((q, index) => (
           <Box key={index} mb={"-5.3%"}>
             {q.type === "textarea" ? (

@@ -19,7 +19,7 @@ export const FacultyMissionStatement = () => {
         setState((prevState) => [value, prevState[1], prevState[2]]);
         console.log(value);
       },
-      type: "input",
+      type: "textarea",
       value: state[0],
     },
   ];
@@ -74,9 +74,9 @@ export const FacultyMissionStatement = () => {
           mb: "2%",
           p: "2%",
           mt: "%",
-          ml: "14%",
+          ml: "15%",
           color: "red",
-          width: "66.1%",
+          width: "66%",
           backgroundColor: "#FFD954",
           borderBottomLeftRadius: "5px",
           borderBottomRightRadius: "5px",

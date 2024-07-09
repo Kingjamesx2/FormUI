@@ -118,10 +118,10 @@ export const UBFacultyMeetings: React.FC = () => {
       ))}
        <Box sx={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
         <IconButton onClick={handleAddContainer}>
-          <AddCircleRoundedIcon fontSize="medium" />
+          <AddCircleRoundedIcon fontSize="medium" sx={{color: "#FFD954"}}/>
         </IconButton>
         <IconButton onClick={handleRemoveContainer}>
-          <RemoveCircleOutlinedIcon fontSize="medium" />
+          <RemoveCircleOutlinedIcon fontSize="medium" sx={{color: "#FFD954"}} />
         </IconButton>
       </Box>
     </Container>

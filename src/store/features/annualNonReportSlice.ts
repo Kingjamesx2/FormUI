@@ -1,11 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface annualNonReportState {
+interface IStategicGoals {
+  question: string;
+  answer: string;
+}
+
+interface annualNonReportInitialState {
   stepData: any[];
+  department: string;
+  missionStatement: string;
+  strategicGoals: IStategicGoals[]
   currentStep: number;
 }
 
-const initialState: annualNonReportState = {
+const initialState: annualNonReportInitialState = {
   stepData: [],
   currentStep: 0,
 };

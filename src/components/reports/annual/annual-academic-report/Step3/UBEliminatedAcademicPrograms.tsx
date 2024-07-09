@@ -28,7 +28,6 @@ export const UBEliminatedAcademicPrograms: React.FC = () => {
   ];
 
   return (
-    <div>
       <Container sx={{ width: 1, m: 1, p: 1 }}>
         <h3 style={{ marginTop: "5%", marginBottom: "-3%"}}><center>List eliminated academic programs</center></h3>
         {questions.map((q, index) => {
@@ -62,6 +61,5 @@ export const UBEliminatedAcademicPrograms: React.FC = () => {
           }
         })}
       </Container>
-    </div>
   );
 };

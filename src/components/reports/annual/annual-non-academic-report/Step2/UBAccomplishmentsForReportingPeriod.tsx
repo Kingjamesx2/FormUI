@@ -3,8 +3,8 @@ import Container from "@mui/material/Container";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
+import { UBRadioButton } from "../../../../common/UBRadioButton/UBRadioButton";
 import Box from "@mui/material/Box";
-
 
 const initialState = ["", "", "", "", ""];
 
@@ -44,16 +44,31 @@ export const UBAccomplishmentsForReportingPeriod: React.FC = () => {
     {
       question:
         "3. Identify the most impactful change/initiative by your faculty for the academic year and give reasons why.",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
+      handleSetAnswerRadio: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        console.log(e.target.value);
         setState((prevState) => {
           const newState = [...prevState];
           newState[2] = value;
           return newState;
         });
       },
-      type: "textarea",
+      type: "radiobutton",
+      options: [
+        { value: "Teaching and Learning", label: "Teaching and Learning" },
+        {
+          value:
+            "Institutional Development (partnerships, funding, visibility etc.)",
+          label:
+            "Institutional Development (partnerships, funding, visibility etc.)",
+        },
+        {
+          value:
+            "Training, webinars, conference and/or projects of improvement and other majorachievements for your department.",
+          label:
+            "Training, webinars, conference and/or projects of improvement and other major achievements for your department.",
+        },
+        { value: "National development", label: "National development" },
+      ],
       value: state[2],
     },
     {
@@ -75,33 +90,53 @@ export const UBAccomplishmentsForReportingPeriod: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h2 style={{ marginTop: "75px", marginBottom: "-20px"}}><center>Accomplishments for the reporting period</center></h2>
+      <h3 style={{ marginBottom: "-20px", marginTop: "50px" }}>
+        <center>Accomplishments for the Reporting Period</center>
+      </h3>
       {questions.map((q, index) => (
-          <Box key={index} mb={-4.5}>
-            {q.type === "textarea" ? (
-              <UBTextArea
-                question={q.question}
-                SetAnswer={q.handleSetAnswer}
-                value={q.value}
-              />
-            ) : q.type === "dropdown" ? (
-              <UbDropdown
+        <Box
+          key={index}
+          mb={-4.7}
+          sx={
+            q.question === ""
+              ? { ml: "-0.7%", mt: "-6%", width: "101.4%" }
+              : {}
+          }
+        >
+          {q.type === "textarea" ? (
+            <UBTextArea
+              question={q.question}
+              SetAnswer={q.handleSetAnswer}
+              value={q.value}
+            />
+          ) : q.type === "dropdown" ? (
+            <UbDropdown
+              label={q.question}
+              options={q.options}
+              handleSetValue={q.handleSetAnswer}
+              value={q.value}
+            />
+          ) : q.type === "radiobutton" ? (
+            <Box sx={{ mt: "-9%" }}>
+              <UBRadioButton
                 label={q.question}
                 options={q.options}
-                handleSetValue={q.handleSetAnswer}
+                handleSetValue={q.handleSetAnswerRadio}
                 value={q.value}
               />
-            ) : (
+            </Box>
+          ) : (
+            <Box sx={{ mt: "-5%", mb: "-5%" }}>
               <UBTextField
                 question={q.question}
                 SetAnswer={q.handleSetAnswer}
                 value={q.value}
               />
-            )}
-          </Box>
-        ))}
+            </Box>
+          )}
+        </Box>
+      ))}
     </Container>
-
   );
 };
 

@@ -13,7 +13,7 @@ export const UBStrategicGoals: React.FC = () => {
   const questions = [
     {
       question:
-        "1. List the strategic goals for the period under review and indicate the progress of each goal.",
+        "1. List accomplished Initiative for the previous Academic Year (AY) 23-24",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         console.log(e.target.value);
@@ -28,7 +28,7 @@ export const UBStrategicGoals: React.FC = () => {
     },
     {
       question:
-        "2. What challenges did your faculty encounter in pursuing these goals? How were these challenges addressed? This may include risk and assumptions identified in the Annual Implementation plan.",
+        "2. List Corresponding Strategic Plan Goal & Strategy",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         console.log(e.target.value);
@@ -41,40 +41,40 @@ export const UBStrategicGoals: React.FC = () => {
       type: "textarea",
       value: state[1],
     },
-    {
-      question: "4. List goals for the upcoming academic year.",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        console.log(e.target.value);
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[2] = value;
-          return newState;
-        });
-      },
-      type: "textarea",
-      value: state[2],
-    },
-    {
-      question:
-        "5. What is the way forward for the Faculty as it enters into its new academic year? How will this assist the University in the long term?",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        console.log(e.target.value);
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[3] = value;
-          return newState;
-        });
-      },
-      type: "textarea",
-      value: state[3],
-    },
+    // {
+    //   question: "4. List goals for the upcoming academic year.",
+    //   handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const value = e.target.value;
+    //     console.log(e.target.value);
+    //     setState((prevState) => {
+    //       const newState = [...prevState];
+    //       newState[2] = value;
+    //       return newState;
+    //     });
+    //   },
+    //   type: "textarea",
+    //   value: state[2],
+    // },
+    // {
+    //   question:
+    //     "5. What is the way forward for the Faculty as it enters into its new academic year? How will this assist the University in the long term?",
+    //   handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const value = e.target.value;
+    //     console.log(e.target.value);
+    //     setState((prevState) => {
+    //       const newState = [...prevState];
+    //       newState[3] = value;
+    //       return newState;
+    //     });
+    //   },
+    //   type: "textarea",
+    //   value: state[3],
+    // },
   ];
 
   return (
 <Container sx={{ width: 1, m: "auto", p: 1, }}>
-      <h3 style={{ marginBottom: "-20px", marginTop: "50px", color: "#FFD954"}}><center>Strategic Goals</center></h3>
+      <h3 style={{ marginBottom: "-20px", marginTop: "50px"}}><center>Strategic Initiatives & Goals</center></h3>
       {questions.map((q, index) => (
         <Box key={index} mb={-4.7}>
           {q.type === "textarea" ? (

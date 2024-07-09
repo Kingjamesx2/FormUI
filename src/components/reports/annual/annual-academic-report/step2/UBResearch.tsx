@@ -13,7 +13,7 @@ export const UBresearch: React.FC = () => {
 
   const questions = [
     {
-      question: "1. List significant accomplishments of the Faculty.",
+      question: "1. Please list any external funding received by the faculty, include research and training grant proposals and awards, as well as any other support.",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         console.log(e.target.value);
@@ -28,7 +28,7 @@ export const UBresearch: React.FC = () => {
     },
     {
       question:
-        "2. Explain/Describe how each of the above has advanced Faculty goals as well as those of the University.",
+        "2. Please list research and publications generated as a result of the faculty’s activities (full citations).",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         console.log(e.target.value);
@@ -43,7 +43,7 @@ export const UBresearch: React.FC = () => {
     },
     {
       question:
-        "3. Identify the most impactful change/initiative by your faculty for the academic year and give reasons why.",
+        "3. List any partnership agencies/organizations which your faculty engaged with during the year in review.",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         console.log(e.target.value);
@@ -58,7 +58,7 @@ export const UBresearch: React.FC = () => {
     },
     {
       question:
-        "4. What were the opportunities gained from this academic year that can be applicable to the upcoming academic year? Please be as specific as possible.",
+        "4. List any scholarships, fellowships or exchange programmes received or offered by the Faculty.",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         console.log(e.target.value);
@@ -70,6 +70,21 @@ export const UBresearch: React.FC = () => {
       },
       type: "textarea",
       value: state[3],
+    },
+    {
+      question:
+        "5. List research and publications generated as a result of the Faculty’s activity (full citations).",
+      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        console.log(e.target.value);
+        setState((prevState) => {
+          const newState = [...prevState];
+          newState[4] = value;
+          return newState;
+        });
+      },
+      type: "textarea",
+      value: state[4],
     },
   ];
 

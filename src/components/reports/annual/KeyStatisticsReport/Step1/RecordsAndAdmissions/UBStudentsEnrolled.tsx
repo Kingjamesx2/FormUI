@@ -8,7 +8,7 @@ import UBInfoTable from "../../../../../common/UBInfoTable/UBInfoTable";
 const initialState = ["", "", ""];
 
 
-const columns = ['Students Enrolled Academic Year 2023/2024', ''];
+const columns = ['1. Students Enrolled Academic Year 2023/2024', ''];
 const initialRows = [
   { degree: 'Associates', '': ''},
   { degree: 'Undergraduate', '': ''},

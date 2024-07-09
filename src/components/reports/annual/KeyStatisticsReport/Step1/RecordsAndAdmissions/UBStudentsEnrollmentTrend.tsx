@@ -17,7 +17,7 @@ const initialRows = [
 
 export const UBStudentsEnrollmentTrend: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
-  const [enrollmentTrend, setEnrollmentTrend] = useState<string>(" Student Enrolment Trend (Per Faculty)");
+  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Per Faculty)");
 
   const questions = [
     {

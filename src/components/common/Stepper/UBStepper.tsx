@@ -73,6 +73,13 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
           ? steps.findIndex((_, i) => !(i in completed))
           : activeStep + 1;
       setActiveStep(newActiveStep);
+
+       // Scroll to the top of the page
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth' // Optional: Adds smooth scrolling
+    });
     }
   };
 

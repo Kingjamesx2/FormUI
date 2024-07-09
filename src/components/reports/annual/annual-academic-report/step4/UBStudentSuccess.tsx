@@ -24,7 +24,7 @@ export const UBStudentSuccess = () => {
   const questions = [
     {
       question:
-        "1. List internships that the Faculty offers and indicate partnership agencies/organizations.",
+        "1. Highlight activities or programmes that engaged students of the Faculty and indicate how they contributed to student learning.",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         console.log(e.target.value);

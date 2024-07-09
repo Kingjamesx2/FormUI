@@ -101,11 +101,11 @@ export const UBActivitiesForTheYear = () => {
           </Box>
           <Box display="flex" justifyContent="center" sx={{ mt: '5%' }}>
             <IconButton onClick={addContainer}>
-              <AddCircleRoundedIcon />
+              <AddCircleRoundedIcon sx={{color: "#FFD954"}} />
             </IconButton>
             {containerIndex > 0 && (
               <IconButton onClick={() => removeContainer(containerIndex)}>
-                <RemoveCircleOutlinedIcon />
+                <RemoveCircleOutlinedIcon  sx={{color: "#FFD954"}}/>
               </IconButton>
             )}
           </Box>

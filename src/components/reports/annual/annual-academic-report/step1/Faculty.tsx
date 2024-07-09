@@ -14,8 +14,8 @@ export const Faculty = () => {
   const [state, setState] = useState<string[]>(initialState);
   const [summary, setSummary] = useState<string>("The annual report provides a comprehensive summary of the University’s activities for the academic year, which is from August to July. The specific outputs/outcomes are based on the Annual Implementation Plan for the period under review.");
 
-  // const theme = useTheme();
   // const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  // const theme = useTheme();
 
   const questions = [
     {
