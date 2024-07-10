@@ -53,7 +53,7 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({ columns, initialRows }
       column !== 'Faculty' &&
       column !== '8. Finance-Income Bz$' &&
       column !== '9. Finance-Expenditures Bz$' &&
-      column !== '1. Students Enrolled Academic Year 2023/2024' &&
+      column !== '1. Students Enrolment for the Academic Year under review' &&
       column !== '5. Origin of Students(Number)' &&
       column !== 'Faculty (2021/2022)' &&
       column !== 'Faculty (2022/2023)' &&
@@ -75,7 +75,7 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({ columns, initialRows }
             {columns.map((column) => (
               <StyledTableCell
                 key={column}
-                align={column === 'Degree Program' || column === 'Faculty' || column === '8. Finance-Income Bz$' || column === '9. Finance-Expenditures Bz$' || column === '1. Students Enrolled Academic Year 2023/2024' || column === '5. Origin of Students(Number)' || column === '6. Campus Statistics (Number of Students) Academic Year 2023-2024' || column === 'Faculty (2021/2022)' || column === 'Faculty (2022/2023)' || column === 'Faculty (2023/2024)' ? 'left' : 'right'}
+                align={column === 'Degree Program' || column === 'Faculty' || column === '8. Finance-Income Bz$' || column === '9. Finance-Expenditures Bz$' || column === '1. Students Enrolment for the Academic Year under review' || column === '5. Origin of Students(Number)' || column === '6. Campus Statistics (Number of Students) Academic Year 2023-2024' || column === 'Faculty (2021/2022)' || column === 'Faculty (2022/2023)' || column === 'Faculty (2023/2024)' ? 'left' : 'right'}
                 sx={{ fontWeight: 'bold' }}
               >
                 {column}
@@ -89,10 +89,10 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({ columns, initialRows }
               {columns.map((column) => (
                 <StyledTableCell
                   key={column}
-                  align={column === 'Degree Program' || column === 'Faculty' || column === '8. Finance-Income Bz$' || column === '9. Finance-Expenditures Bz$' || column === '1. Students Enrolled Academic Year 2023/2024' || column === '5. Origin of Students(Number)' || column === '6. Campus Statistics (Number of Students) Academic Year 2023-2024' || column === 'Faculty (2021/2022)' || column === 'Faculty (2022/2023)' || column === 'Faculty (2023/2024)' ? 'left' : 'right'}
+                  align={column === 'Degree Program' || column === 'Faculty' || column === '8. Finance-Income Bz$' || column === '9. Finance-Expenditures Bz$' || column === '1. Students Enrolment for the Academic Year under review' || column === '5. Origin of Students(Number)' || column === '6. Campus Statistics (Number of Students) Academic Year 2023-2024' || column === 'Faculty (2021/2022)' || column === 'Faculty (2022/2023)' || column === 'Faculty (2023/2024)' ? 'left' : 'right'}
                   sx={{ fontWeight: column === 'Degree Program' ? 'bold' : 'normal' }}
                 >
-                  {column === 'Degree Program' || column === 'Faculty' || column === '8. Finance-Income Bz$' || column === '9. Finance-Expenditures Bz$' || column === '1. Students Enrolled Academic Year 2023/2024' || column === '5. Origin of Students(Number)' || column === '6. Campus Statistics (Number of Students) Academic Year 2023-2024' || column === 'Faculty (2021/2022)' || column === 'Faculty (2022/2023)' || column === 'Faculty (2023/2024)'? (
+                  {column === 'Degree Program' || column === 'Faculty' || column === '8. Finance-Income Bz$' || column === '9. Finance-Expenditures Bz$' || column === '1. Students Enrolment for the Academic Year under review' || column === '5. Origin of Students(Number)' || column === '6. Campus Statistics (Number of Students) Academic Year 2023-2024' || column === 'Faculty (2021/2022)' || column === 'Faculty (2022/2023)' || column === 'Faculty (2023/2024)'? (
                     <span style={{ fontWeight: 'bold' }}>{row.degree}</span>
                   ) : (
                     <TextField

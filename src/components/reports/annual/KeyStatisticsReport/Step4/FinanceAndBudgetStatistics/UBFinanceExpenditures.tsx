@@ -12,7 +12,6 @@ const initialRows = [
   { degree: 'Teaching Staff Costs', '': ''},
   { degree: 'Non-Teaching Staff Costs', '': ''},
   { degree: 'Administrative Cost', '': ''},
-  { degree: 'Capital Expenditures(List major projects below)', '': ''},
 ];
 
 export const UBFinanceExpenditures: React.FC = () => {
@@ -30,56 +29,79 @@ export const UBFinanceExpenditures: React.FC = () => {
       type: "table",
       value: state[0],
     },
+    {
+      question: "10. Capital Expenditures (List major projects below)",
+      handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setState((prevState) => [prevState[0], prevState[1], value]);
+        console.log(value);
+      },
+      type: "textarea",
+      value: state[1],
+    },
+    {
+      question: "11. Other expenditures",
+      handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setState((prevState) => [prevState[0], prevState[1], value]);
+        console.log(value);
+      },
+      type: "textarea",
+      value: state[2],
+    },
   ];
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      {/* <Box sx={{ mt: "10%", width: "70%", ml: "15%", mb: "-30px" }}>
-        {enrollmentTrend}
-      </Box> */}
-      {questions.map((q, index) => {
-        if (q.type === "textarea") {
-          return (
-            <UBTextArea
-              key={index}
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        } else if (q.type === "dropdown") {
-          return (
-            <UbDropdown
-              key={index}
-              label={q.question}
-              options={q.options}
-              handleSetValue={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        } else if (q.type === "table") {
-          return (
-            <Box sx={{ mt: "-5%"}}>
-            <UBInfoTable
-              key={index}
-              columns={columns}
-              initialRows={initialRows}
-            />
-            </Box>
-          );
-        } else if (q.type === "input") {
-          return (
-            <UBTextField
-              key={index}
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        }
-        return null;
-      })}
-    </Container>
+  {/* <Box sx={{ mt: "10%", width: "70%", ml: "15%", mb: "-30px" }}>
+    {enrollmentTrend}
+  </Box> */}
+  {questions.map((q, index) => {
+    return (
+      <Box key={index} mb={-4.7}>
+        {(() => {
+          if (q.type === "textarea") {
+            return (
+              <UBTextArea
+                question={q.question}
+                SetAnswer={q.handleSetAnswer}
+                value={q.value}
+              />
+            );
+          } else if (q.type === "dropdown") {
+            return (
+              <UbDropdown
+                label={q.question}
+                options={q.options}
+                handleSetValue={q.handleSetAnswer}
+                value={q.value}
+              />
+            );
+          } else if (q.type === "table") {
+            return (
+              <Box sx={{ mt: "-5%" }}>
+                <UBInfoTable
+                  columns={columns}
+                  initialRows={initialRows}
+                />
+              </Box>
+            );
+          } else if (q.type === "input") {
+            return (
+              <UBTextField
+                question={q.question}
+                SetAnswer={q.handleSetAnswer}
+                value={q.value}
+              />
+            );
+          }
+          return null;
+        })()}
+      </Box>
+    );
+  })}
+</Container>
+
   );
 };
 

@@ -49,6 +49,7 @@ const stepStyle = (isSmallScreen: boolean) => ({
 export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState<{ [k: number]: boolean }>({});
+  const [formData, setFormData] = useState<{ [key: number]: any }>({});
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
@@ -75,11 +76,11 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
       setActiveStep(newActiveStep);
 
        // Scroll to the top of the page
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth' // Optional: Adds smooth scrolling
-    });
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth' // Optional: Adds smooth scrolling
+      });
     }
   };
 
@@ -94,6 +95,14 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
   const handleReset = () => {
     setActiveStep(0);
     setCompleted({});
+    setFormData({});
+  };
+
+  const updateFormData = (step: number, data: any) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [step]: data,
+    }));
   };
 
   return (
@@ -126,7 +135,10 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
             flexDirection: isSmallScreen ? "column" : "row",
           }}
         >
-          {steps[activeStep].stepComponent}
+          {React.cloneElement(steps[activeStep].stepComponent, {
+            data: formData[activeStep] || {},
+            updateData: (data: any) => updateFormData(activeStep, data),
+          })}
         </Box>
 
         {allStepsCompleted() ? (

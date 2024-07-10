@@ -55,7 +55,7 @@ export const UBResearchAndPartnership = () => {
         value: state[2],
       },
       {
-        question: "4. List any scholarships, fellowships or exchange programmes received or offered by the Faculty.",
+        question: "4. List any scholarships, fellowships or exchange programmes received or offered by your division.",
         handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
           const value = e.target.value;
           console.log(e.target.value);

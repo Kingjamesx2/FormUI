@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import Container from "@mui/material/Container";
+import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
-import { UBTextField } from "../../../../common/UBTextField/UBTextField";
-import { UBRadioButton } from "../../../../common/UBRadioButton/UBRadioButton";
 import Box from "@mui/material/Box";
+import { UBRadioButton } from "../../../../common/UBRadioButton/UBRadioButton";
+import Stack from "@mui/material/Stack";
 
-const initialState = ["", "", "", "", ""];
+const initialState = ["", "", "", "", "", ""];
 
 export const UBAccomplishmentsForReportingPeriod: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
@@ -16,7 +17,6 @@ export const UBAccomplishmentsForReportingPeriod: React.FC = () => {
       question: "1. List significant accomplishments of the Faculty.",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        console.log(e.target.value);
         setState((prevState) => {
           const newState = [...prevState];
           newState[0] = value;
@@ -31,7 +31,6 @@ export const UBAccomplishmentsForReportingPeriod: React.FC = () => {
         "2. Explain/Describe how each of the above has advanced Faculty goals as well as those of the University.",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        console.log(e.target.value);
         setState((prevState) => {
           const newState = [...prevState];
           newState[1] = value;
@@ -72,11 +71,9 @@ export const UBAccomplishmentsForReportingPeriod: React.FC = () => {
       value: state[2],
     },
     {
-      question:
-        "4. What were the opportunities gained from this academic year that can be applicable to the upcoming academic year? Please be as specific as possible.",
+      question: "",
       handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        console.log(e.target.value);
         setState((prevState) => {
           const newState = [...prevState];
           newState[3] = value;
@@ -85,6 +82,20 @@ export const UBAccomplishmentsForReportingPeriod: React.FC = () => {
       },
       type: "textarea",
       value: state[3],
+    },
+    {
+      question:
+        "4. What were the opportunities gained from this academic year that can be applicable to the upcoming academic year? Please be as specific as possible.",
+      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setState((prevState) => {
+          const newState = [...prevState];
+          newState[4] = value;
+          return newState;
+        });
+      },
+      type: "textarea",
+      value: state[4],
     },
   ];
 

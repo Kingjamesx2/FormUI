@@ -8,11 +8,11 @@ import UBInfoTable from "../../../../../common/UBInfoTable/UBInfoTable";
 const initialState = ["", "", ""];
 
 
-const columns = ['1. Students Enrolled Academic Year 2023/2024', ''];
+const columns = ['1. Students Enrolment for the Academic Year under review', ''];
 const initialRows = [
   { degree: 'Associates', '': ''},
-  { degree: 'Undergraduate', '': ''},
-  { degree: 'Graduate(Please Specify)', '': ''},
+  { degree: 'Undergraduates', '': ''},
+  { degree: 'Graduates', '': ''},
 ];
 
 export const UBStudentsEnrolled: React.FC = () => {

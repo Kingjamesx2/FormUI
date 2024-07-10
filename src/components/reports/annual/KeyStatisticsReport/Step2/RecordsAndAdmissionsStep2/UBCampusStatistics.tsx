@@ -13,7 +13,7 @@ const initialRows = [
   { degree: 'Belmopan', '': ''},
   { degree: 'Punta Gorda', '': '' },
   { degree: 'Central Farm', '': '' },
-  { degree: 'Satellite Programs(please specify)', '': '' },
+  { degree: 'Satellite Programs', '': '' },
 
 ];
 

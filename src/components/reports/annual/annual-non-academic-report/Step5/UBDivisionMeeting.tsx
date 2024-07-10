@@ -35,17 +35,7 @@ export const UBFacultyMeetings: React.FC = () => {
         const selectedValue = e.target.value as string;
         handleSetAnswer(containerId, 0, selectedValue);
       },
-      type: "dropdown",
-      options: [
-        {
-          value: "Online",
-          label: "Online",
-        },
-        {
-          value: "Face to face",
-          label: "Face to Face",
-        },
-      ],
+      type: "input",
       value: state[0],
     },
     {

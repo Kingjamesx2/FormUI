@@ -12,7 +12,7 @@ const initialRows = [
   { degree: 'Funding from the Government of Belize', '': ''},
   { degree: 'Tuition Fees', '': ''},
   { degree: 'Contracts', '': ''},
-  { degree: 'research Grants', '': ''},
+  { degree: 'Research Grants', '': ''},
   { degree: 'Endowment and Investment Income', '': ''},
   { degree: 'Other', '': ''},
 ];

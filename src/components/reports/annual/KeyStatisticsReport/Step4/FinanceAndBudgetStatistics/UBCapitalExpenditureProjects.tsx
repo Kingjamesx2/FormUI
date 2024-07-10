@@ -12,7 +12,7 @@ export const CapitalExpenditureProjects: React.FC = () => {
 
   const questions = [
     {
-      question: "10. Major Capital Expenditure Projects / Investments (buildings etc.)",
+      question: "12. Major Capital Expenditure Projects / Investments (buildings etc.)",
       handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value;
         console.log(e.target.value);
@@ -34,7 +34,7 @@ export const CapitalExpenditureProjects: React.FC = () => {
         {questions.map((q, index) => {
           if (q.type === "textarea") {
             return (
-              <Box sx={{ mt:"-5%"}}>
+              <Box sx={{ mt:"-2.5%"}}>
               <UBTextArea
                 key={index}
                 question={q.question}
