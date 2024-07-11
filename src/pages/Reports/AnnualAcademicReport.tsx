@@ -9,6 +9,7 @@ import Header from '../../components/common/Header/Header';  // Import the Heade
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 // import { setCurrentStep } from '../../store/features/annualReportSlice';
+import { Link } from 'react-router-dom';
 
 
 const steps = [
@@ -21,21 +22,17 @@ const steps = [
 
 export const AnnualAcademicReport: React.FC = () => {
 
-  const dispatch = useDispatch();
-  const currentStep = useSelector((state: RootState) => state.annualReport.currentStep);
 
-  const handleStepChange = (step: number) => {
-    dispatch(setCurrentStep(step));
-  };
+
 
   return (
-    <>
+    <Link to="/">
       <Header
         logo="./../icons/UB_Logo.png"
         title="UB Annual Report Template Academic Division"
       />
       <UBStepper steps={steps} />
-    </>
+    </Link>
   );
 };
 

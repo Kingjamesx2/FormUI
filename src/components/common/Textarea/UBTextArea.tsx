@@ -1,11 +1,9 @@
 import React from "react";
-import { styled, useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { styled } from "@mui/material/styles";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Paper from "@mui/material/Paper";
 // import div from "@mui/material/div";
 import { Stack } from "@mui/material";
-import { autoBatchEnhancer } from "@reduxjs/toolkit";
 
 interface IUBTextAreaProps {
   question?: string;

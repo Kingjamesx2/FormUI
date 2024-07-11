@@ -1,9 +1,11 @@
 import React, { useState, ChangeEvent } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Container, Box } from "@mui/material";
 import { UBTextArea } from "../../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
 import UBInfoTable from "../../../../../common/UBInfoTable/UBInfoTable";
+import { selectStudentEnrollmentTrend, setStudentEnrollmentTrend } from ".././../../../../../store/features/KeyStatisticsreportSlice/recordsReportSlice"
 
 const initialState = ["", "", ""];
 
@@ -16,17 +18,20 @@ const initialRows = [
 ];
 
 export const UBStudentsEnrollmentTrend: React.FC = () => {
+  const dispatch = useDispatch();
+  const StudentEnrollmentTrend =  useSelector(selectStudentEnrollmentTrend)
+
   const [state, setState] = useState<string[]>(initialState);
   const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Per Faculty)");
 
   const questions = [
     {
       question: "Student Enrolment Trend (Academic Level)",
-      handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setState((prevState) => [prevState[0], prevState[1], value]);
-        console.log(value);
-      },
+      // handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
+      //   const value = e.target.value;
+      //   setState((prevState) => [prevState[0], prevState[1], value]);
+      //   console.log(value);
+      // },
       type: "table",
       value: state[0],
     },
@@ -63,6 +68,8 @@ export const UBStudentsEnrollmentTrend: React.FC = () => {
               key={index}
               columns={columns}
               initialRows={initialRows}
+              handleSetValue={(e) => dispatch(setStudentEnrollmentTrend(e.target.value as string)) }
+
             />
           );
         } else if (q.type === "input") {

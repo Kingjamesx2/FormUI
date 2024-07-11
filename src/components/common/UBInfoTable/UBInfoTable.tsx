@@ -39,11 +39,13 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({ columns, initialRows }
 
   const handleInputChange = (degree: string, column: string, value: string) => {
     const newValue = parseFloat(value);
+    console.log('change input change .... ')
     if (newValue >= 0) {
       const updatedRows = rows.map((row) =>
         row.degree === degree ? { ...row, [column]: value } : row
       );
       setRows(updatedRows);
+      console.log(updatedRows)
     }
   };
 

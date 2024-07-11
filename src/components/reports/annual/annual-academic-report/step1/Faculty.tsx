@@ -5,14 +5,20 @@ import { SelectChangeEvent } from "@mui/material/Select";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { useSelector, useDispatch } from 'react-redux';
+
+
 
 const initialState = ["FST", "", ""];
 
 export const Faculty = () => {
   const [state, setState] = useState<string[]>(initialState);
   const [summary, setSummary] = useState<string>("The annual report provides a comprehensive summary of the University’s activities for the academic year, which is from August to July. The specific outputs/outcomes are based on the Annual Implementation Plan for the period under review.");
+
+
+  const dispatch = useDispatch();
+  
+
 
   // const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   // const theme = useTheme();

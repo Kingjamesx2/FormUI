@@ -77,66 +77,66 @@ interface annualNonReportInitialState {
 }
 
 const initialState: annualNonReportInitialState = {
-  academicYearID: "2023-2024",
-  department: "ICT- test staff post",
-  reportsTo: "President",
-  deadline: "2024-06-30T00:00:00Z",
-  missionStatement: "To provide high-quality education in computer science.",
+  academicYearID: "",
+  department: "",
+  reportsTo: "",
+  deadline: "",
+  missionStatement: "",
   strategicGoals: {
-      currentGoals: "Increase student enrollment by 10%",
-      challenges: "Limited lab resources",
-      plans: "Upgrade computer labs",
-      upcomingGoals: "Introduce new AI courses"
+      currentGoals: "",
+      challenges: "",
+      plans: "",
+      upcomingGoals: ""
   },
   accomplishments: {
-      accomplishmentList: "Developed new curriculum",
-      accomplishmentAdvancement: "Improved graduation rates",
-      teachingLearningImpact: "Enhanced student engagement",
-      institutionalDevelopmentImpact: "Secured industry partnerships",
-      trainingImpact: "Conducted faculty workshops",
-      nationalDevelopmentImpact: "Participated in national conferences",
-      applicableOpportunities: "Collaborated with tech companies"
+      accomplishmentList: "",
+      accomplishmentAdvancement: "",
+      teachingLearningImpact: "",
+      institutionalDevelopmentImpact: "",
+      trainingImpact: "",
+      nationalDevelopmentImpact: "",
+      applicableOpportunities: ""
   },
   researchPartnerships: {
-      externalFunding: "Received $50,000 grant",
-      researchPublications: "Published 5 papers",
-      partnershipAgencies: "Partnered with XYZ Corp",
-      scholarships: "Awarded 10 scholarships"
+      externalFunding: "",
+      researchPublications: "",
+      partnershipAgencies: "",
+      scholarships: ""
   },
   studentSuccess: {
-      studentClubs: "AI Club, Coding Club",
-      studentSurveyResults: "Positive feedback on courses",
-      newInitiatives: "Launched mentorship program"
+      studentClubs: "",
+      studentSurveyResults: "",
+      newInitiatives: ""
   },
   activities: [
       {
-          eventName: "Tech Expo 2024",
+          eventName: "",
           eventPicture: [
               {
-                  pictureURL: "https://example.com/pic1.jpg",
-                  personsInPicture: "John Doe, Jane Smith"
+                  pictureURL: "",
+                  personsInPicture: ""
               }
           ],
-          eventSummary: "Showcased student projects"
+          eventSummary: ""
       }
   ],
   administrativeData: {
-      fullTimeStaff: 20,
-      partTimeStaff: 10,
-      significantStaffChanges: "Hired 2 new professors"
+      fullTimeStaff: 0,
+      partTimeStaff: 0,
+      significantStaffChanges: ""
   },
   financialBudget: {
-      fundingSources: "Government grants, private donations",
-      significantBudgetChanges: "Increased lab equipment budget"
+      fundingSources: "",
+      significantBudgetChanges: ""
   },
   meetings: [
       {
-          meetingType: "Staff Meeting",
-          meetingDate: "2024-05-15T10:00:00Z",
-          meetingMinutesURL: "https://example.com/minutes1.pdf"
+          meetingType: "",
+          meetingDate: "",
+          meetingMinutesURL: ""
       }
   ],
-  otherComments: "Looking forward to a successful academic year"
+  otherComments: ""
 };
 
 

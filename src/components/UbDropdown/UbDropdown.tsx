@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
-import { BorderAll, Margin } from "@mui/icons-material";
 
 interface IUbDropdownProps {
   label: string;

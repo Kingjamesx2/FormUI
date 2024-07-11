@@ -4,23 +4,28 @@ import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { Box } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
+import { selectMissionStatement, setMissionStatement } from "../../../../../store/features/annualReportSlice"
+
 
 const initialState = ["", "", ""];
 
 export const FacultyMissionStatement = () => {
+  const dispatch = useDispatch()
+  const missionStatement = useSelector(selectMissionStatement)
   const [state, setState] = useState<string[]>(initialState);
   const [deadline, setDeadline] = useState<string>("* Deadline is Friday of the first week in August");
 
   const questions = [
     {
       question: "Faculty Mission Statement",
-      handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setState((prevState) => [value, prevState[1], prevState[2]]);
-        console.log(value);
-      },
+      // handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
+      //   const value = e.target.value;
+      //   setState((prevState) => [value, prevState[1], prevState[2]]);
+      //   console.log(value);
+      // },
       type: "textarea",
-      value: state[0],
+      // value: state[0],
     },
   ];
 
@@ -32,8 +37,8 @@ export const FacultyMissionStatement = () => {
             <UBTextArea
               key={index}
               question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
+              SetAnswer={(e) => dispatch(setMissionStatement(e.target.value as string)) }
+              value={missionStatement}
             />
           );
         } else if (q.type === "dropdown") {

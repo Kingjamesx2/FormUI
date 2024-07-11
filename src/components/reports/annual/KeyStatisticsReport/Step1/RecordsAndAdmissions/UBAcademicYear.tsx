@@ -1,36 +1,34 @@
 import React, { useState, ChangeEvent } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Container } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { UBTextArea } from "../../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
 import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { selectAcademicYearID, setAcademicYearID } from '../../../../../../store/features/KeyStatisticsreportSlice/financeReportSlice'
 
 const initialState = ["FST", "", ""];
 
 export const UBAcademicYear: React.FC = () => {
+  const dispatch = useDispatch()
+  const academicYear = useSelector(selectAcademicYearID)
   const [state, setState] = useState<string[]>(initialState);
   const [departmentHead, setDepartmentHead] = useState<string>("Department Head: Registrar, Office of Human Resource and Office of Finance");
   const [submissionDeadline, setSubmissionDeadline] = useState<string>(
     "Submission Deadline: Please return completed form to the Office of The Vice President by August 1, 2022"
   );
-
+  
   const questions = [
     {
       question: "Academic Year",
-      handleSetAnswer: (e: SelectChangeEvent<string>) => {
-        const selectedValue = e.target.value;
-        setState((prevState) => [selectedValue, "", ""]);
-        console.log(selectedValue);
-      },
+      // handleSetAnswer: (e: SelectChangeEvent<string>) => {
+      //   const selectedValue = e.target.value;
+      //   setState((prevState) => [selectedValue, "", ""]);
+      //   console.log(selectedValue);
+      // },
       type: "dropdown",
       options: [
-        {
-          value: "none",
-          label: "none",
-        },
         {
           value: "2021/2022",
           label: "2021/2022",
@@ -43,8 +41,7 @@ export const UBAcademicYear: React.FC = () => {
           value: "2023/2024",
           label: "2023/2024",
         },
-      ],
-      value: state[0],
+      ]
     },
   ];
 
@@ -55,8 +52,8 @@ export const UBAcademicYear: React.FC = () => {
           <UbDropdown
             label={questions[0].question}
             options={questions[0].options}
-            handleSetValue={questions[0].handleSetAnswer as (e: SelectChangeEvent<string>) => void}
-            value={questions[0].value}
+            handleSetValue={(e) => dispatch(setAcademicYearID(e.target.value as string)) }
+            value={academicYear}
           />
         </Box>
         <Box sx={{ mb: "3%", display: "flex", justifyContent: "left", width: "70%", ml: "15%", mt: "-2.5%", pb: "2%", pt: "3%", pl: "2%", backgroundColor: "#FFD954" }}>

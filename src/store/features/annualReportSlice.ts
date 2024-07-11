@@ -2,10 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store'; // Adjust the path according to your project structure
 
 interface IStrategicGoals {
-  currentGoals: string;
-  challenges: string;
+  previousAcademicYear: string;
   plans: string;
-  upcomingGoals: string;
 }
 
 interface IAccomplishments {
@@ -15,6 +13,7 @@ interface IAccomplishments {
   institutionalDevelopmentImpact: string;
   trainingImpact: string;
   nationalDevelopmentImpact: string;
+  why: string;
   applicableOpportunities: string;
 }
 
@@ -77,66 +76,65 @@ interface AnnualReportInitialState {
 }
 
 const initialState: AnnualReportInitialState = {
-  academicYearID: "2023-2024",
-  department: "ICT- test staff post",
-  reportsTo: "President",
-  deadline: "2024-06-30T00:00:00Z",
-  missionStatement: "To provide high-quality education in computer science.",
+  academicYearID: "",
+  department: "",
+  reportsTo: "",
+  deadline: "",
+  missionStatement: "",
   strategicGoals: {
-    currentGoals: "Increase student enrollment by 10%",
-    challenges: "Limited lab resources",
-    plans: "Upgrade computer labs",
-    upcomingGoals: "Introduce new AI courses"
+    previousAcademicYear: "",
+    plans: "",
   },
   accomplishments: {
-    accomplishmentList: "Developed new curriculum",
-    accomplishmentAdvancement: "Improved graduation rates",
-    teachingLearningImpact: "Enhanced student engagement",
-    institutionalDevelopmentImpact: "Secured industry partnerships",
-    trainingImpact: "Conducted faculty workshops",
-    nationalDevelopmentImpact: "Participated in national conferences",
-    applicableOpportunities: "Collaborated with tech companies"
+    accomplishmentList: "",
+    accomplishmentAdvancement: "",
+    teachingLearningImpact: "",
+    institutionalDevelopmentImpact: "",
+    trainingImpact: "",
+    nationalDevelopmentImpact: "",
+    why: "",
+    applicableOpportunities: ""
   },
   researchPartnerships: {
-    externalFunding: "Received $50,000 grant",
-    researchPublications: "Published 5 papers",
-    partnershipAgencies: "Partnered with XYZ Corp",
-    scholarships: "Awarded 10 scholarships"
+    externalFunding: "",
+    researchPublications: "",
+    partnershipAgencies: "",
+    scholarships: ""
   },
   studentSuccess: {
-    studentClubs: "AI Club, Coding Club",
-    studentSurveyResults: "Positive feedback on courses",
-    newInitiatives: "Launched mentorship program"
+    studentClubs: "",
+    studentSurveyResults: "",
+    newInitiatives: ""
   },
   activities: [
     {
-      eventName: "Tech Expo 2024",
+      eventName: "",
       eventPicture: [
         {
-          pictureURL: "https://example.com/pic1.jpg",
-          personsInPicture: "John Doe, Jane Smith"
+          pictureURL: "",
+          personsInPicture: ""
         }
       ],
-      eventSummary: "Showcased student projects"
+      eventSummary: ""
     }
   ],
   administrativeData: {
-    fullTimeStaff: 20,
-    partTimeStaff: 10,
-    significantStaffChanges: "Hired 2 new professors"
+    fullTimeStaff: 0,
+    partTimeStaff: 0,
+    significantStaffChanges: ""
   },
   financialBudget: {
-    fundingSources: "Government grants, private donations",
-    significantBudgetChanges: "Increased lab equipment budget"
+    fundingSources: "",
+    significantBudgetChanges: ""
   },
   meetings: [
     {
-      meetingType: "Staff Meeting",
-      meetingDate: "2024-05-15T10:00:00Z",
-      meetingMinutesURL: "https://example.com/minutes1.pdf"
+      meetingType: "",
+      meetingDate: "",
+      meetingMinutesURL: ""
     }
   ],
-  otherComments: "Looking forward to a successful academic year"
+  otherComments: ""
 };
 
 const annualReportSlice = createSlice({
@@ -158,26 +156,28 @@ const annualReportSlice = createSlice({
     setMissionStatement: (state, action: PayloadAction<string>) => {
       state.missionStatement = action.payload;
     },
-    setStrategicGoals: (state, action: PayloadAction<IStrategicGoals>) => {
-      state.strategicGoals = action.payload;
+    setStrategicGoals: (state, action: PayloadAction<Partial<IStrategicGoals>>) => {
+      state.strategicGoals = {...state.strategicGoals, ...action.payload};
     },
-    setAccomplishments: (state, action: PayloadAction<IAccomplishments>) => {
-      state.accomplishments = action.payload;
+    setAccomplishments: (state, action: PayloadAction<Partial<IAccomplishments>>) => {
+      state.accomplishments = {...state.accomplishments, ...action.payload};
     },
-    setResearchPartnerships: (state, action: PayloadAction<IResearchPartnerships>) => {
-      state.researchPartnerships = action.payload;
+    setResearchPartnerships: (state, action: PayloadAction<Partial<IResearchPartnerships>>) => {
+      state.researchPartnerships = {...state.researchPartnerships, ...action.payload};
     },
-    setStudentSuccess: (state, action: PayloadAction<IStudentSuccess>) => {
-      state.studentSuccess = action.payload;
+    setStudentSuccess: (state, action: PayloadAction<Partial<IStudentSuccess>>) => {
+      state.studentSuccess = { ...state.studentSuccess , ...action.payload }
     },
     setActivities: (state, action: PayloadAction<IActivity[]>) => {
-      state.activities = action.payload;
+      // 
+      //
+      state.activities = { ...state.activities, ...action.payload }
     },
-    setAdministrativeData: (state, action: PayloadAction<IAdministrativeData>) => {
-      state.administrativeData = action.payload;
+    setAdministrativeData: (state, action: PayloadAction<Partial<IAdministrativeData>>) => {
+      state.administrativeData = { ...state.administrativeData ,...action.payload }
     },
     setFinancialBudget: (state, action: PayloadAction<IFinancialBudget>) => {
-      state.financialBudget = action.payload;
+      state.financialBudget = { ...state.financialBudget, ...action.payload }
     },
     setMeetings: (state, action: PayloadAction<IMeeting[]>) => {
       state.meetings = action.payload;
@@ -203,8 +203,8 @@ export const {
   setFinancialBudget,
   setMeetings,
   setOtherComments,
-  setStepData,
-  setCurrentStep,
+  // setStepData,
+  // setCurrentStep,
 } = annualReportSlice.actions;
 
 export const selectAnnualReport = (state: RootState) => state.annualReport;

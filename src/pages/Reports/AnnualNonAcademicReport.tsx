@@ -9,6 +9,7 @@ import Header from '../../components/common/Header/Header';  // Import the Heade
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 // import { setCurrentStep } from '../../store/features/annualNonReportSlice';
+import { Link } from 'react-router-dom';
 
 
 const steps = [
@@ -20,16 +21,14 @@ const steps = [
 ];
 
 export const AnnualNonAcademicReport = () => {
-  const dispatch = useDispatch();
-  const currentStep = useSelector((state: RootState) => state.annualNonReport.currentStep);
   return (
- <>
+<div>
     <Header
       logo="./../icons/UB_Logo.png"
       title="UB Annual Report Template Non-Academic Division"
     />
     <UBStepper steps={steps} />
-  </>
+    </div>
   );
 };
 

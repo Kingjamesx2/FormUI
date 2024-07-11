@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import UBLogo from './../../icons/UB_Logo.png';
 
+
 interface HeaderProps {
   logo: string;
   title: string;

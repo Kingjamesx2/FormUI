@@ -6,51 +6,32 @@ import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import Box from "@mui/material/Box";
 import { UBRadioButton } from "../../../../common/UBRadioButton/UBRadioButton";
 import Stack from "@mui/material/Stack";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setAccomplishments,
+  selectAccomplishments,
+} from "../../../../../store/features/annualReportSlice";
 
 const initialState = ["", "", "", "", "", ""];
 
 export const UBAccomplishments: React.FC = () => {
+  const dispatch = useDispatch();
+  const accomplishments = useSelector(selectAccomplishments);
   const [state, setState] = useState<string[]>(initialState);
 
   const questions = [
     {
       question: "1. List significant accomplishments of the Faculty.",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[0] = value;
-          return newState;
-        });
-      },
       type: "textarea",
-      value: state[0],
     },
     {
       question:
         "2. Explain/Describe how each of the above has advanced Faculty goals as well as those of the University.",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[1] = value;
-          return newState;
-        });
-      },
       type: "textarea",
-      value: state[1],
     },
     {
       question:
         "3. Identify the most impactful change/initiative by your faculty for the academic year and give reasons why.",
-      handleSetAnswerRadio: (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[2] = value;
-          return newState;
-        });
-      },
       type: "radiobutton",
       options: [
         { value: "Teaching and Learning", label: "Teaching and Learning" },
@@ -68,34 +49,15 @@ export const UBAccomplishments: React.FC = () => {
         },
         { value: "National development", label: "National development" },
       ],
-      value: state[2],
     },
     {
       question: "",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[3] = value;
-          return newState;
-        });
-      },
       type: "textarea",
-      value: state[3],
     },
     {
       question:
         "4. What were the opportunities gained from this academic year that can be applicable to the upcoming academic year? Please be as specific as possible.",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[4] = value;
-          return newState;
-        });
-      },
       type: "textarea",
-      value: state[4],
     },
   ];
 
@@ -109,16 +71,27 @@ export const UBAccomplishments: React.FC = () => {
           key={index}
           mb={-4.7}
           sx={
-            q.question === ""
-              ? { ml: "-0.7%", mt: "-6%", width: "101.4%" }
-              : {}
+            q.question === "" ? { ml: "-0.7%", mt: "-6%", width: "101.4%" } : {}
           }
         >
           {q.type === "textarea" ? (
             <UBTextArea
               question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
+              SetAnswer={(e) =>
+                dispatch(
+                  setAccomplishments({ accomplishmentList: e.target.value}),
+                  setAccomplishments({ accomplishmentAdvancement: e.target.value }),
+                  setAccomplishments({ teachingLearningImpact: e.target.value }),                   setAccomplishments({ accomplishmentAdvancement: e.target.value }),                  setAccomplishments({ accomplishmentAdvancement: e.target.value }),
+                  setAccomplishments({ institutionalDevelopmentImpact: e.target.value }),                  setAccomplishments({ accomplishmentAdvancement: e.target.value }),
+                  setAccomplishments({ trainingImpact: e.target.value }),                  setAccomplishments({ accomplishmentAdvancement: e.target.value }),
+                  setAccomplishments({ nationalDevelopmentImpact: e.target.value }),                  setAccomplishments({ accomplishmentAdvancement: e.target.value }),
+                  setAccomplishments({ why: e.target.value }),                 
+                  setAccomplishments({ applicableOpportunities: e.target.value }),
+                )
+              }
+              value={accomplishments.accomplishmentList}
+
+              // value={strategicGoals.plans}
             />
           ) : q.type === "dropdown" ? (
             <UbDropdown

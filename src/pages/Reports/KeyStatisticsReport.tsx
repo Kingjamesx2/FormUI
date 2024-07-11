@@ -5,6 +5,7 @@ import { KeyStatisticsReportStep2 } from "../../components/reports/annual/KeySta
 import { KeyStatisticsReportStep3 } from "../../components/reports/annual/KeyStatisticsReport/Step3/KeyStatisticsReportStep3";
 import { KeyStatisticsReportStep4 } from "../../components/reports/annual/KeyStatisticsReport/Step4/KeyStatisticsReportStep4";
 import Header from '../../components/common/Header/Header';  // Import the Header component
+import { Link } from 'react-router-dom';
 
 
 const steps = [
@@ -17,13 +18,13 @@ const steps = [
 
 export const KeyStatisticsReport: React.FC = () => {
   return (
-  <>
+  <Link to="/">
     <Header
       logo="./../icons/UB_Logo.png"
       title="University of Belize Key Statistics Template "
     />
     <UBStepper steps={steps} />
-  </>
+  </Link>
   );
 };
 export default KeyStatisticsReport;
