@@ -4,22 +4,33 @@ import { UBTextArea } from "../../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
 import UBInfoTable from "../../../../../common/UBInfoTable/UBInfoTable";
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from "../../../../../../store/store";
+import { setIncome } from "../../../../../../store/features/KeyStatisticsreportSlice/financeReportSlice";
 
 const initialState = ["", "", ""];
 
 const columns = ['8. Finance-Income Bz$', ''];
 const initialRows = [
-  { degree: 'Funding from the Government of Belize', '': ''},
-  { degree: 'Tuition Fees', '': ''},
-  { degree: 'Contracts', '': ''},
-  { degree: 'Research Grants', '': ''},
-  { degree: 'Endowment and Investment Income', '': ''},
-  { degree: 'Other', '': ''},
+  { degree: 'Funding from the Government of Belize', '': '' },
+  { degree: 'Tuition Fees', '': '' },
+  { degree: 'Contracts', '': '' },
+  { degree: 'Research Grants', '': '' },
+  { degree: 'Endowment and Investment Income', '': '' },
+  { degree: 'Other', '': '' },
 ];
 
 export const UBFinanceIncome: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
   const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Academic Level)");
+
+  const dispatch = useDispatch();
+  const { income } = useSelector((state: RootState) => state.finance);
+
+  const handleSetAnswer = (value: any) => {
+    dispatch(setIncome(value));
+  };
+
 
   const questions = [
     {
@@ -36,7 +47,7 @@ export const UBFinanceIncome: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3 style={{ margin: "5% 0 -2% 0"}}><center>III. Finance and Budget Statistics</center></h3>
+      <h3 style={{ margin: "5% 0 -2% 0" }}><center>III. Finance and Budget Statistics</center></h3>
       {/* <Box sx={{ mt: "10%", width: "70%", ml: "15%", mb: "-30px" }}>
         {enrollmentTrend}
       </Box> */}

@@ -8,7 +8,7 @@ import AnnualAcademicReportStep5 from "../../components/reports/annual/annual-ac
 import Header from '../../components/common/Header/Header';  // Import the Header component
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { setCurrentStep } from '../../store/features/annualReportSlice';
+// import { setCurrentStep } from '../../store/features/annualReportSlice';
 
 
 const steps = [
