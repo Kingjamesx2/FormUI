@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React  from "react";
 import Container from "@mui/material/Container";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import Box from "@mui/material/Box";
@@ -8,12 +8,12 @@ import {
   selectStrategicGoals,
 } from "../../../../../store/features/annualReportSlice";
 
-const initialState = ["", "", "", ""];
+// const initialState = ["", "", "", ""];
 
 export const UBStrategicGoals: React.FC = () => {
   const dispatch = useDispatch();
   const strategicGoals = useSelector(selectStrategicGoals);
-  const [state, setState] = useState<string[]>(initialState);
+  // const [state, setState] = useState<string[]>(initialState);
 
   return (
     <Container sx={{ width: 1, m: "auto", p: 1 }}>

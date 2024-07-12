@@ -38,14 +38,37 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({ columns, initialRows }
   const [rows, setRows] = useState<IUBTableData[]>([...initialRows]);
 
   const handleInputChange = (degree: string, column: string, value: string) => {
-    const newValue = parseFloat(value);
+    const newValue = parseFloat(value)
     console.log('change input change .... ')
+
     if (newValue >= 0) {
       const updatedRows = rows.map((row) =>
         row.degree === degree ? { ...row, [column]: value } : row
       );
       setRows(updatedRows);
-      console.log(updatedRows)
+      console.info(updatedRows)
+
+      const _rows = [{
+        academicYear: "2021/2022",
+        associate: updatedRows[0]['2021/2022'],
+        undergraduate: updatedRows[1]['2021/2022'],
+        graduate: updatedRows[2]['2021/2022'],
+        other: updatedRows[3]['2021/2022']
+      }, {
+        academicYear: "2022/2023",
+        associate: updatedRows[0]['2022/2023'],
+        undergraduate: updatedRows[1]['2022/2023'],
+        graduate: updatedRows[2]['2022/2023'],
+        other: updatedRows[3]['2022/2023']
+      }, {
+        academicYear: "2023/2024",
+        associate: updatedRows[0]["2023/2024"],
+        undergraduate: updatedRows[1]["2023/2024"],
+        graduate: updatedRows[2]["2023/2024"],
+        other: updatedRows[3]['2023/2024']
+      }]
+
+      console.log(_rows)
     }
   };
 

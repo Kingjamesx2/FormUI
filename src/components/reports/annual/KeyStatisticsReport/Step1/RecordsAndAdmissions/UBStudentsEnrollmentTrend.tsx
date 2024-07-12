@@ -5,6 +5,7 @@ import { UBTextArea } from "../../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
 import UBInfoTable from "../../../../../common/UBInfoTable/UBInfoTable";
+import { RootState } from "../../../../../../store/store";
 import { selectStudentEnrollmentTrend, setStudentEnrollmentTrend } from ".././../../../../../store/features/KeyStatisticsreportSlice/recordsReportSlice"
 
 const initialState = ["", "", ""];
@@ -19,10 +20,21 @@ const initialRows = [
 
 export const UBStudentsEnrollmentTrend: React.FC = () => {
   const dispatch = useDispatch();
-  const StudentEnrollmentTrend =  useSelector(selectStudentEnrollmentTrend)
+  const  studentEnrollmentTrend  =  ((state:RootState) => state.recordsReport.studentEnrollmentTrend)
+
+  const handleSetAnswer = (value: any) => {
+    dispatch(setStudentEnrollmentTrend(value));
+  };
+
+
 
   const [state, setState] = useState<string[]>(initialState);
   const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Per Faculty)");
+
+
+  
+
+
 
   const questions = [
     {
@@ -68,7 +80,7 @@ export const UBStudentsEnrollmentTrend: React.FC = () => {
               key={index}
               columns={columns}
               initialRows={initialRows}
-              handleSetValue={(e) => dispatch(setStudentEnrollmentTrend(e.target.value as string)) }
+              SetValue={q.handleSetAnswer}
 
             />
           );

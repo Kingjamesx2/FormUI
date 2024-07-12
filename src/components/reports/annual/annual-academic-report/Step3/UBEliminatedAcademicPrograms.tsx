@@ -1,65 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 import Container from "@mui/material/Container";
-import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
-import UbDropdown from "../../../../UbDropdown/UbDropdown";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setEliminatedAcademicProgram,
+  selectEliminatedAcademicProgram,
+} from "../../../../../store/features/annualReportSlice";
 
-const initialState = [""];
+// const initialState = [""];
 
 export const UBEliminatedAcademicPrograms: React.FC = () => {
-  const [state, setState] = useState<string[]>(initialState);
+  const dispatch = useDispatch();
+  const eliminatedAcademicPrograms = useSelector(
+    selectEliminatedAcademicProgram
+  );
 
-  const questions = [
-    {
-      question: "1. List eliminated academic programs",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const value = e.target.value;
-        console.log(e.target.value);
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[0] = value;
-          return newState;
-        });
-      },
-      type: "textarea",
-      value: state[0],
-    },
-
-  ];
+  // const [state, setState] = useState<string[]>(initialState);
 
   return (
-      <Container sx={{ width: 1, m: 1, p: 1 }}>
-        <h3 style={{ marginTop: "5%", marginBottom: "-3%"}}><center>List eliminated academic programs</center></h3>
-        {questions.map((q, index) => {
-          if (q.type === "textarea") {
-            return (
-              <UBTextArea
-                key={index}
-                question={q.question}
-                SetAnswer={q.handleSetAnswer}
-                value={q.value}
-              />
-            );
-          } else if (q.type === "dropdown") {
-            return (
-              <UbDropdown
-                label={q.question}
-                options={q.options}
-                handleSetValue={q.handleSetAnswer}
-                value={q.value}
-              />
-            );
-          } else if (q.type === "input") {
-            return (
-              <UBTextField
-                key={index}
-                question={q.question}
-                SetAnswer={q.handleSetAnswer}
-                value={q.value}
-              />
-            );
-          }
-        })}
-      </Container>
+    <Container sx={{ width: 1, m: 1, p: 1 }}>
+      <h3 style={{ marginTop: "5%", marginBottom: "-3%" }}>
+        <center>List eliminated academic programs</center>
+      </h3>
+      <UBTextArea
+        question="1. List eliminated academic programs"
+        SetAnswer={(e) => dispatch(setEliminatedAcademicProgram(e.target.value))}
+        value={eliminatedAcademicPrograms}
+      />
+    </Container>
   );
 };

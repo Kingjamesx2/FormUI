@@ -4,60 +4,18 @@ import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import Box from "@mui/material/Box";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setAdministrativeData,
+  selectAdministrativeData,
+} from "../../../../../store/features/annualReportSlice";
 
 const initialState = ["", "", ""];
 
 export const UBAdministrativeDepartmentData: React.FC = () => {
+  const dispatch = useDispatch();
+  const administrativeData = useSelector(selectAdministrativeData);
   const [state, setState] = useState<string[]>(initialState);
-
-  const questions = [
-    {
-      question: "a. List number of full-time staff",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const value = e.target.value;
-        console.log(e.target.value);
-        if (/^\d*$/.test(value)) {
-          setState((prevState) => {
-            const newState = [...prevState];
-            newState[0] = value;
-            return newState;
-          });
-        }
-      },
-      type: "input",
-      value: state[0],
-    },
-    {
-      question: "b. List number of part-time staf",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const value = e.target.value;
-        console.log(e.target.value);
-        if (/^\d*$/.test(value)) {
-          setState((prevState) => {
-            const newState = [...prevState];
-            newState[1] = value;
-            return newState;
-          });
-        }
-      },
-      type: "input",
-      value: state[1],
-    },
-    {
-      question: "c. Has there been significant change/s in staffing?",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const value = e.target.value;
-        console.log(e.target.value);
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[2] = value;
-          return newState;
-        });
-      },
-      type: "input",
-      value: state[2],
-    },
-  ];
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
@@ -66,30 +24,40 @@ export const UBAdministrativeDepartmentData: React.FC = () => {
           Administrative Department Data (Inclusive of the Head of Department)
         </center>
       </h3>
-      {questions.map((q, index) => (
-        <Box key={index} mb={"-4.8%"}>
-          {q.type === "textarea" ? (
-            <UBTextArea
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
-          ) : q.type === "dropdown" ? (
-            <UbDropdown
-              label={q.question}
-              options={q.options}
-              handleSetValue={q.handleSetAnswer}
-              value={q.value}
-            />
-          ) : (
-            <UBTextField
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
-          )}
-        </Box>
-      ))}
+
+      <Box mb={"-4.8%"}>
+        <UBTextField
+          question="a. List number of full-time staff"
+          SetAnswer={(e) =>
+            dispatch(setAdministrativeData({ fullTimeStaff: e.target.value }))
+          }
+          value={administrativeData.fullTimeStaff}
+        />
+      </Box>
+
+      <Box mb={"-4.8%"}>
+        <UBTextField
+          question="b. List number of part-time staff"
+          SetAnswer={(e) =>
+            dispatch(setAdministrativeData({ partTimeStaff: e.target.value }))
+          }
+          value={administrativeData.partTimeStaff}
+        />
+      </Box>
+
+      <Box mb={"-4.8%"}>
+        <UBTextField
+          question="c. Has there been significant change/s in staffing?"
+          SetAnswer={(e) =>
+            dispatch(
+              setAdministrativeData({ significantStaffChanges: e.target.value })
+            )
+          }
+          value={administrativeData.significantStaffChanges}
+        />
+      </Box>
     </Container>
   );
 };
+
+export default UBAdministrativeDepartmentData;

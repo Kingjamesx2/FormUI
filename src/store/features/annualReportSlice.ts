@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store'; // Adjust the path according to your project structure
+import { number, string } from 'prop-types';
 
 interface IStrategicGoals {
   previousAcademicYear: string;
@@ -26,9 +27,15 @@ interface IResearchPartnerships {
 }
 
 interface IStudentSuccess {
-  studentClubs: string;
-  studentSurveyResults: string;
-  newInitiatives: string;
+    studentLearning: string;
+    studentClubs: string;
+    student1:string;
+    reason1: string;
+    student2: string;
+    reason2: string;
+    student3: string;
+    reason3: string;
+
 }
 
 interface IEventPicture {
@@ -51,7 +58,7 @@ interface IAdministrativeData {
 
 interface IFinancialBudget {
   fundingSources: string;
-  significantBudgetChanges: string;
+  impactfulChanges: string;
 }
 
 interface IMeeting {
@@ -66,6 +73,24 @@ interface IRevisedAcademics {
   revisedPrograms: string;
 }
 
+interface ICourse {
+  totalNewCourses: number | null,
+  totalCoursesOnline: number,
+  totalCourseFaceToFace: number,
+}
+
+interface IRetentionOfStudents {
+  currentStudents: string;
+  transferStudents: string;
+}
+
+interface IDegreesConferred {
+  degreesConferredForMostRecentAcademicYear: number;
+  degreesConferredForMostRecentAcademicYearPerDepartment: number;
+}
+
+
+
 interface AnnualReportInitialState {
   academicYearID: string;
   department: string;
@@ -76,6 +101,11 @@ interface AnnualReportInitialState {
   accomplishments: IAccomplishments;
   researchPartnerships: IResearchPartnerships;
   revisedAcademics: IRevisedAcademics;
+  course: ICourse;
+  eliminatedAcademicPrograms: string;
+  retentionOfStudents: IRetentionOfStudents;
+  studentIntership: string;
+  degreesConferred: IDegreesConferred;
   studentSuccess: IStudentSuccess;
   activities: IActivity[];
   administrativeData: IAdministrativeData;
@@ -116,11 +146,30 @@ const initialState: AnnualReportInitialState = {
     newProgrammesAdded: "",
     revisedPrograms: "",
   },
-
+  course: {
+    totalNewCourses: null,
+    totalCoursesOnline: 5,
+    totalCourseFaceToFace: 0,
+  },
+  eliminatedAcademicPrograms: "",
+  retentionOfStudents: {
+    currentStudents: "",
+    transferStudents: "",
+  },
+  studentIntership: "",
+  degreesConferred: {
+    degreesConferredForMostRecentAcademicYear: 0,
+    degreesConferredForMostRecentAcademicYearPerDepartment: 0,
+  },
   studentSuccess: {
+    studentLearning: "",
     studentClubs: "",
-    studentSurveyResults: "",
-    newInitiatives: ""
+    student1: "",
+    reason1: "",
+    student2: "",
+    reason2: "",
+    student3: "",
+    reason3: "",
   },
   activities: [
     {
@@ -141,7 +190,7 @@ const initialState: AnnualReportInitialState = {
   },
   financialBudget: {
     fundingSources: "",
-    significantBudgetChanges: ""
+    impactfulChanges: "",
   },
   meetings: [
     {
@@ -181,9 +230,25 @@ const annualReportSlice = createSlice({
     setResearchPartnerships: (state, action: PayloadAction<Partial<IResearchPartnerships>>) => {
       state.researchPartnerships = { ...state.researchPartnerships, ...action.payload };
     },
-
     setRevisedAcademics: (state, action: PayloadAction<Partial<IRevisedAcademics>>) => {
       state.revisedAcademics = { ...state.revisedAcademics, ...action.payload };
+    },
+    setCourse: (state, action: PayloadAction<Partial<ICourse>>) => {
+      state.course = { ...state.course, ...action.payload };
+    },
+    
+    setEliminatedAcademicProgram: (state, action: PayloadAction<string>) => {
+      state.eliminatedAcademicPrograms =  action.payload ;
+    },
+
+    setRetentionOfStudents: (state, action: PayloadAction<Partial<IRetentionOfStudents>>) => {
+      state.retentionOfStudents = {...state.retentionOfStudents,  ...action.payload };
+    },
+    setStudentIntership: (state, action: PayloadAction<string>) => {
+      state.studentIntership = action.payload ;
+    },
+    setDegreesConferred: (state, action: PayloadAction<Partial<IDegreesConferred>>) => {
+      state.degreesConferred = {...state.degreesConferred,  ...action.payload };
     },
 
     setStudentSuccess: (state, action: PayloadAction<Partial<IStudentSuccess>>) => {
@@ -219,6 +284,11 @@ export const {
   setAccomplishments,
   setResearchPartnerships,
   setRevisedAcademics,
+  setCourse,
+  setEliminatedAcademicProgram,
+  setRetentionOfStudents,
+  setStudentIntership,
+  setDegreesConferred,
   setStudentSuccess,
   setActivities,
   setAdministrativeData,
@@ -238,6 +308,11 @@ export const selectStrategicGoals = (state: RootState) => state.annualReport.str
 export const selectAccomplishments = (state: RootState) => state.annualReport.accomplishments;
 export const selectResearchPartnerships = (state: RootState) => state.annualReport.researchPartnerships;
 export const selectRevisedAcademics = (state: RootState) => state.annualReport.revisedAcademics;
+export const selectCourse = (state: RootState) => state.annualReport.course;
+export const selectEliminatedAcademicProgram = (state: RootState) => state.annualReport.eliminatedAcademicPrograms;
+export const selectRetentionOfStudents = (state: RootState) => state.annualReport.retentionOfStudents;
+export const selectStudentInternship = (state: RootState) => state.annualReport.studentIntership;
+export const selectDegreesConferred = (state: RootState) => state.annualReport.degreesConferred;
 export const selectStudentSuccess = (state: RootState) => state.annualReport.studentSuccess;
 export const selectActivities = (state: RootState) => state.annualReport.activities;
 export const selectAdministrativeData = (state: RootState) => state.annualReport.administrativeData;

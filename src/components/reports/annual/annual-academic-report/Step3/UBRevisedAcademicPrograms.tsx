@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
-import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
 import { setRevisedAcademics, selectRevisedAcademics } from '../../../../../store/features/annualReportSlice';
@@ -12,7 +11,7 @@ const initialState = ["", "", ""];
 export const UBRevisedAcademicPrograms: React.FC = () => {
   const dispatch = useDispatch();
   const revisedAcademicsProgram = useSelector(selectRevisedAcademics);
-  const [state, setState] = useState<string[]>(initialState);
+  // const [state, setState] = useState<string[]>(initialState);
 
   return (
     <div>

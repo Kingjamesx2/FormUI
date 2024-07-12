@@ -5,6 +5,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
+import { number } from "prop-types";
 
 interface IUBTextField extends InputHTMLAttributes<HTMLInputElement> {
   question?: string;

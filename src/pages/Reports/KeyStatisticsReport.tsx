@@ -18,13 +18,13 @@ const steps = [
 
 export const KeyStatisticsReport: React.FC = () => {
   return (
-  <Link to="/">
+  <div>
     <Header
       logo="./../icons/UB_Logo.png"
       title="University of Belize Key Statistics Template "
     />
     <UBStepper steps={steps} />
-  </Link>
+    </div>
   );
 };
 export default KeyStatisticsReport;

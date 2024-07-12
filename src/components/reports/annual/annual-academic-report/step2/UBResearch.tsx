@@ -10,7 +10,7 @@ const initialState = ["", "", "", "", ""];
 export const UBresearch: React.FC = () => {
   const dispatch = useDispatch();
   const researchPartnerships = useSelector(selectResearchPartnerships);
-  const [state, setState] = useState<string[]>(initialState);
+  // const [state, setState] = useState<string[]>(initialState);
 
   return (
     <Container sx={{ width: 1, m: 1, mb: "100px", p: 1 }}>
