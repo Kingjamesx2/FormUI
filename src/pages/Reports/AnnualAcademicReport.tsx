@@ -26,13 +26,13 @@ export const AnnualAcademicReport: React.FC = () => {
 
 
   return (
-    <Link to="/">
+    <div>
       <Header
         logo="./../icons/UB_Logo.png"
         title="UB Annual Report Template Academic Division"
       />
       <UBStepper steps={steps} />
-    </Link>
+      </div>
   );
 };
 

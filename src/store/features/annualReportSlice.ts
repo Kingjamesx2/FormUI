@@ -9,10 +9,11 @@ interface IStrategicGoals {
 interface IAccomplishments {
   accomplishmentList: string;
   accomplishmentAdvancement: string;
-  teachingLearningImpact: string;
-  institutionalDevelopmentImpact: string;
-  trainingImpact: string;
-  nationalDevelopmentImpact: string;
+  multipleChoice: string;
+  // teachingLearningImpact: string;
+  // institutionalDevelopmentImpact: string;
+  // trainingImpact: string;
+  // nationalDevelopmentImpact: string;
   why: string;
   applicableOpportunities: string;
 }
@@ -41,6 +42,7 @@ interface IActivity {
   eventSummary: string;
 }
 
+
 interface IAdministrativeData {
   fullTimeStaff: number;
   partTimeStaff: number;
@@ -58,6 +60,12 @@ interface IMeeting {
   meetingMinutesURL: string;
 }
 
+interface IRevisedAcademics {
+  programsOffered: number;
+  newProgrammesAdded: string;
+  revisedPrograms: string;
+}
+
 interface AnnualReportInitialState {
   academicYearID: string;
   department: string;
@@ -67,6 +75,7 @@ interface AnnualReportInitialState {
   strategicGoals: IStrategicGoals;
   accomplishments: IAccomplishments;
   researchPartnerships: IResearchPartnerships;
+  revisedAcademics: IRevisedAcademics;
   studentSuccess: IStudentSuccess;
   activities: IActivity[];
   administrativeData: IAdministrativeData;
@@ -88,10 +97,11 @@ const initialState: AnnualReportInitialState = {
   accomplishments: {
     accomplishmentList: "",
     accomplishmentAdvancement: "",
-    teachingLearningImpact: "",
-    institutionalDevelopmentImpact: "",
-    trainingImpact: "",
-    nationalDevelopmentImpact: "",
+    multipleChoice: "",
+    // teachingLearningImpact: "",
+    // institutionalDevelopmentImpact: "",
+    // trainingImpact: "",
+    // nationalDevelopmentImpact: "",
     why: "",
     applicableOpportunities: ""
   },
@@ -101,6 +111,12 @@ const initialState: AnnualReportInitialState = {
     partnershipAgencies: "",
     scholarships: ""
   },
+  revisedAcademics: {
+    programsOffered: 0,
+    newProgrammesAdded: "",
+    revisedPrograms: "",
+  },
+
   studentSuccess: {
     studentClubs: "",
     studentSurveyResults: "",
@@ -157,16 +173,21 @@ const annualReportSlice = createSlice({
       state.missionStatement = action.payload;
     },
     setStrategicGoals: (state, action: PayloadAction<Partial<IStrategicGoals>>) => {
-      state.strategicGoals = {...state.strategicGoals, ...action.payload};
+      state.strategicGoals = { ...state.strategicGoals, ...action.payload };
     },
     setAccomplishments: (state, action: PayloadAction<Partial<IAccomplishments>>) => {
-      state.accomplishments = {...state.accomplishments, ...action.payload};
+      state.accomplishments = { ...state.accomplishments, ...action.payload };
     },
     setResearchPartnerships: (state, action: PayloadAction<Partial<IResearchPartnerships>>) => {
-      state.researchPartnerships = {...state.researchPartnerships, ...action.payload};
+      state.researchPartnerships = { ...state.researchPartnerships, ...action.payload };
     },
+
+    setRevisedAcademics: (state, action: PayloadAction<Partial<IRevisedAcademics>>) => {
+      state.revisedAcademics = { ...state.revisedAcademics, ...action.payload };
+    },
+
     setStudentSuccess: (state, action: PayloadAction<Partial<IStudentSuccess>>) => {
-      state.studentSuccess = { ...state.studentSuccess , ...action.payload }
+      state.studentSuccess = { ...state.studentSuccess, ...action.payload }
     },
     setActivities: (state, action: PayloadAction<IActivity[]>) => {
       // 
@@ -174,7 +195,7 @@ const annualReportSlice = createSlice({
       state.activities = { ...state.activities, ...action.payload }
     },
     setAdministrativeData: (state, action: PayloadAction<Partial<IAdministrativeData>>) => {
-      state.administrativeData = { ...state.administrativeData ,...action.payload }
+      state.administrativeData = { ...state.administrativeData, ...action.payload }
     },
     setFinancialBudget: (state, action: PayloadAction<IFinancialBudget>) => {
       state.financialBudget = { ...state.financialBudget, ...action.payload }
@@ -197,14 +218,13 @@ export const {
   setStrategicGoals,
   setAccomplishments,
   setResearchPartnerships,
+  setRevisedAcademics,
   setStudentSuccess,
   setActivities,
   setAdministrativeData,
   setFinancialBudget,
   setMeetings,
   setOtherComments,
-  // setStepData,
-  // setCurrentStep,
 } = annualReportSlice.actions;
 
 export const selectAnnualReport = (state: RootState) => state.annualReport;
@@ -217,13 +237,12 @@ export const selectMissionStatement = (state: RootState) => state.annualReport.m
 export const selectStrategicGoals = (state: RootState) => state.annualReport.strategicGoals;
 export const selectAccomplishments = (state: RootState) => state.annualReport.accomplishments;
 export const selectResearchPartnerships = (state: RootState) => state.annualReport.researchPartnerships;
+export const selectRevisedAcademics = (state: RootState) => state.annualReport.revisedAcademics;
 export const selectStudentSuccess = (state: RootState) => state.annualReport.studentSuccess;
 export const selectActivities = (state: RootState) => state.annualReport.activities;
 export const selectAdministrativeData = (state: RootState) => state.annualReport.administrativeData;
 export const selectFinancialBudget = (state: RootState) => state.annualReport.financialBudget;
 export const selectMeetings = (state: RootState) => state.annualReport.meetings;
 export const selectOtherComments = (state: RootState) => state.annualReport.otherComments;
-
-// export const { setStepData, setCurrentStep } = annualReportSlice.actions;
 
 export default annualReportSlice.reducer;

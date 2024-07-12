@@ -4,57 +4,15 @@ import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import Box from "@mui/material/Box";
+import { useSelector, useDispatch } from "react-redux";
+import { setRevisedAcademics, selectRevisedAcademics } from '../../../../../store/features/annualReportSlice';
 
 const initialState = ["", "", ""];
 
 export const UBRevisedAcademicPrograms: React.FC = () => {
+  const dispatch = useDispatch();
+  const revisedAcademicsProgram = useSelector(selectRevisedAcademics);
   const [state, setState] = useState<string[]>(initialState);
-
-  const questions = [
-    {
-      question: "1. List total number of programs offered at the Faculty (inclusive of certificates, major, minors)",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        if (/^\d*$/.test(value)) {
-          setState((prevState) => {
-            const newState = [...prevState];
-            newState[0] = value;
-            return newState;
-          });
-        }
-      },
-      type: "input",
-      value: state[0],
-    },
-    {
-      question:
-        "2. List new programmes added to the Faculty (inclusive of graduate programs)",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const value = e.target.value;
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[1] = value;
-          return newState;
-        });
-      },
-      type: "textarea",
-      value: state[1],
-    },
-    {
-      question:
-        "3. List revised programmes added to the Faculty (inclusive of graduate programs)",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const value = e.target.value;
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[2] = value;
-          return newState;
-        });
-      },
-      type: "textarea",
-      value: state[2],
-    },
-  ];
 
   return (
     <div>
@@ -62,33 +20,40 @@ export const UBRevisedAcademicPrograms: React.FC = () => {
         <h3 style={{ marginBottom: "5%", marginTop: "60px" }}>
           <center>Number of new and revised academic programs</center>
         </h3>
-        {questions.map((q, index) => (
-          <Box key={index} mb={-4.7}>
-            {q.type === "textarea" ? (
-              <UBTextArea
-                question={q.question}
-                SetAnswer={q.handleSetAnswer}
-                value={q.value}
-              />
-            ) : q.type === "dropdown" ? (
-              <UbDropdown
-                label={q.question}
-                options={q.options}
-                handleSetValue={q.handleSetAnswer}
-                value={q.value}
-              />
-            ) : (
-              <Box sx={{ mb: "-5%", mt: "-30px" }}>
-                <UBTextField
-                  question={q.question}
-                  SetAnswer={q.handleSetAnswer}
-                  value={q.value}
-                />
-              </Box>
-            )}
-          </Box>
-        ))}
+        
+        <Box mb={-4.7}>
+          <UBTextField
+            question="1. List total number of programs offered at the Faculty (inclusive of certificates, major, minors)"
+            SetAnswer={(e) =>
+              dispatch(setRevisedAcademics({ programsOffered: e.target.value}))
+            }
+            value={revisedAcademicsProgram.programsOffered} 
+          />
+        </Box>
+        
+        <Box mb={-4.7}>
+          <UBTextArea
+            question="2. List new programmes added to the Faculty (inclusive of graduate programs)"
+            SetAnswer={(e) =>
+              dispatch(setRevisedAcademics({ newProgrammesAdded: e.target.value }))
+            }
+            value={revisedAcademicsProgram.newProgrammesAdded}
+          />
+        </Box>
+        
+        <Box mb={-4.7}>
+          <UBTextArea
+            question="3. List revised programmes added to the Faculty (inclusive of graduate programs)"
+            SetAnswer={(e) =>
+              dispatch(setRevisedAcademics({ revisedPrograms: e.target.value }))
+            }
+            value={revisedAcademicsProgram.revisedPrograms}
+          />
+        </Box>
+        
       </Container>
     </div>
   );
 };
+
+export default UBRevisedAcademicPrograms;
