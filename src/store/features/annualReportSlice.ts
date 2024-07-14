@@ -255,8 +255,6 @@ const annualReportSlice = createSlice({
       state.studentSuccess = { ...state.studentSuccess, ...action.payload }
     },
     setActivities: (state, action: PayloadAction<IActivity[]>) => {
-      // 
-      //
       state.activities = { ...state.activities, ...action.payload }
     },
     setAdministrativeData: (state, action: PayloadAction<Partial<IAdministrativeData>>) => {

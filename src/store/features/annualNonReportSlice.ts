@@ -2,19 +2,21 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './../store'; // Adjust the import according to your store file location
 
 interface IStrategicGoals {
-  currentGoals: string;
-  challenges: string;
-  plans: string;
-  upcomingGoals: string;
+    strategicGoalsUnderReview: string;
+    implmentationPlans: string;
+    plansToAchieveNotCompletedGoals: string;
+    strategicGoals: string;
 }
 
 interface IAccomplishments {
   accomplishmentList: string;
   accomplishmentAdvancement: string;
-  teachingLearningImpact: string;
-  institutionalDevelopmentImpact: string;
-  trainingImpact: string;
-  nationalDevelopmentImpact: string;
+  impactfulChange: string;
+  // teachingLearningImpact: string;
+  // institutionalDevelopmentImpact: string;
+  // trainingImpact: string;
+  // nationalDevelopmentImpact: string;
+  why: string;
   applicableOpportunities: string;
 }
 
@@ -26,10 +28,16 @@ interface IResearchPartnerships {
 }
 
 interface IStudentSuccess {
+  studentLearning: string;
   studentClubs: string;
-  studentSurveyResults: string;
-  newInitiatives: string;
+  student1:string;
+  reason1: string;
+  student2: string;
+  reason2: string;
+  student3: string;
+  reason3: string;
 }
+
 
 interface IEventPicture {
   pictureURL: string;
@@ -83,19 +91,18 @@ const initialState: annualNonReportInitialState = {
   deadline: "",
   missionStatement: "",
   strategicGoals: {
-      currentGoals: "",
-      challenges: "",
-      plans: "",
-      upcomingGoals: ""
+    strategicGoalsUnderReview: "",
+    implmentationPlans: "",
+    plansToAchieveNotCompletedGoals: "",
+    strategicGoals: ""
+
   },
   accomplishments: {
-      accomplishmentList: "",
-      accomplishmentAdvancement: "",
-      teachingLearningImpact: "",
-      institutionalDevelopmentImpact: "",
-      trainingImpact: "",
-      nationalDevelopmentImpact: "",
-      applicableOpportunities: ""
+    accomplishmentList: "",
+    accomplishmentAdvancement: "",
+    impactfulChange: "",
+    why: "",
+    applicableOpportunities: "",
   },
   researchPartnerships: {
       externalFunding: "",
@@ -104,9 +111,14 @@ const initialState: annualNonReportInitialState = {
       scholarships: ""
   },
   studentSuccess: {
-      studentClubs: "",
-      studentSurveyResults: "",
-      newInitiatives: ""
+    studentLearning: "",
+    studentClubs: "",
+    student1: "",
+    reason1: "",
+    student2: "",
+    reason2: "",
+    student3: "",
+    reason3: "",
   },
   activities: [
       {
@@ -159,33 +171,33 @@ const annualNonReportSlice = createSlice({
     setMissionStatement: (state, action: PayloadAction<string>) => {
       state.missionStatement = action.payload;
     },
-    setStrategicGoals: (state, action: PayloadAction<IStrategicGoals>) => {
-      state.strategicGoals = action.payload;
+    setStrategicGoals: (state, action: PayloadAction<Partial<IStrategicGoals>>) => {
+      state.strategicGoals = { ...state.strategicGoals, ...action.payload };
     },
-    setAccomplishments: (state, action: PayloadAction<IAccomplishments>) => {
-      state.accomplishments = action.payload;
+    setAccomplishments: (state, action: PayloadAction<Partial<IAccomplishments>>) => {
+      state.accomplishments = { ...state.accomplishments, ...action.payload };
     },
-    setResearchPartnerships: (state, action: PayloadAction<IResearchPartnerships>) => {
-      state.researchPartnerships = action.payload;
+    setResearchPartnerships: (state, action: PayloadAction<Partial<IResearchPartnerships>>) => {
+      state.researchPartnerships = { ...state.researchPartnerships, ...action.payload };
     },
-    setStudentSuccess: (state, action: PayloadAction<IStudentSuccess>) => {
-      state.studentSuccess = action.payload;
+    setStudentSuccess: (state, action: PayloadAction<Partial<IStudentSuccess>>) => {
+      state.studentSuccess = {...state.studentSuccess, ...action.payload };
     },
     setActivities: (state, action: PayloadAction<IActivity[]>) => {
       state.activities = action.payload;
     },
-    setAdministrativeData: (state, action: PayloadAction<IAdministrativeData>) => {
-      state.administrativeData = action.payload;
+    setAdministrativeData: (state, action: PayloadAction<Partial<IAdministrativeData>>) => {
+      state.administrativeData = { ...state.administrativeData, ...action.payload }
     },
     setFinancialBudget: (state, action: PayloadAction<IFinancialBudget>) => {
-      state.financialBudget = action.payload;
+      state.financialBudget = { ...state.financialBudget, ...action.payload }
     },
     setMeetings: (state, action: PayloadAction<IMeeting[]>) => {
       state.meetings = action.payload;
     },
     setOtherComments: (state, action: PayloadAction<string>) => {
       state.otherComments = action.payload;
-    }
+    },
   },
 });
 

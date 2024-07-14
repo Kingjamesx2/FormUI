@@ -22,7 +22,6 @@ import UbLogo from "../../components/icons/UB_Logo.png";
 import FormCard from "../../components/common/Card/FormCard";
 import SelectAutoWidth from "../../components/SelectAutoWidth/SelectAutoWidth";
 import { Link } from "react-router-dom";
-import { Router } from "react-router-dom";
 
 const drawerWidth: number = 240;
 
@@ -196,9 +195,6 @@ export const Dashboard: React.FC = () => {
                     <Typography variant="body1">
                       <b>Form</b>
                     </Typography>
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={4}>
-                    <SelectAutoWidth />
                   </Grid>
                 </Grid>
               </Grid>
