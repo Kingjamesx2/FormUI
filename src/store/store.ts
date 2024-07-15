@@ -4,7 +4,9 @@ import annualReportReducer from './features/annualReportSlice';
 import annualNonReportReducer from './features/annualNonReportSlice';
 import recordsReportReducer from "./features/KeyStatisticsreportSlice/recordsReportSlice";
 import hrReportReducer from "./features/KeyStatisticsreportSlice/HRReportSlice";
-import financeReportReduce from "./features/KeyStatisticsreportSlice/financeReportSlice"
+import financeReportReduce from "./features/KeyStatisticsreportSlice/financeReportSlice";
+import authReducer from "./../store/features/authSlice";
+import userReducer from "./../store/features/authSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,13 +15,14 @@ export const store = configureStore({
     recordsReport: recordsReportReducer,
     hrReport: hrReportReducer,
     financeReport: financeReportReduce,
-
-    // statisticReport: KeyStatisticsReport,
+    auth: authReducer,
+    user: userReducer,
   },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-export const useAppDispatch: () => typeof store.dispatch = useDispatch;
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export default store;

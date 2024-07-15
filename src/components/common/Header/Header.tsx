@@ -23,7 +23,7 @@ export const Header: React.FC<HeaderProps> = ({ logo, title }) => {
             variant="h6"
             component="div"
             sx={{
-              marginLeft: '-15%',
+              marginLeft: '-10%',
               color: 'black',
               textDecoration: 'none',
             }}

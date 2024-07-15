@@ -34,7 +34,6 @@ interface IStudentSuccess {
     reason2: string;
     student3: string;
     reason3: string;
-
 }
 
 interface IEventPicture {
@@ -42,13 +41,19 @@ interface IEventPicture {
   personsInPicture: string;
 }
 
-interface IActivity {
-  eventName: string;
-  eventPicture: IEventPicture[];
-  eventSummary: string;
-  eventMonth: string;
+export interface IActivity {
+  eventId?: number;
+  eventName?: string;
+  eventPicture?: IEventPicture[];
+  eventSummary?: string;
+  eventMonth?: string;
 }
 
+interface IActivityUpdate {
+  index: number;
+  field: keyof IActivity;
+  value: any
+}
 
 interface IAdministrativeData {
   fullTimeStaff: number;
@@ -171,6 +176,7 @@ const initialState: AnnualReportInitialState = {
   },
   activities: [
     {
+      eventId: 0,
       eventName: "",
       eventPicture: [
         {
@@ -254,7 +260,32 @@ const annualReportSlice = createSlice({
       state.studentSuccess = { ...state.studentSuccess, ...action.payload }
     },
     setActivities: (state, action: PayloadAction<Partial<IActivity>>) => {
-      state.activities = {...state.activities, ...action.payload } 
+      const _event = state.activities.find(i => i.eventId === action.payload.eventId)
+      if (_event) { // update
+        state.activities[_event.eventId || 0] = {..._event}
+      } else {
+        state.activities.push({...action.payload, eventId: state.activities.length})
+      }
+    },
+    addNewActivity: (state) => {
+      state.activities.push({
+        eventId: state.activities.length,
+        eventName: "",
+        eventMonth: "",
+        eventPicture: [],
+        eventSummary: ""
+      })
+    },
+    updateActivity:(state, action: PayloadAction<IActivityUpdate>) => {
+      let _activity: IActivity = state.activities.find(i => i.eventId == action.payload.index) as IActivity
+      const field = action.payload.field
+
+    if (_activity) {
+      state.activities[action.payload.index] = {..._activity }
+      _activity[field] = action.payload.value
+      console.warn('activitt :::: ', _activity, action.payload, state.activities[0])
+    }
+
     },
     setAdministrativeData: (state, action: PayloadAction<Partial<IAdministrativeData>>) => {
       state.administrativeData = { ...state.administrativeData, ...action.payload }
@@ -292,6 +323,8 @@ export const {
   setFinancialBudget,
   setMeetings,
   setOtherComments,
+  addNewActivity,
+  updateActivity
 } = annualReportSlice.actions;
 
 export const selectAnnualReport = (state: RootState) => state.annualReport;

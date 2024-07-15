@@ -8,6 +8,9 @@ import Box from "@mui/material/Box";
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import RemoveCircleOutlinedIcon from '@mui/icons-material/RemoveCircleOutlined';
 import IconButton from '@mui/material/IconButton';
+import { useSelector, useDispatch } from "react-redux";
+import { selectMeetings, setMeetings } from "../../../../../store/features/annualNonReportSlice";
+
 
 const initialState = ["", "", ""];
 
@@ -17,6 +20,9 @@ const createNewContainerState = () => ({
 });
 
 export const UBFacultyMeetings: React.FC = () => {
+  const dispatch = useDispatch();
+  const meetings = useSelector(selectMeetings);
+
   const [containers, setContainers] = useState([{...createNewContainerState()}]);
 
   const handleSetAnswer = (containerId: number, index: number, value: string) => {
@@ -36,7 +42,6 @@ export const UBFacultyMeetings: React.FC = () => {
         handleSetAnswer(containerId, 0, e.target.value);
       },
       type: "input",
-      value: state[0],
     },
     {
       question: "Date of Meeting: ",
@@ -44,7 +49,6 @@ export const UBFacultyMeetings: React.FC = () => {
         handleSetAnswer(containerId, 1, e.target.value);
       },
       type: "input",
-      value: state[1],
     },
     {
       question: "Minutes of Meeting (please attach the minutes of meetings)",
@@ -52,7 +56,6 @@ export const UBFacultyMeetings: React.FC = () => {
         handleSetAnswer(containerId, 2, e.target.value);
       },
       type: "input",
-      value: state[2],
     },
   ];
 
@@ -81,24 +84,30 @@ export const UBFacultyMeetings: React.FC = () => {
               {q.type === "textarea" ? (
                 <UBTextArea
                   question={q.question}
-                  SetAnswer={q.handleSetAnswer}
-                  value={q.value}
+                  SetAnswer={(e) =>
+                    dispatch(setMeetings({ meetingType: e.target.value}))
+                  }                  
+                  value={meetings.meetingType}
                 />
               ) : q.type === "dropdown" ? (
                 <Box sx={{mb: "-4%", ml: "14.4%", pb:"5%", pt:"5%", width: "71%", backgroundColor:"#FFD954", borderRadius: "5px 5px 0 0"}}>
                 <UbDropdown
                   label={q.question}
                   options={q.options}
-                  handleSetValue={q.handleSetAnswer}
-                  value={q.value}
+                  SetAnswer={(e) =>
+                    dispatch(setMeetings({ meetingDate: e.target.value}))
+                  }                  
+                  value={meetings.meetingDate}
                 />
                 </Box>
               ) : (
                 <Box sx={{ marginTop: "-4%", ml:"14.5%", pb: "4%", width: "71%" , backgroundColor: "#FFD954", borderRadius: "5px 5px 5px 5px"}}>
                 <UBTextField
                   question={q.question}
-                  SetAnswer={q.handleSetAnswer}
-                  value={q.value}
+                  SetAnswer={(e) =>
+                    dispatch(setMeetings({ meetingMinutesURL: e.target.value}))
+                  }                  
+                  value={meetings.meetingMinutesURL}
                 />
                 </Box>
               )}

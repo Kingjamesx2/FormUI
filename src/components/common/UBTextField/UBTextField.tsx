@@ -43,7 +43,7 @@ export const UBTextField: FC<IUBTextField> = ({
           width: width ? `${width}px` : "100%",
           maxWidth: "100%",
           borderRadius: "5px",
-          padding: "2%",
+          padding: "4%",
           backgroundColor: "#FFD954",
         }}
       >
@@ -65,6 +65,7 @@ export const UBTextField: FC<IUBTextField> = ({
           }}
           startAdornment={<InputAdornment position="start"></InputAdornment>}
           inputProps={type === "number" ? { inputMode: "numeric" } : {}}
+          autoComplete="off"
         />
       </FormControl>
     </Box>

@@ -67,7 +67,7 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
       // Handle submit logic here
       console.log("Form submitted");
       window.alert("Form submitted");
-      navigate("/");
+      navigate("/"); // Navigate to the home page
     } else {
       const newActiveStep =
         isLastStep() && !allStepsCompleted()
@@ -75,11 +75,11 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
           : activeStep + 1;
       setActiveStep(newActiveStep);
 
-       // Scroll to the top of the page
+      // Scroll to the top of the page
       window.scrollTo({
         top: 0,
         left: 0,
-        behavior: 'smooth' // Optional: Adds smooth scrolling
+        behavior: "smooth", // Optional: Adds smooth scrolling
       });
     }
   };
@@ -155,10 +155,23 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
           <React.Fragment>
             <Stack direction="row" sx={{ pt: 2 }}>
               <Button
-                color="inherit"
                 disabled={activeStep === 0}
                 onClick={handleBack}
-                sx={{ ml: "5%", color: "#fff" }}
+                sx={{
+                  ml: "30%",
+                  backgroundColor: "#E3DFCF", // Set the background color of the button
+                  color: "#000", // Set the text color
+                  width: "2.5%", // Set the width of the button
+                  height: "5%", // Set the height of the button
+                  mt: "2%",
+                  
+                  "&:hover": {
+                    backgroundColor: "#FFB700", // Set the background color on hover
+                  },
+                  "&.Mui-disabled": {
+                    color: "#fff", // Set the text color when the button is disabled
+                  },
+                }}
               >
                 Back
               </Button>
@@ -166,13 +179,14 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
               <Button
                 onClick={handleNext}
                 sx={{
-                  mr: "5%",
+                  mr: "29.5%",
                   bgcolor: "#FFD954",
                   color: "black",
+                  mt: "2%",
                   mb: 2,
                 }}
               >
-                {isLastStep() ? 'Submit' : 'Next'}
+                {isLastStep() ? "Submit" : "Next"}
               </Button>
             </Stack>
           </React.Fragment>

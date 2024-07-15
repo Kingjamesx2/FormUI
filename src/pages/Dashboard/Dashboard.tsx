@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -20,6 +20,11 @@ import UserPosition from "../../components/UserPosition/UserPosition";
 import UbLogo from "../../components/icons/UB_Logo.png";
 import FormCard from "../../components/common/Card/FormCard";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
+import { getUser, logout } from "../../store/features/authSlice";
+import { useNavigate } from "react-router-dom";
+
+
 
 const drawerWidth: number = 240;
 
@@ -74,6 +79,30 @@ const Drawer = styled(MuiDrawer, {
 const defaultTheme = createTheme();
 
 export const Dashboard: React.FC = () => {
+
+  //-----------------------------------------------------------------------
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const basicUserInfo = useAppSelector((state) => state.auth.basicUserInfo);
+  const userProfileInfo = useAppSelector((state) => state.auth.userProfileData);
+
+  useEffect(() => {
+    if (basicUserInfo) {
+      dispatch(getUser(basicUserInfo.id));
+    }
+  }, [basicUserInfo]);
+
+  const handleLogout = async () => {
+    try {
+      await dispatch(logout()).unwrap();
+      navigate("/login");
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+//-----------------------------------------------------------------------------
   const items = [
     "UB Annual Report Template Academic Division",
     "UB Annual Report Template Non-Academic Division",
