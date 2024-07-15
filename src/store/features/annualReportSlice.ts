@@ -93,9 +93,9 @@ interface IDegreesConferred {
 
 interface AnnualReportInitialState {
   academicYearID: string;
-  department: string;
-  reportsTo: string;
-  deadline: string;
+  departmentList: string;
+  faculty: string;
+  dean: string;
   missionStatement: string;
   strategicGoals: IStrategicGoals;
   accomplishments: IAccomplishments;
@@ -116,9 +116,9 @@ interface AnnualReportInitialState {
 
 const initialState: AnnualReportInitialState = {
   academicYearID: "",
-  department: "",
-  reportsTo: "",
-  deadline: "",
+  departmentList: "",
+  faculty: "",
+  dean: "",
   missionStatement: "",
   strategicGoals: {
     previousAcademicYear: "",
@@ -209,14 +209,14 @@ const annualReportSlice = createSlice({
     setAcademicYearID: (state, action: PayloadAction<string>) => {
       state.academicYearID = action.payload;
     },
-    setDepartment: (state, action: PayloadAction<string>) => {
-      state.department = action.payload;
+    setDepartmentList: (state, action: PayloadAction<string>) => {
+      state.departmentList = action.payload;
     },
-    setReportsTo: (state, action: PayloadAction<string>) => {
-      state.reportsTo = action.payload;
+    setFaculty: (state, action: PayloadAction<string>) => {
+      state.faculty = action.payload;
     },
-    setDeadline: (state, action: PayloadAction<string>) => {
-      state.deadline = action.payload;
+    setDean: (state, action: PayloadAction<string>) => {
+      state.dean = action.payload;
     },
     setMissionStatement: (state, action: PayloadAction<string>) => {
       state.missionStatement = action.payload;
@@ -274,9 +274,9 @@ const annualReportSlice = createSlice({
 
 export const {
   setAcademicYearID,
-  setDepartment,
-  setReportsTo,
-  setDeadline,
+  setDepartmentList,
+  setFaculty,
+  setDean,
   setMissionStatement,
   setStrategicGoals,
   setAccomplishments,
@@ -296,11 +296,10 @@ export const {
 } = annualReportSlice.actions;
 
 export const selectAnnualReport = (state: RootState) => state.annualReport;
-
 export const selectAcademicYearID = (state: RootState) => state.annualReport.academicYearID;
-export const selectDepartment = (state: RootState) => state.annualReport.department;
-export const selectReportsTo = (state: RootState) => state.annualReport.reportsTo;
-export const selectDeadline = (state: RootState) => state.annualReport.deadline;
+export const selectDepartmentList = (state: RootState) => state.annualReport.departmentList;
+export const selectFaculty = (state: RootState) => state.annualReport.faculty;
+export const selectDean = (state: RootState) => state.annualReport.dean;
 export const selectMissionStatement = (state: RootState) => state.annualReport.missionStatement;
 export const selectStrategicGoals = (state: RootState) => state.annualReport.strategicGoals;
 export const selectAccomplishments = (state: RootState) => state.annualReport.accomplishments;

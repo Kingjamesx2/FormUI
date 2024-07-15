@@ -1,111 +1,68 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import { SelectChangeEvent } from "@mui/material/Select";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { useSelector, useDispatch } from 'react-redux';
-
-
-
-const initialState = ["FST", "", ""];
+import { setAcademicYearID, selectAcademicYearID, setDepartmentList, selectDepartmentList, setFaculty, selectFaculty, setDean, selectDean } from '../../../../../store/features/annualReportSlice';
 
 export const Faculty = () => {
-  const [state, setState] = useState<string[]>(initialState);
-  const [summary, setSummary] = useState<string>("The annual report provides a comprehensive summary of the University’s activities for the academic year, which is from August to July. The specific outputs/outcomes are based on the Annual Implementation Plan for the period under review.");
-
-
   const dispatch = useDispatch();
-  
+  const academicYearID = useSelector(selectAcademicYearID);
+  const departmentList = useSelector(selectDepartmentList);
+  const faculty = useSelector(selectFaculty);
+  const dean = useSelector(selectDean);
 
-
-  // const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  // const theme = useTheme();
-
-  const questions = [
-    {
-      question: "Faculty",
-      handleSetAnswer: (e: SelectChangeEvent<string>) => {
-        const selectedValue = e.target.value;
-        setState((prevState) => [selectedValue, "", ""]);
-        console.log(selectedValue);
-      },
-      type: "dropdown",
-      options: [
-        {
-          value: "FEA",
-          label: "Faculty of Education and Arts",
-          dean: "Dr Nadine Tun",
-        },
-        {
-          value: "FMSS",
-          label: "Faculty of Management and Social Sciences",
-          dean: "Dr Somanandevi Thiagarajan",
-        },
-        {
-          value: "FHS",
-          label: "Faculty of Health Sciences",
-          dean: "Dr Lisa Johnson",
-        },
-        {
-          value: "FST",
-          label: "Faculty of Science & Technology",
-          dean: "Dr. Apolonio Aguilar",
-        },
-      ],
-      value: state[0],
-    },
-    {
-      question: "List all units/departments/centres/institutes within the Faculty",
-      handleSetAnswer: (e: ChangeEvent<HTMLTextAreaElement>) => {
-        const value = e.target.value;
-        setState((prevState) => [prevState[0], value, prevState[2]]);
-        console.log(value);
-      },
-      type: "textarea",
-      value: state[1],
-    },
-  ];
+  const [summary, setSummary] = useState<string>("The annual report provides a comprehensive summary of the University’s activities for the academic year, which is from August to July. The specific outputs/outcomes are based on the Annual Implementation Plan for the period under review.");
 
   return (
     <Container>
       <Box>
-        <Box sx={{ml:"15%", mt: "10%", p: "2%", width: "66%", backgroundColor: "#FFD954", borderTopLeftRadius: "5px", borderTopRightRadius: "5px"}}>
+        <Box sx={{ ml: "15%", mt: "10%", p: "2%", width: "66%", backgroundColor: "#FFD954", borderTopLeftRadius: "5px", borderTopRightRadius: "5px" }}>
           {summary}
         </Box>
-        <Box sx={{width: "70%",marginTop: "-2px", marginLeft: "15%",paddingBottom: "2%", paddingTop: "3%", backgroundColor: "#FFD954", borderBottomLeftRadius: "none", borderBottomRightRadius: "none"}}>
-        <UbDropdown
-          label={questions[0].question}
-          options={questions[0].options}
-          handleSetValue={questions[0].handleSetAnswer as (e: SelectChangeEvent<string>) => void}
-          value={questions[0].value}
-        />
+        <Box sx={{ width: "70%", marginTop: "-2px", marginLeft: "15%", paddingBottom: "2%", paddingTop: "3%", backgroundColor: "#FFD954", borderBottomLeftRadius: "none", borderBottomRightRadius: "none" }}>
+          <UbDropdown
+            label="Faculty"
+            options={[
+              { value: "FEA", label: "Faculty of Education and Arts" },
+              { value: "FMSS", label: "Faculty of Management and Social Sciences" },
+              { value: "FHS", label: "Faculty of Health Sciences" },
+              { value: "FST", label: "Faculty of Science & Technology" },
+            ]}
+            SetAnswer={(e) => dispatch(setFaculty(e.target.value as string))}
+            value={faculty}
+          />
+        </Box>
+        <Box sx={{ width: "70%", marginTop: "-2px", marginLeft: "15%", paddingBottom: "2%", paddingTop: "3%", backgroundColor: "#FFD954", borderBottomLeftRadius: "none", borderBottomRightRadius: "none" }}>
+          <UbDropdown
+            label="Dean"
+            options={[
+              { value: "Dr Nadine Tun", label: "Dr Nadine Tun" },
+              { value: "Dr Somanandevi Thiagarajan", label: "Dr Somanandevi Thiagarajan" },
+              { value: "Dr Lisa Johnson", label: "Dr Lisa Johnson" },
+              { value: "Dr Apolonio Aguilar", label: "Dr Apolonio Aguilar" },
+            ]}
+            SetAnswer={(e) => dispatch(setDean(e.target.value as string))}
+            value={dean}
+          />
         </Box>
       </Box>
-      {questions.slice(1).map((q, index) => {
-        if (q.type === "textarea") {
-          return (
-            <Box sx={{mt: "-50px", mb: "40px"}}>            
-            <UBTextArea
-              key={index}
-              question={q.question}
-              SetAnswer={q.handleSetAnswer as (e: ChangeEvent<HTMLTextAreaElement>) => void}
-              value={q.value}
-            />
-            </Box>
-          );
-        } else if (q.type === "input") {
-          return (
-            <UBTextField
-              key={index}
-              question={q.question}
-              SetAnswer={q.handleSetAnswer as (e: ChangeEvent<HTMLInputElement>) => void}
-              value={q.value}
-            />
-          );
-        }
-      })}
+      <Box sx={{ mt: "-4%", mb: "4%", width: "98.6%", ml: "0.7%" }}>
+        <UBTextField
+          question="Academic Year"
+          SetAnswer={(e) => dispatch(setAcademicYearID(e.target.value))}
+          value={academicYearID}
+        />
+      </Box>
+      <Box sx={{ mt: "-11%", mb: "4%" }}>
+        <UBTextArea
+          question="List all units/departments/centres/institutes within the Faculty"
+          SetAnswer={(e) => dispatch(setDepartmentList(e.target.value as string))}
+          value={departmentList}
+        />
+      </Box>
     </Container>
   );
 };

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -7,36 +6,61 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import UBLogo from './../../components/icons/UB_Logo.png';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import { Link } from 'react-router-dom';
+import { CredentialResponse, GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-
-
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export const Login: React.FC = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const email = data.get('email');
+    const password = data.get('password');
+
+    try {
+      const response = await axios.post('https://your-backend-api.com/auth/login', {
+        email,
+        password,
+      });
+
+      if (response.data.token) {
+        localStorage.setItem('authToken', response.data.token);
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
 
-  const handleGoogleSuccess = (response: any) => {
+  const handleGoogleSuccess = async (response: CredentialResponse) => {
     console.log('Google Login Success:', response);
-    // You can now use the response token to authenticate the user on your backend
+
+    if (response.credential) {
+      try {
+        const backendResponse = await axios.post('https://your-backend-api.com/auth/google-login', {
+          token: response.credential,
+        });
+
+        if (backendResponse.data.token) {
+          localStorage.setItem('authToken', backendResponse.data.token);
+          navigate('/dashboard');
+        }
+      } catch (error) {
+        console.error('Google login failed:', error);
+      }
+    }
   };
 
-  const handleGoogleFailure = (error: any) => {
-    console.error('Google Login Failed:', error);
+  const handleGoogleFailure = () => {
+    console.error('Google Login Failed');
   };
 
   return (
@@ -132,7 +156,7 @@ export const Login: React.FC = () => {
                 </Link>
                 <GoogleLogin
                   onSuccess={handleGoogleSuccess}
-                  onFailure={handleGoogleFailure}
+                  onError={handleGoogleFailure}
                   hostedDomain="ub.edu.bz"
                 />
                 <Grid container>
