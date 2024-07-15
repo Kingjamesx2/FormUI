@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store'; // Adjust the path according to your project structure
-import { number, string } from 'prop-types';
 
 interface IStrategicGoals {
   previousAcademicYear: string;
@@ -47,6 +46,7 @@ interface IActivity {
   eventName: string;
   eventPicture: IEventPicture[];
   eventSummary: string;
+  eventMonth: string;
 }
 
 
@@ -88,8 +88,6 @@ interface IDegreesConferred {
   degreesConferredForMostRecentAcademicYear: number;
   degreesConferredForMostRecentAcademicYearPerDepartment: number;
 }
-
-
 
 interface AnnualReportInitialState {
   academicYearID: string;
@@ -177,10 +175,11 @@ const initialState: AnnualReportInitialState = {
       eventPicture: [
         {
           pictureURL: "",
-          personsInPicture: ""
+          personsInPicture: "",
         }
       ],
-      eventSummary: ""
+      eventSummary: "",
+      eventMonth: "",
     }
   ],
   administrativeData: {
@@ -254,8 +253,8 @@ const annualReportSlice = createSlice({
     setStudentSuccess: (state, action: PayloadAction<Partial<IStudentSuccess>>) => {
       state.studentSuccess = { ...state.studentSuccess, ...action.payload }
     },
-    setActivities: (state, action: PayloadAction<IActivity[]>) => {
-      state.activities = { ...state.activities, ...action.payload }
+    setActivities: (state, action: PayloadAction<Partial<IActivity>>) => {
+      state.activities = {...state.activities, ...action.payload } 
     },
     setAdministrativeData: (state, action: PayloadAction<Partial<IAdministrativeData>>) => {
       state.administrativeData = { ...state.administrativeData, ...action.payload }

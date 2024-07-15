@@ -11,7 +11,6 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -20,7 +19,6 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import UserPosition from "../../components/UserPosition/UserPosition";
 import UbLogo from "../../components/icons/UB_Logo.png";
 import FormCard from "../../components/common/Card/FormCard";
-import SelectAutoWidth from "../../components/SelectAutoWidth/SelectAutoWidth";
 import { Link } from "react-router-dom";
 
 const drawerWidth: number = 240;
@@ -82,7 +80,6 @@ export const Dashboard: React.FC = () => {
     "University of Belize Key Statistics Template",
   ];
 
-  const [filteredItems, setFilteredItems] = useState<string[]>(items);
   const [open, setOpen] = useState(true);
 
   const toggleDrawer = () => {
@@ -211,7 +208,7 @@ export const Dashboard: React.FC = () => {
                   style={{ textDecoration: "none" }}
                 >
                   <FormCard
-                    formPreview="src/components/icons/formPreview.png"
+                    formPreview="src/components/icons/annualReport.png"
                     title="UB Annual Report Template Academic Division"
                   />
                 </Link>
@@ -222,7 +219,7 @@ export const Dashboard: React.FC = () => {
                   style={{ textDecoration: "none" }}
                 >
                   <FormCard
-                    formPreview="src/components/icons/formPreview.png"
+                    formPreview="src/components/icons/annualNonReport.png"
                     title="UB Annual Report Template Non-Academic Division"
                   />
                 </Link>
@@ -233,7 +230,7 @@ export const Dashboard: React.FC = () => {
                   style={{ textDecoration: "none" }}
                 >
                   <FormCard
-                    formPreview="src/components/icons/formPreview.png"
+                    formPreview="src/components/icons/keyStatistics.png"
                     title="University of Belize Key Statistics Template"
                   />
                 </Link>

@@ -22,13 +22,15 @@ export const UBCourses: React.FC = () => {
           question="1. Total number of new courses added to the Faculty"
           SetAnswer={(e) => dispatch(setCourse({ totalNewCourses: e.target.value }))}
           value={courses.totalNewCourses}
-        />
+          type="number"
+          />
       </Box>
       <Box mb={"-5.4%"}>
         <UBTextField
           question="2. Number of courses offered through online"
           SetAnswer={(e) => dispatch(setCourse({ totalCoursesOnline: e.target.value }))}
           value={courses.totalCoursesOnline}
+          type="number"
         />
       </Box>
       <Box mb={"-5.4%"}>
@@ -36,6 +38,7 @@ export const UBCourses: React.FC = () => {
           question="3. Number of courses offered through face to face"
           SetAnswer={(e) => dispatch(setCourse({ totalCourseFaceToFace: e.target.value }))}
           value={courses.totalCourseFaceToFace}
+          type="number"
         />
       </Box>
     </Container>

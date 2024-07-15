@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Container from "@mui/material/Container";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
-import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import Box from "@mui/material/Box";
-import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setAdministrativeData,
@@ -26,9 +24,10 @@ export const UBAdministrativeDepartmentData: React.FC = () => {
         <UBTextField
           question="a. List number of full-time staff"
           SetAnswer={(e) =>
-            dispatch(setAdministrativeData({ fullTimeStaff: e.target.value }))
+            dispatch(setAdministrativeData({ fullTimeStaff: e.target.value  }))
           }
           value={administrativeData.fullTimeStaff}
+          type="number"
         />
       </Box>
 
@@ -39,6 +38,7 @@ export const UBAdministrativeDepartmentData: React.FC = () => {
             dispatch(setAdministrativeData({ partTimeStaff: e.target.value }))
           }
           value={administrativeData.partTimeStaff}
+          type="number"
         />
       </Box>
 

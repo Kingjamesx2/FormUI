@@ -69,9 +69,8 @@ interface IMeeting {
 
 interface annualNonReportInitialState {
     academicYearID: string;
-    department: string;
+    division: string;
     reportsTo: string;
-    deadline: string;
     missionStatement: string;
     strategicGoals:  IStrategicGoals;
     accomplishments: IAccomplishments;
@@ -86,9 +85,8 @@ interface annualNonReportInitialState {
 
 const initialState: annualNonReportInitialState = {
   academicYearID: "",
-  department: "",
+  division: "",
   reportsTo: "",
-  deadline: "",
   missionStatement: "",
   strategicGoals: {
     strategicGoalsUnderReview: "",
@@ -159,14 +157,11 @@ const annualNonReportSlice = createSlice({
     setAcademicYearID: (state, action: PayloadAction<string>) => {
       state.academicYearID = action.payload;
     },
-    setDepartment: (state, action: PayloadAction<string>) => {
-      state.department = action.payload;
+    setDivision: (state, action: PayloadAction<string>) => {
+      state.division = action.payload;
     },
     setReportsTo: (state, action: PayloadAction<string>) => {
       state.reportsTo = action.payload;
-    },
-    setDeadline: (state, action: PayloadAction<string>) => {
-      state.deadline = action.payload;
     },
     setMissionStatement: (state, action: PayloadAction<string>) => {
       state.missionStatement = action.payload;
@@ -203,9 +198,8 @@ const annualNonReportSlice = createSlice({
 
 export const {
   setAcademicYearID,
-  setDepartment,
+  setDivision,
   setReportsTo,
-  setDeadline,
   setMissionStatement,
   setStrategicGoals,
   setAccomplishments,
@@ -219,9 +213,8 @@ export const {
 } = annualNonReportSlice.actions;
 
 export const selectAcademicYearID = (state: RootState) => state.nonAcademicReport.academicYearID;
-export const selectDepartment = (state: RootState) => state.nonAcademicReport.department;
+export const selectDivision = (state: RootState) => state.nonAcademicReport.division;
 export const selectReportsTo = (state: RootState) => state.nonAcademicReport.reportsTo;
-export const selectDeadline = (state: RootState) => state.nonAcademicReport.deadline;
 export const selectMissionStatement = (state: RootState) => state.nonAcademicReport.missionStatement;
 export const selectStrategicGoals = (state: RootState) => state.nonAcademicReport.strategicGoals;
 export const selectAccomplishments = (state: RootState) => state.nonAcademicReport.accomplishments;

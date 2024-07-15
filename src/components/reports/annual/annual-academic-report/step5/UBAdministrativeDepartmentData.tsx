@@ -32,6 +32,7 @@ export const UBAdministrativeDepartmentData: React.FC = () => {
             dispatch(setAdministrativeData({ fullTimeStaff: e.target.value }))
           }
           value={administrativeData.fullTimeStaff}
+          type="number"
         />
       </Box>
 
@@ -42,6 +43,7 @@ export const UBAdministrativeDepartmentData: React.FC = () => {
             dispatch(setAdministrativeData({ partTimeStaff: e.target.value }))
           }
           value={administrativeData.partTimeStaff}
+          type="number"
         />
       </Box>
 

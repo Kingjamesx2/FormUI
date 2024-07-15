@@ -5,13 +5,13 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
-import { number } from "prop-types";
 
 interface IUBTextField extends InputHTMLAttributes<HTMLInputElement> {
   question?: string;
   SetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   width?: number;
+  type?: string;
 }
 
 export const UBTextField: FC<IUBTextField> = ({
@@ -19,44 +19,52 @@ export const UBTextField: FC<IUBTextField> = ({
   SetAnswer,
   value = "",
   width = 800,
+  type = "",
 }) => {
   const theme = useTheme();
 
   return (
-    <Box  style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      width: "71%",
-      marginTop: "10%",
-      margin: "auto",
-      padding: "2% "
-      
-    }}    
-    sx={{ borderRadius: '' }}>
+    <Box
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "71%",
+        marginTop: "10%",
+        margin: "auto",
+        padding: "2%",
+      }}
+      sx={{ borderRadius: "" }}
+    >
       <FormControl
         fullWidth
         variant="standard"
         style={{
           width: width ? `${width}px` : "100%",
           maxWidth: "100%",
-          borderRadius: '5px',
+          borderRadius: "5px",
           padding: "2%",
-          // border: "1px solid black",
-          backgroundColor: "#FFD954"
+          backgroundColor: "#FFD954",
         }}
       >
-        <InputLabel 
-          htmlFor="standard-adornment-amount" 
-          sx={{ fontSize: '20px', color: "black", m: "3% 0% 8% 3%"}}>
+        <InputLabel
+          htmlFor="standard-adornment-amount"
+          sx={{ fontSize: "20px", color: "black", m: "3% 0% 8% 3%" }}
+        >
           {question}
         </InputLabel>
         <Input
-        sx={{ ml: "2%"}}
+          sx={{ ml: "2%" }}
           id="standard-adornment-amount"
           value={value}
-          onChange={SetAnswer}
+          onChange={(e) => {
+            if (type === "number" && !/^\d*$/.test(e.target.value)) {
+              return;
+            }
+            SetAnswer(e);
+          }}
           startAdornment={<InputAdornment position="start"></InputAdornment>}
+          inputProps={type === "number" ? { inputMode: "numeric" } : {}}
         />
       </FormControl>
     </Box>

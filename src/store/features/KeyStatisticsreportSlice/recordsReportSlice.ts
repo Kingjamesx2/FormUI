@@ -49,10 +49,10 @@ interface CampusStatistics {
 }
 
 interface RecordsReportState {
-  userID: string;
+  // userID: string;
   academicYearID: string;
   department: string;
-  deadline: string;
+  departmentHead: string;
   currentStudentEnrollment: CurrentStudentEnrollment;
   studentEnrollmentTrend: EnrollmentTrend[];
   enrollmentTrendPerFaculty: EnrollmentTrendPerFaculty[];
@@ -63,10 +63,10 @@ interface RecordsReportState {
 
 // Initial State
 const recordsReportInitialState: RecordsReportState = {
-  userID: "",
+  // userID: "",
   academicYearID: "",
   department: "",
-  deadline: "",
+  departmentHead: "",
   currentStudentEnrollment: {
     associates: 0,
     undergraduate: 0,
@@ -168,17 +168,17 @@ const recordsReportSlice = createSlice({
   name: 'recordsReport',
   initialState: recordsReportInitialState,
   reducers: {
-    setUserID: (state, action: PayloadAction<string>) => {
-      state.userID = action.payload;
-    },
+    // setUserID: (state, action: PayloadAction<string>) => {
+    //   state.userID = action.payload;
+    // },
     setAcademicYearID: (state, action: PayloadAction<string>) => {
       state.academicYearID = action.payload;
     },
     setDepartment: (state, action: PayloadAction<string>) => {
       state.department = action.payload;
     },
-    setDeadline: (state, action: PayloadAction<string>) => {
-      state.deadline = action.payload;
+    setDepartmentHead: (state, action: PayloadAction<string>) => {
+      state.departmentHead = action.payload;
     },
     setCurrentStudentEnrollment: (state, action: PayloadAction<CurrentStudentEnrollment>) => {
       state.currentStudentEnrollment = action.payload;
@@ -202,10 +202,10 @@ const recordsReportSlice = createSlice({
 });
 
 export const {
-  setUserID,
+  // setUserID,
   setAcademicYearID,
   setDepartment,
-  setDeadline,
+  setDepartmentHead,
   setCurrentStudentEnrollment,
   setStudentEnrollmentTrend,
   setEnrollmentTrendPerFaculty,
@@ -215,11 +215,9 @@ export const {
 } = recordsReportSlice.actions;
 
 export const selectRecordsReport = (state: RootState) => state.recordsReport;
-
-export const selectUserID = (state: RootState) => state.recordsReport.userID;
 export const selectAcademicYearID = (state: RootState) => state.recordsReport.academicYearID;
 export const selectDepartment = (state: RootState) => state.recordsReport.department;
-export const selectDeadline = (state: RootState) => state.recordsReport.deadline;
+export const selectDepartmentHead = (state: RootState) => state.recordsReport.departmentHead;
 export const selectCurrentStudentEnrollment = (state: RootState) => state.recordsReport.currentStudentEnrollment;
 export const selectStudentEnrollmentTrend = (state: RootState) => state.recordsReport.studentEnrollmentTrend;
 export const selectEnrollmentTrendPerFaculty = (state: RootState) => state.recordsReport.enrollmentTrendPerFaculty;

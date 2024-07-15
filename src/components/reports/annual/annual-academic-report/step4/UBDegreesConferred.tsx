@@ -19,6 +19,7 @@ export const UBDegreesConferred = () => {
           question="a. Total number of degrees conferred for most recent academic year"
           SetAnswer={(e) => dispatch(setDegreesConferred({ degreesConferredForMostRecentAcademicYear: e.target.value }))}
           value={degreesConferred.degreesConferredForMostRecentAcademicYear}
+          type="number"
         />
       </Box>
       <Box mb={"-5%"}>
@@ -26,6 +27,7 @@ export const UBDegreesConferred = () => {
           question="b. Total number of degrees conferred for most recent academic year per department and/or program."
           SetAnswer={(e) => dispatch(setDegreesConferred({ degreesConferredForMostRecentAcademicYearPerDepartment: e.target.value }))}
           value={degreesConferred.degreesConferredForMostRecentAcademicYearPerDepartment}
+          type="number"
         />
       </Box>
     </Container>
