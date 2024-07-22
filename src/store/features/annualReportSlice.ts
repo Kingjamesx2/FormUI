@@ -38,13 +38,13 @@ interface IStudentSuccess {
 
 interface IEventPicture {
   pictureURL: string;
-  personsInPicture: string;
 }
 
 export interface IActivity {
   eventId?: number;
   eventName?: string;
   eventPicture?: IEventPicture[];
+  personsInPicture: string;
   eventSummary?: string;
   eventMonth?: string;
 }
@@ -56,8 +56,8 @@ interface IActivityUpdate {
 }
 
 interface IAdministrativeData {
-  fullTimeStaff: number;
-  partTimeStaff: number;
+  fullTimeStaff: number | null;
+  partTimeStaff: number | null;
   significantStaffChanges: string;
 }
 
@@ -66,22 +66,30 @@ interface IFinancialBudget {
   impactfulChanges: string;
 }
 
+interface IMeetingUpdate {
+  index: number;
+  field: keyof IActivity;
+  value: any
+}
+
+
 interface IMeeting {
-  meetingType: string;
-  meetingDate: string; // ISO date string
-  meetingMinutesURL: string;
+  meetingId?: number;
+  meetingType?: string;
+  meetingDate?: string; // ISO date string
+  meetingMinutesURL?: string;
 }
 
 interface IRevisedAcademics {
-  programsOffered: number;
+  programsOffered: number | null;
   newProgrammesAdded: string;
   revisedPrograms: string;
 }
 
 interface ICourse {
   totalNewCourses: number | null,
-  totalCoursesOnline: number,
-  totalCourseFaceToFace: number,
+  totalCoursesOnline: number | null,
+  totalCourseFaceToFace: number | null
 }
 
 interface IRetentionOfStudents {
@@ -90,8 +98,8 @@ interface IRetentionOfStudents {
 }
 
 interface IDegreesConferred {
-  degreesConferredForMostRecentAcademicYear: number;
-  degreesConferredForMostRecentAcademicYearPerDepartment: number;
+  degreesConferredForMostRecentAcademicYear: number | null;
+  degreesConferredForMostRecentAcademicYearPerDepartment: number | null;
 }
 
 interface AnnualReportInitialState {
@@ -145,14 +153,14 @@ const initialState: AnnualReportInitialState = {
     scholarships: ""
   },
   revisedAcademics: {
-    programsOffered: 0,
+    programsOffered: null,
     newProgrammesAdded: "",
     revisedPrograms: "",
   },
   course: {
     totalNewCourses: null,
-    totalCoursesOnline: 5,
-    totalCourseFaceToFace: 0,
+    totalCoursesOnline: null,
+    totalCourseFaceToFace: null,
   },
   eliminatedAcademicPrograms: "",
   retentionOfStudents: {
@@ -161,8 +169,8 @@ const initialState: AnnualReportInitialState = {
   },
   studentIntership: "",
   degreesConferred: {
-    degreesConferredForMostRecentAcademicYear: 0,
-    degreesConferredForMostRecentAcademicYearPerDepartment: 0,
+    degreesConferredForMostRecentAcademicYear: null,
+    degreesConferredForMostRecentAcademicYearPerDepartment: null,
   },
   studentSuccess: {
     studentLearning: "",
@@ -178,10 +186,10 @@ const initialState: AnnualReportInitialState = {
     {
       eventId: 0,
       eventName: "",
+      personsInPicture: "",
       eventPicture: [
         {
           pictureURL: "",
-          personsInPicture: "",
         }
       ],
       eventSummary: "",
@@ -189,8 +197,8 @@ const initialState: AnnualReportInitialState = {
     }
   ],
   administrativeData: {
-    fullTimeStaff: 0,
-    partTimeStaff: 0,
+    fullTimeStaff: null,
+    partTimeStaff: null,
     significantStaffChanges: ""
   },
   financialBudget: {
@@ -199,9 +207,10 @@ const initialState: AnnualReportInitialState = {
   },
   meetings: [
     {
+      meetingId: 0,
       meetingType: "",
       meetingDate: "",
-      meetingMinutesURL: ""
+      meetingMinutesURL: "",
     }
   ],
   otherComments: ""
@@ -259,33 +268,64 @@ const annualReportSlice = createSlice({
     setStudentSuccess: (state, action: PayloadAction<Partial<IStudentSuccess>>) => {
       state.studentSuccess = { ...state.studentSuccess, ...action.payload }
     },
-    setActivities: (state, action: PayloadAction<Partial<IActivity>>) => {
-      const _event = state.activities.find(i => i.eventId === action.payload.eventId)
-      if (_event) { // update
-        state.activities[_event.eventId || 0] = {..._event}
-      } else {
-        state.activities.push({...action.payload, eventId: state.activities.length})
+    // setActivities: (state, action: PayloadAction<Partial<IActivity>>) => {
+    //   const _event = state.activities.find(i => i.eventId === action.payload.eventId)
+    //   if (_event) { // update
+    //     state.activities[_event.eventId || 0] = {..._event}
+    //   } else {
+    //     state.activities.push({...action.payload, eventId: state.activities.length})
+    //   }
+    // },
+    // addNewActivity: (state) => {
+    //   state.activities.push({
+    //     eventId: state.activities.length,
+    //     eventName: "",
+    //     eventMonth: "",
+    //     eventPicture: [],
+    //     eventSummary: ""
+    //   })
+    // },
+    // updateActivity:(state, action: PayloadAction<IActivityUpdate>) => {
+    //   let _activity: IActivity = state.activities.find(i => i.eventId == action.payload.index) as IActivity
+    //   const field = action.payload.field
+
+    // if (_activity) {
+    //   state.activities[action.payload.index] = {..._activity }
+    //   _activity[field] = action.payload.value
+    //   console.warn('activitt :::: ', _activity, action.payload, state.activities[0])
+    // }\
+
+    setActivities: (state, action: PayloadAction<IActivity>) => {
+      const { eventId } = action.payload;
+      if (eventId !== undefined) {
+        const existingActivityIndex = state.activities.findIndex(activity => activity.eventId === eventId);
+        if (existingActivityIndex >= 0) {
+          state.activities[existingActivityIndex] = { ...state.activities[existingActivityIndex], ...action.payload };
+        } else {
+          state.activities.push({ ...action.payload, eventId: state.activities.length });
+        }
       }
     },
+
     addNewActivity: (state) => {
       state.activities.push({
         eventId: state.activities.length,
         eventName: "",
+        personsInPicture: "",
         eventMonth: "",
         eventPicture: [],
         eventSummary: ""
-      })
+      });
     },
-    updateActivity:(state, action: PayloadAction<IActivityUpdate>) => {
-      let _activity: IActivity = state.activities.find(i => i.eventId == action.payload.index) as IActivity
-      const field = action.payload.field
 
-    if (_activity) {
-      state.activities[action.payload.index] = {..._activity }
-      _activity[field] = action.payload.value
-      console.warn('activitt :::: ', _activity, action.payload, state.activities[0])
-    }
-
+    updateActivity: (state, action: PayloadAction<IActivityUpdate>) => {
+      const { index, field, value } = action.payload;
+      if (index >= 0 && index < state.activities.length) {
+        state.activities[index] = {
+          ...state.activities[index],
+          [field]: value,
+        };
+      }
     },
     setAdministrativeData: (state, action: PayloadAction<Partial<IAdministrativeData>>) => {
       state.administrativeData = { ...state.administrativeData, ...action.payload }
@@ -293,9 +333,43 @@ const annualReportSlice = createSlice({
     setFinancialBudget: (state, action: PayloadAction<IFinancialBudget>) => {
       state.financialBudget = { ...state.financialBudget, ...action.payload }
     },
-    setMeetings: (state, action: PayloadAction<IMeeting[]>) => {
-      state.meetings = action.payload;
+    // setMeetings: (state, action: PayloadAction<IMeeting>) => {
+    //   state.meetings = {...state.meetings, ...action.payload };
+    // },
+
+    setMeetings: (state, action: PayloadAction<IMeeting>) => {
+      const { meetingId } = action.payload;
+      if (meetingId !== undefined) {
+        const existingMeetingIndex = state.meetings.findIndex(meeting => meeting.meetingId === meetingId);
+        if (existingMeetingIndex >= 0) {
+          state.meetings[existingMeetingIndex] = { ...state.meetings[existingMeetingIndex], ...action.payload };
+        } else {
+          state.meetings.push({ ...action.payload, meetingId: state.meetings.length });
+        }
+      }
     },
+
+    addNewMeeting: (state) => {
+      state.meetings.push({
+        meetingId: state.meetings.length,
+        meetingType: "",
+        meetingDate: "",
+        meetingMinutesURL: "",
+      });
+    },
+
+    updateMeeting: (state, action: PayloadAction<IMeetingUpdate>) => {
+      const { index, field, value } = action.payload;
+      if (index >= 0 && index < state.meetings.length) {
+        state.meetings[index] = {
+          ...state.meetings[index],
+          [field]: value,
+        };
+      }
+    },
+
+    
+
     setOtherComments: (state, action: PayloadAction<string>) => {
       state.otherComments = action.payload;
     },
@@ -324,7 +398,9 @@ export const {
   setMeetings,
   setOtherComments,
   addNewActivity,
-  updateActivity
+  updateActivity,
+  addNewMeeting,
+  updateMeeting
 } = annualReportSlice.actions;
 
 export const selectAnnualReport = (state: RootState) => state.annualReport;

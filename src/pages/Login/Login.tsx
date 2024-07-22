@@ -1,77 +1,27 @@
 import * as React from 'react';
-// import Button from '@mui/material/Button';
-// import CssBaseline from '@mui/material/CssBaseline';
-// import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-// import Grid from '@mui/material/Grid';
-// import Box from '@mui/material/Box';
-// import Typography from '@mui/material/Typography';
-// import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import UBLogo from './../../components/icons/UB_Logo.png';
 import { CredentialResponse, GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Container, CssBaseline, Box, Typography, TextField, Button, Grid, FormControlLabel, Checkbox } from "@mui/material";
 
 const defaultTheme = createTheme();
 
+type FormValue = {
+  email: string;
+  password: string;
+};
 
-import { LockOutlined } from "@mui/icons-material";
-import {
-  Container,
-  CssBaseline,
-  Box,
-  Avatar,
-  Typography,
-  TextField,
-  Button,
-  Grid,
-} from "@mui/material";
-import { useState } from "react";
-// import { Link } from "react-router-dom";
-import { useAppDispatch } from "../../store/redux-hooks";
-import { login } from "../../store/features/authSlice";
-
-export const Login: React.FC = () => {
-
-  const dispatch = useAppDispatch();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = async () => {
-    // This is only a basic validation of inputs. Improve this as needed.
-    if (email && password) {
-      try {
-        await dispatch(
-          login({
-            email,
-            password,
-          })
-        ).unwrap();
-      } catch (e) {
-        console.error(e);
-      }
-    } else {
-      // Show an error message.
-    }
-  };
-
+export const Login = () => {
   const navigate = useNavigate();
+  const { register, handleSubmit, formState: { errors } } = useForm<FormValue>();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const email = data.get('email');
-    const password = data.get('password');
-
+  const onSubmit: SubmitHandler<FormValue> = async (data) => {
+    console.log("final data", data);
     try {
-      const response = await axios.post('https://your-backend-api.com/auth/login', {
-        email,
-        password,
-      });
-
+      const response = await axios.post('https://your-backend-api.com/auth/login', data);
       if (response.data.token) {
         localStorage.setItem('authToken', response.data.token);
         navigate('/dashboard');
@@ -83,13 +33,11 @@ export const Login: React.FC = () => {
 
   const handleGoogleSuccess = async (response: CredentialResponse) => {
     console.log('Google Login Success:', response);
-
     if (response.credential) {
       try {
         const backendResponse = await axios.post('https://your-backend-api.com/auth/google-login', {
           token: response.credential,
         });
-
         if (backendResponse.data.token) {
           localStorage.setItem('authToken', backendResponse.data.token);
           navigate('/dashboard');
@@ -106,7 +54,7 @@ export const Login: React.FC = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+      <GoogleOAuthProvider clientId="967559900359-e8o7st6o4n22r2tvcig3ub78724j5cj7.apps.googleusercontent.com">
         <Box
           sx={{
             backgroundColor: '#6C3777',
@@ -152,49 +100,61 @@ export const Login: React.FC = () => {
               <Typography component="h1" variant="h5">
                 Login
               </Typography>
-              <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+              <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
                 <TextField
                   margin="normal"
                   required
                   fullWidth
                   id="email"
                   label="Email Address"
-                  name="email"
                   autoComplete="email"
                   autoFocus
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                      message: "Invalid Email",
+                    },
+                  })}
                 />
+                {errors.email && <p className="error-msg">{errors.email.message}</p>}
                 <TextField
                   margin="normal"
                   required
                   fullWidth
-                  name="password"
                   label="Password"
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 10,
+                      message: "Password should be at least 10 characters",
+                    },
+                  })}
                 />
+                {errors.password && <p className="error-msg">{errors.password.message}</p>}
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
                   label="Remember me"
                 />
-                <Link to="/" style={{ textDecoration: 'none' }}>
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{
-                      mt: 3,
-                      mb: 2,
-                      backgroundColor: '#6C3777',
-                      color: '#fff',
-                      '&:hover': {
-                        backgroundColor: '#5a2f64',
-                      },
-                    }}
-                  >
-                    Login
-                  </Button>
-                </Link>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{
+                    mt: 3,
+                    mb: 2,
+                    backgroundColor: '#6C3777',
+                    color: '#fff',
+                    '&:hover': {
+                      backgroundColor: '#5a2f64',
+                    },
+                  }}
+                >
+                  Login
+                </Button>
                 <GoogleLogin
                   onSuccess={handleGoogleSuccess}
                   onError={handleGoogleFailure}
@@ -202,11 +162,10 @@ export const Login: React.FC = () => {
                 />
                 <Grid container>
                   <Grid item xs>
-                    <Link href="#" variant="body2">
+                    <Link to="#" variant="body2">
                       Forgot password?
                     </Link>
                   </Grid>
-                  <Grid item></Grid>
                 </Grid>
               </Box>
             </Box>
@@ -214,65 +173,6 @@ export const Login: React.FC = () => {
         </Box>
       </GoogleOAuthProvider>
     </ThemeProvider>
-  // <>
-  //     <Container maxWidth="xs">
-  //       <CssBaseline />
-  //       <Box
-  //         sx={{
-  //           mt: 20,
-  //           display: "flex",
-  //           flexDirection: "column",
-  //           alignItems: "center",
-  //         }}
-  //       >
-  //         <Avatar sx={{ m: 1, bgcolor: "primary.light" }}>
-  //           <LockOutlined />
-  //         </Avatar>
-  //         <Typography variant="h5">Login</Typography>
-  //         <Box sx={{ mt: 1 }}>
-  //           <TextField
-  //             margin="normal"
-  //             required
-  //             fullWidth
-  //             id="email"
-  //             label="Email Address"
-  //             name="email"
-  //             autoFocus
-  //             value={email}
-  //             onChange={(e) => setEmail(e.target.value)}
-  //           />
-
-  //           <TextField
-  //             margin="normal"
-  //             required
-  //             fullWidth
-  //             id="password"
-  //             name="password"
-  //             label="Password"
-  //             type="password"
-  //             value={password}
-  //             onChange={(e) => {
-  //               setPassword(e.target.value);
-  //             }}
-  //           />
-
-  //           <Button
-  //             fullWidth
-  //             variant="contained"
-  //             sx={{ mt: 3, mb: 2 }}
-  //             onClick={handleLogin}
-  //           >
-  //             Login
-  //           </Button>
-  //           <Grid container justifyContent={"flex-end"}>
-  //             <Grid item>
-  //               <Link to="/register">Don't have an account? Register</Link>
-  //             </Grid>
-  //           </Grid>
-  //         </Box>
-  //       </Box>
-  //     </Container>
-  //   </>
   );
 };
 
