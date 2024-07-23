@@ -4,6 +4,8 @@ import { UBTextArea } from "../../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
 import UBInfoTable from "../../../../../common/UBInfoTable/UBInfoTable";
+import { useSelector, useDispatch } from "react-redux";
+import { selectExpenditure, setExpenditure } from "../../../../../../store/features/KeyStatisticsreportSlice/financeReportSlice";
 
 const initialState = ["", "", ""];
 
@@ -15,93 +17,44 @@ const initialRows = [
 ];
 
 export const UBFinanceExpenditures: React.FC = () => {
-  const [state, setState] = useState<string[]>(initialState);
-  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Academic Level)");
+  const dispatch = useDispatch();
+  const expenditures = useSelector(selectExpenditure);
 
-  const questions = [
-    {
-      question: "2. Student Enrolment Trend (Academic Level)",
-      handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setState((prevState) => [prevState[0], prevState[1], value]);
-        console.log(value);
-      },
-      type: "table",
-      value: state[0],
-    },
-    {
-      question: "10. Capital Expenditures (List major projects below)",
-      handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setState((prevState) => [prevState[0], prevState[1], value]);
-        console.log(value);
-      },
-      type: "textarea",
-      value: state[1],
-    },
-    {
-      question: "11. Other expenditures",
-      handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setState((prevState) => [prevState[0], prevState[1], value]);
-        console.log(value);
-      },
-      type: "textarea",
-      value: state[2],
-    },
-  ];
+  const [state, setState] = useState<string[]>(initialState);
+
+  const handleCapitalExpendituresChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setExpenditure({ capitalExpenditures: e.target.value }));
+  };
+
+  const handleOtherExpendituresChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setExpenditure({ otherExpenditures: e.target.value }));
+  };
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-  {/* <Box sx={{ mt: "10%", width: "70%", ml: "15%", mb: "-30px" }}>
-    {enrollmentTrend}
-  </Box> */}
-  {questions.map((q, index) => {
-    return (
-      <Box key={index} mb={-4.7}>
-        {(() => {
-          if (q.type === "textarea") {
-            return (
-              <UBTextArea
-                question={q.question}
-                SetAnswer={q.handleSetAnswer}
-                value={q.value}
-              />
-            );
-          } else if (q.type === "dropdown") {
-            return (
-              <UbDropdown
-                label={q.question}
-                options={q.options}
-                handleSetValue={q.handleSetAnswer}
-                value={q.value}
-              />
-            );
-          } else if (q.type === "table") {
-            return (
-              <Box sx={{ mt: "-5%" }}>
-                <UBInfoTable
-                  columns={columns}
-                  initialRows={initialRows}
-                />
-              </Box>
-            );
-          } else if (q.type === "input") {
-            return (
-              <UBTextField
-                question={q.question}
-                SetAnswer={q.handleSetAnswer}
-                value={q.value}
-              />
-            );
-          }
-          return null;
-        })()}
+      {/* Section for Finance Expenditures */}
+      <Box sx={{ mt: "-5%" }}>
+        <UBInfoTable columns={columns} initialRows={initialRows} />
       </Box>
-    );
-  })}
-</Container>
 
+      {/* Section for Capital Expenditures */}
+      <Box mb={-4.7}>
+        <UBTextArea
+          question="10. Capital Expenditures (List major projects below)"
+          SetAnswer={handleCapitalExpendituresChange}
+          value={expenditures.capitalExpenditures}
+        />
+      </Box>
+
+      {/* Section for Other Expenditures */}
+      <Box mb={-4.7}>
+        <UBTextArea
+          question="11. Other expenditures"
+          SetAnswer={handleOtherExpendituresChange}
+          value={expenditures.otherExpenditures}
+        />
+      </Box>
+    </Container>
   );
 };
 

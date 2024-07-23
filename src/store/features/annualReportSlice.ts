@@ -68,12 +68,12 @@ interface IFinancialBudget {
 
 interface IMeetingUpdate {
   index: number;
-  field: keyof IActivity;
+  field: keyof IMeeting;
   value: any
 }
 
 
-interface IMeeting {
+export interface IMeeting {
   meetingId?: number;
   meetingType?: string;
   meetingDate?: string; // ISO date string

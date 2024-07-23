@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../store'; // Adjust the path according to your project structure
 
-interface Income {
+interface IIncome {
   fundingFromGoB: number;
   tuitionFees: number;
   contracts: number;
@@ -11,32 +11,33 @@ interface Income {
   total: number;
 }
 
-interface Expenditure {
+interface IExpenditure {
   teachingStaffCosts: number;
   nonTeachingStaffCosts: number;
   administrationCosts: number;
-  capitalExpenditures: number;
-  otherExpenditures: number;
+  capitalExpenditures: string;
+  otherExpenditures: string;
 }
 
-interface Investments {
+interface IInvestments {
   projectInvestment1: string;
   projectInvestment2: string;
   projectInvestment3: string;
 }
 
-interface FinanceReportState {
+
+interface IFinanceReportState {
   userID: string;
   academicYearID: string;
   department: string;
   deadline: string;
-  income: Income;
-  expenditure: Expenditure;
-  investments: Investments;
+  income: IIncome;
+  expenditure: IExpenditure;
+  investments: IInvestments;
 }
 
 // Initial State
-const financeReportInitialState: FinanceReportState = {
+const financeReportInitialState: IFinanceReportState = {
   userID: "",
   academicYearID: "",
   department: "",
@@ -54,14 +55,16 @@ const financeReportInitialState: FinanceReportState = {
     teachingStaffCosts: 0,
     nonTeachingStaffCosts: 0,
     administrationCosts: 0,
-    capitalExpenditures: 0,
-    otherExpenditures: 0,
+    capitalExpenditures: "",
+    otherExpenditures: "",
   },
   investments: {
     projectInvestment1: "",
     projectInvestment2: "",
     projectInvestment3: "",
   },
+
+  
 };
 
 const financeReportSlice = createSlice({
@@ -80,14 +83,14 @@ const financeReportSlice = createSlice({
     setDeadline: (state, action: PayloadAction<string>) => {
       state.deadline = action.payload;
     },
-    setIncome: (state, action: PayloadAction<Income>) => {
+    setIncome: (state, action: PayloadAction<IIncome>) => {
       state.income = action.payload;
     },
-    setExpenditure: (state, action: PayloadAction<Expenditure>) => {
-      state.expenditure = action.payload;
+    setExpenditure: (state, action: PayloadAction<Partial<IExpenditure>>) => {
+      state.expenditure = { ...state.expenditure , ...action.payload};
     },
-    setInvestments: (state, action: PayloadAction<Investments>) => {
-      state.investments = action.payload;
+    setInvestments: (state, action: PayloadAction<Partial<IInvestments>>) => {
+      state.investments = {...state.investments, ...action.payload};
     },
   },
 });
@@ -103,7 +106,6 @@ export const {
 } = financeReportSlice.actions;
 
 export const selectFinanceReport = (state: RootState) => state.financeReport;
-
 export const selectUserID = (state: RootState) => state.financeReport.userID;
 export const selectAcademicYearID = (state: RootState) => state.financeReport.academicYearID;
 export const selectDepartment = (state: RootState) => state.financeReport.department;

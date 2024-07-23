@@ -12,7 +12,7 @@ export const UBOtherComponents: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3 style={{ marginBottom: "-20px", marginTop: "10px" }}>
+      <h3 style={{ marginBottom: "-2%", marginTop: "10%" }}>
         <center>Other Components</center>
       </h3>
       <Box mb={-4.5}>

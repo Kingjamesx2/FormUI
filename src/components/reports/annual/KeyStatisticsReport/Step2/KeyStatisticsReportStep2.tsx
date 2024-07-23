@@ -13,7 +13,7 @@ export const KeyStatisticsReportStep2: React.FC = () => {
             <GraduationStatistics />
             <OriginOfStudents />
             <CampusStatistics />
-            < UBGraduatesByAgeAndDistrict/>
+            <UBGraduatesByAgeAndDistrict/>
         </Container>
     )
 }

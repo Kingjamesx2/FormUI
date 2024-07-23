@@ -156,7 +156,7 @@ export const Dashboard: React.FC = () => {
             </Typography>
             <UserPosition
               name="James Faber"
-              position="Software Engineer"
+              position="Database Administrator"
               profilePicture="src/components/icons/jamesFaber.jpeg"
             />
           </Toolbar>

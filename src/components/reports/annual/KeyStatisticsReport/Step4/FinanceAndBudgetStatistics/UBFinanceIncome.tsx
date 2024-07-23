@@ -24,8 +24,8 @@ export const UBFinanceIncome: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
   const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Academic Level)");
 
-  const dispatch = useDispatch();
-  const { income } = useSelector((state: RootState) => state.finance);
+  // const dispatch = useDispatch();
+  // const { income } = useSelector((state: RootState) => state.finance);
 
   const handleSetAnswer = (value: any) => {
     dispatch(setIncome(value));

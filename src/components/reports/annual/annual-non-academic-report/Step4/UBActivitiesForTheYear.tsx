@@ -1,120 +1,137 @@
-import React, { useState } from "react";
-import { Container, Box } from "@mui/material";
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import React, { useState, useEffect } from "react";
+import { Container, Box, IconButton } from "@mui/material";
+import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
-import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
-import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
-import RemoveCircleOutlinedIcon from '@mui/icons-material/RemoveCircleOutlined';
-import IconButton from '@mui/material/IconButton';
-
-const initialQuestionState = {
-  nameOfEvent: "",
-  personInPictures: "",
-  summaryOfEvents: "",
-  image: "",
-};
+import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import RemoveCircleOutlinedIcon from "@mui/icons-material/RemoveCircleOutlined";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  IActivity,
+  selectActivities,
+  addNewActivity,
+  updateActivity,
+} from "../../../../../store/features/annualNonReportSlice";
 
 export const UBActivitiesForTheYear = () => {
-  const [containers, setContainers] = useState([initialQuestionState]);
+  const dispatch = useDispatch();
+  const activitiesFromStore = useSelector(selectActivities);
+  const [activities, setActivitiesState] = useState([...activitiesFromStore]);
 
-  const handleSetAnswer = (
-    containerIndex: number,
-    questionKey: keyof typeof initialQuestionState,
-    value: string | FileList | null
-  ) => {
-    setContainers((prevContainers) => {
-      const newContainers = [...prevContainers];
-      newContainers[containerIndex] = {
-        ...newContainers[containerIndex],
-        [questionKey]: value as string, // Assuming value is a string or file name/path
-      };
-      return newContainers;
-    });
+  useEffect(() => {
+    setActivitiesState([...activitiesFromStore]);
+  }, [activitiesFromStore]);
+
+  const handleAddActivity = () => {
+    dispatch(addNewActivity());
   };
 
-  const addContainer = () => {
-    setContainers((prevContainers) => [...prevContainers, initialQuestionState]);
-  };
-
-  const removeContainer = (index: number) => {
-    if (index > 0) { // Ensure the first container is not removed
-      setContainers((prevContainers) =>
-        prevContainers.filter((_, i) => i !== index)
-      );
+  const handleRemoveActivity = (index: number) => {
+    if (index > 0) {
+      const newActivities = activities.filter((_, i) => i !== index);
+      setActivitiesState(newActivities);
     }
   };
 
-  const handleImageUpload = (containerIndex: number, event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    handleSetAnswer(containerIndex, "image", files ? files[0].name : null);
+  const handleChange = (index: number, field: keyof IActivity, value: any) => {
+    dispatch(updateActivity({ index, field, value }));
+  };
+
+  const handleImageChange = (index: number, files: FileList) => {
+    const imageURLs = Array.from(files).map((file) => URL.createObjectURL(file));
+    handleChange(index, "eventPicture", imageURLs);
   };
 
   return (
-    <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3 style={{ marginTop: "5%", marginBottom: "1%" }}>
-        <center>Activities for the year - List activities conducted during the year under review.</center>
+    <Container sx={{ width: 1, m: 1, mb: "100px", p: 1 }}>
+      <h3 style={{ marginBottom: "2%", marginTop: "6%" }}>
+        <center>
+          Activities for the year - List activities conducted during the year
+          under review.
+        </center>
       </h3>
-      {containers.map((container, containerIndex) => (
-        <Box key={containerIndex} mb={"-2%"} p={"2%"} >
-          <Box mb={"-4.4%"} display="flex" alignItems="Left" sx={{width: "69.9%", border: "1px solid", backgroundColor: "#FFD954", ml: "14.4%", borderTopLeftRadius: "5px", borderTopRightRadius: "5px"}}>
-            <Box sx={{ display: "flex",  ml: "-10%", mb: "4%", width: "80%", }}>
-              <UBTextField
-                question="Name Of event: "
-                SetAnswer={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleSetAnswer(containerIndex, "nameOfEvent", e.target.value)
-                }
-                value={container.nameOfEvent}
-              />
-            </Box>
-            <Box sx={{ ml:"-5%", mt: "1.5%"}}>
-              <label>Picture of events</label>
-              <IconButton component="label">
-                <AddPhotoAlternateIcon />
-                <input
-                  type="file"
-                  accept="image/*"
-                  hidden
-                  onChange={(e) => handleImageUpload(containerIndex, e)}
-                />
-              </IconButton>
-              {container.image && <span>{container.image}</span>}
-            </Box>
+
+      {activities.map((activity, index) => (
+        <Box key={index} mb={4}>
+          <Box mb={-6.5}>
+            <UBTextField
+              question="Name of Event"
+              SetAnswer={(e) =>
+                handleChange(index, "eventName", e.target.value)
+              }
+              value={activity.eventName}
+            />
           </Box>
-          <Box mb={"-4.5%"} sx={{ ml:"0.2%" , width: "98.5%"}}>
+
+          <Box mb={-6.5}>
             <UBTextField
               question="Name of person/s in the pictures"
-              SetAnswer={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleSetAnswer(containerIndex, "personInPictures", e.target.value)
+              SetAnswer={(e) =>
+                handleChange(index, "personsInPicture", e.target.value)
               }
-              value={container.personInPictures}
+              value={activity.personsInPicture}
             />
           </Box>
-          <Box mb={"-4.5%"} sx={{ ml:"0.2%" , width: "98.5%"}}>
+
+          <Box mb={-6.5}>
             <UBTextField
-              question="Month of Event"
-              SetAnswer={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleSetAnswer(containerIndex, "personInPictures", e.target.value)
+              question="Month of Event."
+              SetAnswer={(e) =>
+                handleChange(index, "eventMonth", e.target.value)
               }
-              value={container.personInPictures}
+              value={activity.eventMonth}
             />
           </Box>
-          <Box mb={"-4.5%"} mt={"-7.2%"} ml={"-0.41%"} width={"99.84%"}>
+
+          <Box mb={"0%"} sx={{ width: "101.4%", ml: "-0.7%", mt: "-7%"}}>
             <UBTextArea
-              question="Summary of Events"
-              SetAnswer={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleSetAnswer(containerIndex, "summaryOfEvents", e.target.value)
+              question="Summary of the event."
+              SetAnswer={(e) =>
+                handleChange(index, "eventSummary", e.target.value)
               }
-              value={container.summaryOfEvents}
+              value={activity.eventSummary}
             />
           </Box>
-          <Box display="flex" justifyContent="center" sx={{ mt: '5%' }}>
-            <IconButton onClick={addContainer}>
-              <AddCircleRoundedIcon sx={{color: "#FFD954"}}/>
+
+          <Box sx={{ width: "69%", ml: "14.5%", mb: "0%", p: "1%", bgcolor: "#FFD954"}}>
+            <IconButton
+              sx={{ }}
+              size="small"
+              aria-label="upload picture"
+              component="label"
+            >
+              <AddPhotoAlternateOutlinedIcon
+                sx={{ color: "", fontSize: 30 }}
+              />
+              <input
+                hidden
+                accept="image/*"
+                type="file"
+                multiple
+                onChange={(e) =>
+                  handleImageChange(index, e.target.files)
+                }
+              />
             </IconButton>
-            {containerIndex > 0 && (
-              <IconButton onClick={() => removeContainer(containerIndex)}>
-                <RemoveCircleOutlinedIcon sx={{color: "#FFD954"}}/>
+            <Box>
+              {activity.eventPicture && activity.eventPicture.map((url, picIndex) => (
+                <img
+                  key={picIndex}
+                  src={url}
+                  alt={`Preview ${picIndex + 1}`}
+                  style={{ width: "100px", height: "100px", margin: "5px" }}
+                />
+              ))}
+            </Box>
+          </Box>
+
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: "2%" }}>
+            <IconButton onClick={handleAddActivity}>
+              <AddCircleRoundedIcon sx={{color: "#FFD954", cursor: "pointer" }} />
+            </IconButton>
+            {index > 0 && (
+              <IconButton onClick={() => handleRemoveActivity(index)}>
+                <RemoveCircleOutlinedIcon sx={{ color: "#FFD954", cursor: "pointer", ml: 1  }} />
               </IconButton>
             )}
           </Box>

@@ -63,7 +63,7 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
   const allStepsCompleted = () => completedSteps() === totalSteps();
 
   const handleNext = () => {
-    if (isLastStep() && allStepsCompleted()) {
+    if (isLastStep()) {
       // Handle submit logic here
       console.log("Form submitted");
       window.alert("Form submitted");

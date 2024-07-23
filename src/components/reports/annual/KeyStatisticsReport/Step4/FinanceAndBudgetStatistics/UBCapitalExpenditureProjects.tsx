@@ -4,65 +4,30 @@ import Box from "@mui/material/Box";
 import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../../common/Textarea/UBTextArea";
 import { UbDropdown } from "../../../../../UbDropdown/UbDropdown";
+import { useSelector, useDispatch } from "react-redux";
+import { selectInvestments, setInvestments } from "../../../../../../store/features/KeyStatisticsreportSlice/financeReportSlice"
 
 const initialState = ["", "", ""];
 
 export const CapitalExpenditureProjects: React.FC = () => {
+  const dispatch = useDispatch();
+  const investments = useSelector(selectInvestments);
   const [state, setState] = useState<string[]>(initialState);
 
-  const questions = [
-    {
-      question: "12. Major Capital Expenditure Projects / Investments (buildings etc.)",
-      handleSetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const value = e.target.value;
-        console.log(e.target.value);
-        setState((prevState) => {
-          const newState = [...prevState];
-          newState[0] = value;
-          return newState;
-        });
-      },
-      type: "textarea",
-      value: state[0],
-    },
-   
-  ];
+  const handleSetAnswer = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setInvestments({ projectInvestment1: e.target.value }));
+  };
 
   return (
     <div>
       <Container sx={{ width: 1, m: 1, p: 1 }}>
-        {questions.map((q, index) => {
-          if (q.type === "textarea") {
-            return (
-              <Box sx={{ mt:"-2.5%"}}>
-              <UBTextArea
-                key={index}
-                question={q.question}
-                SetAnswer={q.handleSetAnswer}
-                value={q.value}
-              />
-              </Box>
-            );
-          } else if (q.type === "dropdown") {
-            return (
-              <UbDropdown
-                label={q.question}
-                options={q.options}
-                handleSetValue={q.handleSetAnswer}
-                value={q.value}
-              />
-            );
-          } else if (q.type === "input") {
-            return (
-              <UBTextField
-                key={index}
-                question={q.question}
-                SetAnswer={q.handleSetAnswer}
-                value={q.value}
-              />
-            );
-          }
-        })}
+        <Box sx={{ mt:"-2.5%"}}>
+          <UBTextArea
+            question="12. Major Capital Expenditure Projects / Investments (buildings etc.)"
+            SetAnswer={handleSetAnswer}
+            value={investments.projectInvestment1}
+          />
+        </Box>
       </Container>
     </div>
   );
