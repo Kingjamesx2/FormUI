@@ -15,13 +15,13 @@ import {
   CircularProgress,
   Alert,
 } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import {
-  loginStart,
-  loginSuccess,
-  loginFailure,
-} from '../../store/features/authSlice';
+// import {
+//   loginStart,
+//   loginSuccess,
+//   loginFailure,
+// } from '../../store/features/authSlice';
 import './Login.scss';
 import { useLoginMutation } from '../../store/services/authAPI';
 
@@ -33,8 +33,6 @@ type FormValue = {
 };
 
 export const Login = () => {
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
   const { loading, error } = useSelector((state: RootState) => state.auth);
   const {
     register,
