@@ -21,7 +21,7 @@ import UbLogo from "../../components/icons/UB_Logo.png";
 import FormCard from "../../components/common/Card/FormCard";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
-import { getUser, logout } from "../../store/features/authSlice";
+import { logout } from "../../store/features/authSlice";
 import { useNavigate } from "react-router-dom";
 
 
@@ -84,23 +84,23 @@ export const Dashboard: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const basicUserInfo = useAppSelector((state) => state.auth.basicUserInfo);
-  const userProfileInfo = useAppSelector((state) => state.auth.userProfileData);
+  // const basicUserInfo = useAppSelector((state) => state.auth.basicUserInfo);
+  // const userProfileInfo = useAppSelector((state) => state.auth.userProfileData);
 
-  useEffect(() => {
-    if (basicUserInfo) {
-      dispatch(getUser(basicUserInfo.id));
-    }
-  }, [basicUserInfo]);
+  // useEffect(() => {
+  //   if (basicUserInfo) {
+  //     dispatch(getUser(basicUserInfo.id));
+  //   }
+  // }, [basicUserInfo]);
 
-  const handleLogout = async () => {
-    try {
-      await dispatch(logout()).unwrap();
-      navigate("/login");
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  // const handleLogout = async () => {
+  //   try {
+  //     await dispatch(logout()).unwrap();
+  //     navigate("/login");
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
 
 //-----------------------------------------------------------------------------
   const items = [

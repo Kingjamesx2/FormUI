@@ -6,7 +6,9 @@ import recordsReportReducer from "./features/KeyStatisticsreportSlice/recordsRep
 import hrReportReducer from "./features/KeyStatisticsreportSlice/HRReportSlice";
 import financeReportReduce from "./features/KeyStatisticsreportSlice/financeReportSlice";
 import authReducer from "./../store/features/authSlice";
-import userReducer from "./../store/features/authSlice";
+import userReducer from "./../store/features/userSlice";
+import { baseAPI } from "./services/baseAPI";
+import { authAPI } from "./services/authAPI";
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +19,14 @@ export const store = configureStore({
     financeReport: financeReportReduce,
     auth: authReducer,
     user: userReducer,
+    [baseAPI.reducerPath]: baseAPI.reducer,
+    // [authAPI.reducerPath]: authAPI.reducer
   },
+  middleware: (getDefaultMiddleware) => (
+    getDefaultMiddleware().concat(
+      baseAPI.middleware,
+      authAPI.middleware
+    ))
 });
 
 export type RootState = ReturnType<typeof store.getState>;

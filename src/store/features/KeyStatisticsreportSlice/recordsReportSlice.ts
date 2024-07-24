@@ -7,6 +7,7 @@ interface ICurrentStudentEnrollment {
   graduate: number;
 }
 
+//per faculty 
 interface IEnrollmentTrend {
   academicYear: string;
   associate: number;

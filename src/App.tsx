@@ -8,6 +8,8 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import AnnualAcademicReport from './pages/Reports/AnnualAcademicReport';
 import AnnualNonAcademicReport from './pages/Reports/AnnualNonAcademicReport';
 import KeyStatisticsReport from './pages/Reports/KeyStatisticsReport';
+import PrivateRoute from '../src/components/UBPrivateRoute/UBPrivateRoute';
+
 
 
 const App: React.FC = () => {
@@ -15,11 +17,13 @@ const App: React.FC = () => {
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route index element={< Dashboard />} />
           <Route path="/Login" element={<Login/>}/>
+          <Route element={<PrivateRoute />}>
+          <Route index element={< Dashboard />} />
           <Route path="/AnnualAcademicReport" element={< AnnualAcademicReport />} />
           <Route path="/AnnualNonAcademicReport" element={< AnnualNonAcademicReport />} />
           <Route path="/KeyStatisticsReport" element={< KeyStatisticsReport />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </Provider>
