@@ -23,7 +23,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 import { logout } from "../../store/features/authSlice";
 import { useNavigate } from "react-router-dom";
-
+import { useStaffReportMutation } from "../../store/services/annualReport";
 
 
 const drawerWidth: number = 240;
@@ -80,27 +80,10 @@ const defaultTheme = createTheme();
 
 export const Dashboard: React.FC = () => {
 
-  //-----------------------------------------------------------------------
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+//  const [ annualReport, { data: annualReportResult, error: annualReportError, isSuccess: annualReportIsSuccess}] = useStaffReportMutation
 
-  // const basicUserInfo = useAppSelector((state) => state.auth.basicUserInfo);
-  // const userProfileInfo = useAppSelector((state) => state.auth.userProfileData);
 
-  // useEffect(() => {
-  //   if (basicUserInfo) {
-  //     dispatch(getUser(basicUserInfo.id));
-  //   }
-  // }, [basicUserInfo]);
 
-  // const handleLogout = async () => {
-  //   try {
-  //     await dispatch(logout()).unwrap();
-  //     navigate("/login");
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // };
 
 //-----------------------------------------------------------------------------
   const items = [
@@ -185,7 +168,7 @@ export const Dashboard: React.FC = () => {
           </Toolbar>
           <Divider />
           <List component="nav">
-            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+            <Link to="/"  onClick={() => handleFormClick('AnnualAcademicReport', '/AnnualAcademicReport')} style={{ textDecoration: "none", color: "black" }}>
               <ListItems />
             </Link>
           </List>

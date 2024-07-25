@@ -1,1 +1,1 @@
-export const BACKEND_BASE_URL = "http://localhost:8088";
+export const BACKEND_BASE_URL = "https://api.ub.edu.bz/api";

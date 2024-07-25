@@ -12,15 +12,15 @@ export const FacultyMissionStatement = () => {
   const missionStatement = useSelector(selectMissionStatement);
   const [deadline, setDeadline] = useState<string>("* Deadline is Friday of the first week in August");
   
-  axiosInstance.get('/staffReport/668c5b32e15b11267102aa13')
-    .then(function (response) {
-      // handle success
-      console.log(response);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    });
+  // axiosInstance.get('/staffReport/668c5b32e15b11267102aa13')
+  //   .then(function (response) {
+  //     // handle success
+  //     console.log(response);
+  //   })
+  //   .catch(function (error) {
+  //     // handle error
+  //     console.log(error);
+  //   });
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>

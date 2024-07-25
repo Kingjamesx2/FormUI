@@ -7,8 +7,10 @@ import hrReportReducer from "./features/KeyStatisticsreportSlice/HRReportSlice";
 import financeReportReduce from "./features/KeyStatisticsreportSlice/financeReportSlice";
 import authReducer from "./../store/features/authSlice";
 import userReducer from "./../store/features/userSlice";
+// import reportSlice from "./features/reportSlice";
 import { baseAPI } from "./services/baseAPI";
 import { authAPI } from "./services/authAPI";
+import { annualReportAPI } from "./services/annualReport";
 
 export const store = configureStore({
   reducer: {
@@ -25,7 +27,8 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) => (
     getDefaultMiddleware().concat(
       baseAPI.middleware,
-      authAPI.middleware
+      authAPI.middleware,
+      annualReportAPI.middleware
     ))
 });
 

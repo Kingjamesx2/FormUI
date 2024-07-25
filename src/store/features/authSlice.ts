@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { RootState } from "../../store/store"; // Ensure these imports match your project structure
 
 interface AuthState {
   token: string | null;
@@ -6,41 +7,46 @@ interface AuthState {
   error: string | null;
 }
 
+interface IRequest {
+  token: string | null;
+  error: string | null;
+  loading: boolean;
+
+}
+
 const initialState: AuthState = {
   token: null,
   loading: false,
   error: null,
+  
 };
 
+// Slice
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     setAuthData(state, action: PayloadAction<AuthState>) {
-      return {
-        ...state,
-        token: action.payload.token
-      }
+      state.token = action.payload.token;
     },
-    loginStart(state) {
-      state.loading = true;
-      state.error = null;
-    },
-    loginSuccess(state, action: PayloadAction<string>) {
-      state.loading = false;
-      state.token = action.payload;
-    },
-    loginFailure(state, action: PayloadAction<string>) {
-      state.loading = false;
-      state.error = action.payload;
-    },
+
     logout(state) {
       state.token = null;
     },
   },
 });
 
-export const { setAuthData, loginStart, loginSuccess, loginFailure, logout } =
-  authSlice.actions;
+export const requestSlice = createSlice({
+  name: "request",
+  initialState,
+  reducers: {
+    setRequest(state, action: PayloadAction<IRequest>) {
+      state.token = action.payload.token;
+    },
+  },
+});
+
+export const { setAuthData, logout } = authSlice.actions;
+export const { setRequest } = requestSlice.actions;
 
 export default authSlice.reducer;

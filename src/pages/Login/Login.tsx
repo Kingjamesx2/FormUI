@@ -17,11 +17,6 @@ import {
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-// import {
-//   loginStart,
-//   loginSuccess,
-//   loginFailure,
-// } from '../../store/features/authSlice';
 import './Login.scss';
 import { useLoginMutation } from '../../store/services/authAPI';
 

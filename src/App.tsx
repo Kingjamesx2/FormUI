@@ -8,7 +8,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import AnnualAcademicReport from './pages/Reports/AnnualAcademicReport';
 import AnnualNonAcademicReport from './pages/Reports/AnnualNonAcademicReport';
 import KeyStatisticsReport from './pages/Reports/KeyStatisticsReport';
-import PrivateRoute from '../src/components/UBPrivateRoute/UBPrivateRoute';
+import PrivateRoute from './components/UBPrivateRoute/UBPrivateRoute';
 
 
 
@@ -18,12 +18,12 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/Login" element={<Login/>}/>
-          <Route element={<PrivateRoute />}>
+          {/* <Route element={<PrivateRoute />}> */}
           <Route index element={< Dashboard />} />
           <Route path="/AnnualAcademicReport" element={< AnnualAcademicReport />} />
           <Route path="/AnnualNonAcademicReport" element={< AnnualNonAcademicReport />} />
           <Route path="/KeyStatisticsReport" element={< KeyStatisticsReport />} />
-          </Route>
+          {/* </Route> */}
         </Routes>
       </BrowserRouter>
     </Provider>
