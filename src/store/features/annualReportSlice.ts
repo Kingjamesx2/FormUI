@@ -102,7 +102,7 @@ interface IDegreesConferred {
   degreesConferredForMostRecentAcademicYearPerDepartment: number | null;
 }
 
-interface AnnualReportInitialState {
+export interface AnnualReportInitialState {
   academicYearID: string;
   departmentList: string;
   faculty: string;

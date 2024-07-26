@@ -18,12 +18,12 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/Login" element={<Login/>}/>
-          {/* <Route element={<PrivateRoute />}> */}
+          <Route element={<PrivateRoute />}>
           <Route index element={< Dashboard />} />
           <Route path="/AnnualAcademicReport" element={< AnnualAcademicReport />} />
           <Route path="/AnnualNonAcademicReport" element={< AnnualNonAcademicReport />} />
           <Route path="/KeyStatisticsReport" element={< KeyStatisticsReport />} />
-          {/* </Route> */}
+          </Route>
         </Routes>
       </BrowserRouter>
     </Provider>

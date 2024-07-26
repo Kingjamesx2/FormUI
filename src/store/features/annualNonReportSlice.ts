@@ -81,7 +81,7 @@ export interface IMeeting {
   meetingMinutesURL?: string;
 }
 
-interface annualNonReportInitialState {
+export interface annualNonReportInitialState {
   academicYearID: string;
   division: string;
   reportsTo: string;

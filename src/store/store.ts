@@ -10,7 +10,7 @@ import userReducer from "./../store/features/userSlice";
 // import reportSlice from "./features/reportSlice";
 import { baseAPI } from "./services/baseAPI";
 import { authAPI } from "./services/authAPI";
-import { annualReportAPI } from "./services/annualReport";
+import { annualReportAPI } from "./services/annualReportAPI";
 
 export const store = configureStore({
   reducer: {

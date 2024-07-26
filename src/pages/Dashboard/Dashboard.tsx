@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -19,12 +19,10 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import UserPosition from "../../components/UserPosition/UserPosition";
 import UbLogo from "../../components/icons/UB_Logo.png";
 import FormCard from "../../components/common/Card/FormCard";
-import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
-import { logout } from "../../store/features/authSlice";
-import { useNavigate } from "react-router-dom";
-import { useStaffReportMutation } from "../../store/services/annualReport";
-
+import { Link, /*useNavigate */} from "react-router-dom";
+// import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
+// import { logout } from "../../store/features/authSlice";
+import { useFetchAnnualReportQuery } from "../../store/services/annualReportAPI";
 
 const drawerWidth: number = 240;
 
@@ -79,20 +77,10 @@ const Drawer = styled(MuiDrawer, {
 const defaultTheme = createTheme();
 
 export const Dashboard: React.FC = () => {
-
-//  const [ annualReport, { data: annualReportResult, error: annualReportError, isSuccess: annualReportIsSuccess}] = useStaffReportMutation
-
-
-
-
-//-----------------------------------------------------------------------------
-  const items = [
-    "UB Annual Report Template Academic Division",
-    "UB Annual Report Template Non-Academic Division",
-    "University of Belize Key Statistics Template",
-  ];
-
+  const [skipAnnualReport, setSkipAnnualReport] = useState(true)
+  const {data: annualReport, refetch: refetchAnnaulReport } = useFetchAnnualReportQuery(1);
   const [open, setOpen] = useState(true);
+  const isSmallScreen = useMediaQuery("(max-width:600px)");
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -103,7 +91,19 @@ export const Dashboard: React.FC = () => {
     // Add your search logic here
   };
 
-  const isSmallScreen = useMediaQuery("(max-width:600px)");
+  const handleFormClick = async (reportType: string) => {
+    try {
+      skipAnnualReport ? setSkipAnnualReport(false) : false
+      refetchAnnaulReport()
+      console.log("API result:");
+    } catch (error) {
+      console.error("API error:", error);
+    }
+  };
+
+  useEffect(() => {
+    console.log('annualReport ', annualReport)
+  }, [annualReport])
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -168,7 +168,7 @@ export const Dashboard: React.FC = () => {
           </Toolbar>
           <Divider />
           <List component="nav">
-            <Link to="/"  onClick={() => handleFormClick('AnnualAcademicReport', '/AnnualAcademicReport')} style={{ textDecoration: "none", color: "black" }}>
+            <Link to="/"  style={{ textDecoration: "none", color: "black" }}>
               <ListItems />
             </Link>
           </List>
@@ -218,6 +218,7 @@ export const Dashboard: React.FC = () => {
                 <Link
                   to="/AnnualAcademicReport"
                   style={{ textDecoration: "none" }}
+                  onClick={() => handleFormClick('UB Annual Report Template Academic Division')}
                 >
                   <FormCard
                     formPreview="src/components/icons/annualReport.png"

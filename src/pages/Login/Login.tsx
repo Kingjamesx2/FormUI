@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import UBLogo from './../../components/icons/UB_Logo.png';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import {
   Container,
   CssBaseline,
@@ -13,7 +12,7 @@ import {
   Button,
   Grid,
   CircularProgress,
-  Alert,
+  
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
@@ -35,23 +34,22 @@ export const Login = () => {
     formState: { errors },
   } = useForm<FormValue>();
 
+  const navigate = useNavigate();
+
   const [login, { data: loginResult, error: loginError, isSuccess: loginIsSuccess }] = useLoginMutation();
   const [consoleMessage, setConsoleMessage] = useState<string | null>(null);
 
-  const onLogin = async (data: any) => {
-    // Extract the second item from the data object
-    const secondItem = Object.values(data)[1];
-    setConsoleMessage(secondItem);
-    await login(data);
-  };
+  const onLogin = async (data: any) => await login(data);
 
   useEffect(() => {
-    if (loginResult) {
-      const secondItem = Object.values(loginResult)[1];
-      setConsoleMessage(secondItem);
-    } else if (loginError) {
-      setConsoleMessage(loginError.toString());
-    }
+    if(loginError)
+      setConsoleMessage(loginError?.error!);
+    
+    if(!loginResult?.success)
+      setConsoleMessage(loginResult?.message);
+    else
+      navigate('/');
+
   }, [loginResult, loginError, loginIsSuccess]);
 
   return (
@@ -133,7 +131,7 @@ export const Login = () => {
                   required: 'Password is required',
                   minLength: {
                     value: 1,
-                    message: 'Password should be at least 10 characters',
+                    message: 'Password should be at least 1 characters',
                   },
                 })}
               />
