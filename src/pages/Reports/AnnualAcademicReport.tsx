@@ -10,7 +10,7 @@ import Header from '../../components/common/Header/Header';  // Import the Heade
 // import { zodResolver } from "@hookform/resolvers/zod"
 // import { useForm } from "react-hook-form"
 // import { z } from "zod"
-
+import useSaveAnnualFormHook from '../../hooks/useSaveAnnualFormHook';
 
 
 const steps = [
@@ -22,9 +22,7 @@ const steps = [
 ];
 
 export const AnnualAcademicReport: React.FC = () => {
-
-
-
+  useSaveAnnualFormHook()
 
   return (
     <div>

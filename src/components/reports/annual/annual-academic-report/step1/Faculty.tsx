@@ -1,36 +1,26 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
-import { UBTextField } from "../../../../common/UBTextField/UBTextField";
+// import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { useSelector, useDispatch } from "react-redux";
 import Typography from "@mui/material/Typography";
+import { selectAnnualReport } from "../../../../../store/features/annualReportSlice";
 
 import {
-  setAcademicYearID,
-  selectAcademicYearID,
   setDepartmentList,
-  selectDepartmentList,
-  setFaculty,
-  selectFaculty,
-  setDean,
-  selectDean,
+  setFaculty
 } from "../../../../../store/features/annualReportSlice";
 
 export const Faculty = () => {
   const dispatch = useDispatch();
-  const academicYearID = useSelector(selectAcademicYearID);
-  const departmentList = useSelector(selectDepartmentList);
-  const faculty = useSelector(selectFaculty);
-  const dean = useSelector(selectDean);
+  const annualReport = useSelector(selectAnnualReport)
 
-  const [summary, setSummary] = useState<string>(
-    "The annual report provides a comprehensive summary of the University’s activities for the academic year, which is from August to July. The specific outputs/outcomes are based on the Annual Implementation Plan for the period under review."
-  );
-  const [academicYear, setAcademicYear] = useState<string>(
-    "Academic Year: 2023-2024"
-  );
+  useEffect(() => {
+
+  }, [annualReport])
+
   return (
     <Container>
       <Box>
@@ -45,7 +35,7 @@ export const Faculty = () => {
             borderTopRightRadius: "5px",
           }}
         >
-          {summary}
+          The annual report provides a comprehensive summary of the University’s activities for the academic year, which is from August to July. The specific outputs/outcomes are based on the Annual Implementation Plan for the period under review.
         </Box>
         <Box
           sx={{
@@ -58,7 +48,7 @@ export const Faculty = () => {
             borderTopRightRadius: "5px",
           }}
         >
-          <Typography sx={{ fontWeight: "bold" }}>{academicYear}</Typography>
+          <Typography sx={{ fontWeight: "bold" }}>Academic Year: 2023-2024</Typography>
         </Box>
         <Box
           sx={{
@@ -84,51 +74,17 @@ export const Faculty = () => {
               { value: "FST", label: "Faculty of Science & Technology" },
             ]}
             SetAnswer={(e) => dispatch(setFaculty(e.target.value as string))}
-            value={faculty}
-          />
-        </Box>
-        <Box
-          sx={{
-            width: "70%",
-            marginTop: "-0.5%",
-            marginLeft: "15%",
-            paddingBottom: "2%",
-            paddingTop: "3%",
-            backgroundColor: "#FFD954",
-            borderBottomLeftRadius: "none",
-            borderBottomRightRadius: "none",
-          }}
-        >
-          <UbDropdown
-            label="Dean"
-            options={[
-              { value: "Dr Nadine Tun", label: "Dr Nadine Tun" },
-              {
-                value: "Dr Somanandevi Thiagarajan",
-                label: "Dr Somanandevi Thiagarajan",
-              },
-              { value: "Dr Lisa Johnson", label: "Dr Lisa Johnson" },
-              { value: "Dr Apolonio Aguilar", label: "Dr Apolonio Aguilar" },
-            ]}
-            SetAnswer={(e) => dispatch(setDean(e.target.value as string))}
-            value={dean}
+            value={annualReport.faculty}
           />
         </Box>
       </Box>
-      {/* <Box sx={{ mt: "-4%", mb: "4%", width: "98.6%", ml: "0.7%" }}>
-        <UBTextField
-          question="Academic Year"
-          SetAnswer={(e) => dispatch(setAcademicYearID(e.target.value))}
-          value={academicYearID}
-        />
-      </Box> */}
       <Box sx={{ mt: "-4.5%", mb: "4%" }}>
         <UBTextArea
           question="List all units/departments/centres/institutes within the Faculty"
           SetAnswer={(e) =>
             dispatch(setDepartmentList(e.target.value as string))
           }
-          value={departmentList}
+          value={annualReport.departmentList}
         />
       </Box>
     </Container>

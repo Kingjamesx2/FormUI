@@ -1,8 +1,6 @@
 import { baseAPI } from "./baseAPI";
 import {AnnualReportInitialState, setAnnualReportState} from "../../store/features/annualReportSlice"
 
-
-
 export const annualReportAPI = baseAPI.injectEndpoints({
     endpoints: (builder) => ({
         fetchAnnualReport: builder.query({
@@ -13,6 +11,8 @@ export const annualReportAPI = baseAPI.injectEndpoints({
             async onQueryStarted(id, {dispatch, queryFulfilled}) {
                 try {
                     const { data } = await queryFulfilled
+
+                    console.log('ata.data.reportData ===>>> ', data.data.reportData)
 
                     if(data?.data?.reportData)
                         dispatch(setAnnualReportState(data.data.reportData))
@@ -33,6 +33,5 @@ export const annualReportAPI = baseAPI.injectEndpoints({
 
 
 export const {
-    // useLoginMutation
     useFetchAnnualReportQuery, useUpdateAnnualReportMutation
 } = annualReportAPI
