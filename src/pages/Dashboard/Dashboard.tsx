@@ -48,31 +48,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  "& .MuiDrawer-paper": {
-    position: "relative",
-    whiteSpace: "nowrap",
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    boxSizing: "border-box",
-    ...(!open && {
-      overflowX: "hidden",
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      width: theme.spacing(7),
-      [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(9),
-      },
-    }),
-  },
-}));
+
 
 const defaultTheme = createTheme();
 
@@ -82,15 +58,7 @@ export const Dashboard: React.FC = () => {
   const [open, setOpen] = useState(true);
   const isSmallScreen = useMediaQuery("(max-width:600px)");
 
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
-
-  const handleSearch = (searchTerm: string) => {
-    console.log("Search term:", searchTerm);
-    // Add your search logic here
-  };
-
+ 
   const handleFormClick = async (reportType: string) => {
     try {
       skipAnnualReport ? setSkipAnnualReport(false) : false
@@ -109,7 +77,7 @@ export const Dashboard: React.FC = () => {
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar position="absolute">
           <Toolbar
             sx={{
               backgroundColor: "#6C3777",
@@ -122,13 +90,7 @@ export const Dashboard: React.FC = () => {
               noWrap
               sx={{ flexGrow: 1, ml: "6%" }}
             >
-              {/* <SearchBar onSearch={handleSearch} showIconOnly={isSmallScreen}/> */}
             </Typography>
-            <UserPosition
-              name="James Faber"
-              position="Database Administrator"
-              profilePicture="src/components/icons/jamesFaber.jpeg"
-            />
           </Toolbar>
         </AppBar>
 
