@@ -220,6 +220,9 @@ const annualReportSlice = createSlice({
   name: 'annualReport',
   initialState,
   reducers: {
+    setAnnualReportState: (state, action: PayloadAction<AnnualReportInitialState>) => {
+      state = action.payload;
+    },
     setAcademicYearID: (state, action: PayloadAction<string>) => {
       state.academicYearID = action.payload;
     },
@@ -377,6 +380,7 @@ const annualReportSlice = createSlice({
 });
 
 export const {
+  setAnnualReportState,
   setAcademicYearID,
   setDepartmentList,
   setFaculty,

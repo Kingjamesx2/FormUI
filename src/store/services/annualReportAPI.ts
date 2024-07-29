@@ -1,5 +1,5 @@
 import { baseAPI } from "./baseAPI";
-import {AnnualReportInitialState} from "../../store/features/annualReportSlice"
+import {AnnualReportInitialState, setAnnualReportState} from "../../store/features/annualReportSlice"
 
 
 
@@ -12,9 +12,10 @@ export const annualReportAPI = baseAPI.injectEndpoints({
             }),
             async onQueryStarted(id, {dispatch, queryFulfilled}) {
                 try {
-                    console.log(id)
                     const { data } = await queryFulfilled
-                    console.log(data)
+
+                    if(data?.data?.reportData)
+                        dispatch(setAnnualReportState(data.data.reportData))
                 } catch(e) {
                     console.error(e)
                 }
