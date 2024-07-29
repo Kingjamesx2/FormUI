@@ -11,12 +11,9 @@ const useSaveNonAnnualFormHook = () => {
     const annualNonReport = useSelector(selectAnnualNonReport)
     
     useEffect(() => {
-        console.warn(annualNonReport)
         const triggerSaveForm = async () => await saveForm(annualNonReport)
 
         triggerSaveForm()
-
-        console.log(data, error, isSuccess)
 
     }, [annualNonReport])
 

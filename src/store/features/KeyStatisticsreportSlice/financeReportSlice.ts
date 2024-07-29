@@ -27,6 +27,7 @@ interface IInvestments {
 
 
 interface IFinanceReportState {
+  _id: string;
   userID: string;
   academicYearID: string;
   department: string;
@@ -38,6 +39,7 @@ interface IFinanceReportState {
 
 // Initial State
 const financeReportInitialState: IFinanceReportState = {
+  _id: "",
   userID: "",
   academicYearID: "",
   department: "",

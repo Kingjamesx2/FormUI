@@ -8,17 +8,14 @@ import { selectRecordReport } from "../../store/features/KeyStatisticsreportSlic
 
 const useSaveRecordFormHook = () => {
     const [saveForm, { data, error, isSuccess, isLoading }] = useUpdateRecordReportMutation();
-    const RecordReport = useSelector(selectRecordReport)
+    const record = useSelector(selectRecordReport)
     
     useEffect(() => {
-        console.warn(RecordReport)
-        const triggerSaveForm = async () => await saveForm(RecordReport)
+        const triggerSaveForm = async () => await saveForm(record)
 
         triggerSaveForm()
 
-        console.log(data, error, isSuccess)
-
-    }, [RecordReport])
+    }, [record])
 
     return { data, error, isLoading, isSuccess }
 }

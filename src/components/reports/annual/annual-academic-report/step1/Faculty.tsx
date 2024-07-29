@@ -17,10 +17,6 @@ export const Faculty = () => {
   const dispatch = useDispatch();
   const annualReport = useSelector(selectAnnualReport)
 
-  useEffect(() => {
-
-  }, [annualReport])
-
   return (
     <Container>
       <Box>

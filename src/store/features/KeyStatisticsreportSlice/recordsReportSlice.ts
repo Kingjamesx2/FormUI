@@ -55,7 +55,7 @@ interface IGraduates {
 }
 
 export interface RecordsReportState {
-  // userID: string;
+  _id: string;
   academicYearID: string;
   department: string;
   departmentHead: string;
@@ -70,7 +70,7 @@ export interface RecordsReportState {
 
 // Initial State
 const recordsReportInitialState: RecordsReportState = {
-  // userID: "",
+  _id: "",
   academicYearID: "",
   department: "",
   departmentHead: "",

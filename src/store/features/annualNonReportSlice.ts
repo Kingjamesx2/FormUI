@@ -82,6 +82,7 @@ export interface IMeeting {
 }
 
 export interface annualNonReportInitialState {
+  _id: string;
   academicYearID: string;
   division: string;
   reportsTo: string;
@@ -98,6 +99,7 @@ export interface annualNonReportInitialState {
 }
 
 const initialState: annualNonReportInitialState = {
+  _id: "",
   academicYearID: "",
   division: "",
   reportsTo: "",

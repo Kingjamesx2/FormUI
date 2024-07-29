@@ -11,13 +11,10 @@ const useSaveAnnualFormHook = () => {
     const annualReport = useSelector(selectAnnualReport)
     
     useEffect(() => {
-        console.warn(annualReport)
+        console.log('annualReport ==>>> <<< ', annualReport)
         const triggerSaveForm = async () => await saveForm(annualReport)
 
         triggerSaveForm()
-
-        console.log(data, error, isSuccess)
-
     }, [annualReport])
 
     return { data, error, isLoading, isSuccess }

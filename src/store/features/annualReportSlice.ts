@@ -103,6 +103,7 @@ interface IDegreesConferred {
 }
 
 export interface AnnualReportInitialState {
+  _id: string;
   academicYearID: string;
   departmentList: string;
   faculty: string;
@@ -126,6 +127,7 @@ export interface AnnualReportInitialState {
 }
 
 const initialState: AnnualReportInitialState = {
+  _id: "",
   academicYearID: "",
   departmentList: "",
   faculty: "",
@@ -221,57 +223,56 @@ const annualReportSlice = createSlice({
   initialState,
   reducers: {
     setAnnualReportState: (state, action: PayloadAction<AnnualReportInitialState>) => {
-      state = action.payload;
+      return { ...state, ...action.payload };
     },
     setAcademicYearID: (state, action: PayloadAction<string>) => {
-      state.academicYearID = action.payload;
+      return { ...state, academicYearID: action.payload }
     },
     setDepartmentList: (state, action: PayloadAction<string>) => {
-      state.departmentList = action.payload;
+      return { ...state, departmentList: action.payload }
     },
     setFaculty: (state, action: PayloadAction<string>) => {
-      state.faculty = action.payload;
+      return { ...state, faculty: action.payload }
     },
     setDean: (state, action: PayloadAction<string>) => {
-      state.dean = action.payload;
+      return { ...state, dean: action.payload };
     },
     setMissionStatement: (state, action: PayloadAction<string>) => {
-      state.missionStatement = action.payload;
+      return { ...state, missionStatement: action.payload };
     },
     setStrategicGoals: (state, action: PayloadAction<Partial<IStrategicGoals>>) => {
-      state.strategicGoals = { ...state.strategicGoals, ...action.payload };
+      return { ...state, strategicGoals: { ...state.strategicGoals, ...action.payload } };
     },
     setAccomplishments: (state, action: PayloadAction<Partial<IAccomplishments>>) => {
-      state.accomplishments = { ...state.accomplishments, ...action.payload };
+      return { ...state, accomplishments: { ...state.accomplishments, ...action.payload } };
     },
     setResearchPartnerships: (state, action: PayloadAction<Partial<IResearchPartnerships>>) => {
-      state.researchPartnerships = { ...state.researchPartnerships, ...action.payload };
+      return { ...state, researchPartnerships: { ...state.researchPartnerships, ...action.payload } };
     },
     setRevisedAcademics: (state, action: PayloadAction<Partial<IRevisedAcademics>>) => {
-      state.revisedAcademics = { ...state.revisedAcademics, ...action.payload };
+      return { ...state, revisedAcademics: { ...state.revisedAcademics, ...action.payload } };
     },
     setCourse: (state, action: PayloadAction<Partial<ICourse>>) => {
-      state.course = { ...state.course, ...action.payload };
+      return { ...state, course: { ...state.course, ...action.payload } };
     },
     
     setEliminatedAcademicProgram: (state, action: PayloadAction<string>) => {
-      state.eliminatedAcademicPrograms =  action.payload ;
+      return { ...state, eliminatedAcademicPrograms: action.payload };
     },
 
     setRetentionOfStudents: (state, action: PayloadAction<Partial<IRetentionOfStudents>>) => {
-      state.retentionOfStudents = {...state.retentionOfStudents,  ...action.payload };
+      return { ...state, retentionOfStudents: {...state.retentionOfStudents,  ...action.payload } };
     },
     setStudentIntership: (state, action: PayloadAction<string>) => {
-      state.studentIntership = action.payload ;
+      return { ...state, studentIntership: action.payload };
     },
     setDegreesConferred: (state, action: PayloadAction<Partial<IDegreesConferred>>) => {
-      state.degreesConferred = {...state.degreesConferred,  ...action.payload };
+      return { ...state, degreesConferred: {...state.degreesConferred,  ...action.payload } };
     },
 
     setStudentSuccess: (state, action: PayloadAction<Partial<IStudentSuccess>>) => {
-      state.studentSuccess = { ...state.studentSuccess, ...action.payload }
+      return { ...state, studentSuccess: { ...state.studentSuccess, ...action.payload } }
     },
-
 
     setActivities: (state, action: PayloadAction<IActivity>) => {
       const { eventId } = action.payload;
@@ -380,7 +381,9 @@ export const {
   updateMeeting
 } = annualReportSlice.actions;
 
-export const selectAnnualReport = (state: RootState) => state.annualReport;
+export const selectAnnualReport = (state: RootState) => {
+  return state.annualReport;
+}
 export const selectAcademicYearID = (state: RootState) => state.annualReport.academicYearID;
 export const selectDepartmentList = (state: RootState) => state.annualReport.departmentList;
 export const selectFaculty = (state: RootState) => state.annualReport.faculty;

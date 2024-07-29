@@ -1,4 +1,4 @@
-import { baseAPI } from "./baseAPI";
+import { baseAPI } from "./baseAPI"
 import {AnnualReportInitialState, setAnnualReportState} from "../../store/features/annualReportSlice"
 
 export const annualReportAPI = baseAPI.injectEndpoints({
@@ -12,9 +12,7 @@ export const annualReportAPI = baseAPI.injectEndpoints({
                 try {
                     const { data } = await queryFulfilled
 
-                    console.log('ata.data.reportData ===>>> ', data.data.reportData)
-
-                    if(data?.data?.reportData)
+                    if(data?.data?.reportData._id)
                         dispatch(setAnnualReportState(data.data.reportData))
                 } catch(e) {
                     console.error(e)

@@ -42,15 +42,15 @@ const AppBar = styled(MuiAppBar, {
 const defaultTheme = createTheme();
 
 export const Dashboard: React.FC = () => {
-  const [skipAnnualReport, setSkipAnnualReport] = useState(true);
+  const [skipAnnualReport, setSkipAnnualReport] = useState(false);
   const { refetch: refetchAnnaulReport } = useFetchAnnualReportQuery(1);
   const userName = useSelector(selectName);
 
   const handleFormClick = async (reportType: string) => {
     try {
-      skipAnnualReport ? setSkipAnnualReport(false) : false;
-      refetchAnnaulReport();
-      console.log("API result:");
+      // skipAnnualReport ? setSkipAnnualReport(false) : false;
+      // refetchAnnaulReport();
+      // console.log("API result:");
     } catch (error) {
       console.error("API error:", error);
     }

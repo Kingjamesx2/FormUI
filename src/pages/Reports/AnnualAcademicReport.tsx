@@ -8,7 +8,6 @@ import AnnualAcademicReportStep5 from "../../components/reports/annual/annual-ac
 import Header from '../../components/common/Header/Header';  // Import the Header component
 import useSaveAnnualFormHook from '../../hooks/useSaveAnnualFormHook';
 
-
 const steps = [
   { label: "Step 1", stepComponent: <AnnualAcademicReportStep1 /> },
   { label: "Step 2", stepComponent: <AnnualAcademicReportStep2 /> },
@@ -19,6 +18,7 @@ const steps = [
 
 export const AnnualAcademicReport: React.FC = () => {
   useSaveAnnualFormHook()
+  
   return (
     <div>
       <Header

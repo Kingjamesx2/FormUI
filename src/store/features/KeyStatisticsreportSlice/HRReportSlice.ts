@@ -16,6 +16,7 @@ interface INumberOfStaff {
 }
 
 interface IHRReportState {
+  _id: string;
   userID: string;
   academicYearID: string;
   department: string;
@@ -25,6 +26,7 @@ interface IHRReportState {
 
 // Initial State
 const HRReportInitialState: IHRReportState = {
+  _id: "",
   userID: "",
   academicYearID: "",
   department: "",
