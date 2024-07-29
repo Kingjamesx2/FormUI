@@ -103,7 +103,6 @@ interface IDegreesConferred {
 }
 
 export interface AnnualReportInitialState {
-  reportID: string;
   academicYearID: string;
   departmentList: string;
   faculty: string;
@@ -127,7 +126,6 @@ export interface AnnualReportInitialState {
 }
 
 const initialState: AnnualReportInitialState = {
-  reportID: "",
   academicYearID: "",
   departmentList: "",
   faculty: "",
@@ -225,9 +223,6 @@ const annualReportSlice = createSlice({
     setAnnualReportState: (state, action: PayloadAction<AnnualReportInitialState>) => {
       state = action.payload;
     },
-    setReportID: (state, action: PayloadAction<string>) => {
-      state.academicYearID = action.payload;
-    },
     setAcademicYearID: (state, action: PayloadAction<string>) => {
       state.academicYearID = action.payload;
     },
@@ -276,32 +271,7 @@ const annualReportSlice = createSlice({
     setStudentSuccess: (state, action: PayloadAction<Partial<IStudentSuccess>>) => {
       state.studentSuccess = { ...state.studentSuccess, ...action.payload }
     },
-    // setActivities: (state, action: PayloadAction<Partial<IActivity>>) => {
-    //   const _event = state.activities.find(i => i.eventId === action.payload.eventId)
-    //   if (_event) { // update
-    //     state.activities[_event.eventId || 0] = {..._event}
-    //   } else {
-    //     state.activities.push({...action.payload, eventId: state.activities.length})
-    //   }
-    // },
-    // addNewActivity: (state) => {
-    //   state.activities.push({
-    //     eventId: state.activities.length,
-    //     eventName: "",
-    //     eventMonth: "",
-    //     eventPicture: [],
-    //     eventSummary: ""
-    //   })
-    // },
-    // updateActivity:(state, action: PayloadAction<IActivityUpdate>) => {
-    //   let _activity: IActivity = state.activities.find(i => i.eventId == action.payload.index) as IActivity
-    //   const field = action.payload.field
 
-    // if (_activity) {
-    //   state.activities[action.payload.index] = {..._activity }
-    //   _activity[field] = action.payload.value
-    //   console.warn('activitt :::: ', _activity, action.payload, state.activities[0])
-    // }\
 
     setActivities: (state, action: PayloadAction<IActivity>) => {
       const { eventId } = action.payload;
@@ -341,9 +311,7 @@ const annualReportSlice = createSlice({
     setFinancialBudget: (state, action: PayloadAction<IFinancialBudget>) => {
       state.financialBudget = { ...state.financialBudget, ...action.payload }
     },
-    // setMeetings: (state, action: PayloadAction<IMeeting>) => {
-    //   state.meetings = {...state.meetings, ...action.payload };
-    // },
+  
 
     setMeetings: (state, action: PayloadAction<IMeeting>) => {
       const { meetingId } = action.payload;

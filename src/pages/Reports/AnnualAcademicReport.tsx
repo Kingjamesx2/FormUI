@@ -6,10 +6,6 @@ import AnnualAcademicReportStep3 from "../../components/reports/annual/annual-ac
 import AnnualAcademicReportStep4 from "../../components/reports/annual/annual-academic-report/step4/AnnualAcademicReportStep4";
 import AnnualAcademicReportStep5 from "../../components/reports/annual/annual-academic-report/step5/AnnualAcademicReportStep5";
 import Header from '../../components/common/Header/Header';  // Import the Header component
-// import { setCurrentStep } from '../../store/features/annualReportSlice';
-// import { zodResolver } from "@hookform/resolvers/zod"
-// import { useForm } from "react-hook-form"
-// import { z } from "zod"
 import useSaveAnnualFormHook from '../../hooks/useSaveAnnualFormHook';
 
 
@@ -23,7 +19,6 @@ const steps = [
 
 export const AnnualAcademicReport: React.FC = () => {
   useSaveAnnualFormHook()
-
   return (
     <div>
       <Header

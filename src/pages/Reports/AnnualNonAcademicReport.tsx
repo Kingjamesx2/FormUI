@@ -6,11 +6,7 @@ import AnnualNonAcademicReportStep3 from "./../../components/reports/annual/annu
 import AnnualNonAcademicReportStep4 from "./../../components/reports/annual/annual-non-academic-report/Step4/AnnualNonAcademicReportStep4";
 import AnnualNonAcademicReportStep5 from "./../../components/reports/annual/annual-non-academic-report/Step5/AnnualNonAcademicReportStep5";
 import Header from '../../components/common/Header/Header';  // Import the Header component
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-// import { setCurrentStep } from '../../store/features/annualNonReportSlice';
-import { Link } from 'react-router-dom';
-
+import useSaveNonAnnualFormHook from '../../hooks/useSaveNonAnnualFormHook';
 
 const steps = [
   { label: "Step 1", stepComponent: <AnnualNonAcademicReportStep1 /> },
@@ -21,6 +17,7 @@ const steps = [
 ];
 
 export const AnnualNonAcademicReport = () => {
+  useSaveNonAnnualFormHook()
   return (
 <div>
     <Header

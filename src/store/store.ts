@@ -15,7 +15,7 @@ import { annualReportAPI } from "./services/annualReportAPI";
 export const store = configureStore({
   reducer: {
     annualReport: annualReportReducer,
-    nonAcademicReport: annualNonReportReducer,
+    nonAnnualReport: annualNonReportReducer,
     recordsReport: recordsReportReducer,
     hrReport: hrReportReducer,
     financeReport: financeReportReduce,

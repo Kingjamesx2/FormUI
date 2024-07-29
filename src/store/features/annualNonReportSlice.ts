@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "./../store"; // Adjust the import according to your store file location
+import { RootState } from "../store"; // Adjust the import according to your store file location
 
 interface IStrategicGoals {
   strategicGoalsUnderReview: string;
@@ -166,9 +166,12 @@ const initialState: annualNonReportInitialState = {
 };
 
 const annualNonReportSlice = createSlice({
-  name: "nonAcademicReport",
+  name: "nonAnnualReport",
   initialState,
   reducers: {
+    setAnnualNonReportState: (state, action: PayloadAction<annualNonReportInitialState>) => {
+      state = action.payload;
+    },
     setAcademicYearID: (state, action: PayloadAction<string>) => {
       state.academicYearID = action.payload;
     },
@@ -290,6 +293,7 @@ const annualNonReportSlice = createSlice({
 });
 
 export const {
+  setAnnualNonReportState,
   setAcademicYearID,
   setDivision,
   setReportsTo,
@@ -309,31 +313,33 @@ export const {
   updateMeeting
 } = annualNonReportSlice.actions;
 
+
+export const selectAnnualNonReport = (state: RootState) => state.nonAnnualReport;
 export const selectAcademicYearID = (state: RootState) =>
-  state.nonAcademicReport.academicYearID;
+  state.nonAnnualReport.academicYearID;
 export const selectDivision = (state: RootState) =>
-  state.nonAcademicReport.division;
+  state.nonAnnualReport.division;
 export const selectReportsTo = (state: RootState) =>
-  state.nonAcademicReport.reportsTo;
+  state.nonAnnualReport.reportsTo;
 export const selectMissionStatement = (state: RootState) =>
-  state.nonAcademicReport.missionStatement;
+  state.nonAnnualReport.missionStatement;
 export const selectStrategicGoals = (state: RootState) =>
-  state.nonAcademicReport.strategicGoals;
+  state.nonAnnualReport.strategicGoals;
 export const selectAccomplishments = (state: RootState) =>
-  state.nonAcademicReport.accomplishments;
+  state.nonAnnualReport.accomplishments;
 export const selectResearchPartnerships = (state: RootState) =>
-  state.nonAcademicReport.researchPartnerships;
+  state.nonAnnualReport.researchPartnerships;
 export const selectStudentSuccess = (state: RootState) =>
-  state.nonAcademicReport.studentSuccess;
+  state.nonAnnualReport.studentSuccess;
 export const selectActivities = (state: RootState) =>
-  state.nonAcademicReport.activities;
+  state.nonAnnualReport.activities;
 export const selectAdministrativeData = (state: RootState) =>
-  state.nonAcademicReport.administrativeData;
+  state.nonAnnualReport.administrativeData;
 export const selectFinancialBudget = (state: RootState) =>
-  state.nonAcademicReport.financialBudget;
+  state.nonAnnualReport.financialBudget;
 export const selectMeetings = (state: RootState) =>
-  state.nonAcademicReport.meetings;
+  state.nonAnnualReport.meetings;
 export const selectOtherComments = (state: RootState) =>
-  state.nonAcademicReport.otherComments;
+  state.nonAnnualReport.otherComments;
 
 export default annualNonReportSlice.reducer;

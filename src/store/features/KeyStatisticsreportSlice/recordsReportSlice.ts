@@ -7,7 +7,7 @@ interface ICurrentStudentEnrollment {
   graduate: number;
 }
 
-//per faculty 
+//per faculty
 interface IEnrollmentTrend {
   academicYear: string;
   associate: number;
@@ -54,7 +54,7 @@ interface IGraduates {
   GraduatesByDistrict: string;
 }
 
-interface RecordsReportState {
+export interface RecordsReportState {
   // userID: string;
   academicYearID: string;
   department: string;
@@ -182,6 +182,12 @@ const recordsReportSlice = createSlice({
     // setUserID: (state, action: PayloadAction<string>) => {
     //   state.userID = action.payload;
     // },
+    setRecordReportState: (
+      state,
+      action: PayloadAction<RecordsReportState>
+    ) => {
+      state = action.payload;
+    },
     setAcademicYearID: (state, action: PayloadAction<string>) => {
       state.academicYearID = action.payload;
     },
@@ -222,13 +228,14 @@ const recordsReportSlice = createSlice({
       state.campusStatistics = action.payload;
     },
     setGraduates: (state, action: PayloadAction<Partial<IGraduates>>) => {
-      state.graduates = { ...state.graduates ,...action.payload};
+      state.graduates = { ...state.graduates, ...action.payload };
     },
   },
 });
 
 export const {
   // setUserID,
+  setRecordReportState,
   setAcademicYearID,
   setDepartment,
   setDepartmentHead,
@@ -241,7 +248,7 @@ export const {
   setGraduates,
 } = recordsReportSlice.actions;
 
-export const selectRecordsReport = (state: RootState) => state.recordsReport;
+export const selectRecordReport = (state: RootState) => state.recordsReport;
 export const selectAcademicYearID = (state: RootState) =>
   state.recordsReport.academicYearID;
 export const selectDepartment = (state: RootState) =>

@@ -5,7 +5,8 @@ import { KeyStatisticsReportStep2 } from "../../components/reports/annual/KeySta
 import { KeyStatisticsReportStep3 } from "../../components/reports/annual/KeyStatisticsReport/Step3/KeyStatisticsReportStep3";
 import { KeyStatisticsReportStep4 } from "../../components/reports/annual/KeyStatisticsReport/Step4/KeyStatisticsReportStep4";
 import Header from '../../components/common/Header/Header';  // Import the Header component
-import { Link } from 'react-router-dom';
+import useSaveRecordFormHook from '../../hooks/KeyStatisticReportFormHooks/useSaveReportFormHook';
+
 
 
 const steps = [
@@ -17,6 +18,7 @@ const steps = [
 ];
 
 export const KeyStatisticsReport: React.FC = () => {
+  useSaveRecordFormHook()
   return (
   <div>
     <Header
