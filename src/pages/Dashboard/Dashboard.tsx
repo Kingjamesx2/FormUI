@@ -112,30 +112,17 @@ export const Dashboard: React.FC = () => {
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
-              pr: "22px",
               backgroundColor: "#6C3777",
             }}
           >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: "36px",
-                ...(open && { display: "none" }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
             <Typography
               component="h1"
               variant="h6"
               color="inherit"
               noWrap
-              sx={{ flexGrow: 1 }}
+              sx={{ flexGrow: 1, ml: "6%" }}
             >
-              <SearchBar onSearch={handleSearch} showIconOnly={isSmallScreen} />
+              {/* <SearchBar onSearch={handleSearch} showIconOnly={isSmallScreen}/> */}
             </Typography>
             <UserPosition
               name="James Faber"
@@ -144,46 +131,17 @@ export const Dashboard: React.FC = () => {
             />
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <Toolbar
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-              px: [1],
-            }}
-          >
-            <img
-              src={UbLogo}
-              alt="Ub Logo"
-              style={{
-                width: open ? "150px" : "100px",
-                height: open ? "120px" : "70px",
-                transition: "width 0.3s, height 0.3s",
-              }}
-            />
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          <List component="nav">
-            <Link to="/"  style={{ textDecoration: "none", color: "black" }}>
-              <ListItems />
-            </Link>
-          </List>
-        </Drawer>
 
         <Box
           component="main"
           sx={{
             backgroundColor: (theme) =>
               theme.palette.mode === "light"
-                ? theme.palette.grey[100]
+                ? theme.palette.grey[200]
                 : theme.palette.grey[900],
             flexGrow: 1,
             height: "100vh",
-            width: "96vw",
+            width: "100vw",
             overflow: "auto",
           }}
         >
