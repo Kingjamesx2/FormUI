@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -23,6 +24,7 @@ import { Link, /*useNavigate */} from "react-router-dom";
 // import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 // import { logout } from "../../store/features/authSlice";
 import { useFetchAnnualReportQuery } from "../../store/services/annualReportAPI";
+import { selectName } from "../../store/features/authSlice";
 
 const drawerWidth: number = 240;
 
@@ -78,9 +80,10 @@ const defaultTheme = createTheme();
 
 export const Dashboard: React.FC = () => {
   const [skipAnnualReport, setSkipAnnualReport] = useState(true)
-  const {data: annualReport, refetch: refetchAnnaulReport } = useFetchAnnualReportQuery(1);
+  const {refetch: refetchAnnaulReport } = useFetchAnnualReportQuery(1);
   const [open, setOpen] = useState(true);
   const isSmallScreen = useMediaQuery("(max-width:600px)");
+  const userName = useSelector(selectName)
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -100,10 +103,6 @@ export const Dashboard: React.FC = () => {
       console.error("API error:", error);
     }
   };
-
-  useEffect(() => {
-    console.log('annualReport ', annualReport)
-  }, [annualReport])
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -138,8 +137,8 @@ export const Dashboard: React.FC = () => {
               <SearchBar onSearch={handleSearch} showIconOnly={isSmallScreen} />
             </Typography>
             <UserPosition
-              name="James Faber"
-              position="Database Administrator"
+              name={userName}
+              position=""
               profilePicture="src/components/icons/jamesFaber.jpeg"
             />
           </Toolbar>
