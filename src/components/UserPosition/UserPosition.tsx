@@ -1,38 +1,38 @@
-import React, { useState } from 'react';
-import './UserPosition.scss';
+import React, { useState } from "react";
+import "./UserPosition.scss";
 import { Link } from "react-router-dom";
+import exit from "../../components/icons/exit.png";
 
 // Define the interface for the component props
 interface UserPositionProps {
-  name: string; 
-  position: string; 
-  profilePicture: string; 
+  name: string;
+  position: string;
+  logOut: string;
 }
 
-export const UserPosition: React.FC<UserPositionProps> = ({ name, position, profilePicture }) => {
+export const UserPosition: React.FC<UserPositionProps> = ({
+  name,
+  position,
+  logOut,
+}) => {
   // Declares a state variable 'dropdownOpen' and a setter function 'setDropdownOpen' initialized to false
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   // Define a function to toggle the dropdown menu
   const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen); 
+    setDropdownOpen(!dropdownOpen);
   };
 
   return (
-    <div className="user-position"> 
-      <div className="user-details"> 
-        <h4>{name}</h4> 
-        <p>{position}</p> 
+    <div className="user-position">
+      <div className="user-details">
+        <h4 style={{ color: "black" }}>{name}</h4>
+        <p>{position}</p>
       </div>
-      <div className="profile-picture" onClick={toggleDropdown}> 
-        <img src={profilePicture} alt={name} />
-        {dropdownOpen && (
-          <Link to="/Login">
-          <ul className="dropdown-menu"> 
-            <li>Logout</li> 
-          </ul>
-          </Link>
-        )}
+      <div className="profile-picture" onClick={toggleDropdown}>
+        <Link to="/Login">
+          <img src={exit} />
+        </Link>
       </div>
     </div>
   );

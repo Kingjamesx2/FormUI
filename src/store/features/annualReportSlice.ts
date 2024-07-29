@@ -103,6 +103,7 @@ interface IDegreesConferred {
 }
 
 export interface AnnualReportInitialState {
+  reportID: string;
   academicYearID: string;
   departmentList: string;
   faculty: string;
@@ -126,6 +127,7 @@ export interface AnnualReportInitialState {
 }
 
 const initialState: AnnualReportInitialState = {
+  reportID: "",
   academicYearID: "",
   departmentList: "",
   faculty: "",
@@ -222,6 +224,9 @@ const annualReportSlice = createSlice({
   reducers: {
     setAnnualReportState: (state, action: PayloadAction<AnnualReportInitialState>) => {
       state = action.payload;
+    },
+    setReportID: (state, action: PayloadAction<string>) => {
+      state.academicYearID = action.payload;
     },
     setAcademicYearID: (state, action: PayloadAction<string>) => {
       state.academicYearID = action.payload;

@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    profilePicture: 'src/components/icons/jamesFaber.jpeg',
+    logOut: 'src/components/icons/jamesFaber.jpeg',
     name: 'James Faber',
     position: 'Software Engineer',
   },
