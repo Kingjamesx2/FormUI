@@ -9,7 +9,7 @@ import { useTheme } from "@mui/material/styles";
 interface IUBTextField extends InputHTMLAttributes<HTMLInputElement> {
   question?: string;
   SetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: string;
+  value?: string | number;
   width?: number;
   type?: string;
 }
