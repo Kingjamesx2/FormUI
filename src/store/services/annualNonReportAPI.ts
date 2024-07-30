@@ -29,8 +29,6 @@ export const annualNonReportAPI = baseAPI.injectEndpoints({
                 try {
                     const { data } = await queryFulfilled
 
-                    console.log('ata.data.reportData ===>>> ', data.data.reportData)
-
                     if(data?.data?.reportData)
                         dispatch(setAnnualNonReportState(data.data.reportData))
                 } catch(e) {

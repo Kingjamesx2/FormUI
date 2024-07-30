@@ -17,7 +17,7 @@ export const authAPI = baseAPI.injectEndpoints({
             async onQueryStarted(id, {dispatch, queryFulfilled}) {
                 try {
                     const { data } = await queryFulfilled
-                    // console.log(data)
+                    
                     if (data?.data?.token) {
                         dispatch(setAuthData(data.data));
                     }

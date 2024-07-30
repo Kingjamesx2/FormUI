@@ -46,15 +46,14 @@ export const Dashboard: React.FC = () => {
   const { refetch: refetchAnnaulReport } = useFetchAnnualReportQuery(1);
   const userName = useSelector(selectName);
 
-  const handleFormClick = async (reportType: string) => {
-    try {
-      // skipAnnualReport ? setSkipAnnualReport(false) : false;
-      // refetchAnnaulReport();
-      // console.log("API result:");
-    } catch (error) {
-      console.error("API error:", error);
-    }
-  };
+  // const handleFormClick = async (reportType: string) => {
+  //   // try {
+  //   //   // skipAnnualReport ? setSkipAnnualReport(false) : false;
+  //   //   // refetchAnnaulReport();
+  //   // } catch (error) {
+  //   //   console.error("API error:", error);
+  //   // }
+  // };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -145,11 +144,11 @@ export const Dashboard: React.FC = () => {
                 <Link
                   to="/AnnualAcademicReport"
                   style={{ textDecoration: "none" }}
-                  onClick={() =>
-                    handleFormClick(
-                      "UB Annual Report Template Academic Division"
-                    )
-                  }
+                  // onClick={() =>
+                  //   handleFormClick(
+                  //     "UB Annual Report Template Academic Division"
+                  //   )
+                  // }
                 >
                   <FormCard
                     formPreview="src/components/icons/form.png"

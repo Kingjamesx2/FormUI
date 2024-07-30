@@ -61,6 +61,7 @@ export const Faculty = () => {
           <UbDropdown
             label="Faculty"
             options={[
+              { value: "", label: "Choose One" },
               { value: "FEA", label: "Faculty of Education and Arts" },
               {
                 value: "FMSS",
