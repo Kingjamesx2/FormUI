@@ -73,16 +73,7 @@ export const UBActivitiesForTheYear = () => {
             />
           </Box>
 
-          <Box mb={-6.5}>
-            <UBTextField
-              question="Month of Event."
-              SetAnswer={(e) =>
-                handleChange(index, "eventMonth", e.target.value)
-              }
-              value={activity.eventMonth}
-            />
-          </Box>
-
+         
           <Box mb={"0%"} sx={{ width: "101.4%", ml: "-0.7%", mt: "-7%"}}>
             <UBTextArea
               question="Summary of the event."
@@ -95,7 +86,6 @@ export const UBActivitiesForTheYear = () => {
 
           <Box sx={{ width: "69%", ml: "14.5%", mb: "0%", p: "1%", bgcolor: "#FFD954"}}>
             <IconButton
-              sx={{ }}
               size="small"
               aria-label="upload picture"
               component="label"
@@ -140,3 +130,5 @@ export const UBActivitiesForTheYear = () => {
     </Container>
   );
 };
+
+export default UBActivitiesForTheYear;

@@ -56,7 +56,7 @@ export const UBTextField: FC<IUBTextField> = ({
         <Input
           sx={{ ml: "2%" }}
           id="standard-adornment-amount"
-          value={value}
+          value={value ?? ""}
           onChange={(e) => {
             if (type === "number" && !/^\d*$/.test(e.target.value)) {
               return;

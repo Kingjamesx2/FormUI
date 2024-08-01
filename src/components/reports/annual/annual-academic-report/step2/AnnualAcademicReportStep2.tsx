@@ -1,4 +1,3 @@
-import React from "react";
 import { Container } from "@mui/material";
 // import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import { UBStrategicGoals } from "./UBStrategicGoals";

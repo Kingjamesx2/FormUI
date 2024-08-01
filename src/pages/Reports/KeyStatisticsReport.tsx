@@ -23,7 +23,7 @@ export const KeyStatisticsReport: React.FC = () => {
   <div>
     <Header
       logo="./../icons/UB_Logo.png"
-      title="University of Belize Key Statistics Template "
+      title="University of Belize Key Statistics"
     />
     <UBStepper steps={steps} />
     </div>

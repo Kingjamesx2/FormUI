@@ -3,29 +3,23 @@ import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
-import { UBTextField } from "../../../../common/UBTextField/UBTextField";
+// import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  selectAcademicYearID,
-  setAcademicYearID,
-  selectDivision,
   setDivision,
   setReportsTo,
-  selectReportsTo,
-  selectMissionStatement,
   setMissionStatement,
 } from "../../../../../store/features/annualNonReportSlice";
+import { selectAnnualNonReport } from "../../../../../store/features/annualNonReportSlice";
 
-const initialState = ["", "", "", ""];
+
+// const initialState = ["", "", "", ""];
 
 export const AnnualNonAcademicReportStep1: React.FC = () => {
   const dispatch = useDispatch();
-  const academicYearID = useSelector(selectAcademicYearID);
-  const division = useSelector(selectDivision);
-  const reportsTo = useSelector(selectReportsTo);
-  const missionStatement = useSelector(selectMissionStatement);
-
+ 
+  const annualNonReport = useSelector(selectAnnualNonReport)
   const [summary, setSummary] = useState<string>(
     "The annual report provides a comprehensive summary of the University’s activities for the academic year, which is from August to July. The specific outputs/outcomes are based on the Annual Implementation Plan for the period under review."
   );
@@ -83,7 +77,7 @@ export const AnnualNonAcademicReportStep1: React.FC = () => {
               { value: "Quality Assurance", label: "Quality Assurance" },
             ]}
             SetAnswer={(e) => dispatch(setDivision(e.target.value as string))}
-            value={division}
+            value={annualNonReport.division}
           />
         </Box>
         <Box
@@ -110,23 +104,16 @@ export const AnnualNonAcademicReportStep1: React.FC = () => {
               { value: "FST", label: "Faculty of Science & Technology" },
             ]}
             SetAnswer={(e) => dispatch(setReportsTo(e.target.value as string))}
-            value={reportsTo}
+            value={annualNonReport.reportsTo}
           />
         </Box>
       </Box>
-      {/* <Box sx={{ mt: "-4%", mb: "4%", width: "98.6%", ml: "0.7%" }}>
-        <UBTextField
-          question="Academic Year"
-          SetAnswer={(e) => dispatch(setAcademicYearID(e.target.value))}
-          value={academicYearID}
-        />
-      </Box> */}
 
       <Box sx={{ mt: "-50px", mb: "40px" }}>
         <UBTextArea
           question="State your Mission Statement"
           SetAnswer={(e) => dispatch(setMissionStatement(e.target.value))}
-          value={missionStatement}
+          value={annualNonReport.missionStatement}
         />
       </Box>
     </Container>

@@ -1,23 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import Container from "@mui/material/Container";
-import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
-import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import Box from "@mui/material/Box";
 import { UBRadioButton } from "../../../../common/UBRadioButton/UBRadioButton";
-import Stack from "@mui/material/Stack";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setAccomplishments,
   selectAccomplishments,
 } from "../../../../../store/features/annualReportSlice";
 
-const initialState = ["", "", "", "", "", ""];
 
 export const UBAccomplishments: React.FC = () => {
   const dispatch = useDispatch();
   const accomplishments = useSelector(selectAccomplishments);
-  const [state, setState] = useState<string[]>(initialState);
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>

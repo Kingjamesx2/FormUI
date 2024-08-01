@@ -1,28 +1,12 @@
 import { baseAPI } from "./baseAPI";
-// import { setRequest } from "../features/authSlice"
-import  { annualNonReportInitialState, setAnnualNonReportState } from "../../store/features/annualNonReportSlice"
-
-
-
-// export const annualNonReportAPI = baseAPI.injectEndpoints({
-//     endpoints: (builder) => ({
-//         annualNonReport: builder.mutation({
-//             query: (report: annualNonReportInitialState) => ({
-//                 url: '/facultyReport',
-//                 method: 'POST',
-//                 body: report
-//             })
-//         })
-//     })
-// })
-
+import  { annualNonReportInitialState, setAnnualNonReportState } from "../../store/features/annualNonReportSlice";
 
 
 export const annualNonReportAPI = baseAPI.injectEndpoints({
     endpoints: (builder) => ({
         fetchAnnualNonReport: builder.query({
             query: () => ({
-                url: '/facultyReportByUser',
+                url: '/staffReportByUser',
                 method: 'GET'
             }),
             async onQueryStarted(id, {dispatch, queryFulfilled}) {
@@ -30,7 +14,7 @@ export const annualNonReportAPI = baseAPI.injectEndpoints({
                     const { data } = await queryFulfilled
 
                     if(data?.data?.reportData)
-                        dispatch(setAnnualNonReportState(data.data.reportData))
+                        dispatch(setAnnualNonReportState(data?.data?.reportData))
                 } catch(e) {
                     console.error(e)
                 }
@@ -38,7 +22,7 @@ export const annualNonReportAPI = baseAPI.injectEndpoints({
         }),
         updateAnnualNonReport: builder.mutation({
             query: (body: Partial<annualNonReportInitialState>) => ({
-                url: '/facultyReport',
+                url: '/staffReport',
                 method: 'PUT',
                 body
             })

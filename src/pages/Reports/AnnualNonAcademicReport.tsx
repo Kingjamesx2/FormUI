@@ -1,4 +1,4 @@
-// import React from 'react'
+import React from 'react'
 import UBStepper from "../../components/common/Stepper/UBStepper";
 import AnnualNonAcademicReportStep1 from "./../../components/reports/annual/annual-non-academic-report/Step1/AnnualNonAcademicReportStep1";
 import AnnualNonAcademicReportStep2 from "./../../components/reports/annual/annual-non-academic-report/Step2/AnnualNonAcademicReportStep2";
@@ -16,13 +16,13 @@ const steps = [
   { label: "Step 5", stepComponent: <AnnualNonAcademicReportStep5 /> },
 ];
 
-export const AnnualNonAcademicReport = () => {
+export const AnnualNonAcademicReport: React.FC = () => {
   useSaveNonAnnualFormHook()
   return (
 <div>
     <Header
       logo="./../icons/UB_Logo.png"
-      title="UB Annual Report Template Non-Academic Division"
+      title="UB Annual Report Non-Academic Division"
     />
     <UBStepper steps={steps} />
     </div>

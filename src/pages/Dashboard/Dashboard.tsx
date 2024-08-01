@@ -12,9 +12,10 @@ import UserPosition from "../../components/UserPosition/UserPosition";
 import FormCard from "../../components/common/Card/FormCard";
 import { Link } from "react-router-dom";
 import { useFetchAnnualReportQuery } from "../../store/services/annualReportAPI";
+import { useFetchAnnualNonReportQuery } from "../../store/services/annualNonReportAPI";
 import { selectName } from "../../store/features/authSlice";
 import UBLogo from "../../components/icons/UB_Logo.png";
-import exit from "../../components/icons/exit.png";
+// import exit from "../../components/icons/exit.png";
 const drawerWidth: number = 240;
 
 interface AppBarProps extends MuiAppBarProps {
@@ -44,6 +45,7 @@ const defaultTheme = createTheme();
 export const Dashboard: React.FC = () => {
   const [skipAnnualReport, setSkipAnnualReport] = useState(false);
   const { refetch: refetchAnnaulReport } = useFetchAnnualReportQuery(1);
+  const { refetch:refetchAnnualNonReport } = useFetchAnnualNonReportQuery(1);
   const userName = useSelector(selectName);
 
   // const handleFormClick = async (reportType: string) => {
@@ -74,7 +76,7 @@ export const Dashboard: React.FC = () => {
               }}
             >
               <img src={UBLogo} alt="UB Logo" width="25%" />
-              <h2 style={{ marginLeft: "1rem" }}>UB Annual Report Forms</h2>
+              <h2 style={{ marginLeft: "1rem" }}>Annual Monitoring Process</h2>
             </Box>
 
             <Typography
@@ -152,7 +154,7 @@ export const Dashboard: React.FC = () => {
                 >
                   <FormCard
                     formPreview="src/components/icons/form.png"
-                    title="UB Annual Report Template Academic Division"
+                    title="UB Annual Report Academic Division"
                   />
                 </Link>
               </Grid>
@@ -163,7 +165,7 @@ export const Dashboard: React.FC = () => {
                 >
                   <FormCard
                     formPreview="src/components/icons/form1.png"
-                    title="UB Annual Report Template Non-Academic Division"
+                    title="UB Annual Report Non-Academic Division"
                   />
                 </Link>
               </Grid>
@@ -174,7 +176,7 @@ export const Dashboard: React.FC = () => {
                 >
                   <FormCard
                     formPreview="src/components/icons/form2.png"
-                    title="University of Belize Key Statistics Template"
+                    title="University of Belize Key Statistics"
                   />
                 </Link>
               </Grid>

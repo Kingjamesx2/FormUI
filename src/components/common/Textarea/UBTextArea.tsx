@@ -2,13 +2,12 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Paper from "@mui/material/Paper";
-// import div from "@mui/material/div";
 import { Stack } from "@mui/material";
 
 interface IUBTextAreaProps {
   question?: string;
   SetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  value?: string;
+  value?: string | null;  // Allowing null as a type
   maxRows?: number;
   minRows?: number;
 }
@@ -42,13 +41,15 @@ export const UBTextArea: React.FC<IUBTextAreaProps> = ({
   maxRows = 10,
   minRows = 8,
 }) => {
+  // Ensure value is a string or undefined to avoid warnings
+  const textValue = value ?? "";
+
   return (
     <div
       style={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        // height: "100vh",
       }}
     >
       <div
@@ -71,7 +72,7 @@ export const UBTextArea: React.FC<IUBTextAreaProps> = ({
               backgroundColor: "white", // Set background to white
               color: "black",
             }}
-            value={value}
+            value={textValue}
             onChange={SetAnswer}
             placeholder="Type your answer here"
           />

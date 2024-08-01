@@ -162,7 +162,7 @@ const initialState: annualNonReportInitialState = {
       meetingType: "",
       meetingDate: "",
       meetingMinutesURL: "",
-    }
+    },
   ],
   otherComments: "",
 };
@@ -171,56 +171,49 @@ const annualNonReportSlice = createSlice({
   name: "nonAnnualReport",
   initialState,
   reducers: {
-    setAnnualNonReportState: (state, action: PayloadAction<annualNonReportInitialState>) => {
-      state = action.payload;
+    setAnnualNonReportState: (state,action: PayloadAction<annualNonReportInitialState>) => {
+      return { ...state, ...action.payload };
     },
     setAcademicYearID: (state, action: PayloadAction<string>) => {
-      state.academicYearID = action.payload;
+      return { ...state, academicYearID: action.payload }
     },
     setDivision: (state, action: PayloadAction<string>) => {
-      state.division = action.payload;
+      return { ...state, division: action.payload }
     },
     setReportsTo: (state, action: PayloadAction<string>) => {
-      state.reportsTo = action.payload;
+      return { ...state, reportsTo: action.payload }
     },
     setMissionStatement: (state, action: PayloadAction<string>) => {
-      state.missionStatement = action.payload;
+      return { ...state, missionStatement: action.payload }
     },
-    setStrategicGoals: (
-      state,
-      action: PayloadAction<Partial<IStrategicGoals>>
-    ) => {
-      state.strategicGoals = { ...state.strategicGoals, ...action.payload };
+    setStrategicGoals: ( state, action: PayloadAction<Partial<IStrategicGoals>>) => {
+      return { ...state, strategicGoals: { ...state.strategicGoals, ...action.payload }}
     },
-    setAccomplishments: (
-      state,
-      action: PayloadAction<Partial<IAccomplishments>>
-    ) => {
-      state.accomplishments = { ...state.accomplishments, ...action.payload };
+    setAccomplishments: ( state, action: PayloadAction<Partial<IAccomplishments>>) => {
+      return { ...state, accomplishments: { ...state.accomplishments, ...action.payload }}
     },
-    setResearchPartnerships: (
-      state,
-      action: PayloadAction<Partial<IResearchPartnerships>>
-    ) => {
-      state.researchPartnerships = {
-        ...state.researchPartnerships,
-        ...action.payload,
-      };
+    setResearchPartnerships: ( state, action: PayloadAction<Partial<IResearchPartnerships>>) => {
+      return { ...state, researchPartnerships: {...state.researchPartnerships, ...action.payload}}
     },
-    setStudentSuccess: (
-      state,
-      action: PayloadAction<Partial<IStudentSuccess>>
-    ) => {
-      state.studentSuccess = { ...state.studentSuccess, ...action.payload };
+    setStudentSuccess: ( state, action: PayloadAction<Partial<IStudentSuccess>>) => {
+      return { ...state, studentSuccess:  { ...state.studentSuccess, ...action.payload }}
     },
     setActivities: (state, action: PayloadAction<IActivity>) => {
-      const { eventId } = action.payload;
+      const { eventId } = action.payload
       if (eventId !== undefined) {
-        const existingActivityIndex = state.activities.findIndex(activity => activity.eventId === eventId);
+        const existingActivityIndex = state.activities.findIndex(
+          (activity) => activity.eventId === eventId
+        );
         if (existingActivityIndex >= 0) {
-          state.activities[existingActivityIndex] = { ...state.activities[existingActivityIndex], ...action.payload };
+          state.activities[existingActivityIndex] = {
+            ...state.activities[existingActivityIndex],
+            ...action.payload,
+          };
         } else {
-          state.activities.push({ ...action.payload, eventId: state.activities.length });
+          state.activities.push({
+            ...action.payload,
+            eventId: state.activities.length,
+          });
         }
       }
     },
@@ -232,7 +225,7 @@ const annualNonReportSlice = createSlice({
         personsInPicture: "",
         eventMonth: "",
         eventPicture: [],
-        eventSummary: ""
+        eventSummary: "",
       });
     },
 
@@ -245,26 +238,28 @@ const annualNonReportSlice = createSlice({
         };
       }
     },
-    setAdministrativeData: (
-      state,
-      action: PayloadAction<Partial<IAdministrativeData>>
-    ) => {
-      state.administrativeData = {
-        ...state.administrativeData,
-        ...action.payload,
-      };
+    setAdministrativeData: (state, action: PayloadAction<Partial<IAdministrativeData>>) => {
+      return { ...state, administrativeData: {...state.administrativeData, ...action.payload}};
     },
     setFinancialBudget: (state, action: PayloadAction<IFinancialBudget>) => {
-      state.financialBudget = { ...state.financialBudget, ...action.payload };
+      return {...state, financialBudget: { ...state.financialBudget, ...action.payload }};
     },
     setMeetings: (state, action: PayloadAction<IMeeting>) => {
       const { meetingId } = action.payload;
       if (meetingId !== undefined) {
-        const existingMeetingIndex = state.meetings.findIndex(meeting => meeting.meetingId === meetingId);
+        const existingMeetingIndex = state.meetings.findIndex(
+          (meeting) => meeting.meetingId === meetingId
+        );
         if (existingMeetingIndex >= 0) {
-          state.meetings[existingMeetingIndex] = { ...state.meetings[existingMeetingIndex], ...action.payload };
+          state.meetings[existingMeetingIndex] = {
+            ...state.meetings[existingMeetingIndex],
+            ...action.payload,
+          };
         } else {
-          state.meetings.push({ ...action.payload, meetingId: state.meetings.length });
+          state.meetings.push({
+            ...action.payload,
+            meetingId: state.meetings.length,
+          });
         }
       }
     },
@@ -289,7 +284,7 @@ const annualNonReportSlice = createSlice({
     },
 
     setOtherComments: (state, action: PayloadAction<string>) => {
-      state.otherComments = action.payload;
+      return { ...state, otherComments: action.payload }
     },
   },
 });
@@ -312,36 +307,24 @@ export const {
   addNewActivity,
   updateActivity,
   addNewMeeting,
-  updateMeeting
+  updateMeeting,
 } = annualNonReportSlice.actions;
 
-
-export const selectAnnualNonReport = (state: RootState) => state.nonAnnualReport;
-export const selectAcademicYearID = (state: RootState) =>
-  state.nonAnnualReport.academicYearID;
-export const selectDivision = (state: RootState) =>
-  state.nonAnnualReport.division;
-export const selectReportsTo = (state: RootState) =>
-  state.nonAnnualReport.reportsTo;
-export const selectMissionStatement = (state: RootState) =>
-  state.nonAnnualReport.missionStatement;
-export const selectStrategicGoals = (state: RootState) =>
-  state.nonAnnualReport.strategicGoals;
-export const selectAccomplishments = (state: RootState) =>
-  state.nonAnnualReport.accomplishments;
-export const selectResearchPartnerships = (state: RootState) =>
-  state.nonAnnualReport.researchPartnerships;
-export const selectStudentSuccess = (state: RootState) =>
-  state.nonAnnualReport.studentSuccess;
-export const selectActivities = (state: RootState) =>
-  state.nonAnnualReport.activities;
-export const selectAdministrativeData = (state: RootState) =>
-  state.nonAnnualReport.administrativeData;
-export const selectFinancialBudget = (state: RootState) =>
-  state.nonAnnualReport.financialBudget;
-export const selectMeetings = (state: RootState) =>
-  state.nonAnnualReport.meetings;
-export const selectOtherComments = (state: RootState) =>
-  state.nonAnnualReport.otherComments;
+export const selectAnnualNonReport = (state: RootState) => {
+  return state.nonAnnualReport;
+}
+export const selectAcademicYearID = (state: RootState) => state.nonAnnualReport.academicYearID;
+export const selectDivision = (state: RootState) => state.nonAnnualReport.division;
+export const selectReportsTo = (state: RootState) => state.nonAnnualReport.reportsTo;
+export const selectMissionStatement = (state: RootState) => state.nonAnnualReport.missionStatement;
+export const selectStrategicGoals = (state: RootState) => state.nonAnnualReport.strategicGoals;
+export const selectAccomplishments = (state: RootState) => state.nonAnnualReport.accomplishments;
+export const selectResearchPartnerships = (state: RootState) => state.nonAnnualReport.researchPartnerships;
+export const selectStudentSuccess = (state: RootState) => state.nonAnnualReport.studentSuccess;
+export const selectActivities = (state: RootState) => state.nonAnnualReport.activities;
+export const selectAdministrativeData = (state: RootState) => state.nonAnnualReport.administrativeData;
+export const selectFinancialBudget = (state: RootState) => state.nonAnnualReport.financialBudget;
+export const selectMeetings = (state: RootState) => state.nonAnnualReport.meetings;
+export const selectOtherComments = (state: RootState) => state.nonAnnualReport.otherComments;
 
 export default annualNonReportSlice.reducer;

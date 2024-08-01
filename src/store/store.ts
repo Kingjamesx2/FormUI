@@ -7,10 +7,12 @@ import hrReportReducer from "./features/KeyStatisticsreportSlice/HRReportSlice";
 import financeReportReduce from "./features/KeyStatisticsreportSlice/financeReportSlice";
 import authReducer from "./../store/features/authSlice";
 import userReducer from "./../store/features/userSlice";
+import uploadReducer  from "./features/uploadSlice"
 // import reportSlice from "./features/reportSlice";
 import { baseAPI } from "./services/baseAPI";
 import { authAPI } from "./services/authAPI";
 import { annualReportAPI } from "./services/annualReportAPI";
+import { annualNonReportAPI } from "./services/annualNonReportAPI";
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +23,7 @@ export const store = configureStore({
     financeReport: financeReportReduce,
     auth: authReducer,
     user: userReducer,
+    upload: uploadReducer,
     [baseAPI.reducerPath]: baseAPI.reducer,
     // [authAPI.reducerPath]: authAPI.reducer
   },
@@ -28,7 +31,8 @@ export const store = configureStore({
     getDefaultMiddleware().concat(
       baseAPI.middleware,
       authAPI.middleware,
-      annualReportAPI.middleware
+      annualReportAPI.middleware,
+      annualNonReportAPI.middleware
     ))
 });
 

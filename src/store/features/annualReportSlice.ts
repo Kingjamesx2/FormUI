@@ -37,7 +37,8 @@ interface IStudentSuccess {
 }
 
 interface IEventPicture {
-  pictureURL: string;
+  url: string;
+  name: string;
 }
 
 export interface IActivity {
@@ -191,7 +192,8 @@ const initialState: AnnualReportInitialState = {
       personsInPicture: "",
       eventPicture: [
         {
-          pictureURL: "",
+          url: "",
+          name: "",
         }
       ],
       eventSummary: "",
