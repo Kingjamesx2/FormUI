@@ -171,12 +171,34 @@ export const Dashboard: React.FC = () => {
               </Grid>
               <Grid item xs={12} md={4} lg={3}>
                 <Link
-                  to="/KeyStatisticsReport"
+                  to="/RecordsAndAdmissions"
                   style={{ textDecoration: "none" }}
                 >
                   <FormCard
                     formPreview="src/components/icons/form2.png"
-                    title="University of Belize Key Statistics"
+                    title="UB records and Admissions"
+                  />
+                </Link>
+              </Grid>
+              <Grid item xs={12} md={4} lg={3}>
+                <Link
+                  to="/HumanResourceStatistics"
+                  style={{ textDecoration: "none" }}
+                >
+                  <FormCard
+                    formPreview="src/components/icons/form2.png"
+                    title="UB Human Resource Statistics"
+                  />
+                </Link>
+              </Grid>
+              <Grid item xs={12} md={4} lg={3}>
+                <Link
+                  to="/FinanceAndBudgetStatistics"
+                  style={{ textDecoration: "none" }}
+                >
+                  <FormCard
+                    formPreview="src/components/icons/form2.png"
+                    title="UB Finance and Budget Statistics"
                   />
                 </Link>
               </Grid>

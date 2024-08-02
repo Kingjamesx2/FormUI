@@ -2,10 +2,10 @@ import React, { useState, ChangeEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import UbDropdown from "../../../../../UbDropdown/UbDropdown";
-import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
+import UbDropdown from "../../../../UbDropdown/UbDropdown";
+import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import Box from "@mui/material/Box";
-import { selectDepartment, setDepartment, selectDepartmentHead, setDepartmentHead } from '../../../../../../store/features/KeyStatisticsreportSlice/recordsReportSlice'
+import { selectDepartment, setDepartment, selectDepartmentHead, setDepartmentHead } from '../../../../../store/features/KeyStatisticsreportSlice/recordsReportSlice'
 
 export const UBAcademicYear: React.FC = () => {
   const dispatch = useDispatch()
