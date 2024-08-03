@@ -11,7 +11,6 @@ export const annualReportAPI = baseAPI.injectEndpoints({
             async onQueryStarted(id, {dispatch, queryFulfilled}) {
                 try {
                     const { data } = await queryFulfilled
-                    console.log(data)
                     if(data?.data?.reportData._id) {
                         dispatch(setAnnualReportState(data?.data?.reportData))
                     }
