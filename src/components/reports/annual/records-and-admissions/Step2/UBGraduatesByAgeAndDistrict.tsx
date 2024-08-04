@@ -5,7 +5,7 @@ import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
-import { selectGraduates, setGraduates } from "../../../../../store/features/KeyStatisticsreportSlice/recordsReportSlice";
+import { selectGraduates, setGraduates } from "../../../../../store/features/recordsReportSlice";
 
 const initialState = ["", "", "", ""];
 

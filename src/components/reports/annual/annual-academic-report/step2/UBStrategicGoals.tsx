@@ -4,16 +4,11 @@ import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  setStrategicGoals,
-  selectStrategicGoals,
-} from "../../../../../store/features/annualReportSlice";
-
-// const initialState = ["", "", "", ""];
+  setStrategicGoals, selectAnnualReport } from "../../../../../store/features/annualReportSlice";
 
 export const UBStrategicGoals: React.FC = () => {
   const dispatch = useDispatch();
-  const strategicGoals = useSelector(selectStrategicGoals);
-  // const [state, setState] = useState<string[]>(initialState);
+  const annualReport = useSelector(selectAnnualReport)
 
   return (
     <Container sx={{ width: 1, m: "auto", p: 1 }}>
@@ -26,7 +21,7 @@ export const UBStrategicGoals: React.FC = () => {
           SetAnswer={(e) => dispatch(
             setStrategicGoals({ previousAcademicYear: e.target.value })
           )}
-          value={strategicGoals.previousAcademicYear}
+          value={annualReport.strategicGoals.previousAcademicYear}
         />
       </Box>
       <Box mb={-4.7}>
@@ -35,7 +30,7 @@ export const UBStrategicGoals: React.FC = () => {
           SetAnswer={(e) => dispatch(
             setStrategicGoals({ plans: e.target.value })
           )}
-          value={strategicGoals.plans}
+          value={annualReport.strategicGoals.plans}
         />
       </Box>
     </Container>

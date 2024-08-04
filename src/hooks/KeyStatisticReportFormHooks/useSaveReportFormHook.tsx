@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 // import { Box, Button } from "@mui/material";
 // import SaveIcon from '@mui/icons-material/Save';
 // import Snackbar from '@mui/material/Snackbar';
-import { useUpdateRecordReportMutation } from "../../store/services/KeyStatisticReport/recordsReportAPI";
-import { selectRecordReport } from "../../store/features/KeyStatisticsreportSlice/recordsReportSlice";
+import { useUpdateRecordReportMutation } from "../../store/services/recordsReportAPI";
+import { selectRecordReport } from "../../store/features/recordsReportSlice";
 
 const useSaveRecordFormHook = () => {
     const [saveForm, { data, error, isSuccess, isLoading }] = useUpdateRecordReportMutation();

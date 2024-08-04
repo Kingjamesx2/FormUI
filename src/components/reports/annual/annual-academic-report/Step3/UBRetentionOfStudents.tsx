@@ -3,12 +3,12 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import { useSelector, useDispatch } from "react-redux";
-import { setRetentionOfStudents, selectRetentionOfStudents } from "../../../../../store/features/annualReportSlice";
+import { setRetentionOfStudents, selectAnnualReport } from "../../../../../store/features/annualReportSlice";
 
 
 export const UBRetentionOfStudents: React.FC = () => {
   const dispatch = useDispatch();
-  const retentionOfStudents = useSelector(selectRetentionOfStudents);
+  const annualReport = useSelector(selectAnnualReport);
 
   const [retention, setRetention] = useState<string>("1. List retention initiatives for the following:");
 
@@ -23,14 +23,14 @@ export const UBRetentionOfStudents: React.FC = () => {
           <UBTextArea
             question="a. Current students"
             SetAnswer={(e) => dispatch(setRetentionOfStudents({ currentStudents: e.target.value }))}
-            value={retentionOfStudents.currentStudents}
+            value={annualReport.retentionOfStudents.currentStudents}
           />
         </Box>
         <Box mb={"-5.3%"}>
           <UBTextArea
             question="b. Transfer students"
             SetAnswer={(e) => dispatch(setRetentionOfStudents({ transferStudents: e.target.value }))}
-            value={retentionOfStudents.transferStudents}
+            value={annualReport.retentionOfStudents.transferStudents}
           />
         </Box>
       </Container>

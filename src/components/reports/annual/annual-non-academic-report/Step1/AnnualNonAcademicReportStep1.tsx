@@ -14,7 +14,6 @@ import {
 import { selectAnnualNonReport } from "../../../../../store/features/annualNonReportSlice";
 
 
-// const initialState = ["", "", "", ""];
 
 export const AnnualNonAcademicReportStep1: React.FC = () => {
   const dispatch = useDispatch();

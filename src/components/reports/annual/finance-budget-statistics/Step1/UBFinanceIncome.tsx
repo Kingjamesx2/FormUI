@@ -6,7 +6,7 @@ import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import UBInfoTable from "../../../../common/UBInfoTable/UBInfoTable";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from "../../../../../store/store";
-import { setIncome } from "../../../../../store/features/KeyStatisticsreportSlice/financeReportSlice";
+import { setIncome } from "../../../../../store/features/financeReportSlice";
 
 const initialState = ["", "", ""];
 

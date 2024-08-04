@@ -1,17 +1,16 @@
-import React from "react";
 import { Container } from "@mui/material";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  selectStudentSuccess,
+  selectAnnualNonReport,
   setStudentSuccess,
 } from "../../../../../store/features/annualNonReportSlice";
 
 export const UBStudentSuccess = () => {
   const dispatch = useDispatch();
-  const studentSuccess = useSelector(selectStudentSuccess);
+  const annualNonReport = useSelector(selectAnnualNonReport)
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
@@ -24,7 +23,7 @@ export const UBStudentSuccess = () => {
             SetAnswer={(e) =>
               dispatch(setStudentSuccess({ studentLearning: e.target.value }))
             }
-            value={studentSuccess.studentLearning}
+            value={annualNonReport.studentSuccess.studentLearning}
           />
         </Box>
 
@@ -34,7 +33,7 @@ export const UBStudentSuccess = () => {
             SetAnswer={(e) =>
               dispatch(setStudentSuccess({ studentClubs: e.target.value }))
             }
-            value={studentSuccess.studentClubs}
+            value={annualNonReport.studentSuccess.studentClubs}
           />
         </Box>
         <Box sx= {{mt: "-9%"}}>
@@ -59,7 +58,7 @@ export const UBStudentSuccess = () => {
             SetAnswer={(e) =>
               dispatch(setStudentSuccess({ student1: e.target.value }))
             }
-            value={studentSuccess.student1}
+            value={annualNonReport.studentSuccess.student1}
           />
         </Box>
 
@@ -69,7 +68,7 @@ export const UBStudentSuccess = () => {
             SetAnswer={(e) =>
               dispatch(setStudentSuccess({ reason1: e.target.value }))
             }
-            value={studentSuccess.reason1}
+            value={annualNonReport.studentSuccess.reason1}
           />
         </Box>
 
@@ -79,7 +78,7 @@ export const UBStudentSuccess = () => {
             SetAnswer={(e) =>
               dispatch(setStudentSuccess({ student2: e.target.value }))
             }
-            value={studentSuccess.student2}
+            value={annualNonReport.studentSuccess.student2}
           />
         </Box>
 
@@ -89,7 +88,7 @@ export const UBStudentSuccess = () => {
             SetAnswer={(e) =>
               dispatch(setStudentSuccess({ reason2: e.target.value }))
             }
-            value={studentSuccess.reason2}
+            value={annualNonReport.studentSuccess.reason2}
           />
         </Box>
 
@@ -99,7 +98,7 @@ export const UBStudentSuccess = () => {
             SetAnswer={(e) =>
               dispatch(setStudentSuccess({ student3: e.target.value }))
             }
-            value={studentSuccess.student3}
+            value={annualNonReport.studentSuccess.student3}
           />
         </Box>
 
@@ -109,7 +108,7 @@ export const UBStudentSuccess = () => {
             SetAnswer={(e) =>
               dispatch(setStudentSuccess({ reason3: e.target.value }))
             }
-            value={studentSuccess.reason3}
+            value={annualNonReport.studentSuccess.reason3}
           />
         </Box>
       </Box>

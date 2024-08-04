@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../store'; // Adjust the path according to your project structure
+import { RootState } from '../store'; // Adjust the path according to your project structure
 
 interface IIncome {
   fundingFromGoB: number;

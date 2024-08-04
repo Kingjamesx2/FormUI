@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import Container from "@mui/material/Container";
-import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import Box from "@mui/material/Box";
 import { UBRadioButton } from "../../../../common/UBRadioButton/UBRadioButton";
 import { useSelector, useDispatch } from "react-redux";
-import { selectAccomplishments, setAccomplishments } from "../../../../../store/features/annualNonReportSlice";
+import { selectAnnualNonReport, setAccomplishments } from "../../../../../store/features/annualNonReportSlice";
 
-const initialState = ["", "", "", "", "", ""];
 
 export const UBAccomplishmentsForReportingPeriod: React.FC = () => {
   const dispatch = useDispatch();
-  const accomplishments = useSelector(selectAccomplishments);
-  const [state, setState] = useState<string[]>(initialState);
+  const annualNonReport = useSelector(selectAnnualNonReport)
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
@@ -24,7 +21,7 @@ export const UBAccomplishmentsForReportingPeriod: React.FC = () => {
         <UBTextArea
           question="1. List significant accomplishments of the Faculty."
           SetAnswer={(e) => dispatch(setAccomplishments({ accomplishmentList: e.target.value }))}
-          value={accomplishments.accomplishmentList}
+          value={annualNonReport.accomplishments.accomplishmentList}
         />
       </Box>
 
@@ -32,7 +29,7 @@ export const UBAccomplishmentsForReportingPeriod: React.FC = () => {
         <UBTextArea
           question="2. Explain/Describe how each of the above has advanced Faculty goals as well as those of the University."
           SetAnswer={(e) => dispatch(setAccomplishments({ accomplishmentAdvancement: e.target.value }))}
-          value={accomplishments.accomplishmentAdvancement}
+          value={annualNonReport.accomplishments.accomplishmentAdvancement}
         />
       </Box>
 
@@ -52,7 +49,7 @@ export const UBAccomplishmentsForReportingPeriod: React.FC = () => {
             { value: "National development", label: "National development" },
           ]}
           handleSetValue={(e) => dispatch(setAccomplishments({ impactfulChange: e.target.value }))}
-          value={accomplishments.impactfulChange}
+          value={annualNonReport.accomplishments.impactfulChange}
         />
       </Box>
 
@@ -60,7 +57,7 @@ export const UBAccomplishmentsForReportingPeriod: React.FC = () => {
         <UBTextArea
           question=""
           SetAnswer={(e) => dispatch(setAccomplishments({ why: e.target.value }))}
-          value={accomplishments.why}
+          value={annualNonReport.accomplishments.why}
         />
       </Box>
 
@@ -68,7 +65,7 @@ export const UBAccomplishmentsForReportingPeriod: React.FC = () => {
         <UBTextArea
           question="4. What were the opportunities gained from this academic year that can be applicable to the upcoming academic year? Please be as specific as possible."
           SetAnswer={(e) => dispatch(setAccomplishments({ applicableOpportunities: e.target.value }))}
-          value={accomplishments.applicableOpportunities}
+          value={annualNonReport.accomplishments.applicableOpportunities}
         />
       </Box>
     </Container>

@@ -4,11 +4,11 @@ import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
-import { setRevisedAcademics, selectRevisedAcademics } from "../../../../../store/features/annualReportSlice";
+import { setRevisedAcademics, selectAnnualReport } from "../../../../../store/features/annualReportSlice";
 
 export const UBRevisedAcademicPrograms: React.FC = () => {
   const dispatch = useDispatch();
-  const revisedAcademicsProgram = useSelector(selectRevisedAcademics);
+  const annualReport = useSelector(selectAnnualReport)
 
   return (
     <div>
@@ -23,7 +23,7 @@ export const UBRevisedAcademicPrograms: React.FC = () => {
             SetAnswer={(e) =>
               dispatch(setRevisedAcademics({ programsOffered: e.target.value }))
             }
-            value={revisedAcademicsProgram.programsOffered}
+            value={annualReport.revisedAcademics.programsOffered}
             type="number"
           />
         </Box>
@@ -34,7 +34,7 @@ export const UBRevisedAcademicPrograms: React.FC = () => {
             SetAnswer={(e) =>
               dispatch(setRevisedAcademics({ newProgrammesAdded: e.target.value }))
             }
-            value={revisedAcademicsProgram.newProgrammesAdded}
+            value={annualReport.revisedAcademics.newProgrammesAdded}
           />
         </Box>
 
@@ -44,7 +44,7 @@ export const UBRevisedAcademicPrograms: React.FC = () => {
             SetAnswer={(e) =>
               dispatch(setRevisedAcademics({ revisedPrograms: e.target.value }))
             }
-            value={revisedAcademicsProgram.revisedPrograms}
+            value={annualReport.revisedAcademics.revisedPrograms}
           />
         </Box>
       </Container>

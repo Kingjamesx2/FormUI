@@ -2,9 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import annualReportReducer from './features/annualReportSlice';
 import annualNonReportReducer from './features/annualNonReportSlice';
-import recordsReportReducer from "./features/KeyStatisticsreportSlice/recordsReportSlice";
-import hrReportReducer from "./features/KeyStatisticsreportSlice/HRReportSlice";
-import financeReportReduce from "./features/KeyStatisticsreportSlice/financeReportSlice";
+import recordsReportReducer from "./features/recordsReportSlice";
+import hrReportReducer from "./features/HRReportSlice";
+import financeReportReduce from "./features/financeReportSlice";
 import authReducer from "./../store/features/authSlice";
 import userReducer from "./../store/features/userSlice";
 import uploadReducer  from "./features/uploadSlice"

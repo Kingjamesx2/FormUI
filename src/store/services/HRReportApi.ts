@@ -1,5 +1,5 @@
-import { baseAPI } from "./../baseAPI";
-import {RecordsReportState, setRecordReportState} from "../../features/KeyStatisticsreportSlice/recordsReportSlice"
+import { baseAPI } from "./baseAPI";
+import {RecordsReportState, setRecordReportState} from "../features/recordsReportSlice"
 
 export const RecordsReportAPI = baseAPI.injectEndpoints({
     endpoints: (builder) => ({

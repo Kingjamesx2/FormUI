@@ -5,15 +5,14 @@ import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setAdministrativeData,
-  selectAdministrativeData,
+  selectAnnualReport,
 } from "../../../../../store/features/annualReportSlice";
 
 const initialState = ["", "", ""];
 
 export const UBAdministrativeDepartmentData: React.FC = () => {
   const dispatch = useDispatch();
-  const administrativeData = useSelector(selectAdministrativeData);
-  const [state, setState] = useState<string[]>(initialState);
+  const annualReport = useSelector(selectAnnualReport)
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
@@ -29,7 +28,7 @@ export const UBAdministrativeDepartmentData: React.FC = () => {
           SetAnswer={(e) =>
             dispatch(setAdministrativeData({ fullTimeStaff: e.target.value }))
           }
-          value={administrativeData.fullTimeStaff}
+          value={annualReport.administrativeData.fullTimeStaff}
           type="number"
         />
       </Box>
@@ -40,7 +39,7 @@ export const UBAdministrativeDepartmentData: React.FC = () => {
           SetAnswer={(e) =>
             dispatch(setAdministrativeData({ partTimeStaff: e.target.value }))
           }
-          value={administrativeData.partTimeStaff}
+          value={annualReport.administrativeData.partTimeStaff}
           type="number"
         />
       </Box>
@@ -53,7 +52,7 @@ export const UBAdministrativeDepartmentData: React.FC = () => {
               setAdministrativeData({ significantStaffChanges: e.target.value })
             )
           }
-          value={administrativeData.significantStaffChanges}
+          value={annualReport.administrativeData.significantStaffChanges}
         />
       </Box>
     </Container>

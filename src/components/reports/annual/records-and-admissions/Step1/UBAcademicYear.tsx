@@ -2,16 +2,13 @@ import React, { useState, ChangeEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import Box from "@mui/material/Box";
-import { selectDepartment, setDepartment, selectDepartmentHead, setDepartmentHead } from '../../../../../store/features/KeyStatisticsreportSlice/recordsReportSlice'
+import {  setDepartment, setDepartmentHead, selectRecordReport } from '../../../../../store/features/recordsReportSlice'
 
 export const UBAcademicYear: React.FC = () => {
   const dispatch = useDispatch()
-  // const academicYear = useSelector(selectAcademicYearID)
-  const department = useSelector(selectDepartment)
-  const departmentHead = useSelector(selectDepartmentHead)
+  const recordReport = useSelector(selectRecordReport)
 
   const [submissionDeadline, setSubmissionDeadline] = useState<string>(
     "Submission Deadline: Please return completed form to the Office of The Vice President by August 1, 2022"
@@ -46,7 +43,7 @@ export const UBAcademicYear: React.FC = () => {
         <UBTextField
           question="Office/Department"
           SetAnswer={(e) => dispatch(setDepartment(e.target.value as string))}
-          value={department}
+          value={recordReport.department}
         />
       </Box>
 
@@ -54,7 +51,7 @@ export const UBAcademicYear: React.FC = () => {
       <UBTextField
         question="Office/Department Head"
         SetAnswer={(e) => dispatch(setDepartmentHead(e.target.value as string))}
-        value={departmentHead}
+        value={recordReport.departmentHead}
       />
       </Box>
     </Container>

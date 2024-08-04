@@ -3,12 +3,12 @@ import Container from "@mui/material/Container";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import { Box } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { selectMissionStatement, setMissionStatement } from "../../../../../store/features/annualReportSlice";
+import {setMissionStatement, selectAnnualReport } from "../../../../../store/features/annualReportSlice";
 
 
 export const FacultyMissionStatement = () => {
   const dispatch = useDispatch();
-  const missionStatement = useSelector(selectMissionStatement);
+  const annualReport = useSelector(selectAnnualReport)
   const [deadline, setDeadline] = useState<string>("* Deadline is Friday of the first week in August");
   
 
@@ -17,7 +17,7 @@ export const FacultyMissionStatement = () => {
       <UBTextArea
         question="Faculty Mission Statement"
         SetAnswer={(e) => dispatch(setMissionStatement(e.target.value as string))}
-        value={missionStatement}
+        value={annualReport.missionStatement}
       />
       {/* If you have other components like UbDropdown and UBTextField, you can add them here directly */}
       <Box

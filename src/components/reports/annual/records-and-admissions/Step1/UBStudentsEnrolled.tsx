@@ -4,7 +4,7 @@ import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import UBInfoTable from "../../../../common/UBInfoTable/UBInfoTable";
-
+import { useSelector, useDispatch } from "react-redux";
 const initialState = ["", "", ""];
 
 
@@ -18,6 +18,9 @@ const initialRows = [
 export const UBStudentsEnrolled: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
   const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Academic Level)");
+  const dispatch = useDispatch()
+  const recordReport = useSelector(selectRecordReport)
+
 
 
 

@@ -11,18 +11,11 @@ import IconButton from "@mui/material/IconButton";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectMeetings,
-  setMeetings,
   addNewMeeting,
   updateMeeting,
   IMeeting,
 } from "../../../../../store/features/annualNonReportSlice";
 
-const initialState = ["", "", ""];
-
-// const createNewContainerState = () => ({
-//   state: [...initialState],
-//   id: Date.now()
-// });
 
 export const UBFacultyMeetings: React.FC = () => {
   const dispatch = useDispatch();

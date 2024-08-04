@@ -5,7 +5,7 @@ import UBInfoTable from "../../../../common/UBInfoTable/UBInfoTable";
 import {
   selectStudentEnrollmentTrend,
   setStudentEnrollmentTrend,
-} from "../../../../../store/features/KeyStatisticsreportSlice/recordsReportSlice";
+} from "../../../../../store/features/recordsReportSlice";
 
 const columns = ['Degree Program', '2021/2022', '2022/2023', '2023/2024'];
 const initialRows = [

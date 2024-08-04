@@ -4,12 +4,12 @@ import Box from "@mui/material/Box";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import { UBRadioButton } from "../../../../common/UBRadioButton/UBRadioButton";
 import { useSelector, useDispatch } from "react-redux";
-import { setFinancialBudget, selectFinancialBudget } from "../../../../../store/features/annualNonReportSlice";
+import { setFinancialBudget, selectAnnualNonReport } from "../../../../../store/features/annualNonReportSlice";
 
 
 export const UBFinancial: React.FC = () => {
   const dispatch = useDispatch();
-  const financialBudget = useSelector(selectFinancialBudget);
+  const annualNonReport = useSelector(selectAnnualNonReport)
   
 
   return (
@@ -20,7 +20,7 @@ export const UBFinancial: React.FC = () => {
         <UBTextArea
           question="a. State sources of funding, for example, department activities, research fund"
           SetAnswer={(e) => dispatch(setFinancialBudget({ fundingSources: e.target.value }))}
-          value={financialBudget.fundingSources}
+          value={annualNonReport.financialBudget.fundingSources}
         />
       </Box>
 
@@ -31,8 +31,8 @@ export const UBFinancial: React.FC = () => {
             { value: "yes", label: "yes" },
             { value: "no", label: "no" }
           ]}
-          handleSetValue={(e) => dispatch(setFinancialBudget({ impactfulChanges: e.target.value }))}
-          value={financialBudget.impactfulChanges}
+          handleSetValue={(e) => dispatch(setFinancialBudget({ significantBudgetChanges: e.target.value }))}
+          value={annualNonReport.financialBudget.significantBudgetChanges}
         />
       </Box>
       

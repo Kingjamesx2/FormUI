@@ -153,8 +153,8 @@ const initialState: annualNonReportInitialState = {
     significantStaffChanges: "",
   },
   financialBudget: {
-    fundingSources: "",
-    significantBudgetChanges: "",
+    fundingSources: '',
+  significantBudgetChanges: '',
   },
   meetings: [
     {

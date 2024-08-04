@@ -3,12 +3,12 @@ import Container from "@mui/material/Container";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
-import { setOtherComments, selectOtherComments } from "../../../../../store/features/annualReportSlice";
+import { setOtherComments, selectAnnualReport } from "../../../../../store/features/annualReportSlice";
 
 
 export const UBOtherComponents: React.FC = () => {
   const dispatch = useDispatch();
-  const otherComments = useSelector(selectOtherComments);
+  const annualReport = useSelector(selectAnnualReport)
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
@@ -19,7 +19,7 @@ export const UBOtherComponents: React.FC = () => {
         <UBTextArea
           question="1. Use this section to provide information not included in the previous sections but which you believe is pertinent for this report. (optional)"
           SetAnswer={(e) => dispatch(setOtherComments(e.target.value))}
-          value={otherComments}
+          value={annualReport.otherComments}
         />
       </Box>
     </Container>

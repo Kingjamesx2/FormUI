@@ -3,12 +3,11 @@ import Container from "@mui/material/Container";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
-import { selectResearchPartnerships, setResearchPartnerships } from "../../../../../store/features/annualReportSlice";
+import { setResearchPartnerships, selectAnnualReport } from "../../../../../store/features/annualReportSlice";
 
 export const UBresearch: React.FC = () => {
   const dispatch = useDispatch();
-  const researchPartnerships = useSelector(selectResearchPartnerships);
-  // const [state, setState] = useState<string[]>(initialState);
+  const annualReport = useSelector(selectAnnualReport)
 
   return (
     <Container sx={{ width: 1, m: 1, mb: "100px", p: 1 }}>
@@ -22,7 +21,7 @@ export const UBresearch: React.FC = () => {
           SetAnswer={(e) =>
             dispatch(setResearchPartnerships({ externalFunding: e.target.value }))
           }
-          value={researchPartnerships.externalFunding}
+          value={annualReport.researchPartnerships.externalFunding}
         />
       </Box>
       
@@ -32,7 +31,7 @@ export const UBresearch: React.FC = () => {
           SetAnswer={(e) =>
             dispatch(setResearchPartnerships({ researchPublications: e.target.value }))
           }
-          value={researchPartnerships.researchPublications}
+          value={annualReport.researchPartnerships.researchPublications}
         />
       </Box>
       
@@ -42,7 +41,7 @@ export const UBresearch: React.FC = () => {
           SetAnswer={(e) =>
             dispatch(setResearchPartnerships({ partnershipAgencies: e.target.value }))
           }
-          value={researchPartnerships.partnershipAgencies}
+          value={annualReport.researchPartnerships.partnershipAgencies}
         />
       </Box>
       
@@ -52,7 +51,7 @@ export const UBresearch: React.FC = () => {
           SetAnswer={(e) =>
             dispatch(setResearchPartnerships({ scholarships: e.target.value }))
           }
-          value={researchPartnerships.scholarships}
+          value={annualReport.researchPartnerships.scholarships}
         />
       </Box>
     </Container>

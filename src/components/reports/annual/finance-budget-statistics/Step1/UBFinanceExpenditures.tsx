@@ -5,7 +5,7 @@ import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import UBInfoTable from "../../../../common/UBInfoTable/UBInfoTable";
 import { useSelector, useDispatch } from "react-redux";
-import { selectExpenditure, setExpenditure } from "../../../../../store/features/KeyStatisticsreportSlice/financeReportSlice";
+import { selectExpenditure, setExpenditure } from "../../../../../store/features/financeReportSlice";
 
 const initialState = ["", "", ""];
 

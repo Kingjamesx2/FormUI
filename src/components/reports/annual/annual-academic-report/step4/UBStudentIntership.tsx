@@ -2,13 +2,13 @@ import React from "react";
 import { Container } from "@mui/material";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import { useSelector, useDispatch } from "react-redux";
-import { setStudentInternships, selectStudentInternship } from "../../../../../store/features/annualReportSlice";
+import { setStudentInternships, selectAnnualReport } from "../../../../../store/features/annualReportSlice";
 
 // const initialState = [""];
 
 export const UBStudentIntership: React.FC = () => {
   const dispatch = useDispatch();
-  const studentInterships = useSelector(selectStudentInternship);
+  const annualReport = useSelector(selectAnnualReport)
   // const [state, setState] = useState<string[]>(initialState);
 
   return (
@@ -17,8 +17,8 @@ export const UBStudentIntership: React.FC = () => {
       <UBTextArea
         question="1. List internships that the Faculty offers and indicate partnership agencies/organizations."
         SetAnswer={(e) => dispatch(setStudentInternships(e.target.value))}
-        value={studentInterships}
-      />
+        value={annualReport.studentInternships}
+        />
     </Container>
   );
 };

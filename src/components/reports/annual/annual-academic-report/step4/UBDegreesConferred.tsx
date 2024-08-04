@@ -2,11 +2,11 @@ import { Container } from "@mui/material";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
-import { setDegreesConferred, selectDegreesConferred } from "../../../../../store/features/annualReportSlice";
+import { setDegreesConferred, selectAnnualReport } from "../../../../../store/features/annualReportSlice";
 
 export const UBDegreesConferred = () => {
   const dispatch = useDispatch();
-  const degreesConferred = useSelector(selectDegreesConferred);
+  const annualReport = useSelector(selectAnnualReport);
 
 
   return (
@@ -18,7 +18,7 @@ export const UBDegreesConferred = () => {
         <UBTextField
           question="a. Total number of degrees conferred for most recent academic year"
           SetAnswer={(e) => dispatch(setDegreesConferred({ degreesConferredForMostRecentAcademicYear: e.target.value }))}
-          value={degreesConferred.degreesConferredForMostRecentAcademicYear}
+          value={annualReport.degreesConferred.degreesConferredForMostRecentAcademicYear}
           type="number"
         />
       </Box>
@@ -26,7 +26,7 @@ export const UBDegreesConferred = () => {
         <UBTextField
           question="b. Total number of degrees conferred for most recent academic year per department and/or program."
           SetAnswer={(e) => dispatch(setDegreesConferred({ degreesConferredForMostRecentAcademicYearPerDepartment: e.target.value }))}
-          value={degreesConferred.degreesConferredForMostRecentAcademicYearPerDepartment}
+          value={annualReport.degreesConferred.degreesConferredForMostRecentAcademicYearPerDepartment}
           type="number"
         />
       </Box>

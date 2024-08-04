@@ -5,12 +5,12 @@ import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setAdministrativeData,
-  selectAdministrativeData,
+  selectAnnualNonReport,
 } from "../../../../../store/features/annualNonReportSlice";
 
 export const UBAdministrativeDepartmentData: React.FC = () => {
   const dispatch = useDispatch();
-  const administrativeData = useSelector(selectAdministrativeData);
+  const annualNonReport = useSelector(selectAnnualNonReport);
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
@@ -24,9 +24,9 @@ export const UBAdministrativeDepartmentData: React.FC = () => {
         <UBTextField
           question="a. List number of full-time staff"
           SetAnswer={(e) =>
-            dispatch(setAdministrativeData({ fullTimeStaff: e.target.value  }))
+            dispatch(setAdministrativeData({ fullTimeStaff: Number(e.target.value) }))
           }
-          value={administrativeData.fullTimeStaff}
+          value={annualNonReport.administrativeData.fullTimeStaff}
           type="number"
         />
       </Box>
@@ -35,9 +35,9 @@ export const UBAdministrativeDepartmentData: React.FC = () => {
         <UBTextField
           question="b. List number of part-time staff"
           SetAnswer={(e) =>
-            dispatch(setAdministrativeData({ partTimeStaff: e.target.value }))
+            dispatch(setAdministrativeData({ partTimeStaff: Number(e.target.value) }))
           }
-          value={administrativeData.partTimeStaff}
+          value={annualNonReport.administrativeData.partTimeStaff}
           type="number"
         />
       </Box>
@@ -50,7 +50,7 @@ export const UBAdministrativeDepartmentData: React.FC = () => {
               setAdministrativeData({ significantStaffChanges: e.target.value })
             )
           }
-          value={administrativeData.significantStaffChanges}
+          value={annualNonReport.administrativeData.significantStaffChanges}
         />
       </Box>
     </Container>

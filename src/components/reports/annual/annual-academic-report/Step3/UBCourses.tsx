@@ -4,13 +4,13 @@ import Box from "@mui/material/Box";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 // import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import { useSelector, useDispatch } from "react-redux";
-import { selectCourse, setCourses } from "../../../../../store/features/annualReportSlice";
+import { selectAnnualReport, setCourses } from "../../../../../store/features/annualReportSlice";
 
 // const initialState = ["", "", ""];
 
 export const UBCourses: React.FC = () => {
   const dispatch = useDispatch();
-  const courses = useSelector(selectCourse);
+  const annualReport = useSelector(selectAnnualReport)
 
   // const [state, setState] = useState<string[]>(initialState);
 
@@ -21,7 +21,7 @@ export const UBCourses: React.FC = () => {
         <UBTextField
           question="1. Total number of new courses added to the Faculty"
           SetAnswer={(e) => dispatch(setCourses({ totalNewCourses: e.target.value }))}
-          value={courses.totalNewCourses}
+          value={annualReport.courses.totalNewCourses}
           type="number"
           />
       </Box>
@@ -29,7 +29,7 @@ export const UBCourses: React.FC = () => {
         <UBTextField
           question="2. Number of courses offered through online"
           SetAnswer={(e) => dispatch(setCourses({ totalCoursesOnline: e.target.value }))}
-          value={courses.totalCoursesOnline}
+          value={annualReport.courses.totalCoursesOnline}
           type="number"
         />
       </Box>
@@ -37,7 +37,7 @@ export const UBCourses: React.FC = () => {
         <UBTextField
           question="3. Number of courses offered through face to face"
           SetAnswer={(e) => dispatch(setCourses({ totalCourseFaceToFace: e.target.value }))}
-          value={courses.totalCourseFaceToFace}
+          value={annualReport.courses.totalCourseFaceToFace}
           type="number"
         />
       </Box>

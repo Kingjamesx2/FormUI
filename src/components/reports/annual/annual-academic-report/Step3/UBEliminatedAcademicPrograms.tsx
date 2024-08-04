@@ -3,19 +3,11 @@ import Container from "@mui/material/Container";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  setEliminatedAcademicProgram,
-  selectEliminatedAcademicProgram,
-} from "../../../../../store/features/annualReportSlice";
-
-// const initialState = [""];
+  setEliminatedAcademicProgram, selectAnnualReport } from "../../../../../store/features/annualReportSlice";
 
 export const UBEliminatedAcademicPrograms: React.FC = () => {
   const dispatch = useDispatch();
-  const eliminatedAcademicPrograms = useSelector(
-    selectEliminatedAcademicProgram
-  );
-
-  // const [state, setState] = useState<string[]>(initialState);
+  const annualReport = useSelector(selectAnnualReport)
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
@@ -25,7 +17,7 @@ export const UBEliminatedAcademicPrograms: React.FC = () => {
       <UBTextArea
         question="1. List eliminated academic programs"
         SetAnswer={(e) => dispatch(setEliminatedAcademicProgram(e.target.value))}
-        value={eliminatedAcademicPrograms}
+        value={annualReport.eliminatedAcademicPrograms}
       />
     </Container>
   );
