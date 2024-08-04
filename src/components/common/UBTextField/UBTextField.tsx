@@ -6,10 +6,10 @@ import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 
-interface IUBTextField extends InputHTMLAttributes<HTMLInputElement> {
+interface IUBTextField extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value'> {
   question?: string;
   SetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: string | number;
+  value?: string | number; // Removed null
   width?: number;
   type?: string;
 }
@@ -17,9 +17,10 @@ interface IUBTextField extends InputHTMLAttributes<HTMLInputElement> {
 export const UBTextField: FC<IUBTextField> = ({
   question = "Faculty Mission Statement",
   SetAnswer,
-  value = "",
+  value = "", // Default value to empty string
   width = 800,
   type = "",
+  ...props
 }) => {
   const theme = useTheme();
 
@@ -56,7 +57,7 @@ export const UBTextField: FC<IUBTextField> = ({
         <Input
           sx={{ ml: "2%" }}
           id="standard-adornment-amount"
-          value={value}
+          value={value ?? ""} // Handle null case
           onChange={(e) => {
             if (type === "number" && !/^\d*$/.test(e.target.value)) {
               return;
@@ -66,6 +67,7 @@ export const UBTextField: FC<IUBTextField> = ({
           startAdornment={<InputAdornment position="start"></InputAdornment>}
           inputProps={type === "number" ? { inputMode: "numeric" } : {}}
           autoComplete="off"
+          {...props} // Spread additional props
         />
       </FormControl>
     </Box>
