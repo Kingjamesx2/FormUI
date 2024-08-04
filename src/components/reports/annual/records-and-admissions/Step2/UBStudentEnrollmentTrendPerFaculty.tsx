@@ -1,9 +1,9 @@
 import React, { useState, ChangeEvent } from "react";
 import { Container, Box } from "@mui/material";
-import { UBTextArea } from "../../../../../common/Textarea/UBTextArea";
-import UbDropdown from "../../../../../UbDropdown/UbDropdown";
-import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
-import UBInfoTable from "../../../../../common/UBInfoTable/UBInfoTable";
+import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
+import UbDropdown from "../../../../UbDropdown/UbDropdown";
+import { UBTextField } from "../../../../common/UBTextField/UBTextField";
+import UBInfoTable from "../../../../common/UBInfoTable/UBInfoTable";
 
 const initialState = ["", "", ""];
 

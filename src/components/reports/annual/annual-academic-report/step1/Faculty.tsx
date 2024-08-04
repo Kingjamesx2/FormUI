@@ -1,9 +1,7 @@
-import { useEffect } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
-import UbDropdown from "../../../../UbDropdown/UbDropdown";
-// import { UBTextField } from "../../../../common/UBTextField/UBTextField";
+import { UbDropdown } from "../../../../UbDropdown/UbDropdown";
 import { useSelector, useDispatch } from "react-redux";
 import Typography from "@mui/material/Typography";
 import { selectAnnualReport } from "../../../../../store/features/annualReportSlice";
@@ -61,6 +59,7 @@ export const Faculty = () => {
           <UbDropdown
             label="Faculty"
             options={[
+              { value: "", label: "Choose One" },
               { value: "FEA", label: "Faculty of Education and Arts" },
               {
                 value: "FMSS",

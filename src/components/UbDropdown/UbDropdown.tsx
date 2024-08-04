@@ -3,7 +3,7 @@ import { Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 interface IUbDropdownProps {
   label: string;
-  value: string;
+  value: string | null;
   SetAnswer: (event: React.ChangeEvent<{ value: unknown }>) => void;
   options: { value: string; label: string }[];
 }
@@ -25,7 +25,7 @@ export const UbDropdown: React.FC<IUbDropdownProps> = ({
       <Box
         style={{
           width: "50%", // Set the width to a shorter value
-          marginLeft: "2%"
+          marginLeft: "2%",
         }}
       >
         <FormControl fullWidth>
@@ -35,7 +35,7 @@ export const UbDropdown: React.FC<IUbDropdownProps> = ({
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
-            value={value}
+            value={value || ""}
             onChange={SetAnswer}
             autoWidth
             label={label}

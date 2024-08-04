@@ -37,7 +37,8 @@ interface IStudentSuccess {
 }
 
 interface IEventPicture {
-  pictureURL: string;
+  url: string;
+  name: string;
 }
 
 export interface IActivity {
@@ -56,8 +57,8 @@ interface IActivityUpdate {
 }
 
 interface IAdministrativeData {
-  fullTimeStaff: number | null;
-  partTimeStaff: number | null;
+  fullTimeStaff: string;
+  partTimeStaff: string;
   significantStaffChanges: string;
 }
 
@@ -81,15 +82,15 @@ export interface IMeeting {
 }
 
 interface IRevisedAcademics {
-  programsOffered: number | null;
+  programsOffered: string;
   newProgrammesAdded: string;
   revisedPrograms: string;
 }
 
 interface ICourse {
-  totalNewCourses: number | null,
-  totalCoursesOnline: number | null,
-  totalCourseFaceToFace: number | null
+  totalNewCourses: string,
+  totalCoursesOnline: string,
+  totalCourseFaceToFace: string
 }
 
 interface IRetentionOfStudents {
@@ -98,8 +99,8 @@ interface IRetentionOfStudents {
 }
 
 interface IDegreesConferred {
-  degreesConferredForMostRecentAcademicYear: number | null;
-  degreesConferredForMostRecentAcademicYearPerDepartment: number | null;
+  degreesConferredForMostRecentAcademicYear: string;
+  degreesConferredForMostRecentAcademicYearPerDepartment: string;
 }
 
 export interface AnnualReportInitialState {
@@ -113,10 +114,10 @@ export interface AnnualReportInitialState {
   accomplishments: IAccomplishments;
   researchPartnerships: IResearchPartnerships;
   revisedAcademics: IRevisedAcademics;
-  course: ICourse;
+  courses: ICourse;
   eliminatedAcademicPrograms: string;
   retentionOfStudents: IRetentionOfStudents;
-  studentIntership: string;
+  studentInternships: string;
   degreesConferred: IDegreesConferred;
   studentSuccess: IStudentSuccess;
   activities: IActivity[];
@@ -155,24 +156,24 @@ const initialState: AnnualReportInitialState = {
     scholarships: ""
   },
   revisedAcademics: {
-    programsOffered: null,
+    programsOffered: "",
     newProgrammesAdded: "",
     revisedPrograms: "",
   },
-  course: {
-    totalNewCourses: null,
-    totalCoursesOnline: null,
-    totalCourseFaceToFace: null,
+  courses: {
+    totalNewCourses: "",
+    totalCoursesOnline: "",
+    totalCourseFaceToFace: "",
   },
   eliminatedAcademicPrograms: "",
   retentionOfStudents: {
     currentStudents: "",
     transferStudents: "",
   },
-  studentIntership: "",
+  studentInternships: "",
   degreesConferred: {
-    degreesConferredForMostRecentAcademicYear: null,
-    degreesConferredForMostRecentAcademicYearPerDepartment: null,
+    degreesConferredForMostRecentAcademicYear: "",
+    degreesConferredForMostRecentAcademicYearPerDepartment: "",
   },
   studentSuccess: {
     studentLearning: "",
@@ -191,7 +192,8 @@ const initialState: AnnualReportInitialState = {
       personsInPicture: "",
       eventPicture: [
         {
-          pictureURL: "",
+          url: "",
+          name: "",
         }
       ],
       eventSummary: "",
@@ -199,8 +201,8 @@ const initialState: AnnualReportInitialState = {
     }
   ],
   administrativeData: {
-    fullTimeStaff: null,
-    partTimeStaff: null,
+    fullTimeStaff: "",
+    partTimeStaff: "",
     significantStaffChanges: ""
   },
   financialBudget: {
@@ -252,8 +254,8 @@ const annualReportSlice = createSlice({
     setRevisedAcademics: (state, action: PayloadAction<Partial<IRevisedAcademics>>) => {
       return { ...state, revisedAcademics: { ...state.revisedAcademics, ...action.payload } };
     },
-    setCourse: (state, action: PayloadAction<Partial<ICourse>>) => {
-      return { ...state, course: { ...state.course, ...action.payload } };
+    setCourses: (state, action: PayloadAction<Partial<ICourse>>) => {
+      return { ...state, courses: { ...state.courses, ...action.payload } };
     },
     
     setEliminatedAcademicProgram: (state, action: PayloadAction<string>) => {
@@ -263,8 +265,8 @@ const annualReportSlice = createSlice({
     setRetentionOfStudents: (state, action: PayloadAction<Partial<IRetentionOfStudents>>) => {
       return { ...state, retentionOfStudents: {...state.retentionOfStudents,  ...action.payload } };
     },
-    setStudentIntership: (state, action: PayloadAction<string>) => {
-      return { ...state, studentIntership: action.payload };
+    setStudentInternships: (state, action: PayloadAction<string>) => {
+      return { ...state, studentInternships: action.payload };
     },
     setDegreesConferred: (state, action: PayloadAction<Partial<IDegreesConferred>>) => {
       return { ...state, degreesConferred: {...state.degreesConferred,  ...action.payload } };
@@ -364,10 +366,10 @@ export const {
   setAccomplishments,
   setResearchPartnerships,
   setRevisedAcademics,
-  setCourse,
+  setCourses,
   setEliminatedAcademicProgram,
   setRetentionOfStudents,
-  setStudentIntership,
+  setStudentInternships,
   setDegreesConferred,
   setStudentSuccess,
   setActivities,
@@ -391,12 +393,12 @@ export const selectDean = (state: RootState) => state.annualReport.dean;
 export const selectMissionStatement = (state: RootState) => state.annualReport.missionStatement;
 export const selectStrategicGoals = (state: RootState) => state.annualReport.strategicGoals;
 export const selectAccomplishments = (state: RootState) => state.annualReport.accomplishments;
-export const selectResearchPartnerships = (state: RootState) => state.annualReport.researchPartnerships;
+export const selectResearchPartnerships = (state: RootState) => state.annualReport.researchPartnerships || {};
 export const selectRevisedAcademics = (state: RootState) => state.annualReport.revisedAcademics;
-export const selectCourse = (state: RootState) => state.annualReport.course;
+export const selectCourse = (state: RootState) => state.annualReport.courses;
 export const selectEliminatedAcademicProgram = (state: RootState) => state.annualReport.eliminatedAcademicPrograms;
 export const selectRetentionOfStudents = (state: RootState) => state.annualReport.retentionOfStudents;
-export const selectStudentInternship = (state: RootState) => state.annualReport.studentIntership;
+export const selectStudentInternship = (state: RootState) => state.annualReport.studentInternships;
 export const selectDegreesConferred = (state: RootState) => state.annualReport.degreesConferred;
 export const selectStudentSuccess = (state: RootState) => state.annualReport.studentSuccess;
 export const selectActivities = (state: RootState) => state.annualReport.activities;

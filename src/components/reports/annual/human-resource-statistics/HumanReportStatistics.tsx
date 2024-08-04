@@ -1,26 +1,27 @@
 import React, { useState, ChangeEvent } from "react";
 import { Container, Box } from "@mui/material";
-import { UBTextArea } from "../../../../../common/Textarea/UBTextArea";
-import UbDropdown from "../../../../../UbDropdown/UbDropdown";
-import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
-import UBInfoTable from "../../../../../common/UBInfoTable/UBInfoTable";
+import { UBTextArea } from "../../../common/Textarea/UBTextArea";
+import UbDropdown from  "../../../UbDropdown/UbDropdown";
+import { UBTextField } from "../../../common/UBTextField/UBTextField";
+import UBInfoTable from "../../../../components/common/UBInfoTable/UBInfoTable";
 
 const initialState = ["", "", ""];
 
-const columns = ['5. Origin of Students(Number)', ''];
+const columns = ['Faculty', 'Full-time faculty', 'Adjunct faculty', 'Non-teaching staff'];
 const initialRows = [
-  { degree: 'Belize', '': ''},
-  { degree: 'Central American Countries', '': ''},
-  { degree: 'Other Countries', '': ''},
+  { degree: 'Education and Arts', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
+  { degree: 'Management and Social Sciences', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
+  { degree: 'Health Sciences', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
+  { degree: 'Science and Technology', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
 ];
 
-export const UBOriginOfStudents: React.FC = () => {
+export const HumanResourceStatistics: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
-  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("");
+  const [numberStaff, setNumberStaff] = useState<string>("7. Number of Staff Academic Year 2021/2022");
 
   const questions = [
     {
-      question: "2. Student Enrolment Trend (Academic Level)",
+      question: "7. Number of Staff Academic Year 2021/2022",
       handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setState((prevState) => [prevState[0], prevState[1], value]);
@@ -33,7 +34,10 @@ export const UBOriginOfStudents: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      {/* <h3><center>I. Records and Admissions</center></h3> */}
+      <h3 style={{ margin: "5% 0 -4% 0"}}><center> Human Resource Statistics</center></h3>
+      <Box sx={{ mt: "6%", width: "68%", ml: "15%", mb: "-6%", pt: "3%", pb: "2%", pl: "2%", backgroundColor: "#FFD954", fontWeight: "bold", borderRadius: "5px 5px 0 0" }}>
+        {numberStaff}
+      </Box>
       {questions.map((q, index) => {
         if (q.type === "textarea") {
           return (
@@ -78,4 +82,4 @@ export const UBOriginOfStudents: React.FC = () => {
   );
 };
 
-export default UBOriginOfStudents;
+export default HumanResourceStatistics;

@@ -1,23 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import Container from "@mui/material/Container";
-import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
-import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import Box from "@mui/material/Box";
 import { UBRadioButton } from "../../../../common/UBRadioButton/UBRadioButton";
-import Stack from "@mui/material/Stack";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setAccomplishments,
-  selectAccomplishments,
 } from "../../../../../store/features/annualReportSlice";
+import { selectAnnualReport } from "../../../../../store/features/annualReportSlice";
 
-const initialState = ["", "", "", "", "", ""];
+
 
 export const UBAccomplishments: React.FC = () => {
   const dispatch = useDispatch();
-  const accomplishments = useSelector(selectAccomplishments);
-  const [state, setState] = useState<string[]>(initialState);
+  const annualReport = useSelector(selectAnnualReport)
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
@@ -28,12 +24,9 @@ export const UBAccomplishments: React.FC = () => {
       <Box mb={-4.7}>
         <UBTextArea
           question="1. List significant accomplishments of the Faculty."
-          SetAnswer={(e) =>
-            dispatch(
-              setAccomplishments({ accomplishmentList: e.target.value })
-            )
+          SetAnswer={(e) => dispatch( setAccomplishments({ accomplishmentList: e.target.value }))
           }
-          value={accomplishments.accomplishmentList}
+          value={annualReport.accomplishments.accomplishmentList }
         />
       </Box>
       
@@ -45,7 +38,7 @@ export const UBAccomplishments: React.FC = () => {
               setAccomplishments({ accomplishmentAdvancement: e.target.value })
             )
           }
-          value={accomplishments.accomplishmentAdvancement}
+          value={annualReport.accomplishments.accomplishmentAdvancement}
         />
       </Box>
       
@@ -73,7 +66,7 @@ export const UBAccomplishments: React.FC = () => {
               setAccomplishments({ multipleChoice: e.target.value })
             )
           }
-          value={accomplishments.multipleChoice}
+          value={annualReport.accomplishments.multipleChoice}
         />
       </Box>
       
@@ -85,7 +78,7 @@ export const UBAccomplishments: React.FC = () => {
               setAccomplishments({ why: e.target.value })
             )
           }
-          value={accomplishments.why}
+          value={annualReport.accomplishments.why}
         />
       </Box>
       
@@ -97,7 +90,7 @@ export const UBAccomplishments: React.FC = () => {
               setAccomplishments({ applicableOpportunities: e.target.value })
             )
           }
-          value={accomplishments.applicableOpportunities}
+          value={annualReport.accomplishments.applicableOpportunities}
         />
       </Box>
     </Container>

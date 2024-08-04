@@ -189,46 +189,46 @@ const recordsReportSlice = createSlice({
       state = action.payload;
     },
     setAcademicYearID: (state, action: PayloadAction<string>) => {
-      state.academicYearID = action.payload;
+      return { ...state, academicYearID: action.payload };
     },
     setDepartment: (state, action: PayloadAction<string>) => {
-      state.department = action.payload;
+      return { ...state, department: action.payload };
     },
     setDepartmentHead: (state, action: PayloadAction<string>) => {
-      state.departmentHead = action.payload;
+      return { ...state, departmentHead: action.payload };
     },
     setCurrentStudentEnrollment: (
       state,
       action: PayloadAction<ICurrentStudentEnrollment>
     ) => {
-      state.currentStudentEnrollment = action.payload;
+      return { ...state, currentStudentEnrollment: {...state.currentStudentEnrollment, ...action.payload } };
     },
     setStudentEnrollmentTrend: (
       state,
       action: PayloadAction<IEnrollmentTrend[]>
     ) => {
-      state.studentEnrollmentTrend = action.payload;
+      return { ...state, studentEnrollmentTrend: [...state.studentEnrollmentTrend, ...action.payload ] };
     },
     setEnrollmentTrendPerFaculty: (
       state,
       action: PayloadAction<IEnrollmentTrendPerFaculty[]>
     ) => {
-      state.enrollmentTrendPerFaculty = action.payload;
+      return { ...state, enrollmentTrendPerFaculty: [ ...state.enrollmentTrendPerFaculty, ...action.payload ] };
     },
     setGraduationStatistics: (
       state,
       action: PayloadAction<IGraduationStatistics[]>
     ) => {
-      state.graduationStatistics = action.payload;
+      return { ...state, graduationStatistics: [...state.graduationStatistics, ...action.payload ] };
     },
     setStudentOrigin: (state, action: PayloadAction<IStudentOrigin>) => {
-      state.studentOrigin = action.payload;
+      return { ...state, studentOrigin: action.payload };
     },
     setCampusStatistics: (state, action: PayloadAction<ICampusStatistics>) => {
-      state.campusStatistics = action.payload;
+      return { ...state, campusStatistics: action.payload };
     },
     setGraduates: (state, action: PayloadAction<Partial<IGraduates>>) => {
-      state.graduates = { ...state.graduates, ...action.payload };
+      return { ...state, graduates: { ...state.graduates, ...action.payload } };
     },
   },
 });

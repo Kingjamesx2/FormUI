@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import { UBTextField } from "../../../../../common/UBTextField/UBTextField";
-import { UBTextArea } from "../../../../../common/Textarea/UBTextArea";
-import { UbDropdown } from "../../../../../UbDropdown/UbDropdown";
+import { UBTextField } from "../../../../common/UBTextField/UBTextField";
+import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
+import { UbDropdown } from "../../../../UbDropdown/UbDropdown";
 import { useSelector, useDispatch } from "react-redux";
-import { selectInvestments, setInvestments } from "../../../../../../store/features/KeyStatisticsreportSlice/financeReportSlice"
+import { selectInvestments, setInvestments } from "../../../../../store/features/KeyStatisticsreportSlice/financeReportSlice"
 
 const initialState = ["", "", ""];
 

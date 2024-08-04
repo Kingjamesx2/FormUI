@@ -23,7 +23,7 @@ export const AnnualAcademicReport: React.FC = () => {
     <div>
       <Header
         logo="./../icons/UB_Logo.png"
-        title="UB Annual Report Template Academic Division"
+        title="UB Annual Report Academic Division"
       />
       <UBStepper steps={steps} />
       </div>

@@ -5,8 +5,6 @@ import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
 import { selectResearchPartnerships, setResearchPartnerships } from "../../../../../store/features/annualReportSlice";
 
-const initialState = ["", "", "", "", ""];
-
 export const UBresearch: React.FC = () => {
   const dispatch = useDispatch();
   const researchPartnerships = useSelector(selectResearchPartnerships);
