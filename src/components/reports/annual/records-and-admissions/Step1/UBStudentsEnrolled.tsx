@@ -7,9 +7,6 @@ import UBInfoTable from "../../../../common/UBInfoTable/UBInfoTable";
 import { useSelector, useDispatch } from "react-redux";
 import { selectRecordReport, setCurrentStudentEnrollmentTrend } from "../../../../../store/features/recordsReportSlice";
 const initialState = ["", "", ""];
-import { selectRecordReport } from '../../../../../store/features/recordsReportSlice'
-
-
 
 const columns = ['1. Students Enrolment for the Academic Year under review', ''];
 const initialRows = [
