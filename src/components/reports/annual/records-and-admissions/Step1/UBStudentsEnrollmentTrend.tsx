@@ -23,7 +23,7 @@ export const UBStudentsEnrollmentTrend: React.FC = () => {
     dispatch(setStudentEnrollmentTrend(value));
   };
 
-  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Per Faculty)");
+  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Academic Year)");
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
