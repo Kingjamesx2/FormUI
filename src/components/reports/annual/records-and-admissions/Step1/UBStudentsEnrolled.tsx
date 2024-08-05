@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
-import { Container, Box } from "@mui/material";
+import { Container } from "@mui/material";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
@@ -7,6 +7,8 @@ import UBInfoTable from "../../../../common/UBInfoTable/UBInfoTable";
 import { useSelector, useDispatch } from "react-redux";
 import { selectRecordReport, setCurrentStudentEnrollmentTrend } from "../../../../../store/features/recordsReportSlice";
 const initialState = ["", "", ""];
+import { selectRecordReport } from '../../../../../store/features/recordsReportSlice'
+
 
 
 const columns = ['1. Students Enrolment for the Academic Year under review', ''];
