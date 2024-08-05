@@ -1,10 +1,10 @@
 import React, { useState, ChangeEvent } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { Container, Box } from "@mui/material";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import UBInfoTable from "../../../../common/UBInfoTable/UBInfoTable";
-import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from "../../../../../store/store";
 import { setIncome } from "../../../../../store/features/financeReportSlice";
 
@@ -24,13 +24,36 @@ export const UBFinanceIncome: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
   const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Academic Level)");
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const { income } = useSelector((state: RootState) => state.finance);
 
   const handleSetAnswer = (value: any) => {
     dispatch(setIncome(value));
   };
 
+  const handleSetValue = (value: any) => {
+    let _newValues = { 
+      fundingFromGoB: 0,
+      tuitionFees: 0,
+      contracts: 0,
+      researchGrants: 0,
+      endowmentAndInvestmentIncome: 0,
+      other: 0,
+      total: 0 
+    }
+
+    value.forEach(r => {
+      const _v = Object.values(r)[1] as number
+      if (r.degree === 'Funding from the Government of Belize') _newValues.fundingFromGoB = _v
+      if (r.degree === 'Tuition Fees') _newValues.tuitionFees = _v 
+      if (r.degree === 'Contracts') _newValues.contracts = _v
+      if (r.degree === 'Research Grants') _newValues.researchGrants = _v
+      if (r.degree === 'Endowment and Investment Income') _newValues.endowmentAndInvestmentIncome = _v
+      if (r.degree === 'Other') _newValues.other = _v
+    })
+
+    dispatch(setIncome(_newValues))
+  }
 
   const questions = [
     {
@@ -38,15 +61,13 @@ export const UBFinanceIncome: React.FC = () => {
       handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setState((prevState) => [prevState[0], prevState[1], value]);
-        console.log(value);
       },
       type: "table",
       value: state[0],
     },
   ];
 
-  return (
-    <Container sx={{ width: 1, m: 1, p: 1 }}>
+  return (<Container sx={{ width: 1, m: 1, p: 1 }}>
       <h3 style={{ margin: "5% 0 -2% 0" }}><center>III. Finance and Budget Statistics</center></h3>
       {/* <Box sx={{ mt: "10%", width: "70%", ml: "15%", mb: "-30px" }}>
         {enrollmentTrend}
@@ -77,6 +98,7 @@ export const UBFinanceIncome: React.FC = () => {
               key={index}
               columns={columns}
               initialRows={initialRows}
+              SetValue={handleSetValue}
             />
           );
         } else if (q.type === "input") {

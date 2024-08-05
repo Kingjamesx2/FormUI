@@ -13,8 +13,6 @@ import HumanResourceStatistics from './pages/Reports/HumanResourceStatistics';
 import RecordsAndAdmissions from './pages/Reports/RecordsAndAdmissions';
 import FinanceAndBudgetStatistics from './pages/Reports/FinanceAndBudgetStatistics';
 
-
-
 const App: React.FC = () => {
   return (
     <Provider store={store}>

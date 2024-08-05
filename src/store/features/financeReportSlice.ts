@@ -7,7 +7,7 @@ interface IIncome {
   contracts: number;
   researchGrants: number;
   endowmentAndInvestmentIncome: number;
-  other: string;
+  other: number;
   total: number;
 }
 
@@ -25,9 +25,9 @@ interface IInvestments {
   projectInvestment3: string;
 }
 
-
-interface IFinanceReportState {
+export interface IFinanceReportState {
   _id: string;
+  email: string;
   userID: string;
   academicYearID: string;
   department: string;
@@ -40,6 +40,7 @@ interface IFinanceReportState {
 // Initial State
 const financeReportInitialState: IFinanceReportState = {
   _id: "",
+  email: "",
   userID: "",
   academicYearID: "",
   department: "",
@@ -50,7 +51,7 @@ const financeReportInitialState: IFinanceReportState = {
     contracts:0,
     researchGrants: 0,
     endowmentAndInvestmentIncome: 0,
-    other: "",
+    other: 0,
     total: 0,
   },
   expenditure: {
@@ -73,31 +74,35 @@ const financeReportSlice = createSlice({
   name: 'financeReport',
   initialState: financeReportInitialState,
   reducers: {
+    setFinanceReport : (state, action: PayloadAction<IFinanceReportState>) => {
+      return { ...state, ...action.payload }
+    },
     setUserID: (state, action: PayloadAction<string>) => {
-      state.userID = action.payload;
+      return { ...state, userID: action.payload };
     },
     setAcademicYearID: (state, action: PayloadAction<string>) => {
-      state.academicYearID = action.payload;
+      return { ...state, academicYearID: action.payload };
     },
     setDepartment: (state, action: PayloadAction<string>) => {
-      state.department = action.payload;
+      return { ...state, department: action.payload };
     },
     setDeadline: (state, action: PayloadAction<string>) => {
-      state.deadline = action.payload;
+      return { ...state, deadline: action.payload };
     },
     setIncome: (state, action: PayloadAction<IIncome>) => {
-      state.income = action.payload;
+      return { ...state, income: action.payload };
     },
     setExpenditure: (state, action: PayloadAction<Partial<IExpenditure>>) => {
-      state.expenditure = { ...state.expenditure , ...action.payload};
+      return { ...state, expenditure: { ...state.expenditure, ...action.payload} };
     },
     setInvestments: (state, action: PayloadAction<Partial<IInvestments>>) => {
-      state.investments = {...state.investments, ...action.payload};
+      return { ...state, investments: { ...state.investments, ...action.payload } };
     },
   },
 });
 
 export const {
+  setFinanceReport,
   setUserID,
   setAcademicYearID,
   setDepartment,

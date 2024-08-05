@@ -13,26 +13,34 @@ interface IEnrollmentTrend {
   associate: number;
   undergraduate: number;
   graduate: number;
-  other: string;
+  other: number;
 }
 
 interface IEnrollmentTrendPerFaculty {
   academicYear: string;
-  EducationAndArts: number;
-  ManagementAndSocialScience: number;
-  HealthScience: number;
-  ScienceAndTechnology: number;
+  educationAndArts: number;
+  managementAndSocialScience: number;
+  healthScience: number;
+  scienceAndTechnology: number;
+}
+
+interface IGraduationStatisticsFaculty {
+  degree: string;
+  Associates: string;
+  Bachelors: string;
+  Honors: string
 }
 
 interface IGraduationStatistics {
   academicYear: string;
-  EducationAndArts: number;
-  ManagementAndSocialScience: number;
-  HealthScience: number;
-  ScienceAndTechnology: number;
-  associates: number;
-  bachelor: number;
-  honors: number;
+  faculties: IGraduationStatisticsFaculty[]
+  // EducationAndArts: number;
+  // ManagementAndSocialScience: number;
+  // HealthScience: number;
+  // ScienceAndTechnology: number;
+  // associates: number;
+  // bachelor: number;
+  // honors: number;
 }
 
 interface IStudentOrigin {
@@ -56,10 +64,11 @@ interface IGraduates {
 
 export interface RecordsReportState {
   _id: string;
+  email: string;
   academicYearID: string;
   department: string;
   departmentHead: string;
-  currentStudentEnrollment: ICurrentStudentEnrollment;
+  currentStudentEnrollmentTrend: ICurrentStudentEnrollment;
   studentEnrollmentTrend: IEnrollmentTrend[];
   enrollmentTrendPerFaculty: IEnrollmentTrendPerFaculty[];
   graduationStatistics: IGraduationStatistics[];
@@ -71,10 +80,11 @@ export interface RecordsReportState {
 // Initial State
 const recordsReportInitialState: RecordsReportState = {
   _id: "",
+  email: "",
   academicYearID: "",
   department: "",
   departmentHead: "",
-  currentStudentEnrollment: {
+  currentStudentEnrollmentTrend: {
     associates: 0,
     undergraduate: 0,
     graduate: 0,
@@ -85,77 +95,69 @@ const recordsReportInitialState: RecordsReportState = {
       associate: 0,
       undergraduate: 0,
       graduate: 0,
-      other: "",
+      other: 0,
     },
     {
       academicYear: "",
       associate: 0,
       undergraduate: 0,
       graduate: 0,
-      other: "",
+      other: 0,
     },
     {
       academicYear: "",
       associate: 0,
       undergraduate: 0,
       graduate: 0,
-      other: "",
+      other: 0,
     },
   ],
   enrollmentTrendPerFaculty: [
     {
       academicYear: "",
-      EducationAndArts: 0,
-      ManagementAndSocialScience: 0,
-      HealthScience: 0,
-      ScienceAndTechnology: 0,
+      educationAndArts: 0,
+      managementAndSocialScience: 0,
+      healthScience: 0,
+      scienceAndTechnology: 0,
     },
     {
       academicYear: "",
-      EducationAndArts: 0,
-      ManagementAndSocialScience: 0,
-      HealthScience: 0,
-      ScienceAndTechnology: 0,
+      educationAndArts: 0,
+      managementAndSocialScience: 0,
+      healthScience: 0,
+      scienceAndTechnology: 0,
     },
     {
       academicYear: "",
-      EducationAndArts: 0,
-      ManagementAndSocialScience: 0,
-      HealthScience: 0,
-      ScienceAndTechnology: 0,
-    },
+      educationAndArts: 0,
+      managementAndSocialScience: 0,
+      healthScience: 0,
+      scienceAndTechnology: 0,
+    }
   ],
-  graduationStatistics: [
-    {
-      academicYear: "",
-      EducationAndArts: 0,
-      ManagementAndSocialScience: 0,
-      HealthScience: 0,
-      ScienceAndTechnology: 0,
-      associates: 0,
-      bachelor: 0,
-      honors: 0,
+  graduationStatistics: [{
+      academicYear: "2021/2022",
+      faculties: [
+        { degree: 'Education and Arts', 'Associates': '', 'Bachelors': '', 'Honors': '' },
+        { degree: 'Management and Social Science', 'Associates': '', 'Bachelors': '', 'Honors': '' },
+        { degree: 'Health Science', 'Associates': '', 'Bachelors': '', 'Honors': '' },
+        { degree: 'Science and Technology', 'Associates': '', 'Bachelors': '', 'Honors': '' },
+      ]
     },
     {
-      academicYear: "",
-      EducationAndArts: 0,
-      ManagementAndSocialScience: 0,
-      HealthScience: 0,
-      ScienceAndTechnology: 0,
-      associates: 0,
-      bachelor: 0,
-      honors: 0,
+      academicYear: "2022/2023",
+      faculties: [{ degree: 'Education and Arts', 'Associates': '', 'Bachelors': '', 'Honors': '' },
+      { degree: 'Management and Social Science', 'Associates': '', 'Bachelors': '', 'Honors': '' },
+      { degree: 'Health Science', 'Associates': '', 'Bachelors': '', 'Honors': '' },
+      { degree: 'Science and Technology', 'Associates': '', 'Bachelors': '', 'Honors': '' }]
     },
     {
-      academicYear: "",
-      EducationAndArts: 0,
-      ManagementAndSocialScience: 0,
-      HealthScience: 0,
-      ScienceAndTechnology: 0,
-      associates: 0,
-      bachelor: 0,
-      honors: 0,
-    },
+      academicYear: "2023/2024",
+      faculties: [{ degree: 'Education and Arts', 'Associates': '', 'Bachelors': '', 'Honors': '' },
+      { degree: 'Management and Social Science', 'Associates': '', 'Bachelors': '', 'Honors': '' },
+      { degree: 'Health Science', 'Associates': '', 'Bachelors': '', 'Honors': '' },
+      { degree: 'Science and Technology', 'Associates': '', 'Bachelors': '', 'Honors': '' }]
+    }
   ],
   studentOrigin: {
     Belize: 0,
@@ -183,7 +185,7 @@ const recordsReportSlice = createSlice({
     //   state.userID = action.payload;
     // },
     setRecordReportState: (state, action: PayloadAction<RecordsReportState>) => {
-      return{...state, ...action.payload };
+      return { ...state, ...action.payload };
     },
     setAcademicYearID: (state, action: PayloadAction<string>) => {
       return { ...state, academicYearID: action.payload };
@@ -194,29 +196,29 @@ const recordsReportSlice = createSlice({
     setDepartmentHead: (state, action: PayloadAction<string>) => {
       return { ...state, departmentHead: action.payload };
     },
-    setCurrentStudentEnrollment: (
+    setCurrentStudentEnrollmentTrend: (
       state,
       action: PayloadAction<ICurrentStudentEnrollment>
     ) => {
-      return { ...state, currentStudentEnrollment: {...state.currentStudentEnrollment, ...action.payload } };
+      return { ...state, currentStudentEnrollmentTrend: {...state.currentStudentEnrollmentTrend, ...action.payload } };
     },
     setStudentEnrollmentTrend: (
       state,
       action: PayloadAction<IEnrollmentTrend[]>
     ) => {
-      return { ...state, studentEnrollmentTrend: [...state.studentEnrollmentTrend, ...action.payload ] };
+      return { ...state, studentEnrollmentTrend: [...action.payload ] };
     },
     setEnrollmentTrendPerFaculty: (
       state,
       action: PayloadAction<IEnrollmentTrendPerFaculty[]>
     ) => {
-      return { ...state, enrollmentTrendPerFaculty: [ ...state.enrollmentTrendPerFaculty, ...action.payload ] };
+      return { ...state, enrollmentTrendPerFaculty: [ ...action.payload ] };
     },
     setGraduationStatistics: (
       state,
       action: PayloadAction<IGraduationStatistics[]>
     ) => {
-      return { ...state, graduationStatistics: [...state.graduationStatistics, ...action.payload ] };
+      return { ...state, graduationStatistics: [...action.payload ] };
     },
     setStudentOrigin: (state, action: PayloadAction<IStudentOrigin>) => {
       return { ...state, studentOrigin: action.payload };
@@ -236,7 +238,7 @@ export const {
   setAcademicYearID,
   setDepartment,
   setDepartmentHead,
-  setCurrentStudentEnrollment,
+  setCurrentStudentEnrollmentTrend,
   setStudentEnrollmentTrend,
   setEnrollmentTrendPerFaculty,
   setGraduationStatistics,
@@ -245,9 +247,7 @@ export const {
   setGraduates,
 } = recordsReportSlice.actions;
 
-export const selectRecordReport = (state: RootState) => {
-  return state.recordsReport;
-}
+export const selectRecordReport = (state: RootState) => state.recordsReport;
 export const selectAcademicYearID = (state: RootState) =>
   state.recordsReport.academicYearID;
 export const selectDepartment = (state: RootState) =>
@@ -255,7 +255,7 @@ export const selectDepartment = (state: RootState) =>
 export const selectDepartmentHead = (state: RootState) =>
   state.recordsReport.departmentHead;
 export const selectCurrentStudentEnrollment = (state: RootState) =>
-  state.recordsReport.currentStudentEnrollment;
+  state.recordsReport.currentStudentEnrollmentTrend;
 export const selectStudentEnrollmentTrend = (state: RootState) =>
   state.recordsReport.studentEnrollmentTrend;
 export const selectEnrollmentTrendPerFaculty = (state: RootState) =>

@@ -1,12 +1,12 @@
 import { baseAPI } from "./baseAPI";
-import {RecordsReportState, setRecordReportState} from "../features/recordsReportSlice"
+import { setFinanceReport, IFinanceReportState } from "../features/financeReportSlice";
 
 export const RecordsReportAPI = baseAPI.injectEndpoints({
     endpoints: (builder) => ({
-        fetchRecordsReport: builder.query({
+        fetchFinanceReport: builder.query({
             query: () => ({
               //check  url again
-                url: '/facultyReportByUser',
+                url: '/financeReportByUser',
                 method: 'GET'
             }),
             async onQueryStarted(id, {dispatch, queryFulfilled}) {
@@ -14,16 +14,16 @@ export const RecordsReportAPI = baseAPI.injectEndpoints({
                     const { data } = await queryFulfilled
 
                     if(data?.data?.reportData)
-                        dispatch(setRecordReportState(data.data.reportData))
+                        dispatch(setFinanceReport(data.data.reportData))
                 } catch(e) {
                     console.error(e)
                 }
             }
         }),
-        updateRecordReport: builder.mutation({
-            query: (body: Partial<RecordsReportState>) => ({
+        updateFinanceReport: builder.mutation({
+            query: (body: Partial<IFinanceReportState>) => ({
               //check URL
-                url: '/facultyReport',
+                url: '/financeReport',
                 method: 'PUT',
                 body
             })
@@ -33,5 +33,5 @@ export const RecordsReportAPI = baseAPI.injectEndpoints({
 
 
 export const {
-    useFetchRecordsReportQuery, useUpdateRecordReportMutation
+    useFetchFinanceReportQuery, useUpdateFinanceReportMutation
 } = RecordsReportAPI

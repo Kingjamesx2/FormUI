@@ -12,7 +12,7 @@ const useSaveRecordFormHook = () => {
     
     useEffect(() => {
         const triggerSaveForm = async () => await saveForm(record)
-
+        
         triggerSaveForm()
 
     }, [record])

@@ -5,6 +5,7 @@ import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import UBInfoTable from "../../../../common/UBInfoTable/UBInfoTable";
 import { useSelector, useDispatch } from "react-redux";
+import { selectRecordReport, setCurrentStudentEnrollmentTrend } from "../../../../../store/features/recordsReportSlice";
 const initialState = ["", "", ""];
 
 
@@ -21,21 +22,30 @@ export const UBStudentsEnrolled: React.FC = () => {
   const dispatch = useDispatch()
   const recordReport = useSelector(selectRecordReport)
 
-
-
-
   const questions = [
     {
       question: "",
       handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setState((prevState) => [prevState[0], prevState[1], value]);
-        console.log(value);
       },
       type: "table",
       value: state[0],
     },
   ];
+
+  const handleSetValue = (value: any) => {
+    let _newValues = {associates: 0, undergraduate: 0, graduate: 0}
+
+    value.forEach(r => {
+      const _v = Object.values(r)[1] as number
+      if (r.degree === 'Associates') _newValues.associates = _v
+      if (r.degree === 'Undergraduates') _newValues.undergraduate = _v 
+      if (r.degree === 'Graduates') _newValues.graduate = _v
+    })
+    
+    dispatch(setCurrentStudentEnrollmentTrend(_newValues))
+  }
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
@@ -66,6 +76,7 @@ export const UBStudentsEnrolled: React.FC = () => {
               key={index}
               columns={columns}
               initialRows={initialRows}
+              SetValue={handleSetValue}
             />
           );
         } else if (q.type === "input") {

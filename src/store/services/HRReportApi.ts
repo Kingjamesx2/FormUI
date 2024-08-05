@@ -1,12 +1,11 @@
 import { baseAPI } from "./baseAPI";
-import {RecordsReportState, setRecordReportState} from "../features/recordsReportSlice"
+import { setHRReportState, IHRReportState } from '../features/HRReportSlice'
 
-export const RecordsReportAPI = baseAPI.injectEndpoints({
+export const HRReportAPI = baseAPI.injectEndpoints({
     endpoints: (builder) => ({
-        fetchRecordsReport: builder.query({
+        fetchHRReport: builder.query({
             query: () => ({
-              //check  url again
-                url: '/facultyReportByUser',
+                url: '/HRReportByUser',
                 method: 'GET'
             }),
             async onQueryStarted(id, {dispatch, queryFulfilled}) {
@@ -14,16 +13,15 @@ export const RecordsReportAPI = baseAPI.injectEndpoints({
                     const { data } = await queryFulfilled
 
                     if(data?.data?.reportData)
-                        dispatch(setRecordReportState(data.data.reportData))
+                        dispatch(setHRReportState(data.data.reportData))
                 } catch(e) {
                     console.error(e)
                 }
             }
         }),
-        updateRecordReport: builder.mutation({
-            query: (body: Partial<RecordsReportState>) => ({
-              //check URL
-                url: '/facultyReport',
+        updateHRReport: builder.mutation({
+            query: (body: Partial<IHRReportState>) => ({
+                url: '/HRReport',
                 method: 'PUT',
                 body
             })
@@ -33,5 +31,5 @@ export const RecordsReportAPI = baseAPI.injectEndpoints({
 
 
 export const {
-    useFetchRecordsReportQuery, useUpdateRecordReportMutation
-} = RecordsReportAPI
+    useFetchHRReportQuery, useUpdateHRReportMutation
+} = HRReportAPI

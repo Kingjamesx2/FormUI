@@ -1,4 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
+import { useDispatch } from "react-redux";
+import { setStudentOrigin } from "../../../../../store/features/recordsReportSlice";
 import { Container, Box } from "@mui/material";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
@@ -15,6 +17,7 @@ const initialRows = [
 ];
 
 export const UBOriginOfStudents: React.FC = () => {
+  const dispatch = useDispatch()
   const [state, setState] = useState<string[]>(initialState);
   const [enrollmentTrend, setEnrollmentTrend] = useState<string>("");
 
@@ -23,13 +26,24 @@ export const UBOriginOfStudents: React.FC = () => {
       question: "2. Student Enrolment Trend (Academic Level)",
       handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        setState((prevState) => [prevState[0], prevState[1], value]);
-        console.log(value);
-      },
+        setState((prevState) => [prevState[0], prevState[1], value]);      },
       type: "table",
       value: state[0],
     },
   ];
+
+  const handleSetValue = (value: any) => {
+    let _newValues = { Belize: 0, CentralAmericanCountries: 0, OtherCountries: 0}
+
+    value.forEach(r => {
+      const _v = Object.values(r)[1] as number
+      if (r.degree === 'Belize') _newValues.Belize = _v
+      if (r.degree === 'Central American Countries') _newValues.CentralAmericanCountries = _v 
+      if (r.degree === 'Other Countries') _newValues.OtherCountries = _v
+    })
+    
+    dispatch(setStudentOrigin(_newValues))
+  }
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
@@ -60,6 +74,7 @@ export const UBOriginOfStudents: React.FC = () => {
               key={index}
               columns={columns}
               initialRows={initialRows}
+              SetValue={handleSetValue}
             />
           );
         } else if (q.type === "input") {

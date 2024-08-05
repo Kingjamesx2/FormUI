@@ -1,9 +1,11 @@
 import React, { useState, ChangeEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Container, Box, Typography } from "@mui/material";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import UBInfoTable from "../../../../common/UBInfoTable/UBInfoTable";
+import { setGraduationStatistics, selectGraduationStatistics } from "../../../../../store/features/recordsReportSlice";
 
 const initialState = ["", "", ""];
 
@@ -22,8 +24,9 @@ const initialRows = [
 ];
 
 export const UBGraduationStatistics: React.FC = () => {
+  const dispatch = useDispatch()
+  const graduatStatistics = useSelector(selectGraduationStatistics)
   const [state, setState] = useState<string[]>(initialState);
-  const [graduationStatistics, setGraduationStatistics] = useState<string>("4. Graduation Statistics");
   const [specify, setSpecify] = useState<string>("*Please specify number of students graduating with honors in Bachelors programs");
 
   const questions = [
@@ -32,7 +35,6 @@ export const UBGraduationStatistics: React.FC = () => {
       handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setState((prevState) => [value, prevState[1], prevState[2]]);
-        console.log(value);
       },
       type: "table",
       value: state[0],
@@ -42,7 +44,6 @@ export const UBGraduationStatistics: React.FC = () => {
       handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setState((prevState) => [prevState[0], value, prevState[2]]);
-        console.log(value);
       },
       type: "table",
       value: state[1],
@@ -52,18 +53,38 @@ export const UBGraduationStatistics: React.FC = () => {
       handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setState((prevState) => [prevState[0], prevState[1], value]);
-        console.log(value);
       },
       type: "table",
       value: state[2],
     },
   ];
 
+  const handleSetValue = (value: any, year: number) => {
+    let academicYear = '2021/2022'
+    let _v = JSON.parse(JSON.stringify(graduatStatistics))
+    
+    switch(year) {
+      case 0:
+        _v[0].faculties = value 
+      break;
+      case 1:
+        academicYear = '2022/2023'
+        _v[1].faculties = value
+      break;
+      case 2:
+        academicYear = '2023/2024'
+        _v[2].faculties = value
+      break;
+    }
+
+    dispatch(setGraduationStatistics(_v))
+  }
+
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
       <Box>
         <h4 style={{width: "69%", marginLeft: "15%", marginBottom: "-5%", padding: "2% 0 1% 1%", backgroundColor: "#FFD954", borderRadius: "5px 5px 0 0" }}>
-          {graduationStatistics}
+          4. Graduation Statistics
         </h4>
       </Box>
       {questions.map((q, index) => {
@@ -95,6 +116,7 @@ export const UBGraduationStatistics: React.FC = () => {
               <UBInfoTable
                 columns={getColumns(q.year)}
                 initialRows={initialRows}
+                SetValue={(v) => handleSetValue(v, index)}
               />
 
             </Box>

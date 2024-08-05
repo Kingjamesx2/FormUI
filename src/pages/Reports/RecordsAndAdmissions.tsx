@@ -3,8 +3,7 @@ import UBStepper from "../../components/common/Stepper/UBStepper";
 import Header from '../../components/common/Header/Header';  // Import the Header component
 import RecordsAndAdmissionsStep1 from "../../components/reports/annual/records-and-admissions/Step1/RecordsAndAdmissionsStep1";
 import RecordsAndAdmissionsStep2 from "../../components/reports/annual/records-and-admissions/Step2/RecordsAndAdmissionstStep2";
-
-
+import useSaveRecordFormHook from "../../hooks/KeyStatisticReportFormHooks/useSaveReportFormHook";
 
 const steps = [
   { label: "Step 1", stepComponent: <RecordsAndAdmissionsStep1 /> },
@@ -12,8 +11,9 @@ const steps = [
  
 ];
 
-
 export const RecordsAndAdmissions: React.FC = () => {
+  useSaveRecordFormHook()
+  
     return(
         <div>
         <Header

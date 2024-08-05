@@ -15,7 +15,7 @@ interface INumberOfStaff {
   NonTeachingStaff: IFacultyCount;
 }
 
-interface IHRReportState {
+export interface IHRReportState {
   _id: string;
   userID: string;
   academicYearID: string;
@@ -60,42 +60,46 @@ const hrReportSlice = createSlice({
   name: 'hrReport',
   initialState: HRReportInitialState,
   reducers: {
+    setHRReportState: (state, action: PayloadAction<IHRReportState>) => {
+      return { ...state, ...action.payload };
+    },
     setUserID: (state, action: PayloadAction<string>) => {
-      state.userID = action.payload;
+      return {...state,userID: action.payload };
     },
     setAcademicYearID: (state, action: PayloadAction<string>) => {
-      state.academicYearID = action.payload;
+      return {...state, academicYearID: action.payload };
     },
     setDepartment: (state, action: PayloadAction<string>) => {
-      state.department = action.payload;
+      return { ...state, department: action.payload };
     },
     setDeadline: (state, action: PayloadAction<string>) => {
-      state.deadline = action.payload;
+      return { ...state, deadline: action.payload };
     },
     setNumberOfStaff: (state, action: PayloadAction<INumberOfStaff>) => {
-      state.numberOfStaff = action.payload;
+      return { ...state, numberOfStaff: {...action.payload} };
     },
-    setFulltimeFaculty: (state, action: PayloadAction<IFacultyCount>) => {
-      state.numberOfStaff.FulltimeFaculty = action.payload;
-    },
-    setAdjunctFaculty: (state, action: PayloadAction<IFacultyCount>) => {
-      state.numberOfStaff.AdjunctFaculty = action.payload;
-    },
-    setNonTeachingStaff: (state, action: PayloadAction<IFacultyCount>) => {
-      state.numberOfStaff.NonTeachingStaff = action.payload;
-    },
+    // setFulltimeFaculty: (state, action: PayloadAction<IFacultyCount>) => {
+    //   return {state.numberOfStaff.FulltimeFaculty = action.payload;
+    // },
+    // setAdjunctFaculty: (state, action: PayloadAction<IFacultyCount>) => {
+    //   state.numberOfStaff.AdjunctFaculty = action.payload;
+    // },
+    // setNonTeachingStaff: (state, action: PayloadAction<IFacultyCount>) => {
+    //   state.numberOfStaff.NonTeachingStaff = action.payload;
+    // },
   },
 });
 
 export const {
+  setHRReportState,
   setUserID,
   setAcademicYearID,
   setDepartment,
   setDeadline,
   setNumberOfStaff,
-  setFulltimeFaculty,
-  setAdjunctFaculty,
-  setNonTeachingStaff,
+  // setFulltimeFaculty,
+  // setAdjunctFaculty,
+  // setNonTeachingStaff,
 } = hrReportSlice.actions;
 
 export const selectHRReport = (state: RootState) => state.hrReport;
@@ -105,8 +109,8 @@ export const selectAcademicYearID = (state: RootState) => state.hrReport.academi
 export const selectDepartment = (state: RootState) => state.hrReport.department;
 export const selectDeadline = (state: RootState) => state.hrReport.deadline;
 export const selectNumberOfStaff = (state: RootState) => state.hrReport.numberOfStaff;
-export const selectFulltimeFaculty = (state: RootState) => state.hrReport.numberOfStaff.FulltimeFaculty;
-export const selectAdjunctFaculty = (state: RootState) => state.hrReport.numberOfStaff.AdjunctFaculty;
-export const selectNonTeachingStaff = (state: RootState) => state.hrReport.numberOfStaff.NonTeachingStaff;
+// export const selectFulltimeFaculty = (state: RootState) => state.hrReport.numberOfStaff.FulltimeFaculty;
+// export const selectAdjunctFaculty = (state: RootState) => state.hrReport.numberOfStaff.AdjunctFaculty;
+// export const selectNonTeachingStaff = (state: RootState) => state.hrReport.numberOfStaff.NonTeachingStaff;
 
 export default hrReportSlice.reducer;

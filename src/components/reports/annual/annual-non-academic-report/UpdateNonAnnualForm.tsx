@@ -13,12 +13,10 @@ const UpdateNonAnnualForm = () => {
     const [message, setMessage] = useState("false");
     
     const handleFormUpdate = async () => {
-        console.log('handle form Update')
         await saveForm(annualNonReport)
     }
 
     useEffect(() => {
-        console.log(data, error, isSuccess)
         if (isSuccess && !isLoading)
             setMessage("Saved successfully")
         if(error && !isLoading)

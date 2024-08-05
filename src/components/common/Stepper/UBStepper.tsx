@@ -65,7 +65,6 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
   const handleNext = () => {
     if (isLastStep()) {
       // Handle submit logic here
-      console.log("Form submitted");
       window.alert("Form submitted");
       navigate("/"); // Navigate to the home page
     } else {

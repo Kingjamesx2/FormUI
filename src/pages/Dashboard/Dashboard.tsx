@@ -13,6 +13,9 @@ import FormCard from "../../components/common/Card/FormCard";
 import { Link } from "react-router-dom";
 import { useFetchAnnualReportQuery } from "../../store/services/annualReportAPI";
 import { useFetchAnnualNonReportQuery } from "../../store/services/annualNonReportAPI";
+import { useFetchRecordsReportQuery } from "../../store/services/recordsReportAPI";
+import { useFetchHRReportQuery } from '../../store/services/HRReportApi'
+import { useFetchFinanceReportQuery } from '../../store/services/financeReportAPI'
 import { selectName } from "../../store/features/authSlice";
 import UBLogo from "../../components/icons/UB_Logo.png";
 // import exit from "../../components/icons/exit.png";
@@ -43,9 +46,13 @@ const AppBar = styled(MuiAppBar, {
 const defaultTheme = createTheme();
 
 export const Dashboard: React.FC = () => {
-  const [skipAnnualReport, setSkipAnnualReport] = useState(false);
-  const { refetch: refetchAnnaulReport } = useFetchAnnualReportQuery(1);
-  const { refetch:refetchAnnualNonReport } = useFetchAnnualNonReportQuery(1);
+  // const [skipAnnualReport, setSkipAnnualReport] = useState(false);
+  useFetchAnnualReportQuery(1);
+  useFetchAnnualNonReportQuery(1);
+  useFetchRecordsReportQuery(1);
+  useFetchHRReportQuery(1)
+  useFetchFinanceReportQuery(1)
+
   const userName = useSelector(selectName);
 
   // const handleFormClick = async (reportType: string) => {

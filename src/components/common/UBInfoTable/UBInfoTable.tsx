@@ -49,34 +49,9 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({
       const updatedRows = rows.map((row) =>
         row.degree === degree ? { ...row, [column]: value } : row
       );
+      
       setRows(updatedRows);
       SetValue(updatedRows);
-
-      const _rows = [
-        {
-          academicYear: "2021/2022",
-          associate: updatedRows[0]["2021/2022"],
-          undergraduate: updatedRows[1]["2021/2022"],
-          graduate: updatedRows[2]["2021/2022"],
-          other: updatedRows[3]["2021/2022"],
-        },
-        {
-          academicYear: "2022/2023",
-          associate: updatedRows[0]["2022/2023"],
-          undergraduate: updatedRows[1]["2022/2023"],
-          graduate: updatedRows[2]["2022/2023"],
-          other: updatedRows[3]["2022/2023"],
-        },
-        {
-          academicYear: "2023/2024",
-          associate: updatedRows[0]["2023/2024"],
-          undergraduate: updatedRows[1]["2023/2024"],
-          graduate: updatedRows[2]["2023/2024"],
-          other: updatedRows[3]["2023/2024"],
-        },
-      ];
-
-      console.log(_rows);
     }
   };
 

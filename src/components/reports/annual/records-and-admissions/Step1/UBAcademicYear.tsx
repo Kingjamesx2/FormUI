@@ -47,13 +47,13 @@ export const UBAcademicYear: React.FC = () => {
         />
       </Box>
 
-      <Box sx={{width:"101.4%", ml: "0.29%", mb: "-%", mt: "-5%"}}>
+      {/* <Box sx={{width:"101.4%", ml: "0.29%", mb: "-%", mt: "-5%"}}>
       <UBTextField
         question="Office/Department Head"
         SetAnswer={(e) => dispatch(setDepartmentHead(e.target.value as string))}
         value={recordReport.departmentHead}
       />
-      </Box>
+      </Box> */}
     </Container>
   );
 };

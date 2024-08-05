@@ -30,11 +30,25 @@ export const UBFinanceExpenditures: React.FC = () => {
     dispatch(setExpenditure({ otherExpenditures: e.target.value }));
   };
 
+  const handleSetValue = (value: any) => {
+    let _newValues = { ...expenditures }
+
+    value.forEach(r => {
+      const _v = Object.values(r)[1] as number
+      if (r.degree === 'Teaching Staff Costs') _newValues.teachingStaffCosts = _v
+      if (r.degree === 'Non-Teaching Staff Costs') _newValues.nonTeachingStaffCosts = _v 
+      if (r.degree === 'Administrative Cost') _newValues.administrationCosts = _v
+    })
+
+    dispatch(setExpenditure(_newValues))
+  }
+
+
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
       {/* Section for Finance Expenditures */}
       <Box sx={{ mt: "-5%" }}>
-        <UBInfoTable columns={columns} initialRows={initialRows} />
+        <UBInfoTable columns={columns} initialRows={initialRows} SetValue={handleSetValue} />
       </Box>
 
       {/* Section for Capital Expenditures */}
