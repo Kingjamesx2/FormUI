@@ -12,7 +12,7 @@ export const RecordsReportAPI = baseAPI.injectEndpoints({
             async onQueryStarted(id, {dispatch, queryFulfilled}) {
                 try {
                     const { data } = await queryFulfilled
-
+                    console.log('data?.data?.reportData -->>>>>>', data?.data?.reportData)
                     if(data?.data?.reportData)
                         dispatch(setRecordReportState(data.data.reportData))
                 } catch(e) {

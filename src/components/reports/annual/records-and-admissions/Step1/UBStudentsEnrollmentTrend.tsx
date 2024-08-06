@@ -8,16 +8,17 @@ import {
 } from "../../../../../store/features/recordsReportSlice";
 
 const columns = ['Degree Program', '2021/2022', '2022/2023', '2023/2024'];
-const initialRows = [
-  { degree: 'Associates', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
-  { degree: 'Undergraduate', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
-  { degree: 'Graduate (MBA - 19 + MEDL - 47)', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
-  { degree: 'Other', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
-];
+
 
 export const UBStudentsEnrollmentTrend: React.FC = () => {
   const dispatch = useDispatch();
   const studentEnrollmentTrend = useSelector(selectStudentEnrollmentTrend);
+  const initialRows = [
+    { degree: 'Associates', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
+    { degree: 'Undergraduate', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
+    { degree: 'Graduate (MBA - 19 + MEDL - 47)', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
+    { degree: 'Other', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
+  ];
 
   const handleSetAnswer = (value: any) => {
     let _v = [{
@@ -58,6 +59,7 @@ export const UBStudentsEnrollmentTrend: React.FC = () => {
     })
 
     dispatch(setStudentEnrollmentTrend(_v));
+    console.log(_v)
   };
 
   const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Academic Year)");

@@ -71,52 +71,31 @@ export const HumanResourceStatistics: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3 style={{ margin: "5% 0 -4% 0" }}><center> Human Resource Statistics</center></h3>
-      <Box sx={{ mt: "6%", width: "68%", ml: "15%", mb: "-6%", pt: "3%", pb: "2%", pl: "2%", backgroundColor: "#FFD954", fontWeight: "bold", borderRadius: "5px 5px 0 0" }}>
-        7. Number of Staff Academic Year 2023/2024
-      </Box>
-      {questions.map((q, index) => {
-        if (q.type === "textarea") {
-          return (
-            <UBTextArea
-              key={index}
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        } else if (q.type === "dropdown") {
-          return (
-            <UbDropdown
-              key={index}
-              label={q.question}
-              options={q.options}
-              handleSetValue={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        } else if (q.type === "table") {
-          return (
-            <UBInfoTable
-              key={index}
-              columns={columns}
-              initialRows={initialRows}
-              SetValue={handleSetValue}
-            />
-          );
-        } else if (q.type === "input") {
-          return (
-            <UBTextField
-              key={index}
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        }
-        return null;
-      })}
-    </Container>
+    <h3 style={{ margin: "5% 0 -4% 0" }}>
+      <center> Human Resource Statistics</center>
+    </h3>
+    <Box
+      sx={{
+        mt: "6%",
+        width: "68%",
+        ml: "15%",
+        mb: "-6%",
+        pt: "3%",
+        pb: "2%",
+        pl: "2%",
+        backgroundColor: "#FFD954",
+        fontWeight: "bold",
+        borderRadius: "5px 5px 0 0",
+      }}
+    >
+      7. Number of Staff Academic Year 2023/2024
+    </Box>
+    <UBInfoTable
+      columns={columns}
+      initialRows={initialRows}
+      SetValue={handleSetValue}
+    />
+  </Container>
   );
 };
 

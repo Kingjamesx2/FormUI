@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Box, Typography } from "@mui/material";
+import { Container, Box} from "@mui/material";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";

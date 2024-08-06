@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import Container from "@mui/material/Container";
-import { UBTextField } from "../../../../common/UBTextField/UBTextField";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
-import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
 import { selectGraduates, setGraduates } from "../../../../../store/features/recordsReportSlice";

@@ -17,7 +17,8 @@ interface IUBTableData {
 interface UBInfoTableProps {
   columns: string[];
   initialRows: IUBTableData[];
-  SetValue: (value: any) => void;
+  SetValue: (value: IUBTableData[]) => void;
+
 }
 
 const ResponsiveTableContainer = styled(TableContainer)({

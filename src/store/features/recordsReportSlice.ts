@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store"; // Adjust the path according to your project structure
 
-interface ICurrentStudentEnrollment {
+interface ICurrentStudentEnrollmentTrend {
   associates: number;
   undergraduate: number;
   graduate: number;
@@ -68,7 +68,7 @@ export interface RecordsReportState {
   academicYearID: string;
   department: string;
   departmentHead: string;
-  currentStudentEnrollmentTrend: ICurrentStudentEnrollment;
+  currentStudentEnrollmentTrend: ICurrentStudentEnrollmentTrend;
   studentEnrollmentTrend: IEnrollmentTrend[];
   enrollmentTrendPerFaculty: IEnrollmentTrendPerFaculty[];
   graduationStatistics: IGraduationStatistics[];
@@ -198,7 +198,7 @@ const recordsReportSlice = createSlice({
     },
     setCurrentStudentEnrollmentTrend: (
       state,
-      action: PayloadAction<ICurrentStudentEnrollment>
+      action: PayloadAction<ICurrentStudentEnrollmentTrend>
     ) => {
       return { ...state, currentStudentEnrollmentTrend: {...state.currentStudentEnrollmentTrend, ...action.payload } };
     },
@@ -247,8 +247,10 @@ export const {
   setGraduates,
 } = recordsReportSlice.actions;
 
-export const selectRecordReport = (state: RootState) => state.recordsReport;
-export const selectAcademicYearID = (state: RootState) =>
+export const selectRecordReport = (state: RootState) => { 
+  return state.recordsReport;
+}
+  export const selectAcademicYearID = (state: RootState) =>
   state.recordsReport.academicYearID;
 export const selectDepartment = (state: RootState) =>
   state.recordsReport.department;
