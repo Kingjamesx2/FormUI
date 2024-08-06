@@ -18,7 +18,6 @@ interface UBInfoTableProps {
   columns: string[];
   initialRows: IUBTableData[];
   SetValue: (value: IUBTableData[]) => void;
-
 }
 
 const ResponsiveTableContainer = styled(TableContainer)({
@@ -50,7 +49,7 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({
       const updatedRows = rows.map((row) =>
         row.degree === degree ? { ...row, [column]: value } : row
       );
-      
+
       setRows(updatedRows);
       SetValue(updatedRows);
     }
@@ -136,7 +135,9 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({
                       ? "left"
                       : "right"
                   }
-                  sx={{ fontWeight: column === "Degree Program" ? "bold" : "normal" }}
+                  sx={{
+                    fontWeight: column === "Degree Program" ? "bold" : "normal",
+                  }}
                 >
                   {column === "Degree Program" ||
                   column === "Faculty" ||

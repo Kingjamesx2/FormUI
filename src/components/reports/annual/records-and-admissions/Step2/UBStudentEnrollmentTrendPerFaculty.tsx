@@ -10,16 +10,20 @@ const columns = ['Faculty', '2021/2022', '2022/2023', '2023/2024'];
 export const StudentsEnrollmentTrendPerFaculty: React.FC = () => {
   const [enrollmentTrend, setEnrollmentTrend] = useState<string>("3. Student Enrolment Trend (Per Faculty)");
   const dispatch = useDispatch();
-  const enrollmentTrendPerFaculty = useSelector(setEnrollmentTrendPerFaculty);
+  const enrollmentTrendPerFaculty = useSelector(selectEnrollmentTrendPerFaculty);
+
+  console.log('enrollmentTrendPerFaculty enrollmentTrendPerFaculty, ', enrollmentTrendPerFaculty)
+  
   const initialRows = [
-    { degree: 'Education and Arts', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
-    { degree: 'Management and Social Science', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
-    { degree: 'Health Science', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
-    { degree: 'Science and Technology', '2021/2022': '', '2022/2023': '', '2023/2024': '' },
+    { degree: 'Education and Arts', '2021/2022': enrollmentTrendPerFaculty[0].educationAndArts, '2022/2023':  enrollmentTrendPerFaculty[1].educationAndArts, '2023/2024':  enrollmentTrendPerFaculty[2].educationAndArts },
+    { degree: 'Management and Social Science', '2021/2022':  enrollmentTrendPerFaculty[0].managementAndSocialScience, '2022/2023':  enrollmentTrendPerFaculty[1].managementAndSocialScience, '2023/2024':  enrollmentTrendPerFaculty[2].managementAndSocialScience},
+    { degree: 'Health Science', '2021/2022': enrollmentTrendPerFaculty[0].healthScience, '2022/2023': enrollmentTrendPerFaculty[1].healthScience, '2023/2024': enrollmentTrendPerFaculty[2].healthScience },
+    { degree: 'Science and Technology', '2021/2022':enrollmentTrendPerFaculty[0].scienceAndTechnology, '2022/2023': enrollmentTrendPerFaculty[1].scienceAndTechnology, '2023/2024': enrollmentTrendPerFaculty[2].scienceAndTechnology},
   ];
   
 
   const handleSetValue = (value: any) => {
+    console.log(value)
     let _v = [
       {
         academicYear: '2021/2022',
@@ -46,7 +50,7 @@ export const StudentsEnrollmentTrendPerFaculty: React.FC = () => {
 
     value.forEach((r, i) => {
       const p = Object.values(r);
-
+      
       _v.forEach((__v, j) => {
         if (p[0] === 'Education and Arts')
           _v[j].educationAndArts = p[1 + j] as number;

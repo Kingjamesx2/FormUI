@@ -1,27 +1,26 @@
 import React, { useState, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectNumberOfStaff } from "../../../../store/features/HRReportSlice";
 import { Container, Box } from "@mui/material";
-import { UBTextArea } from "../../../common/Textarea/UBTextArea";
-import UbDropdown from "../../../UbDropdown/UbDropdown";
-import { UBTextField } from "../../../common/UBTextField/UBTextField";
 import UBInfoTable from "../../../../components/common/UBInfoTable/UBInfoTable";
-import { setNumberOfStaff } from "../../../../store/features/HRReportSlice";
+import { setNumberOfStaff, selectNumberOfStaff } from "../../../../store/features/HRReportSlice";
 
 const initialState = ["", "", ""];
 
 const columns = ['Faculty', 'Full-time faculty', 'Adjunct faculty', 'Non-teaching staff'];
-const initialRows = [
-  { degree: 'Education and Arts', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
-  { degree: 'Management and Social Sciences', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
-  { degree: 'Health Sciences', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
-  { degree: 'Science and Technology', 'Full-time faculty': '', 'Adjunct faculty': '', 'Non-teaching staff': '' },
-];
 
 export const HumanResourceStatistics: React.FC = () => {
   const dispatch = useDispatch()
   const numberOfStaff = useSelector(selectNumberOfStaff)
   const [state, setState] = useState<string[]>(initialState);
+console.log(numberOfStaff)
+
+  const initialRows = [
+    { degree: 'Education and Arts', 'Full-time faculty': numberOfStaff.FulltimeFaculty.EducationAndArts, 'Adjunct faculty':numberOfStaff.AdjunctFaculty.EducationAndArts, 'Non-teaching staff': numberOfStaff.NonTeachingStaff.EducationAndArts },
+    { degree: 'Management and Social Sciences', 'Full-time faculty':  numberOfStaff.FulltimeFaculty.ManagementAndSocialSciences, 'Adjunct faculty':numberOfStaff.AdjunctFaculty.ManagementAndSocialSciences, 'Non-teaching staff': numberOfStaff.NonTeachingStaff.ManagementAndSocialSciences },
+    { degree: 'Health Sciences', 'Full-time faculty': numberOfStaff.FulltimeFaculty.HealthSciences, 'Adjunct faculty': numberOfStaff.AdjunctFaculty.HealthSciences, 'Non-teaching staff':  numberOfStaff.NonTeachingStaff.HealthSciences },
+    { degree: 'Science and Technology', 'Full-time faculty':numberOfStaff.FulltimeFaculty.ScienceAndTechnology, 'Adjunct faculty': numberOfStaff.AdjunctFaculty.ScienceAndTechnology, 'Non-teaching staff': numberOfStaff.NonTeachingStaff.ScienceAndTechnology },
+  ];
+  
 
   const questions = [
     {
