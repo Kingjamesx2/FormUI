@@ -120,7 +120,7 @@ export const Dashboard: React.FC = () => {
                 >
                   <Grid item xs={12} sm={6} md={4}>
                     <Typography variant="body1">
-                      <b>Form</b>
+                      {/* <b>Form</b> */}
                     </Typography>
                   </Grid>
                 </Grid>
