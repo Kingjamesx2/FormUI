@@ -1,35 +1,25 @@
-import React, { useState, ChangeEvent } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import { Container, Box } from "@mui/material";
-import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
-import UbDropdown from "../../../../UbDropdown/UbDropdown";
-import { UBTextField } from "../../../../common/UBTextField/UBTextField";
+import React from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { Container } from "@mui/material";
 import UBInfoTable from "../../../../common/UBInfoTable/UBInfoTable";
-import { RootState } from "../../../../../store/store";
-import { setIncome } from "../../../../../store/features/financeReportSlice";
+import { setIncome, selectIncome } from "../../../../../store/features/financeReportSlice";
 
-const initialState = ["", "", ""];
 
 const columns = ['8. Finance-Income Bz$', ''];
-const initialRows = [
-  { degree: 'Funding from the Government of Belize', '': '' },
-  { degree: 'Tuition Fees', '': '' },
-  { degree: 'Contracts', '': '' },
-  { degree: 'Research Grants', '': '' },
-  { degree: 'Endowment and Investment Income', '': '' },
-  { degree: 'Other', '': '' },
-];
+
 
 export const UBFinanceIncome: React.FC = () => {
-  const [state, setState] = useState<string[]>(initialState);
-  const [enrollmentTrend, setEnrollmentTrend] = useState<string>("2. Student Enrolment Trend (Academic Level)");
-
   const dispatch = useDispatch();
-  // const { income } = useSelector((state: RootState) => state.finance);
+  const income = useSelector(selectIncome)
+  const initialRows = [
+    { degree: 'Funding from the Government of Belize', '': income.fundingFromGoB},
+    { degree: 'Tuition Fees', '': income.tuitionFees },
+    { degree: 'Contracts', '': income.contracts },
+    { degree: 'Research Grants', '': income.researchGrants },
+    { degree: 'Endowment and Investment Income', '': income.endowmentAndInvestmentIncome },
+    { degree: 'Other', '': income.other },
 
-  const handleSetAnswer = (value: any) => {
-    dispatch(setIncome(value));
-  };
+  ];
 
   const handleSetValue = (value: any) => {
     let _newValues = { 
@@ -40,79 +30,31 @@ export const UBFinanceIncome: React.FC = () => {
       endowmentAndInvestmentIncome: 0,
       other: 0,
       total: 0 
-    }
+    };
 
     value.forEach(r => {
-      const _v = Object.values(r)[1] as number
-      if (r.degree === 'Funding from the Government of Belize') _newValues.fundingFromGoB = _v
-      if (r.degree === 'Tuition Fees') _newValues.tuitionFees = _v 
-      if (r.degree === 'Contracts') _newValues.contracts = _v
-      if (r.degree === 'Research Grants') _newValues.researchGrants = _v
-      if (r.degree === 'Endowment and Investment Income') _newValues.endowmentAndInvestmentIncome = _v
-      if (r.degree === 'Other') _newValues.other = _v
-    })
+      const _v = Object.values(r)[1] as number;
+      if (r.degree === 'Funding from the Government of Belize') _newValues.fundingFromGoB = _v;
+      if (r.degree === 'Tuition Fees') _newValues.tuitionFees = _v;
+      if (r.degree === 'Contracts') _newValues.contracts = _v;
+      if (r.degree === 'Research Grants') _newValues.researchGrants = _v;
+      if (r.degree === 'Endowment and Investment Income') _newValues.endowmentAndInvestmentIncome = _v;
+      if (r.degree === 'Other') _newValues.other = _v;
+    });
 
-    dispatch(setIncome(_newValues))
-  }
+    dispatch(setIncome(_newValues));
+  };
 
-  const questions = [
-    {
-      question: "2. Student Enrolment Trend (Academic Level)",
-      handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setState((prevState) => [prevState[0], prevState[1], value]);
-      },
-      type: "table",
-      value: state[0],
-    },
-  ];
-
-  return (<Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3 style={{ margin: "5% 0 -2% 0" }}><center>III. Finance and Budget Statistics</center></h3>
-      {/* <Box sx={{ mt: "10%", width: "70%", ml: "15%", mb: "-30px" }}>
-        {enrollmentTrend}
-      </Box> */}
-      {questions.map((q, index) => {
-        if (q.type === "textarea") {
-          return (
-            <UBTextArea
-              key={index}
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        } else if (q.type === "dropdown") {
-          return (
-            <UbDropdown
-              key={index}
-              label={q.question}
-              options={q.options}
-              handleSetValue={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        } else if (q.type === "table") {
-          return (
-            <UBInfoTable
-              key={index}
-              columns={columns}
-              initialRows={initialRows}
-              SetValue={handleSetValue}
-            />
-          );
-        } else if (q.type === "input") {
-          return (
-            <UBTextField
-              key={index}
-              question={q.question}
-              SetAnswer={q.handleSetAnswer}
-              value={q.value}
-            />
-          );
-        }
-        return null;
-      })}
+  return (
+    <Container sx={{ width: 1, m: 1, p: 1 }}>
+      <h3 style={{ margin: "5% 0 -2% 0" }}>
+        <center>III. Finance and Budget Statistics</center>
+      </h3>
+      <UBInfoTable
+        columns={columns}
+        initialRows={initialRows}
+        SetValue={handleSetValue}
+      />
     </Container>
   );
 };

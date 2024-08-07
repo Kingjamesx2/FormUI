@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Box, Typography } from "@mui/material";
+import { Container, Box} from "@mui/material";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
@@ -16,18 +16,14 @@ const getColumns = (year: string) => [
   'Honors',
 ];
 
-const initialRows = [
-  { degree: 'Education and Arts', 'Associates': '', 'Bachelors': '', 'Honors': '' },
-  { degree: 'Management and Social Science', 'Associates': '', 'Bachelors': '', 'Honors': '' },
-  { degree: 'Health Science', 'Associates': '', 'Bachelors': '', 'Honors': '' },
-  { degree: 'Science and Technology', 'Associates': '', 'Bachelors': '', 'Honors': '' },
-];
-
 export const UBGraduationStatistics: React.FC = () => {
   const dispatch = useDispatch()
   const graduatStatistics = useSelector(selectGraduationStatistics)
   const [state, setState] = useState<string[]>(initialState);
   const [specify, setSpecify] = useState<string>("*Please specify number of students graduating with honors in Bachelors programs");
+
+  console.log(graduatStatistics)
+  const initialRows = [[...graduatStatistics[0].faculties], [...graduatStatistics[1].faculties], [...graduatStatistics[2].faculties]]
 
   const questions = [
     {
@@ -37,7 +33,7 @@ export const UBGraduationStatistics: React.FC = () => {
         setState((prevState) => [value, prevState[1], prevState[2]]);
       },
       type: "table",
-      value: state[0],
+      value: initialRows[0],
     },
     {
       year: "2022/2023",
@@ -46,7 +42,7 @@ export const UBGraduationStatistics: React.FC = () => {
         setState((prevState) => [prevState[0], value, prevState[2]]);
       },
       type: "table",
-      value: state[1],
+      value: initialRows[1],
     },
     {
       year: "2023/2024",
@@ -55,11 +51,12 @@ export const UBGraduationStatistics: React.FC = () => {
         setState((prevState) => [prevState[0], prevState[1], value]);
       },
       type: "table",
-      value: state[2],
+      value: initialRows[2],
     },
   ];
 
   const handleSetValue = (value: any, year: number) => {
+    console.log('value, value value ', value)
     let academicYear = '2021/2022'
     let _v = JSON.parse(JSON.stringify(graduatStatistics))
     
@@ -115,7 +112,7 @@ export const UBGraduationStatistics: React.FC = () => {
               </Box>
               <UBInfoTable
                 columns={getColumns(q.year)}
-                initialRows={initialRows}
+                initialRows={q.value}
                 SetValue={(v) => handleSetValue(v, index)}
               />
 

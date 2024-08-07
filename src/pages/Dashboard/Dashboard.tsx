@@ -55,6 +55,15 @@ export const Dashboard: React.FC = () => {
 
   const userName = useSelector(selectName);
 
+  // const handleFormClick = async (reportType: string) => {
+  //   // try {
+  //   //   // skipAnnualReport ? setSkipAnnualReport(false) : false;
+  //   //   // refetchAnnaulReport();
+  //   // } catch (error) {
+  //   //   console.error("API error:", error);
+  //   // }
+  // };
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex" }}>

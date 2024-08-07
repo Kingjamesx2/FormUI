@@ -1,7 +1,7 @@
 import { baseAPI } from "./baseAPI";
 import { setFinanceReport, IFinanceReportState } from "../features/financeReportSlice";
 
-export const RecordsReportAPI = baseAPI.injectEndpoints({
+export const financeReportAPI = baseAPI.injectEndpoints({
     endpoints: (builder) => ({
         fetchFinanceReport: builder.query({
             query: () => ({
@@ -34,4 +34,4 @@ export const RecordsReportAPI = baseAPI.injectEndpoints({
 
 export const {
     useFetchFinanceReportQuery, useUpdateFinanceReportMutation
-} = RecordsReportAPI
+} = financeReportAPI
