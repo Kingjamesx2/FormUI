@@ -77,6 +77,7 @@ export const AnnualNonAcademicReportStep1: React.FC = () => {
             ]}
             SetAnswer={(e) => dispatch(setDivision(e.target.value as string))}
             value={annualNonReport.division}
+         
           />
         </Box>
         <Box

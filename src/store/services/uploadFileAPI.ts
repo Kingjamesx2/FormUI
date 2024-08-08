@@ -23,6 +23,7 @@ export const uploadFileAPI = baseAPI.injectEndpoints({
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
+          console.log(data)
           dispatch(setFiles(data.data.files));
         } catch (e) {
           console.error(e);

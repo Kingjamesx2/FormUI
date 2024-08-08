@@ -199,7 +199,7 @@ const annualNonReportSlice = createSlice({
       return { ...state, studentSuccess:  { ...state.studentSuccess, ...action.payload }}
     },
     setActivities: (state, action: PayloadAction<IActivity>) => {
-      const { eventId } = action.payload
+      const { eventId } = action.payload;
       if (eventId !== undefined) {
         const existingActivityIndex = state.activities.findIndex(
           (activity) => activity.eventId === eventId
@@ -224,8 +224,8 @@ const annualNonReportSlice = createSlice({
         eventName: "",
         personsInPicture: "",
         eventMonth: "",
-        eventPicture: [],
         eventSummary: "",
+        eventPicture: [],
       });
     },
 
