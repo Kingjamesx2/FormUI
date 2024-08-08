@@ -43,6 +43,7 @@ export const Header: React.FC<HeaderProps> = ({ logo, title }) => {
                 color: "black",
               }}
             >
+              
               <h3 style={{ marginLeft: "1rem" }}>{title}</h3>
             </Box>
 
