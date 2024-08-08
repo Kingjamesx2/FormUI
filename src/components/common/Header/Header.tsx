@@ -2,7 +2,6 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import UBLogo from './../../icons/UB_Logo.png';
 import { Link } from 'react-router-dom';
 import UserPosition from "../../UserPosition/UserPosition";
@@ -33,7 +32,7 @@ export const Header: React.FC<HeaderProps> = ({ logo, title }) => {
               }}
             >
               <img src={UBLogo} alt="UB Logo" width="25%" />
-              <h2 style={{ marginLeft: "1rem" }}>Annual Monitoring Process</h2>
+              {/* <h2 style={{ marginLeft: "1rem" }}>Annual Monitoring Process</h2> */}
             </Box>
             <Box
               sx={{
@@ -44,7 +43,7 @@ export const Header: React.FC<HeaderProps> = ({ logo, title }) => {
               }}
             >
               
-              <h3 style={{ marginLeft: "1rem" }}>{title}</h3>
+              <h2 style={{ marginLeft: "1rem" }}>{title}</h2>
             </Box>
 
             <Typography
