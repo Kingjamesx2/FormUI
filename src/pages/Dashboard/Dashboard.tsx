@@ -55,15 +55,6 @@ export const Dashboard: React.FC = () => {
 
   const userName = useSelector(selectName);
 
-  // const handleFormClick = async (reportType: string) => {
-  //   // try {
-  //   //   // skipAnnualReport ? setSkipAnnualReport(false) : false;
-  //   //   // refetchAnnaulReport();
-  //   // } catch (error) {
-  //   //   console.error("API error:", error);
-  //   // }
-  // };
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex" }}>
@@ -71,7 +62,7 @@ export const Dashboard: React.FC = () => {
         <AppBar position="absolute">
           <Toolbar
             sx={{
-              backgroundColor: "#FFF",
+              backgroundColor: "#fff",
             }}
           >
             <Box
@@ -96,10 +87,11 @@ export const Dashboard: React.FC = () => {
             <UserPosition name={userName} position="" logOut="" />
           </Toolbar>
         </AppBar>
+        
         <Box
           component="main"
           sx={{
-            backgroundColor: "#6C3777",
+            backgroundColor: "#fff",
             flexGrow: 1,
             height: "100vh",
             width: "100vw",
@@ -128,9 +120,6 @@ export const Dashboard: React.FC = () => {
                   spacing={2}
                 >
                   <Grid item xs={12} sm={6} md={4}>
-                    <Typography variant="body1">
-                      <b>Form</b>
-                    </Typography>
                   </Grid>
                 </Grid>
               </Grid>
@@ -144,7 +133,7 @@ export const Dashboard: React.FC = () => {
               ml: "auto", // Center horizontally
               mr: "auto", // Center horizontally
               p: "1% 0 1% 1%",
-              width: "70vw",
+              width: "50vw",
               overflowX: "hidden",
             }}
           >
@@ -153,11 +142,7 @@ export const Dashboard: React.FC = () => {
                 <Link
                   to="/AnnualAcademicReport"
                   style={{ textDecoration: "none" }}
-                  // onClick={() =>
-                  //   handleFormClick(
-                  //     "UB Annual Report Template Academic Division"
-                  //   )
-                  // }
+
                 >
                   <FormCard
                     formPreview="src/components/icons/form.png"

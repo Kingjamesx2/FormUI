@@ -9,10 +9,14 @@ import authReducer from "./../store/features/authSlice";
 import userReducer from "./../store/features/userSlice";
 import uploadReducer  from "./features/uploadSlice"
 // import reportSlice from "./features/reportSlice";
+import downloadReducer from "../store/features/downloadSlice";
 import { baseAPI } from "./services/baseAPI";
 import { authAPI } from "./services/authAPI";
 import { annualReportAPI } from "./services/annualReportAPI";
 import { annualNonReportAPI } from "./services/annualNonReportAPI";
+import { financeReportAPI } from "./services/financeReportAPI";
+import { HRReportAPI } from "./services/HRReportApi";
+import { RecordsReportAPI } from "./services/recordsReportAPI";
 
 export const store = configureStore({
   reducer: {
@@ -24,6 +28,7 @@ export const store = configureStore({
     auth: authReducer,
     user: userReducer,
     upload: uploadReducer,
+    download: downloadReducer,
     [baseAPI.reducerPath]: baseAPI.reducer,
     // [authAPI.reducerPath]: authAPI.reducer
   },
@@ -32,7 +37,11 @@ export const store = configureStore({
       baseAPI.middleware,
       authAPI.middleware,
       annualReportAPI.middleware,
-      annualNonReportAPI.middleware
+      annualNonReportAPI.middleware,
+      financeReportAPI.middleware,
+      HRReportAPI.middleware,
+      RecordsReportAPI.middleware
+
     ))
 });
 

@@ -10,9 +10,10 @@ import {
   IActivity,
   selectActivities,
   addNewActivity,
+  selectAnnualNonReport,
   updateActivity,
 } from "../../../../../store/features/annualNonReportSlice";
-import { useUploadFileMutation } from "./../../../../../store/services/uploadFileAPI";
+import { useUploadFileMutation } from "./../../../../../store/services/uploadFileAPI"
 
 export const UBActivitiesForTheYear = () => {
   const dispatch = useDispatch();
@@ -48,8 +49,11 @@ export const UBActivitiesForTheYear = () => {
   // };
 
   const handleImageChange = async (index: number, files: FileList) => {
+    console.log('files ---->>>>>', files)
     const formData = new FormData();
     Array.from(files).forEach((file) => formData.append('file', file));
+
+    console.log(formData)
     
     try {
       const response = await uploadFile(formData).unwrap();

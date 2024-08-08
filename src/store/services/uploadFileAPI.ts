@@ -18,7 +18,8 @@ export const uploadFileAPI = baseAPI.injectEndpoints({
         url: '/uploadPhoto',
         method: 'POST',
         body: formData,
-        formData: true
+        formData: true,
+        
       }),
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         try {

@@ -13,7 +13,7 @@ interface FormCardProps {
 export const FormCard: React.FC<FormCardProps> = ({ formPreview, title }) => {
   return (
     <div>
-       <Card sx={{ maxWidth: 350 }}>
+       <Card sx={{ maxWidth: 250 }}>
       <CardMedia
         component="img"
         image={formPreview}
@@ -30,7 +30,7 @@ export const FormCard: React.FC<FormCardProps> = ({ formPreview, title }) => {
           variant="h6"
           component="div"
           sx={{
-            fontSize: '14px',
+            fontSize: '80%',
             pt: '5%',
             whiteSpace: 'wrap',
             textOverflow: 'ellipsis',
