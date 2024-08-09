@@ -1,11 +1,8 @@
-// import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// import { RootState } from '../store';
-import { setFiles, clearFiles } from '../features/uploadSlice';
+import { setFiles } from '../features/uploadSlice';
 import { baseAPI } from "./baseAPI";
 
-
 interface IUploadFileResponse {
-  data: {
+  data?: {
     files: File[];
     message: string;
   };
@@ -13,19 +10,24 @@ interface IUploadFileResponse {
 
 export const uploadFileAPI = baseAPI.injectEndpoints({
   endpoints: (builder) => ({
-    uploadFile: builder.mutation<IUploadFileResponse, FormData>({
+    uploadFile: builder.mutation({
       query: (formData) => ({
         url: '/uploadPhoto',
         method: 'POST',
+        headers: {
+          "content-type": "multipart/form-data"
+        },
         body: formData,
-        formData: true,
-        
       }),
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          console.log(data)
-          dispatch(setFiles(data.data.files));
+          
+          if (data?.data?.files) {
+            dispatch(setFiles(data.data.files));
+          } else {
+            console.log("No content returned from server.");
+          }
         } catch (e) {
           console.error(e);
         }
