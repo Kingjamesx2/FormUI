@@ -2,12 +2,13 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 import UBLogo from './../../icons/UB_Logo.png';
 import { Link } from 'react-router-dom';
-import UserPosition from "../../UserPosition/UserPosition";
+import UserPosition from '../../UserPosition/UserPosition';
+import { useSelector } from "react-redux";
 import { selectName } from "../../../store/features/authSlice";
-import { useSelector } from 'react-redux';
-import { Box } from '@mui/material';
+
 
 interface HeaderProps {
   logo: string;
@@ -16,46 +17,32 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ logo, title }) => {
   const userName = useSelector(selectName);
+
   return (
-    <AppBar position="absolute">
-          <Toolbar
+    <AppBar position="static" sx={{ bgcolor: '#fff', width: '100vw' }}>
+      <Container maxWidth={false} sx={{ width: '100vw', padding: 0 }}>
+        <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100vw' }}>
+          <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
+            <img src={UBLogo} alt="UB Logo" style={{ width: '35%', height: '35%', marginLeft: "5%" }} />
+          </Link>
+          
+          <Typography
+            variant="h6"
+            component="div"
             sx={{
-              backgroundColor: "#FFF",
+              marginLeft: '-10%',
+              color: 'black',
+              textDecoration: 'none',
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                ml: "2%",
-                color: "black",
-              }}
-            >
-              <img src={UBLogo} alt="UB Logo" width="25%" />
-              {/* <h2 style={{ marginLeft: "1rem" }}>Annual Monitoring Process</h2> */}
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                ml: "2%",
-                color: "black",
-              }}
-            >
-              
-              <h2 style={{ marginLeft: "1rem" }}>{title}</h2>
-            </Box>
-
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1, ml: "6%" }}
-            ></Typography>
+            {title}
+          </Typography>
+          <div style={{ display: 'flex', justifyContent: '', alignItems: 'center', backgroundColor: "#fff", position: "relative", left: "30%" /* marginLeft: "20%", paddingLeft: "0%" */}}>
             <UserPosition name={userName} position="" logOut="" />
-          </Toolbar>
-        </AppBar>
+          </div>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 

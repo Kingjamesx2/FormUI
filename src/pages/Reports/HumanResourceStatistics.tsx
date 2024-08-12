@@ -17,7 +17,7 @@ export const HumanResourceStatistics: React.FC = () => {
           logo="./../icons/UB_Logo.png"
           title="UB Human Statistics Report "
         />
-        <UBStepper steps={steps} />
+        <UBStepper steps={steps}/>
         </div>
 
     )
