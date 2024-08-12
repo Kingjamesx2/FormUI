@@ -13,14 +13,12 @@ export const uploadSlice = createSlice({
   initialState,
   reducers: {
     setFiles(state, action: PayloadAction<File[]>) {
-      state.files = action.payload;
+      return  { ...state, files: {...action.payload} };
     },
-    clearFiles(state) {
-      state.files = [];
-    },
+    
   },
 });
 
-export const { setFiles, clearFiles } = uploadSlice.actions;
+export const { setFiles} = uploadSlice.actions;
 
 export default uploadSlice.reducer;

@@ -26,7 +26,7 @@ export const AnnualAcademicReport: React.FC = () => {
         title="UB Annual Report Academic Division"
       />
       <UBStepper steps={steps} />
-      </div>
+        </div>
   );
 };
 

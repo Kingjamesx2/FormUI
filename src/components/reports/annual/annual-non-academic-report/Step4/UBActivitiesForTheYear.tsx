@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Container, Box, IconButton } from "@mui/material";
+import { useState, useEffect } from "react";
+import { Container, Box, IconButton, CircularProgress } from "@mui/material";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
@@ -10,17 +10,35 @@ import {
   IActivity,
   selectActivities,
   addNewActivity,
-  selectAnnualNonReport,
+  // selectAnnualNonReport,
   updateActivity,
 } from "../../../../../store/features/annualNonReportSlice";
-import { useUploadFileMutation } from "./../../../../../store/services/uploadFileAPI"
+// import { useUploadFileMutation } from "./../../../../../store/services/uploadFileAPI";
+import { RootState } from "../../../../../store/store"; // Import your RootState or relevant type
+
+// Function to convert JSON to FormData
+// function jsonToFormData(json: Record<string, any>): FormData {
+//   const formData = new FormData();
+//   Object.keys(json).forEach((key) => {
+//     const value = json[key];
+//     if (typeof value === "object" && !(value instanceof File)) {
+//       formData.append(key, JSON.stringify(value));
+//     } else {
+//       formData.append(key, value);
+//     }
+//   });
+//   return formData;
+// }
 
 export const UBActivitiesForTheYear = () => {
   const dispatch = useDispatch();
   const activitiesFromStore = useSelector(selectActivities);
   const [activities, setActivitiesState] = useState([...activitiesFromStore]);
-  const [uploadFile] = useUploadFileMutation();
+  // const [uploadFile] = useUploadFileMutation();
+  const [isUploading, setIsUploading] = useState(false);
 
+  // Get token from the Redux store
+  const token = useSelector((state: RootState) => state.auth.token);
 
   useEffect(() => {
     setActivitiesState([...activitiesFromStore]);
@@ -41,35 +59,43 @@ export const UBActivitiesForTheYear = () => {
     dispatch(updateActivity({ index, field, value }));
   };
 
-  // const handleImageChange = (index: number, files: FileList) => {
-  //   const imageURLs = Array.from(files).map((file) =>
-  //     URL.createObjectURL(file)
-  //   );
-  //   handleChange(index, "eventPicture", imageURLs);
-  // };
+  const handleImageChange = async (index: number, files: FileList | null) => {
+    if (!files || !files.length) return;
 
-  const handleImageChange = async (index: number, files: FileList) => {
-    console.log('files ---->>>>>', files)
-    const formData = new FormData()
+    setIsUploading(true);
 
-    Array.from(files).forEach((file) => {
-      console.log(file)
-      formData.append('file', file)
-    })
+    const formData = new FormData();
+    Array.from(files).forEach((file) => formData.append("file", file)); // Use 'file' as the key
 
-    // for(var pair of formData.entries()) {
-    //   console.dir(pair)
-    // }
-    
     try {
-      const response = await uploadFile(formData).unwrap();
-      const imageURLs = response.data.files.map((file: any) => file.url); // Ensure this matches the server's response format
-      handleChange(index, 'eventPicture', imageURLs);
+      const response = await fetch("https://api.ub.edu.bz/api/uploadPhoto", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`, // Add token to headers
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Upload response:", data); // Log the response for debugging
+
+      // Check if the expected data structure is present
+      if (data && Array.isArray(data.files)) {
+        const imageURLs = data.files.map((file: any) => file.url); // Ensure this matches your response format
+        handleChange(index, "eventPicture", imageURLs);
+      } else {
+        console.error("Unexpected response format:", data);
+      }
     } catch (error) {
-      console.error('Error uploading files:', error);
+      console.error("Error uploading files:", error);
+    } finally {
+      setIsUploading(false);
     }
   };
-
 
   return (
     <Container sx={{ width: 1, m: 1, mb: "100px", p: 1 }}>
@@ -132,7 +158,6 @@ export const UBActivitiesForTheYear = () => {
             }}
           >
             <IconButton
-              sx={{}}
               size="small"
               aria-label="upload picture"
               component="label"
@@ -143,9 +168,17 @@ export const UBActivitiesForTheYear = () => {
                 accept="image/*"
                 type="file"
                 multiple
-                onChange={(e) => handleImageChange(index, e.target.files)}
+                onChange={(e) => {
+                  const files = e.target.files;
+                  if (files) {
+                    handleImageChange(index, files);
+                  }
+                }}
               />
             </IconButton>
+
+            {isUploading && <CircularProgress size={24} />}
+
             <Box>
               {activity.eventPicture &&
                 activity.eventPicture.map((picture, picIndex) => (
