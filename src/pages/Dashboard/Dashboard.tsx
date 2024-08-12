@@ -16,7 +16,13 @@ import { useFetchAnnualNonReportQuery } from "../../store/services/annualNonRepo
 import { useFetchRecordsReportQuery } from "../../store/services/recordsReportAPI";
 import { useFetchHRReportQuery } from '../../store/services/HRReportApi'
 import { useFetchFinanceReportQuery } from '../../store/services/financeReportAPI'
-import { selectName } from "../../store/features/authSlice";
+import { selectName, selectUsername } from "../../store/features/authSlice";
+import { selectFinanceReport } from "../../store/features/financeReportSlice";
+import { selectAnnualReport } from "../../store/features/annualReportSlice";
+import { selectRecordReport } from "../../store/features/recordsReportSlice";
+import { selectHRReport } from "../../store/features/HRReportSlice";
+import { selectAnnualNonReport } from "../../store/features/annualNonReportSlice";
+
 import UBLogo from "../../components/icons/UB_Logo.png";
 // import exit from "../../components/icons/exit.png";
 const drawerWidth: number = 240;
@@ -54,15 +60,12 @@ export const Dashboard: React.FC = () => {
   useFetchFinanceReportQuery(1)
 
   const userName = useSelector(selectName);
-
-  // const handleFormClick = async (reportType: string) => {
-  //   // try {
-  //   //   // skipAnnualReport ? setSkipAnnualReport(false) : false;
-  //   //   // refetchAnnaulReport();
-  //   // } catch (error) {
-  //   //   console.error("API error:", error);
-  //   // }
-  // };
+  const username = useSelector(selectUsername);
+  const financeReport = useSelector(selectFinanceReport)
+  const staffReport = useSelector(selectAnnualNonReport)
+  const facultyReport = useSelector(selectAnnualReport)
+  const recordReport = useSelector(selectRecordReport)
+  const HRReport = useSelector(selectHRReport)
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -146,71 +149,83 @@ export const Dashboard: React.FC = () => {
             }}
           >
             <Grid container spacing={3}>
-              <Grid item xs={12} md={4} lg={3}>
-                <Link
-                  to="/AnnualAcademicReport"
-                  style={{ textDecoration: "none" }}
+              {['ljohnson', 'bwatler', 'tusher', 'aaguilar'].includes(username) &&
+                (< Grid item xs={12} md={4} lg={3}>
+                  <Link
+                    to="/AnnualAcademicReport"
+                    style={{ textDecoration: "none" }}
                   // onClick={() =>
                   //   handleFormClick(
                   //     "UB Annual Report Template Academic Division"
                   //   )
                   // }
-                >
-                  <FormCard
-                    formPreview="src/components/icons/form.png"
-                    title="UB Annual Report Academic Division"
-                  />
-                </Link>
-              </Grid>
-              <Grid item xs={12} md={4} lg={3}>
-                <Link
-                  to="/AnnualNonAcademicReport"
-                  style={{ textDecoration: "none" }}
-                >
-                  <FormCard
-                    formPreview="src/components/icons/form1.png"
-                    title="UB Annual Report Non-Academic Division"
-                  />
-                </Link>
-              </Grid>
-              <Grid item xs={12} md={4} lg={3}>
-                <Link
-                  to="/RecordsAndAdmissions"
-                  style={{ textDecoration: "none" }}
-                >
-                  <FormCard
-                    formPreview="src/components/icons/form2.png"
-                    title="UB records and Admissions"
-                  />
-                </Link>
-              </Grid>
-              <Grid item xs={12} md={4} lg={3}>
-                <Link
-                  to="/HumanResourceStatistics"
-                  style={{ textDecoration: "none" }}
-                >
-                  <FormCard
-                    formPreview="src/components/icons/form2.png"
-                    title="UB Human Resource Statistics"
-                  />
-                </Link>
-              </Grid>
-              <Grid item xs={12} md={4} lg={3}>
-                <Link
-                  to="/FinanceAndBudgetStatistics"
-                  style={{ textDecoration: "none" }}
-                >
-                  <FormCard
-                    formPreview="src/components/icons/form2.png"
-                    title="UB Finance and Budget Statistics"
-                  />
-                </Link>
-              </Grid>
+                  >
+                    <FormCard
+                      formPreview="src/components/icons/form.png"
+                      title="UB Annual Report Academic Division"
+                    />
+                  </Link>
+                </Grid>
+                )}
+              {facultyReport.formSubmitted && < Grid item xs={12} md={4} lg={3} sx={{ color: '#FFF' }}> Annual Report Academic Division form was submitted </Grid>}
+              {['luis.herrera', 'fburns', 'akantun', 'egbert.irving', 'carisa.carrillo', 'twilliams', 'lcruz', 'fpalma'].includes(username) &&
+                (<Grid item xs={12} md={4} lg={3}>
+                  <Link
+                    to="/AnnualNonAcademicReport"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <FormCard
+                      formPreview="src/components/icons/form1.png"
+                      title="UB Annual Report Non-Academic Division"
+                    />
+                  </Link>
+                </Grid>)}
+              {staffReport.formSubmitted && < Grid item xs={12} md={4} lg={3} sx={{ color: '#FFF' }}> Annual Report Non-Academic Division form was submitted </Grid>}
+              {['rpineda'].includes(username) &&
+                (<Grid item xs={12} md={4} lg={3}>
+                  <Link
+                    to="/RecordsAndAdmissions"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <FormCard
+                      formPreview="src/components/icons/form2.png"
+                      title="UB records and Admissions"
+                    />
+                  </Link>
+                </Grid>)}
+              {recordReport.formSubmitted && < Grid item xs={12} md={4} lg={3} sx={{ color: '#FFF' }}> Records and Admissions form was submitted </Grid>}
+              {['cguerrero'].includes(username) &&
+                (<Grid item xs={12} md={4} lg={3}>
+                  <Link
+                    to="/HumanResourceStatistics"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <FormCard
+                      formPreview="src/components/icons/form2.png"
+                      title="UB Human Resource Statistics"
+                    />
+                  </Link>
+                </Grid>)}
+              {HRReport.formSubmitted && < Grid item xs={12} md={4} lg={3} sx={{ color: '#FFF' }}> Human Resource Statistics form was submitted </Grid>}
+              {['isangster'].includes(username) &&
+                (<Grid item xs={12} md={4} lg={3}>
+                  <Link
+                    to="/FinanceAndBudgetStatistics"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <FormCard
+                      formPreview="src/components/icons/form2.png"
+                      title="UB Finance and Budget Statistics"
+                    />
+                  </Link>
+                </Grid>
+                )}
+                {financeReport.formSubmitted && < Grid item xs={12} md={4} lg={3} sx={{ color: '#FFF' }}> Finance and Budget Statistics form was submitted </Grid>}
             </Grid>
           </Container>
         </Box>
       </Box>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 };
 

@@ -14,12 +14,12 @@ export const authAPI = baseAPI.injectEndpoints({
                 method: 'POST',
                 body: credentials
             }),
-            async onQueryStarted(id, {dispatch, queryFulfilled}) {
+            async onQueryStarted(input, {dispatch, queryFulfilled}) {
                 try {
                     const { data } = await queryFulfilled
                     
                     if (data?.data?.token) {
-                        dispatch(setAuthData(data.data));
+                        dispatch(setAuthData({...data.data, username: input.username}));
                     }
                 } catch(e) {
                     console.error(e)

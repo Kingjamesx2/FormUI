@@ -3,6 +3,7 @@ import { RootState } from '../store';
 
 interface AuthState {
   token: string | null;
+  username: string;
   name: string;
   loading: boolean;
   error: string | null;
@@ -10,6 +11,7 @@ interface AuthState {
 
 const initialState: AuthState = {
   token: null,
+  username: "",
   name: "",
   loading: false,
   error: null,
@@ -21,12 +23,10 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setAuthData(state, action: PayloadAction<AuthState>) {
-      state.token = action.payload.token;
-      state.name = action.payload.name;
+      return { ...state, ...action.payload }
     },
-
     logout(state) {
-      state.token = null;
+      return { ...state, token: null }
     },
   },
 });
@@ -36,3 +36,4 @@ export const { setAuthData, logout } = authSlice.actions;
 export default authSlice.reducer;
 
 export const selectName = (state: RootState) => state.auth.name;
+export const selectUsername = (state: RootState) => state.auth.username;

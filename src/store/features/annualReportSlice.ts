@@ -125,6 +125,7 @@ export interface AnnualReportInitialState {
   financialBudget: IFinancialBudget;
   meetings: IMeeting[];
   otherComments: string;
+  formSubmitted: boolean
 }
 
 const initialState: AnnualReportInitialState = {
@@ -217,7 +218,8 @@ const initialState: AnnualReportInitialState = {
       meetingMinutesURL: "",
     }
   ],
-  otherComments: ""
+  otherComments: "",
+  formSubmitted: false
 };
 
 const annualReportSlice = createSlice({

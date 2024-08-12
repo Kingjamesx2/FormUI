@@ -22,6 +22,7 @@ export interface IHRReportState {
   department: string;
   deadline: string;
   numberOfStaff: INumberOfStaff;
+  formSubmitted: boolean
 }
 
 // Initial State
@@ -52,8 +53,9 @@ const HRReportInitialState: IHRReportState = {
       HealthSciences: 0,
       ScienceAndTechnology: 0,
       Total: 0,
-    },
+    }
   },
+  formSubmitted: false
 };
 
 const hrReportSlice = createSlice({

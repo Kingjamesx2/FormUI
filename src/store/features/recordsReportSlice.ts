@@ -75,6 +75,7 @@ export interface RecordsReportState {
   studentOrigin: IStudentOrigin;
   campusStatistics: ICampusStatistics;
   graduates: IGraduates;
+  formSubmitted: boolean
 }
 
 // Initial State
@@ -175,6 +176,7 @@ const recordsReportInitialState: RecordsReportState = {
     GraduatesByAge: "",
     GraduatesByDistrict: "",
   },
+  formSubmitted: false
 };
 
 const recordsReportSlice = createSlice({

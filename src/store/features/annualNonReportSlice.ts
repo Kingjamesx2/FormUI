@@ -96,6 +96,7 @@ export interface annualNonReportInitialState {
   financialBudget: IFinancialBudget;
   meetings: IMeeting[];
   otherComments: string;
+  formSubmitted: boolean;
 }
 
 const initialState: annualNonReportInitialState = {
@@ -165,6 +166,7 @@ const initialState: annualNonReportInitialState = {
     },
   ],
   otherComments: "",
+  formSubmitted: false
 };
 
 const annualNonReportSlice = createSlice({

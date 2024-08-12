@@ -35,6 +35,7 @@ export interface IFinanceReportState {
   income: IIncome;
   expenditure: IExpenditure;
   investments: IInvestments;
+  formSubmitted: boolean;
 }
 
 // Initial State
@@ -66,8 +67,7 @@ const financeReportInitialState: IFinanceReportState = {
     projectInvestment2: "",
     projectInvestment3: "",
   },
-
-  
+  formSubmitted: false
 };
 
 const financeReportSlice = createSlice({

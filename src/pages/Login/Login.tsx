@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import UBLogo from './../../components/icons/UB_Logo.png';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ import {
   Button,
   Grid,
   CircularProgress,
-  
+
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
@@ -20,6 +20,11 @@ import './Login.scss';
 import { useLoginMutation } from '../../store/services/authAPI';
 
 const defaultTheme = createTheme();
+
+interface ILoginCredentials {
+  username: string;
+  password: string;
+}
 
 type FormValue = {
   username: string;
@@ -39,13 +44,20 @@ export const Login = () => {
   const [login, { data: loginResult, error: loginError, isSuccess: loginIsSuccess }] = useLoginMutation();
   const [consoleMessage, setConsoleMessage] = useState<string | null>(null);
 
-  const onLogin = async (data: any) => await login(data);
+  const onLogin = async (data: ILoginCredentials) => {
+    // console.log(data)
+    if (!['ljohnson', 'bwatler', 'tusher', 'aaguilar', 'mteck', 'cguerrero', 'isangster',
+      'luis.herrera'].includes(data.username)) {
+      setConsoleMessage('Login disallowed, contact ICT');
+    } else
+      await login(data);
+  }
 
   useEffect(() => {
-    if(loginError)
-      setConsoleMessage(loginError?.error!);
-    
-    if(!loginResult?.success)
+    if (loginError)
+      setConsoleMessage(loginError?.error);
+
+    if (!loginResult?.success)
       setConsoleMessage(loginResult?.message);
     else
       navigate('/');
