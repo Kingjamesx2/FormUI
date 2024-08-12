@@ -34,10 +34,12 @@ export const UBActivitiesForTheYear = () => {
   };
 
   const handleChange = (index: number, field: keyof IActivity, value: any) => {
+    console.log(index,field, value)
     dispatch(updateActivity({ index, field, value }));
   };
 
   const handleImageChange = (index: number, files: FileList) => {
+    console.log('files --->>. ', files)
     const imageURLs = Array.from(files).map((file) => URL.createObjectURL(file));
     handleChange(index, "eventPicture", imageURLs);
   };

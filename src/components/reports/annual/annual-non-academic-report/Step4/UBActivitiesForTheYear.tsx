@@ -50,10 +50,16 @@ export const UBActivitiesForTheYear = () => {
 
   const handleImageChange = async (index: number, files: FileList) => {
     console.log('files ---->>>>>', files)
-    const formData = new FormData();
-    Array.from(files).forEach((file) => formData.append('file', file));
+    const formData = new FormData()
 
-    console.log(formData)
+    Array.from(files).forEach((file) => {
+      console.log(file)
+      formData.append('file', file)
+    })
+
+    // for(var pair of formData.entries()) {
+    //   console.dir(pair)
+    // }
     
     try {
       const response = await uploadFile(formData).unwrap();

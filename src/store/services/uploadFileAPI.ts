@@ -14,17 +14,19 @@ interface IUploadFileResponse {
 export const uploadFileAPI = baseAPI.injectEndpoints({
   endpoints: (builder) => ({
     uploadFile: builder.mutation<IUploadFileResponse, FormData>({
-      query: (formData) => ({
+      query: (body) => ({
         url: '/uploadPhoto',
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data;'
+        },
+        body,
         formData: true,
-        
       }),
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          console.log(data)
+
           dispatch(setFiles(data.data.files));
         } catch (e) {
           console.error(e);
