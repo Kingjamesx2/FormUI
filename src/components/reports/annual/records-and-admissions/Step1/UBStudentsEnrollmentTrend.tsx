@@ -45,7 +45,7 @@ export const UBStudentsEnrollmentTrend: React.FC = () => {
       },
     ];
 
-    value.forEach((r, i) => {
+    value.forEach((r: any) => {
       const p = Object.values(r);
 
       _v.forEach((__v, j) => {

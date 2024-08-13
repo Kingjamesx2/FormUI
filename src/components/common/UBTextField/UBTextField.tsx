@@ -5,11 +5,12 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
+import { IGraduationStatisticsFaculty } from "../../../store/features/recordsReportSlice";
 
-interface IUBTextField extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value'> {
+interface IUBTextField extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'size' | 'color'> {
   question?: string;
-  SetAnswer: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: string | number; // Removed null
+  SetAnswer: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  value?: string | number | IGraduationStatisticsFaculty[]; // Removed null
   width?: number;
   type?: string;
 }

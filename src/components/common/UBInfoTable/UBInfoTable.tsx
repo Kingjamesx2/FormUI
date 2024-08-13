@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
+import { IGraduationStatisticsFaculty } from "../../../store/features/recordsReportSlice";
 
 interface IUBTableData {
   degree: string;
@@ -16,8 +17,8 @@ interface IUBTableData {
 
 interface UBInfoTableProps {
   columns: string[];
-  initialRows: IUBTableData[];
-  SetValue: (value: IUBTableData[]) => void;
+  initialRows: (IGraduationStatisticsFaculty | IUBTableData)[];
+  SetValue: (value: (IGraduationStatisticsFaculty | IUBTableData)[]) => void;
 }
 
 const ResponsiveTableContainer = styled(TableContainer)({
@@ -40,7 +41,7 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({
   initialRows,
   SetValue,
 }) => {
-  const [rows, setRows] = useState<IUBTableData[]>([...initialRows]);
+  const [rows, setRows] = useState<(IGraduationStatisticsFaculty | IUBTableData)[]>([...initialRows]);
 
   const handleInputChange = (degree: string, column: string, value: string) => {
     const newValue = parseFloat(value);
@@ -70,17 +71,17 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({
         "6. Campus Statistics (Number of Students) Academic Year 2023-2024"
     ) {
       acc[column] = rows.reduce(
-        (sum, row) => sum + (parseFloat(row[column] as string) || 0),
+        (sum, row) => sum + 0, //(parseFloat(row[column]) || 0),
         0
       );
     }
     return acc;
   }, {});
 
-  const totalRow = { degree: "Total", ...totals };
+  const totalRow: { [key: string]: number|string } = { degree: "Total", ...totals };
 
   return (
-    <ResponsiveTableContainer component={Paper}>
+    <ResponsiveTableContainer>
       <Table sx={{ minWidth: 550 }} aria-label="dynamic table">
         <TableHead>
           <TableRow>
@@ -155,7 +156,8 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({
                   ) : (
                     <TextField
                       type="number"
-                      value={row[column] as string}
+                      value="test"
+                      // value={row[column]}
                       onChange={(e) =>
                         handleInputChange(row.degree, column, e.target.value)
                       }

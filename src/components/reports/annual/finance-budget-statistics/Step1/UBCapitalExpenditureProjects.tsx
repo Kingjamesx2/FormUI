@@ -10,7 +10,7 @@ export const CapitalExpenditureProjects: React.FC = () => {
   const dispatch = useDispatch();
   const investments = useSelector(selectInvestments);
 
-  const handleSetAnswer = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleSetAnswer = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     dispatch(setInvestments({ projectInvestment1: e.target.value }));
   };
 

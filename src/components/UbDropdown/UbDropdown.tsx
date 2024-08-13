@@ -1,10 +1,11 @@
-import React from "react";
-import { Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import React, { ReactNode } from "react";
+import { Box, FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from "@mui/material";
+import { IGraduationStatisticsFaculty } from "../../store/features/recordsReportSlice";
 
 interface IUbDropdownProps {
   label: string;
   value: string | null;
-  SetAnswer: (event: React.ChangeEvent<{ value: unknown }>) => void;
+  SetAnswer: (event: SelectChangeEvent<string>, child: ReactNode) => void;
   options: { value: string; label: string }[];
 }
 

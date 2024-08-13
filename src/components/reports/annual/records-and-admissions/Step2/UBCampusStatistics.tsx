@@ -21,7 +21,7 @@ export const UBCampusStatistics: React.FC = () => {
   const handleSetValue = (value: any) => {
     let _newValues = { BelizeCity: 0, Belmopan: 0, PuntaGorda: 0, CentralFarm: 0, SatellitePrograms: 0 };
 
-    value.forEach(r => {
+    value.forEach((r: any) => {
       const _v = Object.values(r)[1] as number;
       if (r.degree === 'Belize City') _newValues.BelizeCity = _v;
       if (r.degree === 'Belmopan') _newValues.Belmopan = _v;

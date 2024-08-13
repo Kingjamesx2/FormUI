@@ -27,7 +27,7 @@ export const UBGraduationStatistics: React.FC = () => {
   const questions = [
     {
       year: "2021/2022",
-      handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
+      handleSetAnswer: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const value = e.target.value;
         setState((prevState) => [value, prevState[1], prevState[2]]);
       },
@@ -36,7 +36,7 @@ export const UBGraduationStatistics: React.FC = () => {
     },
     {
       year: "2022/2023",
-      handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
+      handleSetAnswer: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const value = e.target.value;
         setState((prevState) => [prevState[0], value, prevState[2]]);
       },
@@ -45,7 +45,7 @@ export const UBGraduationStatistics: React.FC = () => {
     },
     {
       year: "2023/2024",
-      handleSetAnswer: (e: ChangeEvent<HTMLInputElement>) => {
+      handleSetAnswer: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const value = e.target.value;
         setState((prevState) => [prevState[0], prevState[1], value]);
       },
@@ -83,7 +83,7 @@ export const UBGraduationStatistics: React.FC = () => {
         </h4>
       </Box>
       {questions.map((q, index) => {
-        if (q.type === "textarea") {
+       /* if (q.type === "textarea") {
           return (
             <UBTextArea
               key={index}
@@ -102,7 +102,7 @@ export const UBGraduationStatistics: React.FC = () => {
               value={q.value}
             />
           );
-        } else if (q.type === "table") {
+        }*/ if (q.type === "table") {
           return (
             <Box key={index} sx={{ mb: "-4.5%" }}>
               <Box sx={{ ml: "15%", mt: "5%", mb: "-6%", pb: "1%", pt: "2%", pl: "1%", width: "69%", backgroundColor: "#FFD954" }}>

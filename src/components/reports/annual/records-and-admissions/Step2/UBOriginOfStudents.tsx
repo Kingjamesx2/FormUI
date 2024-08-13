@@ -21,7 +21,7 @@ export const UBOriginOfStudents: React.FC = () => {
   const handleSetValue = (value: any) => {
     let _newValues = { Belize: 0, CentralAmericanCountries: 0, OtherCountries: 0 };
 
-    value.forEach(r => {
+    value.forEach((r: any) => {
       const _v = Object.values(r)[1] as number;
       if (r.degree === 'Belize') _newValues.Belize = _v;
       if (r.degree === 'Central American Countries') _newValues.CentralAmericanCountries = _v;

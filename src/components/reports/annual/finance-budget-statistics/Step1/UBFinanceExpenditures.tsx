@@ -21,13 +21,13 @@ export const UBFinanceExpenditures: React.FC = () => {
   ];
 
   const handleCapitalExpendituresChange = (
-    e: ChangeEvent<HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     dispatch(setExpenditure({ capitalExpenditures: e.target.value }));
   };
 
   const handleOtherExpendituresChange = (
-    e: ChangeEvent<HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     dispatch(setExpenditure({ otherExpenditures: e.target.value }));
   };

@@ -24,7 +24,7 @@ interface IEnrollmentTrendPerFaculty {
   scienceAndTechnology: number;
 }
 
-interface IGraduationStatisticsFaculty {
+export interface IGraduationStatisticsFaculty {
   degree: string;
   Associates: string;
   Bachelors: string;

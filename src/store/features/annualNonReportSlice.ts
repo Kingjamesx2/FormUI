@@ -64,8 +64,8 @@ interface IAdministrativeData {
 }
 
 interface IFinancialBudget {
-  fundingSources: string;
-  significantBudgetChanges: string;
+  fundingSources?: string;
+  significantBudgetChanges?: string;
 }
 
 interface IMeetingUpdate {

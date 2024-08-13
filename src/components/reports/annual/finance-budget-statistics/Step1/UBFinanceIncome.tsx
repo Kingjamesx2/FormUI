@@ -32,7 +32,7 @@ export const UBFinanceIncome: React.FC = () => {
       total: 0 
     };
 
-    value.forEach(r => {
+    value.forEach((r:any ) => {
       const _v = Object.values(r)[1] as number;
       if (r.degree === 'Funding from the Government of Belize') _newValues.fundingFromGoB = _v;
       if (r.degree === 'Tuition Fees') _newValues.tuitionFees = _v;

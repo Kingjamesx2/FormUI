@@ -54,7 +54,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (loginError)
-      setConsoleMessage(loginError?.error);
+      setConsoleMessage("Mismatch username/password");
 
     if (!loginResult?.success)
       setConsoleMessage(loginResult?.message);

@@ -39,7 +39,8 @@ export const UBActivitiesForTheYear = () => {
     dispatch(updateActivity({ index, field, value }));
   };
 
-  const handleImageChange = async (index: number, files: FileList) => {
+  const handleImageChange = async (index: number, files: FileList | null) => {
+    if (!files) return
     const formData = new FormData();
     Array.from(files).map((file) => formData.append("file[]", file));
 
@@ -72,7 +73,7 @@ export const UBActivitiesForTheYear = () => {
       }
     }).then(r => r.blob()).then(blob => {
       const file = window.URL.createObjectURL(blob);
-      let a = document.querySelector(`#${id}`);
+      let a:HTMLImageElement|null = document.querySelector(`#${id}`);
 
       a!.src = file;
     })
@@ -142,7 +143,7 @@ export const UBActivitiesForTheYear = () => {
             <Box>
               {
                 activity.eventPicture && activity.eventPicture.map((url, picIndex) => {
-                  downloadFile(url, `activity${picIndex.toString()}`)
+                  downloadFile(url.toString(), `activity${picIndex.toString()}`)
                   
                   return (<img
                     id={`activity${picIndex.toString()}`}

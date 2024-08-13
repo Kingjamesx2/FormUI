@@ -3,10 +3,11 @@ import { styled } from "@mui/material/styles";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Paper from "@mui/material/Paper";
 import { Stack } from "@mui/material";
+// import { IGraduationStatisticsFaculty } from "../../../store/features/recordsReportSlice";
 
 interface IUBTextAreaProps {
   question?: string;
-  SetAnswer: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  SetAnswer: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   value?: string | null;  // Allowing null as a type
   maxRows?: number;
   minRows?: number;

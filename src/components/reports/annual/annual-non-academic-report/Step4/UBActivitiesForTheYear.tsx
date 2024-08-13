@@ -105,7 +105,7 @@ export const UBActivitiesForTheYear = () => {
       }
     }).then(r => r.blob()).then(blob => {
       const file = window.URL.createObjectURL(blob);
-      let a = document.querySelector(`#${id}`);
+      let a:HTMLImageElement|null = document.querySelector(`#${id}`);
 
       a!.src = file;
     })
@@ -196,7 +196,7 @@ export const UBActivitiesForTheYear = () => {
             <Box>
               {
                 activity.eventPicture && activity.eventPicture.map((url, picIndex) => {
-                  downloadFile(url, `activity${picIndex.toString()}`)
+                  downloadFile(url.toString(), `activity${picIndex.toString()}`)
 
                   return (<img
                     id={`activity${picIndex.toString()}`}

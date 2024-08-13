@@ -18,7 +18,7 @@ export const UBStudentsEnrolled: React.FC = () => {
   const handleSetValue = (value: any) => {
     let _newValues = { associates: 0, undergraduate: 0, graduate: 0 };
 
-    value.forEach(r => {
+    value.forEach((r: any) => {
       const _v = Object.values(r)[1] as number;
       if (r.degree === 'Associates') _newValues.associates = _v;
       if (r.degree === 'Undergraduates') _newValues.undergraduate = _v;

@@ -161,7 +161,7 @@ export const Dashboard: React.FC = () => {
                   // }
                   >
                     <FormCard
-                      formPreview="src/components/icons/form.png"
+                      formPreview="/form.png"
                       title="UB Annual Report Academic Division"
                     />
                   </Link>
@@ -188,7 +188,7 @@ export const Dashboard: React.FC = () => {
                     style={{ textDecoration: "none" }}
                   >
                     <FormCard
-                      formPreview="src/components/icons/form2.png"
+                      formPreview="/form2.png"
                       title="UB records and Admissions"
                     />
                   </Link>
@@ -201,7 +201,7 @@ export const Dashboard: React.FC = () => {
                     style={{ textDecoration: "none" }}
                   >
                     <FormCard
-                      formPreview="src/components/icons/form2.png"
+                      formPreview="/form2.png"
                       title="UB Human Resource Statistics"
                     />
                   </Link>
@@ -214,7 +214,7 @@ export const Dashboard: React.FC = () => {
                     style={{ textDecoration: "none" }}
                   >
                     <FormCard
-                      formPreview="src/components/icons/form2.png"
+                      formPreview="/form2.png"
                       title="UB Finance and Budget Statistics"
                     />
                   </Link>

@@ -32,7 +32,7 @@ export const UBFinancial: React.FC = () => {
             { value: "no", label: "no" }
           ]}
           handleSetValue={(e) => dispatch(setFinancialBudget({ significantBudgetChanges: e.target.value }))}
-          value={annualNonReport.financialBudget.significantBudgetChanges}
+          value={annualNonReport.financialBudget.significantBudgetChanges??''}
         />
       </Box>
       
