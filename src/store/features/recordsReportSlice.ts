@@ -24,7 +24,11 @@ interface IEnrollmentTrendPerFaculty {
   scienceAndTechnology: number;
 }
 
-export interface IGraduationStatisticsFaculty {
+interface IObjectKeys {
+  [key: string]: string | number;
+}
+
+export interface IGraduationStatisticsFaculty extends IObjectKeys{
   degree: string;
   Associates: string;
   Bachelors: string;

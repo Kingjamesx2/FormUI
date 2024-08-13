@@ -156,8 +156,7 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({
                   ) : (
                     <TextField
                       type="number"
-                      value="test"
-                      // value={row[column]}
+                      value={row[column]}
                       onChange={(e) =>
                         handleInputChange(row.degree, column, e.target.value)
                       }
