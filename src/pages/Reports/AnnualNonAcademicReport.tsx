@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import UBStepper from "../../components/common/Stepper/UBStepper";
 import AnnualNonAcademicReportStep1 from "./../../components/reports/annual/annual-non-academic-report/Step1/AnnualNonAcademicReportStep1";
 import AnnualNonAcademicReportStep2 from "./../../components/reports/annual/annual-non-academic-report/Step2/AnnualNonAcademicReportStep2";
@@ -7,6 +8,7 @@ import AnnualNonAcademicReportStep4 from "./../../components/reports/annual/annu
 import AnnualNonAcademicReportStep5 from "./../../components/reports/annual/annual-non-academic-report/Step5/AnnualNonAcademicReportStep5";
 import Header from '../../components/common/Header/Header';  // Import the Header component
 import useSaveNonAnnualFormHook from '../../hooks/useSaveNonAnnualFormHook';
+import { setFormSubmitted } from '../../store/features/annualNonReportSlice';
 
 const steps = [
   { label: "Step 1", stepComponent: <AnnualNonAcademicReportStep1 /> },
@@ -17,6 +19,8 @@ const steps = [
 ];
 
 export const AnnualNonAcademicReport: React.FC = () => {
+  const dispatch = useDispatch()
+
   useSaveNonAnnualFormHook()
   return (
 <div>
@@ -24,7 +28,7 @@ export const AnnualNonAcademicReport: React.FC = () => {
       logo="./../icons/UB_Logo.png"
       title="UB Annual Report Non-Academic Division"
     />
-    <UBStepper steps={steps} />
+    <UBStepper steps={steps} submitFn={() => dispatch(setFormSubmitted(true))} />
     </div>
   );
 };

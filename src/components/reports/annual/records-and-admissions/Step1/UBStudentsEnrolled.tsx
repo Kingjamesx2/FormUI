@@ -26,7 +26,6 @@ export const UBStudentsEnrolled: React.FC = () => {
     });
 
     dispatch(setCurrentStudentEnrollmentTrend(_newValues));
-    console.log('UB students enrolled --->>>>....', _newValues)
   };
 
   return (

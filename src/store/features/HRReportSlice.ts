@@ -80,6 +80,9 @@ const hrReportSlice = createSlice({
     setNumberOfStaff: (state, action: PayloadAction<INumberOfStaff>) => {
       return { ...state, numberOfStaff: {...action.payload} };
     },
+    setFormSubmitted: (state, _: PayloadAction<boolean>) => {
+      return {...state, formSubmitted: true}
+    }
     // setFulltimeFaculty: (state, action: PayloadAction<IFacultyCount>) => {
     //   return {state.numberOfStaff.FulltimeFaculty = action.payload;
     // },
@@ -99,6 +102,7 @@ export const {
   setDepartment,
   setDeadline,
   setNumberOfStaff,
+  setFormSubmitted
   // setFulltimeFaculty,
   // setAdjunctFaculty,
   // setNonTeachingStaff,

@@ -12,8 +12,6 @@ export const StudentsEnrollmentTrendPerFaculty: React.FC = () => {
   const dispatch = useDispatch();
   const enrollmentTrendPerFaculty = useSelector(selectEnrollmentTrendPerFaculty);
 
-  console.log('enrollmentTrendPerFaculty enrollmentTrendPerFaculty, ', enrollmentTrendPerFaculty)
-  
   const initialRows = [
     { degree: 'Education and Arts', '2021/2022': enrollmentTrendPerFaculty[0].educationAndArts, '2022/2023':  enrollmentTrendPerFaculty[1].educationAndArts, '2023/2024':  enrollmentTrendPerFaculty[2].educationAndArts },
     { degree: 'Management and Social Science', '2021/2022':  enrollmentTrendPerFaculty[0].managementAndSocialScience, '2022/2023':  enrollmentTrendPerFaculty[1].managementAndSocialScience, '2023/2024':  enrollmentTrendPerFaculty[2].managementAndSocialScience},
@@ -23,7 +21,6 @@ export const StudentsEnrollmentTrendPerFaculty: React.FC = () => {
   
 
   const handleSetValue = (value: any) => {
-    console.log(value)
     let _v = [
       {
         academicYear: '2021/2022',

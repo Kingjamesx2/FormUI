@@ -12,7 +12,6 @@ export const HumanResourceStatistics: React.FC = () => {
   const dispatch = useDispatch()
   const numberOfStaff = useSelector(selectNumberOfStaff)
   const [state, setState] = useState<string[]>(initialState);
-console.log(numberOfStaff)
 
   const initialRows = [
     { degree: 'Education and Arts', 'Full-time faculty': numberOfStaff.FulltimeFaculty.EducationAndArts, 'Adjunct faculty':numberOfStaff.AdjunctFaculty.EducationAndArts, 'Non-teaching staff': numberOfStaff.NonTeachingStaff.EducationAndArts },

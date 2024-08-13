@@ -288,6 +288,9 @@ const annualNonReportSlice = createSlice({
     setOtherComments: (state, action: PayloadAction<string>) => {
       return { ...state, otherComments: action.payload }
     },
+    setFormSubmitted: (state, _: PayloadAction<boolean>) => {
+      return {...state, formSubmitted: true}
+    }
   },
 });
 
@@ -310,6 +313,7 @@ export const {
   updateActivity,
   addNewMeeting,
   updateMeeting,
+  setFormSubmitted
 } = annualNonReportSlice.actions;
 
 export const selectAnnualNonReport = (state: RootState) => {

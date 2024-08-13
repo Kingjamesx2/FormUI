@@ -73,7 +73,7 @@ export const UBOtherComponents: React.FC = () => {
         />
       </Box>
 
-      <button onClick={downloadPDF}>Generate PDF</button>
+      {/* <button onClick={downloadPDF}>Generate PDF</button> */}
     </Container>
   );
 };

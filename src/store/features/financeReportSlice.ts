@@ -98,6 +98,9 @@ const financeReportSlice = createSlice({
     setInvestments: (state, action: PayloadAction<Partial<IInvestments>>) => {
       return { ...state, investments: { ...state.investments, ...action.payload } };
     },
+    setFormSubmitted: (state, _: PayloadAction<boolean>) => {
+      return {...state, formSubmitted: true}
+    }
   },
 });
 
@@ -110,6 +113,7 @@ export const {
   setIncome,
   setExpenditure,
   setInvestments,
+  setFormSubmitted
 } = financeReportSlice.actions;
 
 export const selectFinanceReport = (state: RootState) => state.financeReport;

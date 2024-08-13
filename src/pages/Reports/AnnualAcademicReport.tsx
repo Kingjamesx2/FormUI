@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import UBStepper from "../../components/common/Stepper/UBStepper";
 import AnnualAcademicReportStep1 from "../../components/reports/annual/annual-academic-report/step1/AnnualAcademicReportStep1";
 import AnnualAcademicReportStep2 from "../../components/reports/annual/annual-academic-report/step2/AnnualAcademicReportStep2";
@@ -7,9 +8,10 @@ import AnnualAcademicReportStep4 from "../../components/reports/annual/annual-ac
 import AnnualAcademicReportStep5 from "../../components/reports/annual/annual-academic-report/step5/AnnualAcademicReportStep5";
 import Header from '../../components/common/Header/Header';
 import useSaveAnnualFormHook from '../../hooks/useSaveAnnualFormHook';
-import UserPosition from '../../components/UserPosition/UserPosition';
-import { useSelector } from "react-redux";
-import { selectName } from "../../store/features/authSlice";
+// import UserPosition from '../../components/UserPosition/UserPosition';
+// import { useSelector } from "react-redux";
+// import { selectName } from "../../store/features/authSlice";
+import { setFormSubmitted } from '../../store/features/annualReportSlice';
 
 const steps = [
   { label: "Step 1", stepComponent: <AnnualAcademicReportStep1 /> },
@@ -20,8 +22,9 @@ const steps = [
 ];
 
 export const AnnualAcademicReport: React.FC = () => {
+  const dispatch = useDispatch()
   useSaveAnnualFormHook();
-  const userName = useSelector(selectName);
+  // const userName = useSelector(selectName);
 
   return (
     <div>
@@ -34,7 +37,7 @@ export const AnnualAcademicReport: React.FC = () => {
           <UserPosition name={userName} position="" logOut="" />
         </div> */}
       </div>
-      <UBStepper steps={steps} />
+      <UBStepper steps={steps} submitFn={() => dispatch(setFormSubmitted(true))} />
     </div>
   );
 };

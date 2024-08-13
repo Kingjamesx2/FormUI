@@ -348,12 +348,13 @@ const annualReportSlice = createSlice({
         };
       }
     },
-
-    
-
     setOtherComments: (state, action: PayloadAction<string>) => {
       state.otherComments = action.payload;
     },
+    setFormSubmitted: (state, _: PayloadAction<boolean>) => {
+      console.log('form submitted')
+      return {...state, formSubmitted: true}
+    }
   },
 });
 
@@ -382,7 +383,8 @@ export const {
   addNewActivity,
   updateActivity,
   addNewMeeting,
-  updateMeeting
+  updateMeeting,
+  setFormSubmitted
 } = annualReportSlice.actions;
 
 export const selectAnnualReport = (state: RootState) => {

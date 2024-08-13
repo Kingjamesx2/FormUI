@@ -17,6 +17,7 @@ interface IStep {
 
 interface IUBStepperProps {
   steps: IStep[];
+  submitFn: () => void;
 }
 
 const stepStyle = (isSmallScreen: boolean) => ({
@@ -46,7 +47,7 @@ const stepStyle = (isSmallScreen: boolean) => ({
   },
 });
 
-export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
+export const UBStepper: React.FC<IUBStepperProps> = ({ steps, submitFn }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState<{ [k: number]: boolean }>({});
   const [formData, setFormData] = useState<{ [key: number]: any }>({});
@@ -66,6 +67,7 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps }) => {
     if (isLastStep()) {
       // Handle submit logic here
       window.alert("Form submitted");
+      submitFn()
       navigate("/"); // Navigate to the home page
     } else {
       const newActiveStep =

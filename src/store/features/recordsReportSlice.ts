@@ -231,6 +231,9 @@ const recordsReportSlice = createSlice({
     setGraduates: (state, action: PayloadAction<Partial<IGraduates>>) => {
       return { ...state, graduates: { ...state.graduates, ...action.payload } };
     },
+    setFormSubmitted: (state, _: PayloadAction<boolean>) => {
+      return {...state, formSubmitted: true}
+    }
   },
 });
 
@@ -247,6 +250,7 @@ export const {
   setStudentOrigin,
   setCampusStatistics,
   setGraduates,
+  setFormSubmitted
 } = recordsReportSlice.actions;
 
 export const selectRecordReport = (state: RootState) => { 

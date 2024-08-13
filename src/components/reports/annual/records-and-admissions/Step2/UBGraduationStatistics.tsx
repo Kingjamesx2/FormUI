@@ -22,7 +22,6 @@ export const UBGraduationStatistics: React.FC = () => {
   const [state, setState] = useState<string[]>(initialState);
   const [specify, setSpecify] = useState<string>("*Please specify number of students graduating with honors in Bachelors programs");
 
-  console.log(graduatStatistics)
   const initialRows = [[...graduatStatistics[0].faculties], [...graduatStatistics[1].faculties], [...graduatStatistics[2].faculties]]
 
   const questions = [
@@ -56,7 +55,6 @@ export const UBGraduationStatistics: React.FC = () => {
   ];
 
   const handleSetValue = (value: any, year: number) => {
-    console.log('value, value value ', value)
     let academicYear = '2021/2022'
     let _v = JSON.parse(JSON.stringify(graduatStatistics))
     
