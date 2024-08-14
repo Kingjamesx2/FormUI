@@ -289,6 +289,12 @@ const annualReportSlice = createSlice({
         }
       }
     },
+    removeActivity: (state, action: PayloadAction<number>) => {
+      const index = action.payload;
+      if (index >= 0 && index < state.activities.length) {
+        state.activities.splice(index, 1);
+      }
+    },
 
     addNewActivity: (state) => {
       state.activities.push({
@@ -381,6 +387,7 @@ export const {
   setMeetings,
   setOtherComments,
   addNewActivity,
+  removeActivity,
   updateActivity,
   addNewMeeting,
   updateMeeting,

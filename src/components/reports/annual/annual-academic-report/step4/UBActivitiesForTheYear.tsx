@@ -10,6 +10,7 @@ import {
   IActivity,
   selectActivities,
   addNewActivity,
+  removeActivity,
   updateActivity,
 } from "../../../../../store/features/annualReportSlice";
 import { RootState } from "../../../../../store/store";
@@ -29,10 +30,7 @@ export const UBActivitiesForTheYear = () => {
   };
 
   const handleRemoveActivity = (index: number) => {
-    if (index > 0) {
-      const newActivities = activities.filter((_, i) => i !== index);
-      setActivitiesState(newActivities);
-    }
+    dispatch(removeActivity(index));
   };
 
   const handleChange = (index: number, field: keyof IActivity, value: any) => {
@@ -66,7 +64,6 @@ export const UBActivitiesForTheYear = () => {
     }
   };
 
-  
   const downloadFile = (url: string, id: string) => {
     fetch(url, {
       headers: {
