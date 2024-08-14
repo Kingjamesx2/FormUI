@@ -2,6 +2,7 @@ import React from "react";
 import Container from "@mui/material/Container";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setOtherComments,
@@ -15,20 +16,30 @@ export const UBOtherComponents: React.FC = () => {
 
   // Get token from the Redux store
   const token = useSelector((state: RootState) => state.auth.token);
+  const reportId = annualNonReport._id; // Replace with the correct path to your ID
 
   const downloadPDF = async (id: string) => {
     try {
       // Fetch the PDF file
-      const response = await fetch(`https://api.ub.edu.bz/api/generateStaffPdf/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/pdf",
-          Authorization: `Bearer ${token}`, // Add token to headers
-        },
-      });
+      const response = await fetch(
+        `https://api.ub.edu.bz/api/generateStaffPdf/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/pdf",
+            Authorization: `Bearer ${token}`, // Add token to headers
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Check if the response is a PDF
+      const contentType = response.headers.get("Content-Type");
+      if (contentType !== "application/pdf") {
+        throw new Error(`Unexpected content type: ${contentType}`);
       }
 
       // Convert the response to a blob
@@ -53,15 +64,15 @@ export const UBOtherComponents: React.FC = () => {
 
       // Optionally, revoke the object URL after a short delay to release memory
       setTimeout(() => window.URL.revokeObjectURL(url), 100);
-    } catch (error) {
+   }  catch (error) {
       console.error("Error downloading the PDF:", error);
     }
-
-
   };
 
   return (
-    <Container sx={{ width: 1, m: 1, p: 1 }}>
+    <Container
+      sx={{ /*height: "100%"*/ width: 1, m: 1, p: 1 }}
+    >
       <h3 style={{ marginBottom: "-2%", marginTop: "10%" }}>
         <center>Other Components</center>
       </h3>
@@ -73,7 +84,11 @@ export const UBOtherComponents: React.FC = () => {
         />
       </Box>
 
-      {/* <button onClick={downloadPDF}>Generate PDF</button> */}
+      <div style={{position: "relative", top: "7rem", left: "46rem"}}>
+        {/* <Link to="/"> */}
+          <button onClick={() => downloadPDF(reportId as string)}>Download PDF</button>
+        {/* </Link> */}
+      </div>
     </Container>
   );
 };
