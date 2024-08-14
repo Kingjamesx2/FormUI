@@ -66,6 +66,7 @@ export const UBActivitiesForTheYear = () => {
     }
   };
 
+  
   const downloadFile = (url: string, id: string) => {
     fetch(url, {
       headers: {
