@@ -66,6 +66,7 @@ export const UBActivitiesForTheYear = () => {
     }
   };
 
+  
   const downloadFile = (url: string, id: string) => {
     fetch(url, {
       headers: {
@@ -148,8 +149,8 @@ export const UBActivitiesForTheYear = () => {
                   return (<img
                     id={`activity${picIndex.toString()}`}
                     key={picIndex}
-                    src={''}
-                    alt={`Preview ${picIndex + 1}`}
+                    // src={''}
+                    // alt={`Preview ${picIndex + 1}`}
                     style={{ width: "100px", height: "100px", margin: "5px" }}
                   />
                   )
