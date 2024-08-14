@@ -141,10 +141,10 @@ export const UBActivitiesForTheYear = () => {
             <Box>
               {
                 activity.eventPicture && activity.eventPicture.map((url, picIndex) => {
-                  downloadFile(url.toString(), `activity${picIndex.toString()}`)
+                  downloadFile(url.toString(), `activity${index}${picIndex.toString()}`)
                   
                   return (<img
-                    id={`activity${picIndex.toString()}`}
+                    id={`activity${index}${picIndex.toString()}`}
                     key={picIndex}
                     // src={''}
                     // alt={`Preview ${picIndex + 1}`}
