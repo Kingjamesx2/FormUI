@@ -154,11 +154,6 @@ export const Dashboard: React.FC = () => {
                   <Link
                     to="/AnnualAcademicReport"
                     style={{ textDecoration: "none" }}
-                  // onClick={() =>
-                  //   handleFormClick(
-                  //     "UB Annual Report Template Academic Division"
-                  //   )
-                  // }
                   >
                     <FormCard
                       formPreview="/form.png"
@@ -201,7 +196,7 @@ export const Dashboard: React.FC = () => {
                     style={{ textDecoration: "none" }}
                   >
                     <FormCard
-                      formPreview="/form2.png"
+                      formPreview="/form6.png"
                       title="UB Human Resource Statistics"
                     />
                   </Link>
@@ -214,7 +209,7 @@ export const Dashboard: React.FC = () => {
                     style={{ textDecoration: "none" }}
                   >
                     <FormCard
-                      formPreview="/form2.png"
+                      formPreview="/form7.png"
                       title="UB Finance and Budget Statistics"
                     />
                   </Link>
