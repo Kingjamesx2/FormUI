@@ -13,6 +13,7 @@ import {
   selectMeetings,
   setMeetings,
   addNewMeeting,
+  removeMeeting,
   updateMeeting,
   IMeeting,
 } from "../../../../../store/features/annualReportSlice";
@@ -38,10 +39,7 @@ export const UBFacultyMeetings: React.FC = () => {
   };
 
   const handleRemoveMeetings = (index: number) => {
-    if (index > 0) {
-      const newMeetings = meetings.filter((_, i) => i !== index);
-      setMeetingsState(newMeetings);
-    }
+    dispatch(removeMeeting(index));
   };
 
   const handleChange = (index: number, field: keyof IMeeting, value: any) => {

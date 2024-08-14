@@ -345,6 +345,13 @@ const annualReportSlice = createSlice({
       });
     },
 
+    removeMeeting: (state, action: PayloadAction<number>) => {
+      const index = action.payload;
+      if (index >= 0 && index < state.meetings.length) {
+        state.meetings.splice(index, 1);
+      }
+    },
+
     updateMeeting: (state, action: PayloadAction<IMeetingUpdate>) => {
       const { index, field, value } = action.payload;
       if (index >= 0 && index < state.meetings.length) {
@@ -390,6 +397,7 @@ export const {
   removeActivity,
   updateActivity,
   addNewMeeting,
+  removeMeeting,
   updateMeeting,
   setFormSubmitted
 } = annualReportSlice.actions;
