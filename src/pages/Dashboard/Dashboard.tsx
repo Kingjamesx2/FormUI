@@ -175,7 +175,7 @@ export const Dashboard: React.FC = () => {
                     style={{ textDecoration: "none" }}
                   >
                     <FormCard
-                      formPreview="src/components/icons/form1.png"
+                      formPreview="/form1.png"
                       title="UB Annual Report Non-Academic Division"
                     />
                   </Link>
