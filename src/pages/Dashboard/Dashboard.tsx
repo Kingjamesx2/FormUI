@@ -149,7 +149,7 @@ export const Dashboard: React.FC = () => {
             }}
           >
             <Grid container spacing={3}>
-              {['luis.herrera','ljohnson', 'bwatler', 'tusher', 'aaguilar'].includes(username) &&
+              {['jfaber','luis.herrera','ljohnson', 'bwatler', 'tusher', 'aaguilar'].includes(username) &&
                 (< Grid item xs={12} md={4} lg={3}>
                   <Link
                     to="/AnnualAcademicReport"
@@ -168,7 +168,7 @@ export const Dashboard: React.FC = () => {
                 </Grid>
                 )}
               {facultyReport.formSubmitted && < Grid item xs={12} md={4} lg={3} sx={{ color: '#FFF' }}> Annual Report Academic Division form was submitted </Grid>}
-              {['luis.herrera', 'fburns', 'akantun', 'egbert.irving', 'carisa.carrillo', 'twilliams', 'lcruz', 'fpalma'].includes(username) &&
+              {['jfaber','luis.herrera', 'fburns', 'akantun', 'egbert.irving', 'carisa.carrillo', 'twilliams', 'lcruz', 'fpalma'].includes(username) &&
                 (<Grid item xs={12} md={4} lg={3}>
                   <Link
                     to="/AnnualNonAcademicReport"
@@ -181,7 +181,7 @@ export const Dashboard: React.FC = () => {
                   </Link>
                 </Grid>)}
               {staffReport.formSubmitted && < Grid item xs={12} md={4} lg={3} sx={{ color: '#FFF' }}> Annual Report Non-Academic Division form was submitted </Grid>}
-              {['luis.herrera','rpineda'].includes(username) &&
+              {['jfaber','luis.herrera','rpineda'].includes(username) &&
                 (<Grid item xs={12} md={4} lg={3}>
                   <Link
                     to="/RecordsAndAdmissions"
@@ -194,7 +194,7 @@ export const Dashboard: React.FC = () => {
                   </Link>
                 </Grid>)}
               {recordReport.formSubmitted && < Grid item xs={12} md={4} lg={3} sx={{ color: '#FFF' }}> Records and Admissions form was submitted </Grid>}
-              {['luis.herrera','cguerrero'].includes(username) &&
+              {['jfaber','luis.herrera','cguerrero'].includes(username) &&
                 (<Grid item xs={12} md={4} lg={3}>
                   <Link
                     to="/HumanResourceStatistics"
@@ -207,7 +207,7 @@ export const Dashboard: React.FC = () => {
                   </Link>
                 </Grid>)}
               {HRReport.formSubmitted && < Grid item xs={12} md={4} lg={3} sx={{ color: '#FFF' }}> Human Resource Statistics form was submitted </Grid>}
-              {['luis.herrera','isangster'].includes(username) &&
+              {['jfaber','luis.herrera','isangster'].includes(username) &&
                 (<Grid item xs={12} md={4} lg={3}>
                   <Link
                     to="/FinanceAndBudgetStatistics"

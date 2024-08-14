@@ -303,7 +303,7 @@ const annualReportSlice = createSlice({
 
     updateActivity: (state, action: PayloadAction<IActivityUpdate>) => {
       const { index, field, value } = action.payload;
-      if (index >= 0 && index < state.activities.length) {
+      if (index >= 0 && index <= state.activities.length) {
         state.activities[index] = {
           ...state.activities[index],
           [field]: value,
