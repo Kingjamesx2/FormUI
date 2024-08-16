@@ -18,6 +18,7 @@ interface IStep {
 interface IUBStepperProps {
   steps: IStep[];
   submitFn: () => void;
+  hideStepper?: boolean;
 }
 
 const stepStyle = (isSmallScreen: boolean) => ({
@@ -47,7 +48,7 @@ const stepStyle = (isSmallScreen: boolean) => ({
   },
 });
 
-export const UBStepper: React.FC<IUBStepperProps> = ({ steps, submitFn }) => {
+export const UBStepper: React.FC<IUBStepperProps> = ({ steps, submitFn, hideStepper }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState<{ [k: number]: boolean }>({});
   const [formData, setFormData] = useState<{ [key: number]: any }>({});
@@ -109,25 +110,26 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps, submitFn }) => {
   return (
     <div className="form">
       <Stack sx={{ width: "100vw" }}>
-        <Stepper
-          nonLinear
-          activeStep={activeStep}
-          sx={stepStyle(isSmallScreen)}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            width: "60%",
-            margin: "3% 0 0 18%",
-          }}
-        >
-          {steps.map((step, index) => (
-            <Step key={step.label} completed={completed[index]}>
-              <StepButton onClick={handleStep(index)}>
-                {/* <StepLabel>{step.label}</StepLabel> */}
-              </StepButton>
-            </Step>
-          ))}
-        </Stepper>
+        {!hideStepper && ( // Conditionally render the Stepper
+          <Stepper
+            nonLinear
+            activeStep={activeStep}
+            sx={stepStyle(isSmallScreen)}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              width: "60%",
+              margin: "3% 0 0 18%",
+            }}
+          >
+            {steps.map((step, index) => (
+              <Step key={step.label} completed={completed[index]}>
+                <StepButton onClick={handleStep(index)} />
+              </Step>
+            ))}
+          </Stepper>
+        )}
+
 
         <Box
           sx={{

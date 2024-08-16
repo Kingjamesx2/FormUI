@@ -56,29 +56,42 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({
     }
   };
 
+  // const totals = columns.reduce<{ [key: string]: number }>((acc, column) => {
+  //   if (
+  //     column !== "Degree Program" &&
+  //     column !== "Faculty" &&
+  //     column !== "1. Finance-Income Bz$" &&
+  //     column !== "2. Finance-Expenditures Bz$" &&
+  //     column !== "Students Enrolment for the Academic Year under review" &&
+  //     column !== "5. Origin of Students(Number)" &&
+  //     column !== "Faculty (2021/2022)" &&
+  //     column !== "Faculty (2022/2023)" &&
+  //     column !== "Faculty (2023/2024)" &&
+  //     column !==
+  //       "6. Campus Statistics (Number of Students) Academic Year 2023-2024"
+  //   ) {
+  //     acc[column] = rows.reduce(
+  //       (sum, row) => sum + (parseFloat(String(row[column])) || 0),
+  //       0
+  //     );
+  //   }
+  //   return acc;
+  // }, {});
+  
+  // const totalRow: { [key: string]: number | string } = { degree: "Total", ...totals };
+
   const totals = columns.reduce<{ [key: string]: number }>((acc, column) => {
-    if (
-      column !== "Degree Program" &&
-      column !== "Faculty" &&
-      column !== "8. Finance-Income Bz$" &&
-      column !== "9. Finance-Expenditures Bz$" &&
-      column !== "1. Students Enrolment for the Academic Year under review" &&
-      column !== "5. Origin of Students(Number)" &&
-      column !== "Faculty (2021/2022)" &&
-      column !== "Faculty (2022/2023)" &&
-      column !== "Faculty (2023/2024)" &&
-      column !==
-        "6. Campus Statistics (Number of Students) Academic Year 2023-2024"
-    ) {
+    if (column !== "1. Students Enrolment for the Academic Year under review") {
       acc[column] = rows.reduce(
-        (sum, row) => sum + 0, //(parseFloat(row[column]) || 0),
+        (sum, row) => sum + (parseFloat(String(row[column])) || 0),
         0
       );
     }
     return acc;
   }, {});
+  
+  const totalRow: { [key: string]: number | string } = { degree: "Total", ...totals };
 
-  const totalRow: { [key: string]: number|string } = { degree: "Total", ...totals };
 
   return (
     <ResponsiveTableContainer>
@@ -91,8 +104,8 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({
                 align={
                   column === "Degree Program" ||
                   column === "Faculty" ||
-                  column === "8. Finance-Income Bz$" ||
-                  column === "9. Finance-Expenditures Bz$" ||
+                  column === "1. Finance-Income Bz$" ||
+                  column === "2. Finance-Expenditures Bz$" ||
                   column ===
                     "1. Students Enrolment for the Academic Year under review" ||
                   column === "5. Origin of Students(Number)" ||
@@ -123,8 +136,8 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({
                   align={
                     column === "Degree Program" ||
                     column === "Faculty" ||
-                    column === "8. Finance-Income Bz$" ||
-                    column === "9. Finance-Expenditures Bz$" ||
+                    column === "1. Finance-Income Bz$" ||
+                    column === "2. Finance-Expenditures Bz$" ||
                     column ===
                       "1. Students Enrolment for the Academic Year under review" ||
                     column === "5. Origin of Students(Number)" ||
@@ -142,8 +155,8 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({
                 >
                   {column === "Degree Program" ||
                   column === "Faculty" ||
-                  column === "8. Finance-Income Bz$" ||
-                  column === "9. Finance-Expenditures Bz$" ||
+                  column === "1. Finance-Income Bz$" ||
+                  column === "2. Finance-Expenditures Bz$" ||
                   column ===
                     "1. Students Enrolment for the Academic Year under review" ||
                   column === "5. Origin of Students(Number)" ||
@@ -176,7 +189,7 @@ export const UBInfoTable: React.FC<UBInfoTableProps> = ({
                 align={column === "Degree Program" ? "left" : "right"}
                 sx={{ fontWeight: "bold" }}
               >
-                {column === "Degree Program" ? "Total" : totalRow[column]}
+                {/* {column === "Degree Program" ? "Total" : totalRow[column]} */}
               </StyledTableCell>
             ))}
           </TableRow>

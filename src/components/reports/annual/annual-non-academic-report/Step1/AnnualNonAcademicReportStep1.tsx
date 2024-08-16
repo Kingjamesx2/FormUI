@@ -7,11 +7,11 @@ import UbDropdown from "../../../../UbDropdown/UbDropdown";
 import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  setDivision,
+  setDepartment,
   setReportsTo,
   setMissionStatement,
+  selectAnnualNonReport
 } from "../../../../../store/features/annualNonReportSlice";
-import { selectAnnualNonReport } from "../../../../../store/features/annualNonReportSlice";
 
 
 
@@ -75,8 +75,8 @@ export const AnnualNonAcademicReportStep1: React.FC = () => {
               { value: "Library", label: "Library" },
               { value: "Quality Assurance", label: "Quality Assurance" },
             ]}
-            SetAnswer={(e) => dispatch(setDivision(e.target.value as string))}
-            value={annualNonReport.division}
+            SetAnswer={(e) => dispatch(setDepartment(e.target.value as string))}
+            value={annualNonReport.department}
          
           />
         </Box>

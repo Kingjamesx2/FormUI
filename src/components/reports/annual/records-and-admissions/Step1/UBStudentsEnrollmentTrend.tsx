@@ -14,10 +14,36 @@ export const UBStudentsEnrollmentTrend: React.FC = () => {
   const studentEnrollmentTrend = useSelector(selectStudentEnrollmentTrend);
 
   const initialRows = [
-    { degree: 'Associates', '2021/2022': studentEnrollmentTrend[0].associate, '2022/2023': studentEnrollmentTrend[1].associate, '2023/2024': studentEnrollmentTrend[2].associate },
-    { degree: 'Undergraduate', '2021/2022': studentEnrollmentTrend[0].undergraduate, '2022/2023': studentEnrollmentTrend[1].undergraduate, '2023/2024': studentEnrollmentTrend[2].undergraduate },
-    { degree: 'Graduate (MBA - 19 + MEDL - 47)', '2021/2022': studentEnrollmentTrend[0].graduate, '2022/2023': studentEnrollmentTrend[1].graduate, '2023/2024': studentEnrollmentTrend[2].graduate },
-    { degree: 'Other', '2021/2022': studentEnrollmentTrend[0].other, '2022/2023': studentEnrollmentTrend[1].other, '2023/2024': studentEnrollmentTrend[2].other }
+    {
+      degree: "Associates",
+      "2021/2022": studentEnrollmentTrend[0].associate,
+      "2022/2023": studentEnrollmentTrend[1].associate,
+      "2023/2024": studentEnrollmentTrend[2].associate,
+    },
+    {
+      degree: "Undergraduate",
+      "2021/2022": studentEnrollmentTrend[0].undergraduate,
+      "2022/2023": studentEnrollmentTrend[1].undergraduate,
+      "2023/2024": studentEnrollmentTrend[2].undergraduate,
+    },
+    {
+      degree: "Graduate (MBA - 19 + MEDL - 47)",
+      "2021/2022": studentEnrollmentTrend[0].graduate,
+      "2022/2023": studentEnrollmentTrend[1].graduate,
+      "2023/2024": studentEnrollmentTrend[2].graduate,
+    },
+    {
+      degree: "Other",
+      "2021/2022": studentEnrollmentTrend[0].other,
+      "2022/2023": studentEnrollmentTrend[1].other,
+      "2023/2024": studentEnrollmentTrend[2].other,
+    },
+    {
+      degree: "Total",
+      "2021/2022": studentEnrollmentTrend[0].Total,
+      "2022/2023": studentEnrollmentTrend[1].Total,
+      "2023/2024": studentEnrollmentTrend[2].Total,
+    },
   ];
 
   const handleSetAnswer = (value: any) => {
@@ -28,6 +54,7 @@ export const UBStudentsEnrollmentTrend: React.FC = () => {
         undergraduate: 0,
         graduate: 0,
         other: 0,
+        Total: 0,
       },
       {
         academicYear: "2022/2023",
@@ -35,6 +62,7 @@ export const UBStudentsEnrollmentTrend: React.FC = () => {
         undergraduate: 0,
         graduate: 0,
         other: 0,
+        Total: 0,
       },
       {
         academicYear: "2023/2024",
@@ -42,6 +70,7 @@ export const UBStudentsEnrollmentTrend: React.FC = () => {
         undergraduate: 0,
         graduate: 0,
         other: 0,
+        Total: 0,
       },
     ];
 
@@ -54,6 +83,8 @@ export const UBStudentsEnrollmentTrend: React.FC = () => {
         if (p[0] === "Graduate (MBA - 19 + MEDL - 47)")
           _v[j].graduate = p[1 + j] as number;
         if (p[0] === "Other") _v[j].other = p[1 + j] as number;
+        if (p[0] === "Total") _v[j].Total = p[1 + j] as number;
+
       });
     });
 

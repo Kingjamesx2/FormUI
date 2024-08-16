@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store"; // Adjust the import according to your store file location
+import  form from "../../../public/form.png"
 
 interface IStrategicGoals {
   strategicGoalsUnderReview: string;
@@ -39,16 +40,16 @@ interface IStudentSuccess {
 }
 
 interface IEventPicture {
-  pictureURL: string;
+  eventPicture: string;
 }
 
 export interface IActivity {
   eventId?: number;
   eventName?: string;
-  eventPicture?: IEventPicture[];
+  eventMonth?: string;
+  pictureURL?: IEventPicture[];
   personsInPicture: string;
   eventSummary?: string;
-  eventMonth?: string;
 }
 
 interface IActivityUpdate {
@@ -84,7 +85,7 @@ export interface IMeeting {
 export interface annualNonReportInitialState {
   _id: string;
   academicYearID: string;
-  division: string;
+  department: string;
   reportsTo: string;
   missionStatement: string;
   strategicGoals: IStrategicGoals;
@@ -102,7 +103,7 @@ export interface annualNonReportInitialState {
 const initialState: annualNonReportInitialState = {
   _id: "",
   academicYearID: "",
-  division: "",
+  department: "",
   reportsTo: "",
   missionStatement: "",
   strategicGoals: {
@@ -139,9 +140,9 @@ const initialState: annualNonReportInitialState = {
       eventId: 0,
       eventName: "",
       personsInPicture: "",
-      eventPicture: [
+      pictureURL: [
         {
-          pictureURL: "",
+          eventPicture: ""
         },
       ],
       eventSummary: "",
@@ -154,8 +155,8 @@ const initialState: annualNonReportInitialState = {
     significantStaffChanges: "",
   },
   financialBudget: {
-    fundingSources: '',
-  significantBudgetChanges: '',
+    fundingSources: "",
+    significantBudgetChanges: "",
   },
   meetings: [
     {
@@ -166,39 +167,69 @@ const initialState: annualNonReportInitialState = {
     },
   ],
   otherComments: "",
-  formSubmitted: false
+  formSubmitted: false,
 };
 
 const annualNonReportSlice = createSlice({
   name: "nonAnnualReport",
   initialState,
   reducers: {
-    setAnnualNonReportState: (state,action: PayloadAction<annualNonReportInitialState>) => {
+    setAnnualNonReportState: (
+      state,
+      action: PayloadAction<annualNonReportInitialState>
+    ) => {
       return { ...state, ...action.payload };
     },
     setAcademicYearID: (state, action: PayloadAction<string>) => {
-      return { ...state, academicYearID: action.payload }
+      return { ...state, academicYearID: action.payload };
     },
-    setDivision: (state, action: PayloadAction<string>) => {
-      return { ...state, division: action.payload }
+    setDepartment: (state, action: PayloadAction<string>) => {
+      return { ...state, department: action.payload };
     },
     setReportsTo: (state, action: PayloadAction<string>) => {
-      return { ...state, reportsTo: action.payload }
+      return { ...state, reportsTo: action.payload };
     },
     setMissionStatement: (state, action: PayloadAction<string>) => {
-      return { ...state, missionStatement: action.payload }
+      return { ...state, missionStatement: action.payload };
     },
-    setStrategicGoals: ( state, action: PayloadAction<Partial<IStrategicGoals>>) => {
-      return { ...state, strategicGoals: { ...state.strategicGoals, ...action.payload }}
+    setStrategicGoals: (
+      state,
+      action: PayloadAction<Partial<IStrategicGoals>>
+    ) => {
+      return {
+        ...state,
+        strategicGoals: { ...state.strategicGoals, ...action.payload },
+      };
     },
-    setAccomplishments: ( state, action: PayloadAction<Partial<IAccomplishments>>) => {
-      return { ...state, accomplishments: { ...state.accomplishments, ...action.payload }}
+    setAccomplishments: (
+      state,
+      action: PayloadAction<Partial<IAccomplishments>>
+    ) => {
+      return {
+        ...state,
+        accomplishments: { ...state.accomplishments, ...action.payload },
+      };
     },
-    setResearchPartnerships: ( state, action: PayloadAction<Partial<IResearchPartnerships>>) => {
-      return { ...state, researchPartnerships: {...state.researchPartnerships, ...action.payload}}
+    setResearchPartnerships: (
+      state,
+      action: PayloadAction<Partial<IResearchPartnerships>>
+    ) => {
+      return {
+        ...state,
+        researchPartnerships: {
+          ...state.researchPartnerships,
+          ...action.payload,
+        },
+      };
     },
-    setStudentSuccess: ( state, action: PayloadAction<Partial<IStudentSuccess>>) => {
-      return { ...state, studentSuccess:  { ...state.studentSuccess, ...action.payload }}
+    setStudentSuccess: (
+      state,
+      action: PayloadAction<Partial<IStudentSuccess>>
+    ) => {
+      return {
+        ...state,
+        studentSuccess: { ...state.studentSuccess, ...action.payload },
+      };
     },
     setActivities: (state, action: PayloadAction<IActivity>) => {
       const { eventId } = action.payload;
@@ -219,6 +250,12 @@ const annualNonReportSlice = createSlice({
         }
       }
     },
+    removeActivity: (state, action: PayloadAction<number>) => {
+      const index = action.payload;
+      if (index >= 0 && index < state.activities.length) {
+        state.activities.splice(index, 1);
+      }
+    },
 
     addNewActivity: (state) => {
       state.activities.push({
@@ -226,25 +263,38 @@ const annualNonReportSlice = createSlice({
         eventName: "",
         personsInPicture: "",
         eventMonth: "",
+        pictureURL: [
+          {
+            eventPicture: "",
+          },
+        ],
         eventSummary: "",
-        eventPicture: [],
       });
     },
 
     updateActivity: (state, action: PayloadAction<IActivityUpdate>) => {
       const { index, field, value } = action.payload;
-      if (index >= 0 && index < state.activities.length) {
+      if (index >= 0 && index <= state.activities.length) {
         state.activities[index] = {
           ...state.activities[index],
           [field]: value,
         };
       }
     },
-    setAdministrativeData: (state, action: PayloadAction<Partial<IAdministrativeData>>) => {
-      return { ...state, administrativeData: {...state.administrativeData, ...action.payload}};
+    setAdministrativeData: (
+      state,
+      action: PayloadAction<Partial<IAdministrativeData>>
+    ) => {
+      return {
+        ...state,
+        administrativeData: { ...state.administrativeData, ...action.payload },
+      };
     },
     setFinancialBudget: (state, action: PayloadAction<IFinancialBudget>) => {
-      return {...state, financialBudget: { ...state.financialBudget, ...action.payload }};
+      return {
+        ...state,
+        financialBudget: { ...state.financialBudget, ...action.payload },
+      };
     },
     setMeetings: (state, action: PayloadAction<IMeeting>) => {
       const { meetingId } = action.payload;
@@ -275,6 +325,13 @@ const annualNonReportSlice = createSlice({
       });
     },
 
+    removeMeeting: (state, action: PayloadAction<number>) => {
+      const index = action.payload;
+      if (index >= 0 && index < state.meetings.length) {
+        state.meetings.splice(index, 1);
+      }
+    },
+
     updateMeeting: (state, action: PayloadAction<IMeetingUpdate>) => {
       const { index, field, value } = action.payload;
       if (index >= 0 && index < state.meetings.length) {
@@ -286,18 +343,18 @@ const annualNonReportSlice = createSlice({
     },
 
     setOtherComments: (state, action: PayloadAction<string>) => {
-      return { ...state, otherComments: action.payload }
+      return { ...state, otherComments: action.payload };
     },
     setFormSubmitted: (state, _: PayloadAction<boolean>) => {
-      return {...state, formSubmitted: true}
-    }
+      return { ...state, formSubmitted: true };
+    },
   },
 });
 
 export const {
   setAnnualNonReportState,
   setAcademicYearID,
-  setDivision,
+  setDepartment,
   setReportsTo,
   setMissionStatement,
   setStrategicGoals,
@@ -310,27 +367,42 @@ export const {
   setMeetings,
   setOtherComments,
   addNewActivity,
+  removeActivity,
   updateActivity,
   addNewMeeting,
+  removeMeeting,
   updateMeeting,
-  setFormSubmitted
+  setFormSubmitted,
 } = annualNonReportSlice.actions;
 
 export const selectAnnualNonReport = (state: RootState) => {
   return state.nonAnnualReport;
-}
-export const selectAcademicYearID = (state: RootState) => state.nonAnnualReport.academicYearID;
-export const selectDivision = (state: RootState) => state.nonAnnualReport.division;
-export const selectReportsTo = (state: RootState) => state.nonAnnualReport.reportsTo;
-export const selectMissionStatement = (state: RootState) => state.nonAnnualReport.missionStatement;
-export const selectStrategicGoals = (state: RootState) => state.nonAnnualReport.strategicGoals;
-export const selectAccomplishments = (state: RootState) => state.nonAnnualReport.accomplishments;
-export const selectResearchPartnerships = (state: RootState) => state.nonAnnualReport.researchPartnerships;
-export const selectStudentSuccess = (state: RootState) => state.nonAnnualReport.studentSuccess;
-export const selectActivities = (state: RootState) => state.nonAnnualReport.activities;
-export const selectAdministrativeData = (state: RootState) => state.nonAnnualReport.administrativeData;
-export const selectFinancialBudget = (state: RootState) => state.nonAnnualReport.financialBudget;
-export const selectMeetings = (state: RootState) => state.nonAnnualReport.meetings;
-export const selectOtherComments = (state: RootState) => state.nonAnnualReport.otherComments;
+};
+export const selectAcademicYearID = (state: RootState) =>
+  state.nonAnnualReport.academicYearID;
+export const selectDepartment = (state: RootState) =>
+  state.nonAnnualReport.department;
+export const selectReportsTo = (state: RootState) =>
+  state.nonAnnualReport.reportsTo;
+export const selectMissionStatement = (state: RootState) =>
+  state.nonAnnualReport.missionStatement;
+export const selectStrategicGoals = (state: RootState) =>
+  state.nonAnnualReport.strategicGoals;
+export const selectAccomplishments = (state: RootState) =>
+  state.nonAnnualReport.accomplishments;
+export const selectResearchPartnerships = (state: RootState) =>
+  state.nonAnnualReport.researchPartnerships;
+export const selectStudentSuccess = (state: RootState) =>
+  state.nonAnnualReport.studentSuccess;
+export const selectActivities = (state: RootState) =>
+  state.nonAnnualReport.activities;
+export const selectAdministrativeData = (state: RootState) =>
+  state.nonAnnualReport.administrativeData;
+export const selectFinancialBudget = (state: RootState) =>
+  state.nonAnnualReport.financialBudget;
+export const selectMeetings = (state: RootState) =>
+  state.nonAnnualReport.meetings;
+export const selectOtherComments = (state: RootState) =>
+  state.nonAnnualReport.otherComments;
 
 export default annualNonReportSlice.reducer;

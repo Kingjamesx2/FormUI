@@ -13,9 +13,9 @@ import {
   selectMeetings,
   addNewMeeting,
   updateMeeting,
+  removeMeeting,
   IMeeting,
 } from "../../../../../store/features/annualNonReportSlice";
-
 
 export const UBFacultyMeetings: React.FC = () => {
   const dispatch = useDispatch();
@@ -31,10 +31,7 @@ export const UBFacultyMeetings: React.FC = () => {
   };
 
   const handleRemoveMeetings = (index: number) => {
-    if (index > 0) {
-      const newMeetings = meetings.filter((_, i) => i !== index);
-      setMeetingsState(newMeetings);
-    }
+    dispatch(removeMeeting(index));
   };
 
   const handleChange = (index: number, field: keyof IMeeting, value: any) => {

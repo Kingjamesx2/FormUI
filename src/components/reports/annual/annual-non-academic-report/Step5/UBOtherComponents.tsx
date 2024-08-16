@@ -84,10 +84,25 @@ export const UBOtherComponents: React.FC = () => {
         />
       </Box>
 
-      <div style={{position: "relative", top: "7rem", left: "46rem"}}>
-        {/* <Link to="/"> */}
-          <button onClick={() => downloadPDF(reportId as string)}>Download PDF</button>
-        {/* </Link> */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "7rem",
+          position: "relative",
+          top: "5.8rem",
+        }}
+      >
+        <button
+          onClick={() => downloadPDF(reportId as string)}
+          style={{
+            padding: "0.5rem 1rem",
+            fontSize: "1rem",
+          }}
+        >
+          Download PDF
+        </button>
       </div>
     </Container>
   );

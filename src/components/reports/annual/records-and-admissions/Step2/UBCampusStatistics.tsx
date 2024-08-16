@@ -36,9 +36,6 @@ export const UBCampusStatistics: React.FC = () => {
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
       <Box sx={{ mb: 2 }}>
-        <Typography variant="h6" sx={{ mb: 1 }}>
-          2021/2022
-        </Typography>
         <UBInfoTable
           columns={columns}
           initialRows={initialRows}

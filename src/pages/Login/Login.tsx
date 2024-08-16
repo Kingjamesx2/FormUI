@@ -50,7 +50,7 @@ export const Login = () => {
       'jfaber','ljohnson', 
       'bwatler', 'tusher', 'aaguilar', 
       'mteck', 'cguerrero', 'isangster',
-      'luis.herrera'].includes(data.username)) {
+      'luis.herrera', 'swindsor'].includes(data.username)) {
       setConsoleMessage('Login disallowed, contact ICT');
     } else
       await login(data);

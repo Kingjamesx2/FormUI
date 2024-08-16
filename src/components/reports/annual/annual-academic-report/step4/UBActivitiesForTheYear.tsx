@@ -38,7 +38,7 @@ export const UBActivitiesForTheYear = () => {
   };
 
   const handleImageChange = async (index: number, files: FileList | null) => {
-    if (!files) return
+    if (!files) return;
     const formData = new FormData();
     Array.from(files).map((file) => formData.append("file[]", file));
 
@@ -55,10 +55,16 @@ export const UBActivitiesForTheYear = () => {
     }
 
     const { data } = await response.json();
-    
+
     if (data && Array.isArray(data)) {
-      const imageURLs = data.map((file: any) => `https://api.ub.edu.bz/api/getFile/photos/` + file.generated_name); // Ensure this matches your response format
-      handleChange(index, "eventPicture", [ ...activities[index].eventPicture??[], ...imageURLs ]);
+      const imageURLs = data.map(
+        (file: any) =>
+          `https://api.ub.edu.bz/api/getFile/photos/` + file.generated_name
+      ); // Ensure this matches your response format
+      handleChange(index, "pictureURL", [
+        ...(activities[index].pictureURL ?? []),
+        ...imageURLs,
+      ]);
     } else {
       console.error("Unexpected response format:", data);
     }
@@ -68,14 +74,16 @@ export const UBActivitiesForTheYear = () => {
     fetch(url, {
       headers: {
         Authorization: `Bearer ${token}`, // Add token to headers
-      }
-    }).then(r => r.blob()).then(blob => {
-      const file = window.URL.createObjectURL(blob);
-      let a:HTMLImageElement|null = document.querySelector(`#${id}`);
-
-      a!.src = file;
+      },
     })
-  }
+      .then((r) => r.blob())
+      .then((blob) => {
+        const file = window.URL.createObjectURL(blob);
+        let a: HTMLImageElement | null = document.querySelector(`#${id}`);
+
+        a!.src = file;
+      });
+  };
 
   return (
     <Container sx={{ width: 1, m: 1, mb: "100px", p: 1 }}>
@@ -108,6 +116,15 @@ export const UBActivitiesForTheYear = () => {
             />
           </Box>
 
+          <Box mb={-6.5}>
+            <UBTextField
+              question="Event Month"
+              SetAnswer={(e) =>
+                handleChange(index, "eventMonth", e.target.value)
+              }
+              value={activity.eventMonth}
+            />
+          </Box>
 
           <Box mb={"0%"} sx={{ width: "101.4%", ml: "-0.7%", mt: "-7%" }}>
             <UBTextArea
@@ -119,49 +136,61 @@ export const UBActivitiesForTheYear = () => {
             />
           </Box>
 
-          <Box sx={{ width: "69%", ml: "14.5%", mb: "0%", p: "1%", bgcolor: "#FFD954" }}>
+          <Box
+            sx={{
+              width: "69%",
+              ml: "14.5%",
+              mb: "0%",
+              p: "1%",
+              bgcolor: "#FFD954",
+            }}
+          >
             <IconButton
               size="small"
               aria-label="upload picture"
               component="label"
             >
-              <AddPhotoAlternateOutlinedIcon
-                sx={{ color: "", fontSize: 30 }}
-              />
+              <AddPhotoAlternateOutlinedIcon sx={{ color: "", fontSize: 30 }} />
               <input
                 hidden
                 accept="image/*"
                 type="file"
                 multiple
-                onChange={(e) =>
-                  handleImageChange(index, e.target.files)
-                }
+                onChange={(e) => handleImageChange(index, e.target.files)}
               />
             </IconButton>
             <Box>
-              {
-                activity.eventPicture && activity.eventPicture.map((url, picIndex) => {
-                  downloadFile(url.toString(), `activity${index}${picIndex.toString()}`)
-                  
-                  return (<img
-                    id={`activity${index}${picIndex.toString()}`}
-                    key={picIndex}
-                    // src={''}
-                    // alt={`Preview ${picIndex + 1}`}
-                    style={{ width: "100px", height: "100px", margin: "5px" }}
-                  />
-                  )
+              {activity.pictureURL &&
+                activity.pictureURL.map((url, picIndex) => {
+                  downloadFile(
+                    url.toString(),
+                    `activity${picIndex.toString()}`
+                  );
+
+                  return (
+                    <img
+                      id={`activity${picIndex.toString()}`}
+                      key={picIndex}
+                      // src={''}
+                      // alt={`Preview ${picIndex + 1}`}
+                      style={{ width: "100px", height: "100px", margin: "5px" }}
+                    />
+                  );
                 })}
             </Box>
           </Box>
 
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: "2%" }}>
+          <Box sx={{ display: "flex", justifyContent: "center", mt: "2%" }}>
             <IconButton onClick={handleAddActivity}>
-              <AddCircleRoundedIcon sx={{ color: "#FFD954", cursor: "pointer" }} />
+              <AddCircleRoundedIcon
+                sx={{ color: "#FFD954", cursor: "pointer" }}
+              />
             </IconButton>
             {index > 0 && (
               <IconButton onClick={() => handleRemoveActivity(index)}>
-                <RemoveCircleOutlinedIcon sx={{ color: "#FFD954", cursor: "pointer", ml: 1 }} />
+                <RemoveCircleOutlinedIcon
+                  sx={{ color: "#FFD954", cursor: "pointer", ml: 1 }}
+                />
               </IconButton>
             )}
           </Box>

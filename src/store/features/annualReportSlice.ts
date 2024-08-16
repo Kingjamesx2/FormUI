@@ -37,17 +37,16 @@ interface IStudentSuccess {
 }
 
 interface IEventPicture {
-  url: string;
-  name: string;
+  eventPicture: string;
 }
 
 export interface IActivity {
   eventId?: number;
   eventName?: string;
-  eventPicture?: IEventPicture[];
+  eventMonth?: string;
+  pictureURL?: IEventPicture[];
   personsInPicture: string;
   eventSummary?: string;
-  eventMonth?: string;
 }
 
 interface IActivityUpdate {
@@ -191,10 +190,9 @@ const initialState: AnnualReportInitialState = {
       eventId: 0,
       eventName: "",
       personsInPicture: "",
-      eventPicture: [
+      pictureURL: [
         {
-          url: "",
-          name: "",
+          eventPicture: ""
         }
       ],
       eventSummary: "",
@@ -302,14 +300,18 @@ const annualReportSlice = createSlice({
         eventName: "",
         personsInPicture: "",
         eventMonth: "",
-        eventPicture: [],
+        pictureURL: [
+          {
+            eventPicture: "",
+          }
+        ],
         eventSummary: ""
       });
     },
 
     updateActivity: (state, action: PayloadAction<IActivityUpdate>) => {
       const { index, field, value } = action.payload;
-      if (index >= 0 && index <= state.activities.length) {
+      if (index >= 0 && index < state.activities.length) {
         state.activities[index] = {
           ...state.activities[index],
           [field]: value,

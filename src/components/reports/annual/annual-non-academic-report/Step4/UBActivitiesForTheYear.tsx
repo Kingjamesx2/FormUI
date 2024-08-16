@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Container, Box, IconButton, CircularProgress } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Container, Box, IconButton } from "@mui/material";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
@@ -10,34 +10,15 @@ import {
   IActivity,
   selectActivities,
   addNewActivity,
-  // selectAnnualNonReport,
+  removeActivity,
   updateActivity,
 } from "../../../../../store/features/annualNonReportSlice";
-// import { useUploadFileMutation } from "./../../../../../store/services/uploadFileAPI";
-import { RootState } from "../../../../../store/store"; // Import your RootState or relevant type
-
-// Function to convert JSON to FormData
-// function jsonToFormData(json: Record<string, any>): FormData {
-//   const formData = new FormData();
-//   Object.keys(json).forEach((key) => {
-//     const value = json[key];
-//     if (typeof value === "object" && !(value instanceof File)) {
-//       formData.append(key, JSON.stringify(value));
-//     } else {
-//       formData.append(key, value);
-//     }
-//   });
-//   return formData;
-// }
+import { RootState } from "../../../../../store/store";
 
 export const UBActivitiesForTheYear = () => {
   const dispatch = useDispatch();
   const activitiesFromStore = useSelector(selectActivities);
   const [activities, setActivitiesState] = useState([...activitiesFromStore]);
-  // const [uploadFile] = useUploadFileMutation();
-  const [isUploading, setIsUploading] = useState(false);
-
-  // Get token from the Redux store
   const token = useSelector((state: RootState) => state.auth.token);
 
   useEffect(() => {
@@ -49,10 +30,7 @@ export const UBActivitiesForTheYear = () => {
   };
 
   const handleRemoveActivity = (index: number) => {
-    if (index > 0) {
-      const newActivities = activities.filter((_, i) => i !== index);
-      setActivitiesState(newActivities);
-    }
+    dispatch(removeActivity(index));
   };
 
   const handleChange = (index: number, field: keyof IActivity, value: any) => {
@@ -60,41 +38,60 @@ export const UBActivitiesForTheYear = () => {
   };
 
   const handleImageChange = async (index: number, files: FileList | null) => {
-    if (!files || !files.length) return;
-
-    setIsUploading(true);
-
+    if (!files) return;
     const formData = new FormData();
-    Array.from(files).forEach((file) => formData.append("file", file)); // Use 'file' as the key
+    Array.from(files).map((file) => formData.append("file[]", file));
 
-    try {
-      const formData = new FormData();
-      Array.from(files).map((file) => formData.append("file[]", file));
+    const response = await fetch("https://api.ub.edu.bz/api/uploadPhoto", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`, // Add token to headers
+      },
+      body: formData,
+    });
 
-      const response = await fetch("https://api.ub.edu.bz/api/uploadPhoto", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`, // Add token to headers
-        },
-        body: formData,
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const { data } = await response.json();
+
+    if (data && Array.isArray(data)) {
+      // Map the new images to have separate URLs for storage and display
+      const newImages = data
+        .filter((file: any) => file.generated_name) // Ensure the file has a valid name
+        .map((file: any, i: number) => ({
+          eventPicture: `https://api.ub.edu.bz/photos/` + file.generated_name, // Save this to the database
+          displayURL:
+            `https://api.ub.edu.bz/api/getFile/photos/` + file.generated_name, // Use this for UI display
+          id: `activity${index}${i}`, // Unique ID for each image
+        }));
+
+      // Update the pictureURL array in the activities
+      const updatedPictureURL = (activities[index].pictureURL ?? []).map(
+        (pic, i) => {
+          if (!pic.eventPicture) {
+            // Replace null or invalid entry with a new image if available
+            const newImage = newImages.shift();
+            return newImage ? { eventPicture: newImage.eventPicture } : pic;
+          } else {
+            return pic;
+          }
+        }
+      );
+
+      // Append any remaining new images that were not used to replace nulls
+      handleChange(index, "pictureURL", [
+        ...updatedPictureURL,
+        ...newImages.map((img) => ({ eventPicture: img.eventPicture })), // Store only eventPicture URLs in the database
+      ]);
+
+      // Display images in the UI using displayURL
+      newImages.forEach((img) => {
+        downloadFile(img.displayURL, img.id);
       });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const { data } = await response.json();
-      
-      if (data && Array.isArray(data)) {
-        const imageURLs = data.map((file: any) => `https://api.ub.edu.bz/api/getFile/photos/` + file.generated_name); // Ensure this matches your response format
-        handleChange(index, "eventPicture", [...activities[index].eventPicture??[], ...imageURLs]);
-      } else {
-        console.error("Unexpected response format:", data);
-      }
-    } catch (error) {
-      console.error("Error uploading files:", error);
-    } finally {
-      setIsUploading(false);
+    } else {
+      console.error("Unexpected response format:", data);
     }
   };
 
@@ -102,14 +99,16 @@ export const UBActivitiesForTheYear = () => {
     fetch(url, {
       headers: {
         Authorization: `Bearer ${token}`, // Add token to headers
-      }
-    }).then(r => r.blob()).then(blob => {
-      const file = window.URL.createObjectURL(blob);
-      let a:HTMLImageElement|null = document.querySelector(`#${id}`);
-
-      a!.src = file;
+      },
     })
-  }
+      .then((r) => r.blob())
+      .then((blob) => {
+        const file = window.URL.createObjectURL(blob);
+        let a: HTMLImageElement | null = document.querySelector(`#${id}`);
+
+        a!.src = file;
+      });
+  };
 
   return (
     <Container sx={{ width: 1, m: 1, mb: "100px", p: 1 }}>
@@ -144,7 +143,7 @@ export const UBActivitiesForTheYear = () => {
 
           <Box mb={-6.5}>
             <UBTextField
-              question="Month of Event."
+              question="Event Month"
               SetAnswer={(e) =>
                 handleChange(index, "eventMonth", e.target.value)
               }
@@ -182,30 +181,25 @@ export const UBActivitiesForTheYear = () => {
                 accept="image/*"
                 type="file"
                 multiple
-                onChange={(e) => {
-                  const files = e.target.files;
-                  if (files) {
-                    handleImageChange(index, files);
-                  }
-                }}
+                onChange={(e) => handleImageChange(index, e.target.files)}
               />
             </IconButton>
 
-            {isUploading && <CircularProgress size={24} />}
-
             <Box>
-              {
-                activity.eventPicture && activity.eventPicture.map((url, picIndex) => {
-                  downloadFile(url.toString(), `activity${picIndex.toString()}`)
+              {activity.pictureURL &&
+                activity.pictureURL.map((pic, picIndex) => {
+                  const url = `https://api.ub.edu.bz/api/getFile/photos/${pic.eventPicture.split("/").pop()}`;
 
-                  return (<img
-                    id={`activity${picIndex.toString()}`}
-                    key={picIndex}
-                    src={''}
-                    alt={`Preview ${picIndex + 1}`}
-                    style={{ width: "100px", height: "100px", margin: "5px" }}
-                  />
-                  )
+                  downloadFile(url, `activity${index}${picIndex.toString()}`);
+
+                  return (
+                    <img
+                      id={`activity${index}${picIndex.toString()}`}
+                      key={picIndex}
+                      src={url} // Display the image using displayURL
+                      style={{ width: "100px", height: "100px", margin: "5px" }}
+                    />
+                  );
                 })}
             </Box>
           </Box>

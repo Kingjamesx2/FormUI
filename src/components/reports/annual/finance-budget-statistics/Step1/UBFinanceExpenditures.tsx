@@ -8,7 +8,7 @@ import {
   setExpenditure,
 } from "../../../../../store/features/financeReportSlice";
 
-const columns = ["9. Finance-Expenditures Bz$", ""];
+const columns = ["2. Finance-Expenditures Bz$", ""];
 
 
 export const UBFinanceExpenditures: React.FC = () => {
@@ -62,7 +62,7 @@ export const UBFinanceExpenditures: React.FC = () => {
       {/* Section for Capital Expenditures */}
       <Box mb={-4.7}>
         <UBTextArea
-          question="10. Capital Expenditures (List major projects below)"
+          question="3. Capital Expenditures (List major projects below)"
           SetAnswer={handleCapitalExpendituresChange}
           value={expenditures.capitalExpenditures}
         />
@@ -71,7 +71,7 @@ export const UBFinanceExpenditures: React.FC = () => {
       {/* Section for Other Expenditures */}
       <Box mb={-4.7}>
         <UBTextArea
-          question="11. Other expenditures"
+          question="4. Other expenditures"
           SetAnswer={handleOtherExpendituresChange}
           value={expenditures.otherExpenditures}
         />

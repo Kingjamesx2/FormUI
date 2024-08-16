@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import { UBTextField } from "../../../../common/UBTextField/UBTextField";
-import { UBTextArea } from "../../../../common/Textarea/UBTextArea";
-import UbDropdown from "../../../../UbDropdown/UbDropdown";
-import UBRadioButton from "../../../../common/UBRadioButton/UBRadioButton";
 import Box from "@mui/material/Box";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import RemoveCircleOutlinedIcon from "@mui/icons-material/RemoveCircleOutlined";
@@ -17,13 +14,6 @@ import {
   updateMeeting,
   IMeeting,
 } from "../../../../../store/features/annualReportSlice";
-
-const initialState = ["", "", ""];
-
-// const createNewContainerState = () => ({
-//   state: [...initialState],
-//   id: Date.now()
-// });
 
 export const UBFacultyMeetings: React.FC = () => {
   const dispatch = useDispatch();
@@ -45,9 +35,10 @@ export const UBFacultyMeetings: React.FC = () => {
   const handleChange = (index: number, field: keyof IMeeting, value: any) => {
     dispatch(updateMeeting({ index, field, value }));
   };
+
   return (
     <Container sx={{ width: 1, m: 1, mb: "100px", p: 1 }}>
-      <h3 style={{ marginBottom: "6%", marginTop: "5%" }}>
+      <h3 style={{ marginBottom: "2%", marginTop: "5%" }}>
         <center>Faculty Meetings</center>
       </h3>
 
@@ -83,7 +74,7 @@ export const UBFacultyMeetings: React.FC = () => {
             />
           </Box>
 
-          <Box sx={{ display: "flex", justifyContent: "center", mt: "2%" }}>
+          <Box sx={{ display: "flex", justifyContent: "center", mt: "4%" }}>
             <IconButton onClick={handleAddMeetings}>
               <AddCircleRoundedIcon
                 sx={{ color: "#FFD954", cursor: "pointer" }}

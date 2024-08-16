@@ -5,6 +5,7 @@ interface ICurrentStudentEnrollmentTrend {
   associates: number;
   undergraduate: number;
   graduate: number;
+  Total: number;
 }
 
 //per faculty
@@ -14,6 +15,7 @@ interface IEnrollmentTrend {
   undergraduate: number;
   graduate: number;
   other: number;
+  Total: number;
 }
 
 interface IEnrollmentTrendPerFaculty {
@@ -93,6 +95,7 @@ const recordsReportInitialState: RecordsReportState = {
     associates: 0,
     undergraduate: 0,
     graduate: 0,
+    Total: 0,
   },
   studentEnrollmentTrend: [
     {
@@ -101,6 +104,7 @@ const recordsReportInitialState: RecordsReportState = {
       undergraduate: 0,
       graduate: 0,
       other: 0,
+      Total: 0,
     },
     {
       academicYear: "",
@@ -108,6 +112,8 @@ const recordsReportInitialState: RecordsReportState = {
       undergraduate: 0,
       graduate: 0,
       other: 0,
+      Total: 0,
+
     },
     {
       academicYear: "",
@@ -115,6 +121,8 @@ const recordsReportInitialState: RecordsReportState = {
       undergraduate: 0,
       graduate: 0,
       other: 0,
+      Total: 0,
+
     },
   ],
   enrollmentTrendPerFaculty: [
@@ -242,7 +250,6 @@ const recordsReportSlice = createSlice({
 });
 
 export const {
-  // setUserID,
   setRecordReportState,
   setAcademicYearID,
   setDepartment,
