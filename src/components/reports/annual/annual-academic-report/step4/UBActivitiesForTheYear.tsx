@@ -57,14 +57,39 @@ export const UBActivitiesForTheYear = () => {
     const { data } = await response.json();
 
     if (data && Array.isArray(data)) {
-      const imageURLs = data.map(
-        (file: any) =>
-          `https://api.ub.edu.bz/api/getFile/photos/` + file.generated_name
-      ); // Ensure this matches your response format
+      // Map the new images to have separate URLs for storage and display
+      const newImages = data
+        .filter((file: any) => file.generated_name) // Ensure the file has a valid name
+        .map((file: any, i: number) => ({
+          eventPicture: `/photos/` + file.generated_name, // Save this to the database
+          displayURL:
+            `https://api.ub.edu.bz/api/getFile/photos/` + file.generated_name, // Use this for UI display
+          id: `activity${index}${i}`, // Unique ID for each image
+        }));
+
+      // Update the pictureURL array in the activities
+      const updatedPictureURL = (activities[index].pictureURL ?? []).map(
+        (pic, i) => {
+          if (!pic.eventPicture) {
+            // Replace null or invalid entry with a new image if available
+            const newImage = newImages.shift();
+            return newImage ? { eventPicture: newImage.eventPicture } : pic;
+          } else {
+            return pic;
+          }
+        }
+      );
+
+      // Append any remaining new images that were not used to replace nulls
       handleChange(index, "pictureURL", [
-        ...(activities[index].pictureURL ?? []),
-        ...imageURLs,
+        ...updatedPictureURL,
+        ...newImages.map((img) => ({ eventPicture: img.eventPicture })), // Store only eventPicture URLs in the database
       ]);
+
+      // Display images in the UI using displayURL
+      newImages.forEach((img) => {
+        downloadFile(img.displayURL, img.id);
+      });
     } else {
       console.error("Unexpected response format:", data);
     }
@@ -159,20 +184,20 @@ export const UBActivitiesForTheYear = () => {
                 onChange={(e) => handleImageChange(index, e.target.files)}
               />
             </IconButton>
+
             <Box>
               {activity.pictureURL &&
-                activity.pictureURL.map((url, picIndex) => {
-                  downloadFile(
-                    url.toString(),
-                    `activity${picIndex.toString()}`
-                  );
+                activity.pictureURL.map((pic, picIndex) => {
+                  const eventPicture = pic?.eventPicture || ""; // Use an empty string as a fallback
+                  const url = `https://api.ub.edu.bz/api/getFile/photos/${eventPicture.split("/").pop()}`;
+
+                  downloadFile(url, `activity${index}${picIndex.toString()}`);
 
                   return (
                     <img
-                      id={`activity${picIndex.toString()}`}
+                      id={`activity${index}${picIndex.toString()}`}
                       key={picIndex}
-                      // src={''}
-                      // alt={`Preview ${picIndex + 1}`}
+                      src={url} // Display the image using displayURL
                       style={{ width: "100px", height: "100px", margin: "5px" }}
                     />
                   );

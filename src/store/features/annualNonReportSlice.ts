@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store"; // Adjust the import according to your store file location
-import  form from "../../../public/form.png"
 
 interface IStrategicGoals {
   strategicGoalsUnderReview: string;
