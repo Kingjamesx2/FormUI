@@ -61,7 +61,7 @@ export const UBActivitiesForTheYear = () => {
       const newImages = data
         .filter((file: any) => file.generated_name) // Ensure the file has a valid name
         .map((file: any, i: number) => ({
-          eventPicture: `https://api.ub.edu.bz/photos/` + file.generated_name, // Save this to the database
+          eventPicture: `/photos/` + file.generated_name, // Save this to the database
           displayURL:
             `https://api.ub.edu.bz/api/getFile/photos/` + file.generated_name, // Use this for UI display
           id: `activity${index}${i}`, // Unique ID for each image
@@ -94,6 +94,7 @@ export const UBActivitiesForTheYear = () => {
       console.error("Unexpected response format:", data);
     }
   };
+
 
   const downloadFile = (url: string, id: string) => {
     fetch(url, {
@@ -188,18 +189,23 @@ export const UBActivitiesForTheYear = () => {
             <Box>
               {activity.pictureURL &&
                 activity.pictureURL.map((pic, picIndex) => {
-                  const url = `https://api.ub.edu.bz/api/getFile/photos/${pic.eventPicture.split("/").pop()}`;
+                  const eventPicture = pic.eventPicture;
+                  const url = eventPicture
+                    ? `https://api.ub.edu.bz/api/getFile/photos/${eventPicture.split("/").pop()}`
+                    : "";
 
-                  downloadFile(url, `activity${index}${picIndex.toString()}`);
+                  if (eventPicture) {
+                    downloadFile(url, `activity${index}${picIndex.toString()}`);
+                  }
 
-                  return (
+                  return eventPicture ? (
                     <img
                       id={`activity${index}${picIndex.toString()}`}
                       key={picIndex}
                       src={url} // Display the image using displayURL
                       style={{ width: "100px", height: "100px", margin: "5px" }}
                     />
-                  );
+                  ) : null;
                 })}
             </Box>
           </Box>

@@ -188,19 +188,23 @@ export const UBActivitiesForTheYear = () => {
             <Box>
               {activity.pictureURL &&
                 activity.pictureURL.map((pic, picIndex) => {
-                  const eventPicture = pic?.eventPicture || ""; // Use an empty string as a fallback
-                  const url = `https://api.ub.edu.bz/api/getFile/photos/${eventPicture.split("/").pop()}`;
+                  const eventPicture = pic.eventPicture;
+                  const url = eventPicture
+                    ? `https://api.ub.edu.bz/api/getFile/photos/${eventPicture.split("/").pop()}`
+                    : "";
 
-                  downloadFile(url, `activity${index}${picIndex.toString()}`);
+                  if (eventPicture) {
+                    downloadFile(url, `activity${index}${picIndex.toString()}`);
+                  }
 
-                  return (
+                  return eventPicture ? (
                     <img
                       id={`activity${index}${picIndex.toString()}`}
                       key={picIndex}
                       src={url} // Display the image using displayURL
                       style={{ width: "100px", height: "100px", margin: "5px" }}
                     />
-                  );
+                  ) : null;
                 })}
             </Box>
           </Box>

@@ -4,6 +4,7 @@ import { RootState } from "../store"; // Adjust the path according to your proje
 interface IStrategicGoals {
   previousAcademicYear: string;
   plans: string;
+  completionRate: string;
 }
 
 interface IAccomplishments {
@@ -140,6 +141,7 @@ const initialState: AnnualReportInitialState = {
   strategicGoals: {
     previousAcademicYear: "",
     plans: "",
+    completionRate: ""
   },
   accomplishments: {
     accomplishmentList: "",

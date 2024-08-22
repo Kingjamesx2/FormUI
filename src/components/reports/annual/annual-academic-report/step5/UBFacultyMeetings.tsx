@@ -65,13 +65,14 @@ export const UBFacultyMeetings: React.FC = () => {
           }));
 
         const meetingMinutesURL = [
-            ...newFiles.map((file: any) => ({ meetingURL: file.fileURL })),
-          ]
-        
+          ...newFiles.map((file: any) => ({ meetingURL: file.fileURL })),
+        ];
+
         if (annualReport.meetings[index].meetingMinutesURL) {
-          annualReport.meetings[index].meetingMinutesURL.map(r => {
-            if (r.meetingURL) meetingMinutesURL.unshift({meetingURL: r.meetingURL})
-          })
+          annualReport.meetings[index].meetingMinutesURL.map((r) => {
+            if (r.meetingURL)
+              meetingMinutesURL.unshift({ meetingURL: r.meetingURL });
+          });
         }
 
         dispatch(
@@ -136,6 +137,8 @@ export const UBFacultyMeetings: React.FC = () => {
                 borderRadius: "8px", // Adjusts the roundness of the corners
                 width: "150px", // Adjust the width to make it rectangular
                 height: "40px", // Adjust the height
+                ml: "2%",
+                mt: "3%",
               }}
             >
               <UploadIcon sx={{ fontSize: 30 }} />
@@ -150,26 +153,44 @@ export const UBFacultyMeetings: React.FC = () => {
               Upload File
             </IconButton>
 
-
-            <Box sx={{ display: "flex", justifyContent: "center", mt: "4%" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap", // Allows the files to wrap to the next line
+                mt: "4%",
+              }}
+            >
               {meeting.meetingMinutesURL &&
                 meeting.meetingMinutesURL.map((minutes, minutesIndex) => {
                   //Iterates over the array of URLs for the meeting minutes.
                   const meetingURL = minutes?.meetingURL || ""; //Extracts the URL from each minutes object.
-                  const url = `https://api.ub.edu.bz/api/getFile/meetings/${meetingURL.split("/").pop()}`; //Constructs a full API URL to fetch the file using the last part of meetingURL
+                  const fileName = meetingURL.split("/").pop(); // Extract the file name from the URL
+                  const url = `https://api.ub.edu.bz/api/getFile/meetings/${fileName}`; //Constructs a full API URL to fetch the file using the last part of meetingURL
                   console.log(url);
                   // downloadFile(url, `meetings${index}${meetIndex.toString()}`);
                   return (
-                    (minutes.meetingURL) && <a
-                      // id={`meetings${index}${meetIndex.toString()}`}
-                      key={minutesIndex}
-                      href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ display: "block", margin: "5px 0" }}
-                    >
-                      {`Meeting ${minutesIndex + 1}`}
-                    </a>
+                    minutes.meetingURL && (
+                      <a
+                        // id={`meetings${index}${meetIndex.toString()}`}
+                        key={minutesIndex}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: "block",
+                          margin: "5px", // Margin between items
+                          padding: "1% 0% 0% 2%",
+                          border: "1px black solid",
+                          borderRadius: "8px", // Adjusts the roundness of the corners
+                          width: "150px", // Adjust the width to make it rectangular
+                          height: "40px", // Adjust the height
+                          backgroundColor: "#fff",
+                        }}
+                      >
+                        {`Meeting file ${minutesIndex + 1}`}
+                      </a>
+                    )
                   );
                 })}
             </Box>
@@ -194,3 +215,5 @@ export const UBFacultyMeetings: React.FC = () => {
     </Container>
   );
 };
+
+export default UBFacultyMeetings;

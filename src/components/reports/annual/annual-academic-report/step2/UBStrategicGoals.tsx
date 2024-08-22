@@ -17,7 +17,7 @@ export const UBStrategicGoals: React.FC = () => {
       </h3>
       <Box mb={-4.7}>
         <UBTextArea
-          question="1. List accomplished Initiative for the previous Academic Year (AY) 23-24"
+          question="1. Accomplished Initiative for the Academic Year (AY) 23-24"
           SetAnswer={(e) => dispatch(
             setStrategicGoals({ previousAcademicYear: e.target.value })
           )}
@@ -26,11 +26,21 @@ export const UBStrategicGoals: React.FC = () => {
       </Box>
       <Box mb={-4.7}>
         <UBTextArea
-          question="2. List Corresponding Strategic Plan Goal & Strategy"
+          question="2. Corresponding Strategic Plan Goal & Strategy"
           SetAnswer={(e) => dispatch(
             setStrategicGoals({ plans: e.target.value })
           )}
           value={annualReport.strategicGoals.plans}
+        />
+      </Box>
+
+      <Box mb={-4.7}>
+        <UBTextArea
+          question="3. What is the completion rate for the 2023-2024 Annual Implementation Plan?"
+          SetAnswer={(e) => dispatch(
+            setStrategicGoals({ completionRate: e.target.value })
+          )}
+          value={annualReport.strategicGoals.completionRate}
         />
       </Box>
     </Container>

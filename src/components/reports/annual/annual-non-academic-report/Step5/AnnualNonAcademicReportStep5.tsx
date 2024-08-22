@@ -1,13 +1,13 @@
 import React from "react";
 import Container from "@mui/material/Container";
-import { UBFacultyMeetings } from "./UBDivisionMeeting";
+import { UBDivisionMeeting } from "./UBDivisionMeeting";
 import UBFinancial from "./UBFinancial";
 import UBOtherComponents from "./UBOtherComponents";
 
 export const AnnualNonAcademicReportStep5: React.FC = () => {
     return(
         <Container>
-            <UBFacultyMeetings />
+            <UBDivisionMeeting />
             <UBFinancial />
             <UBOtherComponents />
         </Container>

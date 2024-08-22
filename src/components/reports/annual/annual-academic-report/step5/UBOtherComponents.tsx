@@ -76,7 +76,7 @@ export const UBOtherComponents: React.FC = () => {
       </h3>
       <Box mb={-4.5}>
         <UBTextArea
-          question="1. Use this section to provide information not included in the previous sections but which you believe is pertinent for this report. (optional)"
+          question="Use this section to provide information not included in the previous sections but which you believe is pertinent for this report. (optional)"
           SetAnswer={(e) => dispatch(setOtherComments(e.target.value))}
           value={annualReport.otherComments}
         />

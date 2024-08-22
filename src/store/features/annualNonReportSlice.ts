@@ -74,11 +74,15 @@ interface IMeetingUpdate {
   value: any;
 }
 
+interface IMeetingURL {
+  meetingURL: string;
+}
+
 export interface IMeeting {
   meetingId?: number;
   meetingType?: string;
   meetingDate?: string; // ISO date string
-  meetingMinutesURL?: string;
+  meetingMinutesURL?: IMeetingURL[];
 }
 
 export interface annualNonReportInitialState {
@@ -162,7 +166,7 @@ const initialState: annualNonReportInitialState = {
       meetingId: 0,
       meetingType: "",
       meetingDate: "",
-      meetingMinutesURL: "",
+      meetingMinutesURL: [],
     },
   ],
   otherComments: "",
@@ -320,7 +324,11 @@ const annualNonReportSlice = createSlice({
         meetingId: state.meetings.length,
         meetingType: "",
         meetingDate: "",
-        meetingMinutesURL: "",
+        meetingMinutesURL: [
+          {
+            meetingURL: "",
+          },
+        ],
       });
     },
 

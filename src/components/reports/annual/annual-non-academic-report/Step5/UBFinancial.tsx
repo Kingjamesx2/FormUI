@@ -14,7 +14,7 @@ export const UBFinancial: React.FC = () => {
 
   return (
     <Container sx={{ width: 1, m: 1, p: 1 }}>
-      <h3 style={{ marginBottom: "-2%", marginTop: "7%" }}><center>Financial/Budget</center></h3>
+      <h3 style={{ marginBottom: "-2%", marginTop: "-7%" }}><center>Financial/Budget</center></h3>
       
       <Box mb={"-4%"}>
         <UBTextArea
