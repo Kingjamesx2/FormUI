@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -8,23 +8,27 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import { Button } from "@mui/material";
 import UserPosition from "../../components/UserPosition/UserPosition";
 import FormCard from "../../components/common/Card/FormCard";
 import { Link } from "react-router-dom";
 import { useFetchAnnualReportQuery } from "../../store/services/annualReportAPI";
 import { useFetchAnnualNonReportQuery } from "../../store/services/annualNonReportAPI";
 import { useFetchRecordsReportQuery } from "../../store/services/recordsReportAPI";
-import { useFetchHRReportQuery } from '../../store/services/HRReportApi'
-import { useFetchFinanceReportQuery } from '../../store/services/financeReportAPI'
+import { useFetchHRReportQuery } from "../../store/services/HRReportApi";
+import { useFetchFinanceReportQuery } from "../../store/services/financeReportAPI";
 import { selectName, selectUsername } from "../../store/features/authSlice";
 import { selectFinanceReport } from "../../store/features/financeReportSlice";
 import { selectAnnualReport } from "../../store/features/annualReportSlice";
 import { selectRecordReport } from "../../store/features/recordsReportSlice";
 import { selectHRReport } from "../../store/features/HRReportSlice";
 import { selectAnnualNonReport } from "../../store/features/annualNonReportSlice";
+import { RootState } from "../../store/store";
 
 import UBLogo from "../../components/icons/UB_Logo.png";
-// import exit from "../../components/icons/exit.png";
+import { record } from "zod";
+
+
 const drawerWidth: number = 240;
 
 interface AppBarProps extends MuiAppBarProps {
@@ -52,20 +56,307 @@ const AppBar = styled(MuiAppBar, {
 const defaultTheme = createTheme();
 
 export const Dashboard: React.FC = () => {
+  
+  
+
   // const [skipAnnualReport, setSkipAnnualReport] = useState(false);
   useFetchAnnualReportQuery(1);
   useFetchAnnualNonReportQuery(1);
   useFetchRecordsReportQuery(1);
-  useFetchHRReportQuery(1)
-  useFetchFinanceReportQuery(1)
+  useFetchHRReportQuery(1);
+  useFetchFinanceReportQuery(1);
 
+
+// Get token from the Redux store
+const token = useSelector((state: RootState) => state.auth.token);
+
+  //---------------selectors-------------------------------------
   const userName = useSelector(selectName);
   const username = useSelector(selectUsername);
-  const financeReport = useSelector(selectFinanceReport)
-  const staffReport = useSelector(selectAnnualNonReport)
-  const facultyReport = useSelector(selectAnnualReport)
-  const recordReport = useSelector(selectRecordReport)
-  const HRReport = useSelector(selectHRReport)
+  const financeReport = useSelector(selectFinanceReport);
+  const staffReport = useSelector(selectAnnualNonReport);
+  const facultyReport = useSelector(selectAnnualReport);
+  const recordReport = useSelector(selectRecordReport);
+  const HRReport = useSelector(selectHRReport);
+  //-------------------------------------------------------------
+
+//----------------------------------path ID-------------------------
+const financeReportID = financeReport._id; // Replace with the correct path to your ID
+const staffReportID = staffReport._id;
+const facultyReportID = facultyReport._id;
+const recordReportID = recordReport._id;
+const HRReportID = HRReport._id
+//------------------------------------------------------------------
+
+
+
+//----------------------------------------------Fetch Annual Report Academic Division-----------------------------------------------------
+const downloadAnnualPDF = async (id: string) => {
+  try {
+    // Fetch the PDF file
+    const response = await fetch(
+      `https://api.ub.edu.bz/api/generateFacultyPdf/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/pdf",
+          Authorization: `Bearer ${token}`, // Add token to headers
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Check if the response is a PDF
+    const contentType = response.headers.get("Content-Type");
+    if (contentType !== "application/pdf") {
+      throw new Error(`Unexpected content type: ${contentType}`);
+    }
+
+    // Convert the response to a blob
+    const blob = await response.blob();
+
+    // Create a URL for the blob
+    const url = window.URL.createObjectURL(blob);
+
+    // Create a temporary link element
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Annual Report Academic Division.pdf"; // The filename the user will see
+
+    // Append the link to the body
+    document.body.appendChild(a);
+
+    // Programmatically click the link to trigger the download
+    a.click();
+
+    // Remove the link after triggering the download
+    a.remove();
+
+    // Optionally, revoke the object URL after a short delay to release memory
+    setTimeout(() => window.URL.revokeObjectURL(url), 100);
+  } catch (error) {
+    console.error("Error downloading the PDF:", error);
+  }
+};
+
+//----------------------------------------------------------------END--------------------------------------------------------------------
+
+
+//----------------------------------------------Fetch Annual Non Report Academic Division-----------------------------------------------------
+const downloadNonAnnualPDF = async (id: string) => {
+  try {
+    // Fetch the PDF file
+    const response = await fetch(
+      `https://api.ub.edu.bz/api/generateStaffPdf/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/pdf",
+          Authorization: `Bearer ${token}`, // Add token to headers
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Check if the response is a PDF
+    const contentType = response.headers.get("Content-Type");
+    if (contentType !== "application/pdf") {
+      throw new Error(`Unexpected content type: ${contentType}`);
+    }
+
+    // Convert the response to a blob
+    const blob = await response.blob();
+
+    // Create a URL for the blob
+    const url = window.URL.createObjectURL(blob);
+
+    // Create a temporary link element
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Annual Report Non-Academic Division.pdf"; // The filename the user will see
+
+    // Append the link to the body
+    document.body.appendChild(a);
+
+    // Programmatically click the link to trigger the download
+    a.click();
+
+    // Remove the link after triggering the download
+    a.remove();
+
+    // Optionally, revoke the object URL after a short delay to release memory
+    setTimeout(() => window.URL.revokeObjectURL(url), 100);
+ }  catch (error) {
+    console.error("Error downloading the PDF:", error);
+  }
+};
+//----------------------------------------------------------------END--------------------------------------------------------------------
+
+//----------------------------------------------Fetch  Finance and Budget Statistics Report-----------------------------------------------------
+const downloadFinancePDF = async (id: string) => {
+  try {
+    // Fetch the PDF file
+    const response = await fetch(
+      `https://api.ub.edu.bz/api/generateFinancePdf/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/pdf",
+          Authorization: `Bearer ${token}`, // Add token to headers
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Check if the response is a PDF
+    const contentType = response.headers.get("Content-Type");
+    if (contentType !== "application/pdf") {
+      throw new Error(`Unexpected content type: ${contentType}`);
+    }
+
+    // Convert the response to a blob
+    const blob = await response.blob();
+
+    // Create a URL for the blob
+    const url = window.URL.createObjectURL(blob);
+
+    // Create a temporary link element
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = " Finance and Budget Statistics Report.pdf"; // The filename the user will see
+
+    // Append the link to the body
+    document.body.appendChild(a);
+
+    // Programmatically click the link to trigger the download
+    a.click();
+
+    // Remove the link after triggering the download
+    a.remove();
+
+    // Optionally, revoke the object URL after a short delay to release memory
+    setTimeout(() => window.URL.revokeObjectURL(url), 100);
+  } catch (error) {
+    console.error("Error downloading the PDF:", error);
+  }
+};
+
+//---------------------------------------------------------------END--------------------------------------------------------------------
+
+//----------------------------------------------Fetch Human Statistics Report-----------------------------------------------------------
+const downloadHRPDF = async (id: string) => {
+  try {
+    // Fetch the PDF file
+    const response = await fetch(
+      `https://api.ub.edu.bz/api/generateHRPdf/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/pdf",
+          Authorization: `Bearer ${token}`, // Add token to headers
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Check if the response is a PDF
+    const contentType = response.headers.get("Content-Type");
+    if (contentType !== "application/pdf") {
+      throw new Error(`Unexpected content type: ${contentType}`);
+    }
+
+    // Convert the response to a blob
+    const blob = await response.blob();
+
+    // Create a URL for the blob
+    const url = window.URL.createObjectURL(blob);
+
+    // Create a temporary link element
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = " Human Statistics Report.pdf"; // The filename the user will see
+
+    // Append the link to the body
+    document.body.appendChild(a);
+
+    // Programmatically click the link to trigger the download
+    a.click();
+
+    // Remove the link after triggering the download
+    a.remove();
+
+    // Optionally, revoke the object URL after a short delay to release memory
+    setTimeout(() => window.URL.revokeObjectURL(url), 100);
+  } catch (error) {
+    console.error("Error downloading the PDF:", error);
+  }
+};
+//---------------------------------------------------------------END--------------------------------------------------------------------
+
+//----------------------------------------------------Report and Records------------------------------------------------------------------
+const downloadRecordsPDF = async (id: string) => {
+  try {
+    // Fetch the PDF file
+    const response = await fetch(
+      `https://api.ub.edu.bz/api/generateRecordsPdf/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/pdf",
+          Authorization: `Bearer ${token}`, // Add token to headers
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Check if the response is a PDF
+    const contentType = response.headers.get("Content-Type");
+    if (contentType !== "application/pdf") {
+      throw new Error(`Unexpected content type: ${contentType}`);
+    }
+
+    // Convert the response to a blob
+    const blob = await response.blob();
+
+    // Create a URL for the blob
+    const url = window.URL.createObjectURL(blob);
+
+    // Create a temporary link element
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Report and Records.pdf"; // The filename the user will see
+
+    // Append the link to the body
+    document.body.appendChild(a);
+
+    // Programmatically click the link to trigger the download
+    a.click();
+
+    // Remove the link after triggering the download
+    a.remove();
+
+    // Optionally, revoke the object URL after a short delay to release memory
+    setTimeout(() => window.URL.revokeObjectURL(url), 100);
+  } catch (error) {
+    console.error("Error downloading the PDF:", error);
+  }
+};
+//--------------------------------------------------END--------------------------------------------------------------------
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -130,8 +421,7 @@ export const Dashboard: React.FC = () => {
                   alignItems="center"
                   spacing={2}
                 >
-                  <Grid item xs={12} sm={6} md={4}>
-                  </Grid>
+                  <Grid item xs={12} sm={6} md={4}></Grid>
                 </Grid>
               </Grid>
             </Grid>
@@ -149,8 +439,17 @@ export const Dashboard: React.FC = () => {
             }}
           >
             <Grid container spacing={3}>
-              {['jfaber','mteck','senriquez','luis.herrera','ljohnson', 'bwatler', 'tusher', 'aaguilar'].includes(username) &&
-                (< Grid item xs={12} md={4} lg={3}>
+              {[
+                "jfaber",
+                "mteck",
+                "senriquez",
+                "luis.herrera",
+                "ljohnson",
+                "bwatler",
+                "tusher",
+                "aaguilar",
+              ].includes(username) && (
+                <Grid item xs={12} md={4} lg={3}>
                   <Link
                     to="/AnnualAcademicReport"
                     style={{ textDecoration: "none" }}
@@ -161,10 +460,35 @@ export const Dashboard: React.FC = () => {
                     />
                   </Link>
                 </Grid>
-                )}
-              {facultyReport.formSubmitted && < Grid item xs={12} md={4} lg={3} sx={{ color: '#FFF' }}> Annual Report Academic Division form was submitted </Grid>}
-              {['jfaber','mteck','senriquez','luis.herrera', 'fburns', 'akantun', 'egbert.irving', 'carisa.carrillo', 'twilliams', 'lcruz', 'fpalma'].includes(username) &&
-                (<Grid item xs={12} md={4} lg={3}>
+              )}
+              {facultyReport.formSubmitted && (
+                <Grid item xs={12} md={4} lg={3} sx={{ color: "#FFF" }}>
+                  {" "}
+                  Annual Report Academic Division form was submitted
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => downloadAnnualPDF(facultyReportID as string)}
+                    sx={{ mt: 2 }} // Add some margin-top to space the button
+                  >
+                    Download PDF
+                  </Button>
+                </Grid>
+              )}
+              {[
+                "jfaber",
+                "mteck",
+                "senriquez",
+                "luis.herrera",
+                "fburns",
+                "akantun",
+                "egbert.irving",
+                "carisa.carrillo",
+                "twilliams",
+                "lcruz",
+                "fpalma",
+              ].includes(username) && (
+                <Grid item xs={12} md={4} lg={3}>
                   <Link
                     to="/AnnualNonAcademicReport"
                     style={{ textDecoration: "none" }}
@@ -174,10 +498,30 @@ export const Dashboard: React.FC = () => {
                       title="UB Annual Report Non-Academic Division"
                     />
                   </Link>
-                </Grid>)}
-              {staffReport.formSubmitted && < Grid item xs={12} md={4} lg={3} sx={{ color: '#FFF' }}> Annual Report Non-Academic Division form was submitted </Grid>}
-              {['jfaber','mteck','senriquez','luis.herrera','rpineda'].includes(username) &&
-                (<Grid item xs={12} md={4} lg={3}>
+                </Grid>
+              )}
+              {staffReport.formSubmitted && (
+                <Grid item xs={12} md={4} lg={3} sx={{ color: "#FFF" }}>
+                  {" "}
+                  Annual Report Non-Academic Division form was submitted{" "}
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => downloadNonAnnualPDF(staffReportID as string)}
+                    sx={{ mt: 2 }} // Add some margin-top to space the button
+                  >
+                    Download PDF
+                  </Button>
+                </Grid>
+              )}
+              {[
+                "jfaber",
+                "mteck",
+                "senriquez",
+                "luis.herrera",
+                "rpineda",
+              ].includes(username) && (
+                <Grid item xs={12} md={4} lg={3}>
                   <Link
                     to="/RecordsAndAdmissions"
                     style={{ textDecoration: "none" }}
@@ -187,10 +531,30 @@ export const Dashboard: React.FC = () => {
                       title="UB records and Admissions"
                     />
                   </Link>
-                </Grid>)}
-              {recordReport.formSubmitted && < Grid item xs={12} md={4} lg={3} sx={{ color: '#FFF' }}> Records and Admissions form was submitted </Grid>}
-              {['jfaber','mteck','senriquez','luis.herrera','cguerrero'].includes(username) &&
-                (<Grid item xs={12} md={4} lg={3}>
+                </Grid>
+              )}
+              {recordReport.formSubmitted && (
+                <Grid item xs={12} md={4} lg={3} sx={{ color: "#FFF" }}>
+                  {" "}
+                  Records and Admissions form was submitted{" "}
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => downloadRecordsPDF(recordReportID)}
+                    sx={{ mt: 2 }} // Add some margin-top to space the button
+                  >
+                    Download PDF
+                  </Button>
+                </Grid>
+              )}
+              {[
+                "jfaber",
+                "mteck",
+                "senriquez",
+                "luis.herrera",
+                "cguerrero",
+              ].includes(username) && (
+                <Grid item xs={12} md={4} lg={3}>
                   <Link
                     to="/HumanResourceStatistics"
                     style={{ textDecoration: "none" }}
@@ -200,10 +564,30 @@ export const Dashboard: React.FC = () => {
                       title="UB Human Resource Statistics"
                     />
                   </Link>
-                </Grid>)}
-              {HRReport.formSubmitted && < Grid item xs={12} md={4} lg={3} sx={{ color: '#FFF' }}> Human Resource Statistics form was submitted </Grid>}
-              {['jfaber','mteck','senriquez','luis.herrera','isangster'].includes(username) &&
-                (<Grid item xs={12} md={4} lg={3}>
+                </Grid>
+              )}
+              {HRReport.formSubmitted && (
+                <Grid item xs={12} md={4} lg={3} sx={{ color: "#FFF" }}>
+                  {" "}
+                  Human Resource Statistics form was submitted{" "}
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => downloadHRPDF(HRReportID)}
+                    sx={{ mt: 2 }} // Add some margin-top to space the button
+                  >
+                    Download PDF
+                  </Button>
+                </Grid>
+              )}
+              {[
+                "jfaber",
+                "mteck",
+                "senriquez",
+                "luis.herrera",
+                "isangster",
+              ].includes(username) && (
+                <Grid item xs={12} md={4} lg={3}>
                   <Link
                     to="/FinanceAndBudgetStatistics"
                     style={{ textDecoration: "none" }}
@@ -214,13 +598,26 @@ export const Dashboard: React.FC = () => {
                     />
                   </Link>
                 </Grid>
-                )}
-                {financeReport.formSubmitted && < Grid item xs={12} md={4} lg={3} sx={{ color: '#FFF' }}> Finance and Budget Statistics form was submitted </Grid>}
+              )}
+              {financeReport.formSubmitted && (
+                <Grid item xs={12} md={4} lg={3} sx={{ color: "#FFF" }}>
+                  {" "}
+                  Finance and Budget Statistics form was submitted{" "}
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => downloadFinancePDF(financeReportID)}
+                    sx={{ mt: 2 }} // Add some margin-top to space the button
+                  >
+                    Download PDF
+                  </Button>
+                </Grid>
+              )}
             </Grid>
           </Container>
         </Box>
       </Box>
-    </ThemeProvider >
+    </ThemeProvider>
   );
 };
 

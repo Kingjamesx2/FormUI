@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { selectAnnualReport } from "../../../../../store/features/annualReportSlice";
 
 import {
-  setDepartmentList,
+  setUnits,
   setFaculty
 } from "../../../../../store/features/annualReportSlice";
 
@@ -77,9 +77,9 @@ export const Faculty = () => {
         <UBTextArea
           question="List all units/departments/centres/institutes within the Faculty"
           SetAnswer={(e) =>
-            dispatch(setDepartmentList(e.target.value as string))
+            dispatch(setUnits(e.target.value as string))
           }
-          value={annualReport.departmentList}
+          value={annualReport.units}
         />
       </Box>
     </Container>

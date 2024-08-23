@@ -13,7 +13,7 @@ export const UBStrategicGoals: React.FC = () => {
   return (
     <Container sx={{ width: 1, m: "auto", p: 1 }}>
       <h3 style={{ marginBottom: "-20px", marginTop: "50px" }}>
-        <center>Strategic Initiatives & Goals</center>
+        <center>Strategic Goals</center>
       </h3>
       <Box mb={-4.7}>
         <UBTextArea

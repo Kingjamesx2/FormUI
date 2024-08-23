@@ -109,7 +109,7 @@ interface IDegreesConferred {
 export interface AnnualReportInitialState {
   _id: string;
   academicYearID: string;
-  departmentList: string;
+  units: string;
   faculty: string;
   dean: string;
   missionStatement: string;
@@ -134,7 +134,7 @@ export interface AnnualReportInitialState {
 const initialState: AnnualReportInitialState = {
   _id: "",
   academicYearID: "",
-  departmentList: "",
+  units: "",
   faculty: "",
   dean: "",
   missionStatement: "",
@@ -238,8 +238,9 @@ const annualReportSlice = createSlice({
     setAcademicYearID: (state, action: PayloadAction<string>) => {
       return { ...state, academicYearID: action.payload };
     },
-    setDepartmentList: (state, action: PayloadAction<string>) => {
-      return { ...state, departmentList: action.payload };
+    
+    setUnits: (state, action: PayloadAction<string>) => {
+      return { ...state, units: action.payload };
     },
     setFaculty: (state, action: PayloadAction<string>) => {
       return { ...state, faculty: action.payload };
@@ -458,7 +459,7 @@ const annualReportSlice = createSlice({
 export const {
   setAnnualReportState,
   setAcademicYearID,
-  setDepartmentList,
+  setUnits,
   setFaculty,
   setDean,
   setMissionStatement,
@@ -491,8 +492,9 @@ export const selectAnnualReport = (state: RootState) => {
 };
 export const selectAcademicYearID = (state: RootState) =>
   state.annualReport.academicYearID;
-export const selectDepartmentList = (state: RootState) =>
-  state.annualReport.departmentList;
+
+export const selectUnits = (state: RootState) =>
+  state.annualReport.units;
 export const selectFaculty = (state: RootState) => state.annualReport.faculty;
 export const selectDean = (state: RootState) => state.annualReport.dean;
 export const selectMissionStatement = (state: RootState) =>
