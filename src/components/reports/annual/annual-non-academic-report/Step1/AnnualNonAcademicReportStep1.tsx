@@ -10,15 +10,13 @@ import {
   setDepartment,
   setReportsTo,
   setMissionStatement,
-  selectAnnualNonReport
+  selectAnnualNonReport,
 } from "../../../../../store/features/annualNonReportSlice";
-
-
 
 export const AnnualNonAcademicReportStep1: React.FC = () => {
   const dispatch = useDispatch();
- 
-  const annualNonReport = useSelector(selectAnnualNonReport)
+
+  const annualNonReport = useSelector(selectAnnualNonReport);
   const [summary, setSummary] = useState<string>(
     "The annual report provides a comprehensive summary of the University’s activities for the academic year, which is from August to July. The specific outputs/outcomes are based on the Annual Implementation Plan for the period under review."
   );
@@ -70,41 +68,63 @@ export const AnnualNonAcademicReportStep1: React.FC = () => {
           <UbDropdown
             label="Division (Department, Centres/Institute)"
             options={[
-              { value: "ICT", label: "ICT" },
-              { value: "Student Affairs", label: "Student Affairs" },
-              { value: "Library", label: "Library" },
+              {
+                value: "Registrar/Admissions ",
+                label: "Registrar/Admissions ",
+              },
+              {
+                value: "Quality Assurance Office",
+                label: "Quality Assurance Office",
+              },
+              { value: "Student Affairs ", label: "Student Affairs " },
               { value: "Quality Assurance", label: "Quality Assurance" },
+              {
+                value: "Environmental Research Institute (ERI) ",
+                label: "Environmental Research Institute (ERI) ",
+              },
+              {
+                value: "Open and Distance Learning (ODL)",
+                label: "Open and Distance Learning (ODL)",
+              },
+              {
+                value: "Campus Administrator, Punta Gorda",
+                label: "Campus Administrator, Punta Gorda",
+              },
+              { value: "Chief Librarian", label: "Chief Librarian" },
+              {
+                value: "Director, Central Farm Agriculture",
+                label: "Director, Central Farm Agriculture",
+              },
+              {
+                value: "Regional Language Center",
+                label: "Regional Language Center",
+              },
+              {
+                value: "Marketing & Communications Department",
+                label: "Marketing & Communications Department",
+              },
+              {
+                value: "Director, Office of Human Resources ",
+                label: "Director, Office of Human Resources ",
+              },
+              {
+                value: "Director, Office of Finance",
+                label: "Director, Office of Finance",
+              },
+              { value: "Chief Public Safety", label: "Chief Public Safety" },
+              {
+                value: "Director of Physical Plant",
+                label: "Director of Physical Plant",
+              },
+              {
+                value:
+                  "Director, Information, Communication and Technology Department",
+                label:
+                  "Director, Information, Communication and Technology Department",
+              },
             ]}
             SetAnswer={(e) => dispatch(setDepartment(e.target.value as string))}
             value={annualNonReport.department}
-         
-          />
-        </Box>
-        <Box
-          sx={{
-            width: "70%",
-            marginTop: "-2px",
-            marginLeft: "15%",
-            paddingBottom: "2%",
-            paddingTop: "3%",
-            backgroundColor: "#FFD954",
-            borderBottomLeftRadius: "none",
-            borderBottomRightRadius: "none",
-          }}
-        >
-          <UbDropdown
-            label="Reports To:"
-            options={[
-              { value: "FEA", label: "Faculty of Education and Arts" },
-              {
-                value: "FMSS",
-                label: "Faculty of Management and Social Sciences",
-              },
-              { value: "FHS", label: "Faculty of Health Sciences" },
-              { value: "FST", label: "Faculty of Science & Technology" },
-            ]}
-            SetAnswer={(e) => dispatch(setReportsTo(e.target.value as string))}
-            value={annualNonReport.reportsTo}
           />
         </Box>
       </Box>

@@ -8,12 +8,12 @@ import { selectAnnualReport } from "../../../../../store/features/annualReportSl
 
 import {
   setUnits,
-  setFaculty
+  setFaculty,
 } from "../../../../../store/features/annualReportSlice";
 
 export const Faculty = () => {
   const dispatch = useDispatch();
-  const annualReport = useSelector(selectAnnualReport)
+  const annualReport = useSelector(selectAnnualReport);
 
   return (
     <Container>
@@ -29,7 +29,10 @@ export const Faculty = () => {
             borderTopRightRadius: "5px",
           }}
         >
-          The annual report provides a comprehensive summary of the University’s activities for the academic year, which is from August to July. The specific outputs/outcomes are based on the Annual Implementation Plan for the period under review.
+          The annual report provides a comprehensive summary of the University’s
+          activities for the academic year, which is from August to July. The
+          specific outputs/outcomes are based on the Annual Implementation Plan
+          for the period under review.
         </Box>
         <Box
           sx={{
@@ -42,7 +45,9 @@ export const Faculty = () => {
             borderTopRightRadius: "5px",
           }}
         >
-          <Typography sx={{ fontWeight: "bold" }}>Academic Year: 2023-2024</Typography>
+          <Typography sx={{ fontWeight: "bold" }}>
+            Academic Year: 2023-2024
+          </Typography>
         </Box>
         <Box
           sx={{
@@ -76,9 +81,7 @@ export const Faculty = () => {
       <Box sx={{ mt: "-4.5%", mb: "4%" }}>
         <UBTextArea
           question="List all units/departments/centres/institutes within the Faculty"
-          SetAnswer={(e) =>
-            dispatch(setUnits(e.target.value as string))
-          }
+          SetAnswer={(e) => dispatch(setUnits(e.target.value as string))}
           value={annualReport.units}
         />
       </Box>

@@ -8,7 +8,6 @@ import {
   setGraduates,
   selectRecordReport
 } from "../../../../../store/features/recordsReportSlice";
-import { RootState } from "../../../../../store/store"; // Import your RootState or relevant type
 
 export const UBGraduatesByAgeAndDistrict: React.FC = () => {
   const dispatch = useDispatch();

@@ -24,10 +24,8 @@ import { selectRecordReport } from "../../store/features/recordsReportSlice";
 import { selectHRReport } from "../../store/features/HRReportSlice";
 import { selectAnnualNonReport } from "../../store/features/annualNonReportSlice";
 import { RootState } from "../../store/store";
-
+import UBFormChecks from "../../components/UBFormChecks/UBFormChecks";
 import UBLogo from "../../components/icons/UB_Logo.png";
-import { record } from "zod";
-
 
 const drawerWidth: number = 240;
 
@@ -56,9 +54,6 @@ const AppBar = styled(MuiAppBar, {
 const defaultTheme = createTheme();
 
 export const Dashboard: React.FC = () => {
-  
-  
-
   // const [skipAnnualReport, setSkipAnnualReport] = useState(false);
   useFetchAnnualReportQuery(1);
   useFetchAnnualNonReportQuery(1);
@@ -66,9 +61,8 @@ export const Dashboard: React.FC = () => {
   useFetchHRReportQuery(1);
   useFetchFinanceReportQuery(1);
 
-
-// Get token from the Redux store
-const token = useSelector((state: RootState) => state.auth.token);
+  // Get token from the Redux store
+  const token = useSelector((state: RootState) => state.auth.token);
 
   //---------------selectors-------------------------------------
   const userName = useSelector(selectName);
@@ -80,283 +74,280 @@ const token = useSelector((state: RootState) => state.auth.token);
   const HRReport = useSelector(selectHRReport);
   //-------------------------------------------------------------
 
-//----------------------------------path ID-------------------------
-const financeReportID = financeReport._id; // Replace with the correct path to your ID
-const staffReportID = staffReport._id;
-const facultyReportID = facultyReport._id;
-const recordReportID = recordReport._id;
-const HRReportID = HRReport._id
-//------------------------------------------------------------------
+  //----------------------------------path ID-------------------------
+  const financeReportID = financeReport._id; // Replace with the correct path to your ID
+  const staffReportID = staffReport._id;
+  const facultyReportID = facultyReport._id;
+  const recordReportID = recordReport._id;
+  const HRReportID = HRReport._id;
+  //------------------------------------------------------------------
 
+  //----------------------------------------------Fetch Annual Report Academic Division-----------------------------------------------------
+  const downloadAnnualPDF = async (id: string) => {
+    try {
+      // Fetch the PDF file
+      const response = await fetch(
+        `https://api.ub.edu.bz/api/generateFacultyPdf/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/pdf",
+            Authorization: `Bearer ${token}`, // Add token to headers
+          },
+        }
+      );
 
-
-//----------------------------------------------Fetch Annual Report Academic Division-----------------------------------------------------
-const downloadAnnualPDF = async (id: string) => {
-  try {
-    // Fetch the PDF file
-    const response = await fetch(
-      `https://api.ub.edu.bz/api/generateFacultyPdf/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/pdf",
-          Authorization: `Bearer ${token}`, // Add token to headers
-        },
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    );
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    // Check if the response is a PDF
-    const contentType = response.headers.get("Content-Type");
-    if (contentType !== "application/pdf") {
-      throw new Error(`Unexpected content type: ${contentType}`);
-    }
-
-    // Convert the response to a blob
-    const blob = await response.blob();
-
-    // Create a URL for the blob
-    const url = window.URL.createObjectURL(blob);
-
-    // Create a temporary link element
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "Annual Report Academic Division.pdf"; // The filename the user will see
-
-    // Append the link to the body
-    document.body.appendChild(a);
-
-    // Programmatically click the link to trigger the download
-    a.click();
-
-    // Remove the link after triggering the download
-    a.remove();
-
-    // Optionally, revoke the object URL after a short delay to release memory
-    setTimeout(() => window.URL.revokeObjectURL(url), 100);
-  } catch (error) {
-    console.error("Error downloading the PDF:", error);
-  }
-};
-
-//----------------------------------------------------------------END--------------------------------------------------------------------
-
-
-//----------------------------------------------Fetch Annual Non Report Academic Division-----------------------------------------------------
-const downloadNonAnnualPDF = async (id: string) => {
-  try {
-    // Fetch the PDF file
-    const response = await fetch(
-      `https://api.ub.edu.bz/api/generateStaffPdf/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/pdf",
-          Authorization: `Bearer ${token}`, // Add token to headers
-        },
+      // Check if the response is a PDF
+      const contentType = response.headers.get("Content-Type");
+      if (contentType !== "application/pdf") {
+        throw new Error(`Unexpected content type: ${contentType}`);
       }
-    );
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      // Convert the response to a blob
+      const blob = await response.blob();
+
+      // Create a URL for the blob
+      const url = window.URL.createObjectURL(blob);
+
+      // Create a temporary link element
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Annual Report Academic Division.pdf"; // The filename the user will see
+
+      // Append the link to the body
+      document.body.appendChild(a);
+
+      // Programmatically click the link to trigger the download
+      a.click();
+
+      // Remove the link after triggering the download
+      a.remove();
+
+      // Optionally, revoke the object URL after a short delay to release memory
+      setTimeout(() => window.URL.revokeObjectURL(url), 100);
+    } catch (error) {
+      console.error("Error downloading the PDF:", error);
     }
+  };
 
-    // Check if the response is a PDF
-    const contentType = response.headers.get("Content-Type");
-    if (contentType !== "application/pdf") {
-      throw new Error(`Unexpected content type: ${contentType}`);
-    }
+  //----------------------------------------------------------------END--------------------------------------------------------------------
 
-    // Convert the response to a blob
-    const blob = await response.blob();
+  //----------------------------------------------Fetch Annual Non Report Academic Division-----------------------------------------------------
+  const downloadNonAnnualPDF = async (id: string) => {
+    try {
+      // Fetch the PDF file
+      const response = await fetch(
+        `https://api.ub.edu.bz/api/generateStaffPdf/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/pdf",
+            Authorization: `Bearer ${token}`, // Add token to headers
+          },
+        }
+      );
 
-    // Create a URL for the blob
-    const url = window.URL.createObjectURL(blob);
-
-    // Create a temporary link element
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "Annual Report Non-Academic Division.pdf"; // The filename the user will see
-
-    // Append the link to the body
-    document.body.appendChild(a);
-
-    // Programmatically click the link to trigger the download
-    a.click();
-
-    // Remove the link after triggering the download
-    a.remove();
-
-    // Optionally, revoke the object URL after a short delay to release memory
-    setTimeout(() => window.URL.revokeObjectURL(url), 100);
- }  catch (error) {
-    console.error("Error downloading the PDF:", error);
-  }
-};
-//----------------------------------------------------------------END--------------------------------------------------------------------
-
-//----------------------------------------------Fetch  Finance and Budget Statistics Report-----------------------------------------------------
-const downloadFinancePDF = async (id: string) => {
-  try {
-    // Fetch the PDF file
-    const response = await fetch(
-      `https://api.ub.edu.bz/api/generateFinancePdf/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/pdf",
-          Authorization: `Bearer ${token}`, // Add token to headers
-        },
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    );
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    // Check if the response is a PDF
-    const contentType = response.headers.get("Content-Type");
-    if (contentType !== "application/pdf") {
-      throw new Error(`Unexpected content type: ${contentType}`);
-    }
-
-    // Convert the response to a blob
-    const blob = await response.blob();
-
-    // Create a URL for the blob
-    const url = window.URL.createObjectURL(blob);
-
-    // Create a temporary link element
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = " Finance and Budget Statistics Report.pdf"; // The filename the user will see
-
-    // Append the link to the body
-    document.body.appendChild(a);
-
-    // Programmatically click the link to trigger the download
-    a.click();
-
-    // Remove the link after triggering the download
-    a.remove();
-
-    // Optionally, revoke the object URL after a short delay to release memory
-    setTimeout(() => window.URL.revokeObjectURL(url), 100);
-  } catch (error) {
-    console.error("Error downloading the PDF:", error);
-  }
-};
-
-//---------------------------------------------------------------END--------------------------------------------------------------------
-
-//----------------------------------------------Fetch Human Statistics Report-----------------------------------------------------------
-const downloadHRPDF = async (id: string) => {
-  try {
-    // Fetch the PDF file
-    const response = await fetch(
-      `https://api.ub.edu.bz/api/generateHRPdf/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/pdf",
-          Authorization: `Bearer ${token}`, // Add token to headers
-        },
+      // Check if the response is a PDF
+      const contentType = response.headers.get("Content-Type");
+      if (contentType !== "application/pdf") {
+        throw new Error(`Unexpected content type: ${contentType}`);
       }
-    );
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      // Convert the response to a blob
+      const blob = await response.blob();
+
+      // Create a URL for the blob
+      const url = window.URL.createObjectURL(blob);
+
+      // Create a temporary link element
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Annual Report Non-Academic Division.pdf"; // The filename the user will see
+
+      // Append the link to the body
+      document.body.appendChild(a);
+
+      // Programmatically click the link to trigger the download
+      a.click();
+
+      // Remove the link after triggering the download
+      a.remove();
+
+      // Optionally, revoke the object URL after a short delay to release memory
+      setTimeout(() => window.URL.revokeObjectURL(url), 100);
+    } catch (error) {
+      console.error("Error downloading the PDF:", error);
     }
+  };
+  //----------------------------------------------------------------END--------------------------------------------------------------------
 
-    // Check if the response is a PDF
-    const contentType = response.headers.get("Content-Type");
-    if (contentType !== "application/pdf") {
-      throw new Error(`Unexpected content type: ${contentType}`);
-    }
+  //----------------------------------------------Fetch  Finance and Budget Statistics Report-----------------------------------------------------
+  const downloadFinancePDF = async (id: string) => {
+    try {
+      // Fetch the PDF file
+      const response = await fetch(
+        `https://api.ub.edu.bz/api/generateFinancePdf/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/pdf",
+            Authorization: `Bearer ${token}`, // Add token to headers
+          },
+        }
+      );
 
-    // Convert the response to a blob
-    const blob = await response.blob();
-
-    // Create a URL for the blob
-    const url = window.URL.createObjectURL(blob);
-
-    // Create a temporary link element
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = " Human Statistics Report.pdf"; // The filename the user will see
-
-    // Append the link to the body
-    document.body.appendChild(a);
-
-    // Programmatically click the link to trigger the download
-    a.click();
-
-    // Remove the link after triggering the download
-    a.remove();
-
-    // Optionally, revoke the object URL after a short delay to release memory
-    setTimeout(() => window.URL.revokeObjectURL(url), 100);
-  } catch (error) {
-    console.error("Error downloading the PDF:", error);
-  }
-};
-//---------------------------------------------------------------END--------------------------------------------------------------------
-
-//----------------------------------------------------Report and Records------------------------------------------------------------------
-const downloadRecordsPDF = async (id: string) => {
-  try {
-    // Fetch the PDF file
-    const response = await fetch(
-      `https://api.ub.edu.bz/api/generateRecordsPdf/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/pdf",
-          Authorization: `Bearer ${token}`, // Add token to headers
-        },
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    );
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      // Check if the response is a PDF
+      const contentType = response.headers.get("Content-Type");
+      if (contentType !== "application/pdf") {
+        throw new Error(`Unexpected content type: ${contentType}`);
+      }
+
+      // Convert the response to a blob
+      const blob = await response.blob();
+
+      // Create a URL for the blob
+      const url = window.URL.createObjectURL(blob);
+
+      // Create a temporary link element
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = " Finance and Budget Statistics Report.pdf"; // The filename the user will see
+
+      // Append the link to the body
+      document.body.appendChild(a);
+
+      // Programmatically click the link to trigger the download
+      a.click();
+
+      // Remove the link after triggering the download
+      a.remove();
+
+      // Optionally, revoke the object URL after a short delay to release memory
+      setTimeout(() => window.URL.revokeObjectURL(url), 100);
+    } catch (error) {
+      console.error("Error downloading the PDF:", error);
     }
+  };
 
-    // Check if the response is a PDF
-    const contentType = response.headers.get("Content-Type");
-    if (contentType !== "application/pdf") {
-      throw new Error(`Unexpected content type: ${contentType}`);
+  //---------------------------------------------------------------END--------------------------------------------------------------------
+
+  //----------------------------------------------Fetch Human Statistics Report-----------------------------------------------------------
+  const downloadHRPDF = async (id: string) => {
+    try {
+      // Fetch the PDF file
+      const response = await fetch(
+        `https://api.ub.edu.bz/api/generateHRPdf/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/pdf",
+            Authorization: `Bearer ${token}`, // Add token to headers
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Check if the response is a PDF
+      const contentType = response.headers.get("Content-Type");
+      if (contentType !== "application/pdf") {
+        throw new Error(`Unexpected content type: ${contentType}`);
+      }
+
+      // Convert the response to a blob
+      const blob = await response.blob();
+
+      // Create a URL for the blob
+      const url = window.URL.createObjectURL(blob);
+
+      // Create a temporary link element
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = " Human Statistics Report.pdf"; // The filename the user will see
+
+      // Append the link to the body
+      document.body.appendChild(a);
+
+      // Programmatically click the link to trigger the download
+      a.click();
+
+      // Remove the link after triggering the download
+      a.remove();
+
+      // Optionally, revoke the object URL after a short delay to release memory
+      setTimeout(() => window.URL.revokeObjectURL(url), 100);
+    } catch (error) {
+      console.error("Error downloading the PDF:", error);
     }
+  };
+  //---------------------------------------------------------------END--------------------------------------------------------------------
 
-    // Convert the response to a blob
-    const blob = await response.blob();
+  //----------------------------------------------------Report and Records------------------------------------------------------------------
+  const downloadRecordsPDF = async (id: string) => {
+    try {
+      // Fetch the PDF file
+      const response = await fetch(
+        `https://api.ub.edu.bz/api/generateRecordsPdf/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/pdf",
+            Authorization: `Bearer ${token}`, // Add token to headers
+          },
+        }
+      );
 
-    // Create a URL for the blob
-    const url = window.URL.createObjectURL(blob);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-    // Create a temporary link element
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "Report and Records.pdf"; // The filename the user will see
+      // Check if the response is a PDF
+      const contentType = response.headers.get("Content-Type");
+      if (contentType !== "application/pdf") {
+        throw new Error(`Unexpected content type: ${contentType}`);
+      }
 
-    // Append the link to the body
-    document.body.appendChild(a);
+      // Convert the response to a blob
+      const blob = await response.blob();
 
-    // Programmatically click the link to trigger the download
-    a.click();
+      // Create a URL for the blob
+      const url = window.URL.createObjectURL(blob);
 
-    // Remove the link after triggering the download
-    a.remove();
+      // Create a temporary link element
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Report and Records.pdf"; // The filename the user will see
 
-    // Optionally, revoke the object URL after a short delay to release memory
-    setTimeout(() => window.URL.revokeObjectURL(url), 100);
-  } catch (error) {
-    console.error("Error downloading the PDF:", error);
-  }
-};
-//--------------------------------------------------END--------------------------------------------------------------------
+      // Append the link to the body
+      document.body.appendChild(a);
+
+      // Programmatically click the link to trigger the download
+      a.click();
+
+      // Remove the link after triggering the download
+      a.remove();
+
+      // Optionally, revoke the object URL after a short delay to release memory
+      setTimeout(() => window.URL.revokeObjectURL(url), 100);
+    } catch (error) {
+      console.error("Error downloading the PDF:", error);
+    }
+  };
+  //--------------------------------------------------END--------------------------------------------------------------------
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -390,6 +381,7 @@ const downloadRecordsPDF = async (id: string) => {
             <UserPosition name={userName} position="" logOut="" />
           </Toolbar>
         </AppBar>
+
         <Box
           component="main"
           sx={{
@@ -413,6 +405,8 @@ const downloadRecordsPDF = async (id: string) => {
               overflowX: "hidden",
             }}
           >
+            {/* <UBFormChecks/> */}
+
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Grid
@@ -507,7 +501,9 @@ const downloadRecordsPDF = async (id: string) => {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => downloadNonAnnualPDF(staffReportID as string)}
+                    onClick={() =>
+                      downloadNonAnnualPDF(staffReportID as string)
+                    }
                     sx={{ mt: 2 }} // Add some margin-top to space the button
                   >
                     Download PDF
@@ -613,6 +609,18 @@ const downloadRecordsPDF = async (id: string) => {
                   </Button>
                 </Grid>
               )}
+
+              {/* <Grid item xs={12} md={4} lg={3}>
+                <Link
+                  to="/UBFormChecks"
+                  style={{ textDecoration: "none" }}
+                >
+                  <FormCard
+                    formPreview="/form7.png"
+                    title="Testing"
+                  />
+                </Link>
+              </Grid> */}
             </Grid>
           </Container>
         </Box>

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from '../store';
+import { RootState } from "../store";
 
 interface AuthState {
   token: string | null;
@@ -23,10 +23,10 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setAuthData(state, action: PayloadAction<AuthState>) {
-      return { ...state, ...action.payload }
+      return { ...state, ...action.payload };
     },
     logout(state) {
-      return { ...state, token: null }
+      return { ...state, token: null };
     },
   },
 });

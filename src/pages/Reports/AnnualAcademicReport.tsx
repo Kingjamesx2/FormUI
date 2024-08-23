@@ -8,9 +8,6 @@ import AnnualAcademicReportStep4 from "../../components/reports/annual/annual-ac
 import AnnualAcademicReportStep5 from "../../components/reports/annual/annual-academic-report/step5/AnnualAcademicReportStep5";
 import Header from '../../components/common/Header/Header';
 import useSaveAnnualFormHook from '../../hooks/useSaveAnnualFormHook';
-// import UserPosition from '../../components/UserPosition/UserPosition';
-// import { useSelector } from "react-redux";
-// import { selectName } from "../../store/features/authSlice";
 import { setFormSubmitted } from '../../store/features/annualReportSlice';
 
 const steps = [

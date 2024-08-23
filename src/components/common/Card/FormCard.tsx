@@ -13,35 +13,35 @@ interface FormCardProps {
 export const FormCard: React.FC<FormCardProps> = ({ formPreview, title }) => {
   return (
     <div>
-       <Card sx={{ maxWidth: 350 }}>
-      <CardMedia
-        component="img"
-        image={formPreview}
-        alt={title}
-        sx={{
-          width: '100%',
-          height: 'auto',
-          objectFit: 'contain',
-        }}
-      />
-      <CardContent sx={{ height: 80, bgcolor: "#FFD954", pt: "1%" }}>
-        <Typography
-          gutterBottom
-          variant="h6"
-          component="div"
+      <Card sx={{ maxWidth: 350 }}>
+        <CardMedia
+          component="img"
+          image={formPreview}
+          alt={title}
           sx={{
-            fontSize: '14px',
-            pt: '5%',
-            whiteSpace: 'wrap',
-            textOverflow: 'ellipsis',
-            textAlign: 'center',
-            fontWeight: 'bold', // or use 700 for numeric weight
+            width: "100%",
+            height: "auto",
+            objectFit: "contain",
           }}
-        >
-          {title}
-        </Typography>
-      </CardContent>
-    </Card>
+        />
+        <CardContent sx={{ height: 80, bgcolor: "#FFD954", pt: "1%" }}>
+          <Typography
+            gutterBottom
+            variant="h6"
+            component="div"
+            sx={{
+              fontSize: "14px",
+              pt: "5%",
+              whiteSpace: "wrap",
+              textOverflow: "ellipsis",
+              textAlign: "center",
+              fontWeight: "bold", // or use 700 for numeric weight
+            }}
+          >
+            {title}
+          </Typography>
+        </CardContent>
+      </Card>
     </div>
   );
 };
