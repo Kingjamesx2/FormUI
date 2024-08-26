@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
-import { useSelector, useDispatch } from "react-redux";
-import { selectAnnualReport } from "../../store/features/annualReportSlice";
 import { RootState } from "../../store/store";
-import { useFetchAnnualReportQuery } from "../../store/services/annualReportAPI";
-import { selectName, selectUsername } from "../../store/features/authSlice";
+import { useSelector } from "react-redux";
 
 // Custom styled DataGrid
 const CustomDataGrid = styled(DataGrid)(({ theme }) => ({
@@ -22,17 +19,16 @@ const CustomDataGrid = styled(DataGrid)(({ theme }) => ({
 
 const columns: GridColDef[] = [
   {
-    field: "reportBy",
-    headerName: "Report By",
+    field: "name",
+    headerName: "User Name",
     flex: 1,
     editable: false,
     headerAlign: "center",
     align: "center",
   },
   {
-    field: "status",
-    headerName: "Status",
-    type: "number",
+    field: "reportType",
+    headerName: "Report Type",
     flex: 1,
     editable: false,
     headerAlign: "center",
@@ -46,46 +42,81 @@ const columns: GridColDef[] = [
     flex: 1,
     headerAlign: "center",
     align: "center",
-    renderCell: (params) => (
-      <Button
-        variant="contained"
-        size="small"
-        onClick={() => handleDownloadPDF(params.row.id)}
-      >
-        Download PDF
-      </Button>
-    ),
+    renderCell: (params) => {
+      const { isSubmitted, _id } = params.row;
+      return (
+        <Button
+          variant="contained"
+          size="small"
+          onClick={() => handleDownloadPDF(_id)}
+          disabled={!isSubmitted} // Disable button if not submitted
+          sx={{
+            backgroundColor: !isSubmitted ? "gray" : undefined, // Gray background if not submitted
+            cursor: !isSubmitted ? "not-allowed" : "pointer", // Change cursor to indicate disabled state
+          }}
+        >
+          {isSubmitted ? "Download PDF" : "Not Available"}
+        </Button>
+      );
+    },
   },
 ];
 
-const rows = [
-  { id: 1, reportBy: "Jon Snow", status: 1 },
-  { id: 2, reportBy: "Cersei Lannister", status: 2 },
-  { id: 3, reportBy: "Jaime Lannister", status: 2 },
-  { id: 4, reportBy: "Arya Stark", status: 1 },
-  { id: 5, reportBy: "Daenerys Targaryen", status: 3 },
-  { id: 6, reportBy: "Melisandre", status: 3 },
-  { id: 7, reportBy: "Ferrara Clifford", status: 1 },
-  { id: 8, reportBy: "Rossini Frances", status: 2 },
-  { id: 9, reportBy: "Harvey Roxie", status: 3 },
-];
-
-const handleDownloadPDF = (id: number) => {
+const handleDownloadPDF = (id: string) => {
   console.log(`Downloading PDF for row with id: ${id}`);
 };
 
 export const UBFormsChecks: React.FC = () => {
-  useFetchAnnualReportQuery(1);
+  const [reports, setReports] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  //---------------selectors-------------------------------------
-  const name = useSelector(selectName);
-  const username = useSelector(selectUsername);
-  const facultyReport = useSelector(selectAnnualReport);
-  //-------------------------------------------------------------
+  const token = useSelector((state: RootState) => state.auth.token);
 
-  //----------------------------------path ID-------------------------
-  const facultyReportID = facultyReport._id;
-  //------------------------------------------------------------------
+  useEffect(() => {
+    // Fetch data from the API
+    const fetchReports = async () => {
+      try {
+        const response = await fetch(
+          "https://api.ub.edu.bz/api/allReports/faculty-finance-human_resources-records-staff",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Add token to headers
+            },
+          }
+        );
+        const result = await response.json();
+
+        if (response.ok) {
+          setReports(result.data.reportData || []);
+        } else {
+          setError(result.message || "Failed to fetch data");
+        }
+      } catch (error) {
+        setError("An error occurred while fetching data");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchReports();
+  }, [token]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  // Map the fetched data to the DataGrid rows format
+  const rows = reports.map((report) => ({
+    id: report._id,
+    name: report.name,
+    reportType: report.reportType,
+    isSubmitted: report.isSubmitted, // Add isSubmitted property
+  }));
 
   return (
     <Box

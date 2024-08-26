@@ -1,15 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import annualReportReducer from './features/annualReportSlice';
-import annualNonReportReducer from './features/annualNonReportSlice';
+import annualReportReducer from "./features/annualReportSlice";
+import annualNonReportReducer from "./features/annualNonReportSlice";
 import recordsReportReducer from "./features/recordsReportSlice";
 import hrReportReducer from "./features/HRReportSlice";
 import financeReportReduce from "./features/financeReportSlice";
 import authReducer from "./../store/features/authSlice";
 import userReducer from "./../store/features/userSlice";
-import uploadReducer  from "./features/uploadSlice"
+import uploadReducer from "./features/uploadSlice";
 // import reportSlice from "./features/reportSlice";
 import downloadReducer from "../store/features/downloadSlice";
+import ubFormCheckReducer from "../store/features/UBFormCheckSlice";
 import { baseAPI } from "./services/baseAPI";
 import { authAPI } from "./services/authAPI";
 import { annualReportAPI } from "./services/annualReportAPI";
@@ -29,10 +30,11 @@ export const store = configureStore({
     user: userReducer,
     upload: uploadReducer,
     download: downloadReducer,
+    ubFormChecks: ubFormCheckReducer,
     [baseAPI.reducerPath]: baseAPI.reducer,
     // [authAPI.reducerPath]: authAPI.reducer
   },
-  middleware: (getDefaultMiddleware) => (
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       baseAPI.middleware,
       authAPI.middleware,
@@ -41,8 +43,7 @@ export const store = configureStore({
       financeReportAPI.middleware,
       HRReportAPI.middleware,
       RecordsReportAPI.middleware
-
-    ))
+    ),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

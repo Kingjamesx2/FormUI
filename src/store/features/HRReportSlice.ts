@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store'; // Adjust the path according to your project structure
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store"; // Adjust the path according to your project structure
 
 interface IFacultyCount {
   EducationAndArts: number;
@@ -22,7 +22,7 @@ export interface IHRReportState {
   department: string;
   deadline: string;
   numberOfStaff: INumberOfStaff;
-  formSubmitted: boolean
+  formSubmitted: boolean;
 }
 
 // Initial State
@@ -53,23 +53,23 @@ const HRReportInitialState: IHRReportState = {
       HealthSciences: 0,
       ScienceAndTechnology: 0,
       Total: 0,
-    }
+    },
   },
-  formSubmitted: false
+  formSubmitted: false,
 };
 
 const hrReportSlice = createSlice({
-  name: 'hrReport',
+  name: "hrReport",
   initialState: HRReportInitialState,
   reducers: {
     setHRReportState: (state, action: PayloadAction<IHRReportState>) => {
       return { ...state, ...action.payload };
     },
     setUserID: (state, action: PayloadAction<string>) => {
-      return {...state,userID: action.payload };
+      return { ...state, userID: action.payload };
     },
     setAcademicYearID: (state, action: PayloadAction<string>) => {
-      return {...state, academicYearID: action.payload };
+      return { ...state, academicYearID: action.payload };
     },
     setDepartment: (state, action: PayloadAction<string>) => {
       return { ...state, department: action.payload };
@@ -78,20 +78,11 @@ const hrReportSlice = createSlice({
       return { ...state, deadline: action.payload };
     },
     setNumberOfStaff: (state, action: PayloadAction<INumberOfStaff>) => {
-      return { ...state, numberOfStaff: {...action.payload} };
+      return { ...state, numberOfStaff: { ...action.payload } };
     },
     setFormSubmitted: (state, _: PayloadAction<boolean>) => {
-      return {...state, formSubmitted: true}
-    }
-    // setFulltimeFaculty: (state, action: PayloadAction<IFacultyCount>) => {
-    //   return {state.numberOfStaff.FulltimeFaculty = action.payload;
-    // },
-    // setAdjunctFaculty: (state, action: PayloadAction<IFacultyCount>) => {
-    //   state.numberOfStaff.AdjunctFaculty = action.payload;
-    // },
-    // setNonTeachingStaff: (state, action: PayloadAction<IFacultyCount>) => {
-    //   state.numberOfStaff.NonTeachingStaff = action.payload;
-    // },
+      return { ...state, formSubmitted: true };
+    },
   },
 });
 
@@ -102,19 +93,18 @@ export const {
   setDepartment,
   setDeadline,
   setNumberOfStaff,
-  setFormSubmitted
-  // setFulltimeFaculty,
-  // setAdjunctFaculty,
-  // setNonTeachingStaff,
+  setFormSubmitted,
 } = hrReportSlice.actions;
 
 export const selectHRReport = (state: RootState) => state.hrReport;
 
 export const selectUserID = (state: RootState) => state.hrReport.userID;
-export const selectAcademicYearID = (state: RootState) => state.hrReport.academicYearID;
+export const selectAcademicYearID = (state: RootState) =>
+  state.hrReport.academicYearID;
 export const selectDepartment = (state: RootState) => state.hrReport.department;
 export const selectDeadline = (state: RootState) => state.hrReport.deadline;
-export const selectNumberOfStaff = (state: RootState) => state.hrReport.numberOfStaff;
+export const selectNumberOfStaff = (state: RootState) =>
+  state.hrReport.numberOfStaff;
 // export const selectFulltimeFaculty = (state: RootState) => state.hrReport.numberOfStaff.FulltimeFaculty;
 // export const selectAdjunctFaculty = (state: RootState) => state.hrReport.numberOfStaff.AdjunctFaculty;
 // export const selectNonTeachingStaff = (state: RootState) => state.hrReport.numberOfStaff.NonTeachingStaff;

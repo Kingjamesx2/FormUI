@@ -405,7 +405,7 @@ export const Dashboard: React.FC = () => {
               overflowX: "hidden",
             }}
           >
-            {/* <UBFormChecks/> */}
+            <UBFormChecks />
 
             <Grid container spacing={3}>
               <Grid item xs={12}>
