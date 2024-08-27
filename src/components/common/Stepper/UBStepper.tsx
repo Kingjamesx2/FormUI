@@ -69,7 +69,7 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps, submitFn, hideStep
       // Handle submit logic here
       window.alert("Form submitted");
       submitFn()
-      navigate("/"); // Navigate to the home page
+      // navigate("/"); // Navigate to the home page
     } else {
       const newActiveStep =
         isLastStep() && !allStepsCompleted()

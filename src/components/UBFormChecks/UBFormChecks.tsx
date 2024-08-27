@@ -49,10 +49,10 @@ const columns: GridColDef[] = [
           variant="contained"
           size="small"
           onClick={() => handleDownloadPDF(_id)}
-          disabled={!isSubmitted} // Disable button if not submitted
+          disabled={!isSubmitted}
           sx={{
-            backgroundColor: !isSubmitted ? "gray" : undefined, // Gray background if not submitted
-            cursor: !isSubmitted ? "not-allowed" : "pointer", // Change cursor to indicate disabled state
+            backgroundColor: isSubmitted ? "blue" : "gray",
+            cursor: isSubmitted ? "pointer" : "not-allowed",
           }}
         >
           {isSubmitted ? "Download PDF" : "Not Available"}

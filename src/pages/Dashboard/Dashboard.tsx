@@ -405,7 +405,7 @@ export const Dashboard: React.FC = () => {
               overflowX: "hidden",
             }}
           >
-            <UBFormChecks />
+            {/* <UBFormChecks /> */}
 
             <Grid container spacing={3}>
               <Grid item xs={12}>
@@ -438,11 +438,12 @@ export const Dashboard: React.FC = () => {
                 "mteck",
                 "senriquez",
                 "luis.herrera",
-                "ljohnson",
                 "bwatler",
                 "tusher",
+                "lthurton",
                 "aaguilar",
-              ].includes(username) && (
+                "vpalacio",
+              ].includes(username) && !facultyReport.formSubmitted &&(
                 <Grid item xs={12} md={4} lg={3}>
                   <Link
                     to="/AnnualAcademicReport"
@@ -481,7 +482,23 @@ export const Dashboard: React.FC = () => {
                 "twilliams",
                 "lcruz",
                 "fpalma",
-              ].includes(username) && (
+                "vpalacio",
+                "rpineda",
+                "mcommissiong",
+                "mcuellar",
+                "jsnaddon",
+                "rpolonio",
+                "twilliams",
+                "mortega",
+                "cguerrero",
+                "isangster",
+                "jsalam",
+                "fburns",
+                "jbabb",
+                "delmer.tzib",
+                "dconorquie",
+                "egbert.irving",
+              ].includes(username) && !staffReport.formSubmitted && (
                 <Grid item xs={12} md={4} lg={3}>
                   <Link
                     to="/AnnualNonAcademicReport"
@@ -516,7 +533,8 @@ export const Dashboard: React.FC = () => {
                 "senriquez",
                 "luis.herrera",
                 "rpineda",
-              ].includes(username) && (
+                "vpalacio",
+              ].includes(username) && !recordReport.formSubmitted &&(
                 <Grid item xs={12} md={4} lg={3}>
                   <Link
                     to="/RecordsAndAdmissions"
@@ -549,7 +567,8 @@ export const Dashboard: React.FC = () => {
                 "senriquez",
                 "luis.herrera",
                 "cguerrero",
-              ].includes(username) && (
+                "vpalacio",
+              ].includes(username) && !HRReport.formSubmitted && (
                 <Grid item xs={12} md={4} lg={3}>
                   <Link
                     to="/HumanResourceStatistics"
@@ -582,7 +601,8 @@ export const Dashboard: React.FC = () => {
                 "senriquez",
                 "luis.herrera",
                 "isangster",
-              ].includes(username) && (
+                "vpalacio",
+              ].includes(username) && !financeReport.formSubmitted && (
                 <Grid item xs={12} md={4} lg={3}>
                   <Link
                     to="/FinanceAndBudgetStatistics"

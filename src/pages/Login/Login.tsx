@@ -47,7 +47,7 @@ export const Login = () => {
   const [consoleMessage, setConsoleMessage] = useState<string | null>(null);
 
   const onLogin = async (data: ILoginCredentials) => {
-    console.log(data.username);
+   
     if (
       ![
         "senriquez",
@@ -63,6 +63,23 @@ export const Login = () => {
         "isangster",
         "luis.herrera",
         "swindsor",
+        "lthurton",
+        "rpineda",
+        "mcommissiong",
+        "mcuellar",
+        "jsnaddon",
+        "rpolonio",
+        "twilliams",
+        "mortega",
+        "lcruz",
+        "carisa.carrillo",
+        "jsalam",
+        "fburns",
+        "jbabb",
+        "delmer.tzib",
+        "dconorquie",
+        "egbert.irving",
+        "vpalacio",
       ].includes(data.username)
     ) {
       setConsoleMessage("Login disallowed, contact ICT");
