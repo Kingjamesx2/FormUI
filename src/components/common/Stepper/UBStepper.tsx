@@ -54,7 +54,6 @@ export const UBStepper: React.FC<IUBStepperProps> = ({ steps, submitFn, hideStep
   const [formData, setFormData] = useState<{ [key: number]: any }>({});
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const navigate = useNavigate();
 
   const totalSteps = () => steps.length;
 

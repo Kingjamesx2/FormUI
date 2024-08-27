@@ -405,7 +405,19 @@ export const Dashboard: React.FC = () => {
               overflowX: "hidden",
             }}
           >
-            {/* <UBFormChecks /> */}
+            <Grid container spacing={3}>
+              {[
+                "jfaber",
+                "luis.herrera",
+                "mteck",
+                "vpalacio",
+                "senriquez",
+              ].includes(username) && (
+                <Grid item xs={12} md={12} lg={12}>
+                  <UBFormChecks />
+                </Grid>
+              )}
+            </Grid>
 
             <Grid container spacing={3}>
               <Grid item xs={12}>
@@ -434,29 +446,27 @@ export const Dashboard: React.FC = () => {
           >
             <Grid container spacing={3}>
               {[
-                "jfaber",
-                "mteck",
-                "senriquez",
+                // "jfaber",
                 "luis.herrera",
                 "bwatler",
                 "tusher",
                 "lthurton",
                 "ljohnson",
                 "aaguilar",
-                "vpalacio",
-              ].includes(username) && !facultyReport.formSubmitted &&(
-                <Grid item xs={12} md={4} lg={3}>
-                  <Link
-                    to="/AnnualAcademicReport"
-                    style={{ textDecoration: "none" }}
-                  >
-                    <FormCard
-                      formPreview="/form.png"
-                      title="UB Annual Report Academic Division"
-                    />
-                  </Link>
-                </Grid>
-              )}
+              ].includes(username) &&
+                !facultyReport.formSubmitted && (
+                  <Grid item xs={12} md={4} lg={3}>
+                    <Link
+                      to="/AnnualAcademicReport"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <FormCard
+                        formPreview="/form.png"
+                        title="UB Annual Report Academic Division"
+                      />
+                    </Link>
+                  </Grid>
+                )}
               {facultyReport.formSubmitted && (
                 <Grid item xs={12} md={4} lg={3} sx={{ color: "#FFF" }}>
                   {" "}
@@ -472,9 +482,7 @@ export const Dashboard: React.FC = () => {
                 </Grid>
               )}
               {[
-                "jfaber",
-                "mteck",
-                "senriquez",
+                // "jfaber",
                 "luis.herrera",
                 "fburns",
                 "akantun",
@@ -483,7 +491,6 @@ export const Dashboard: React.FC = () => {
                 "twilliams",
                 "lcruz",
                 "fpalma",
-                "vpalacio",
                 "rpineda",
                 "mcommissiong",
                 "mcuellar",
@@ -499,19 +506,20 @@ export const Dashboard: React.FC = () => {
                 "delmer.tzib",
                 "dconorquie",
                 "egbert.irving",
-              ].includes(username) && !staffReport.formSubmitted && (
-                <Grid item xs={12} md={4} lg={3}>
-                  <Link
-                    to="/AnnualNonAcademicReport"
-                    style={{ textDecoration: "none" }}
-                  >
-                    <FormCard
-                      formPreview="/form1.png"
-                      title="UB Annual Report Non-Academic Division"
-                    />
-                  </Link>
-                </Grid>
-              )}
+              ].includes(username) &&
+                !staffReport.formSubmitted && (
+                  <Grid item xs={12} md={4} lg={3}>
+                    <Link
+                      to="/AnnualNonAcademicReport"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <FormCard
+                        formPreview="/form1.png"
+                        title="UB Annual Report Non-Academic Division"
+                      />
+                    </Link>
+                  </Grid>
+                )}
               {staffReport.formSubmitted && (
                 <Grid item xs={12} md={4} lg={3} sx={{ color: "#FFF" }}>
                   {" "}
@@ -528,26 +536,20 @@ export const Dashboard: React.FC = () => {
                   </Button>
                 </Grid>
               )}
-              {[
-                "jfaber",
-                "mteck",
-                "senriquez",
-                "luis.herrera",
-                "rpineda",
-                "vpalacio",
-              ].includes(username) && !recordReport.formSubmitted &&(
-                <Grid item xs={12} md={4} lg={3}>
-                  <Link
-                    to="/RecordsAndAdmissions"
-                    style={{ textDecoration: "none" }}
-                  >
-                    <FormCard
-                      formPreview="/form2.png"
-                      title="UB records and Admissions"
-                    />
-                  </Link>
-                </Grid>
-              )}
+              {["jfaber", "luis.herrera", "rpineda"].includes(username) &&
+                !recordReport.formSubmitted && (
+                  <Grid item xs={12} md={4} lg={3}>
+                    <Link
+                      to="/RecordsAndAdmissions"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <FormCard
+                        formPreview="/form2.png"
+                        title="UB records and Admissions"
+                      />
+                    </Link>
+                  </Grid>
+                )}
               {recordReport.formSubmitted && (
                 <Grid item xs={12} md={4} lg={3} sx={{ color: "#FFF" }}>
                   {" "}
@@ -562,26 +564,20 @@ export const Dashboard: React.FC = () => {
                   </Button>
                 </Grid>
               )}
-              {[
-                "jfaber",
-                "mteck",
-                "senriquez",
-                "luis.herrera",
-                "cguerrero",
-                "vpalacio",
-              ].includes(username) && !HRReport.formSubmitted && (
-                <Grid item xs={12} md={4} lg={3}>
-                  <Link
-                    to="/HumanResourceStatistics"
-                    style={{ textDecoration: "none" }}
-                  >
-                    <FormCard
-                      formPreview="/form6.png"
-                      title="UB Human Resource Statistics"
-                    />
-                  </Link>
-                </Grid>
-              )}
+              {["jfaber", "luis.herrera", "cguerrero"].includes(username) &&
+                !HRReport.formSubmitted && (
+                  <Grid item xs={12} md={4} lg={3}>
+                    <Link
+                      to="/HumanResourceStatistics"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <FormCard
+                        formPreview="/form6.png"
+                        title="UB Human Resource Statistics"
+                      />
+                    </Link>
+                  </Grid>
+                )}
               {HRReport.formSubmitted && (
                 <Grid item xs={12} md={4} lg={3} sx={{ color: "#FFF" }}>
                   {" "}
@@ -596,26 +592,20 @@ export const Dashboard: React.FC = () => {
                   </Button>
                 </Grid>
               )}
-              {[
-                "jfaber",
-                "mteck",
-                "senriquez",
-                "luis.herrera",
-                "isangster",
-                "vpalacio",
-              ].includes(username) && !financeReport.formSubmitted && (
-                <Grid item xs={12} md={4} lg={3}>
-                  <Link
-                    to="/FinanceAndBudgetStatistics"
-                    style={{ textDecoration: "none" }}
-                  >
-                    <FormCard
-                      formPreview="/form7.png"
-                      title="UB Finance and Budget Statistics"
-                    />
-                  </Link>
-                </Grid>
-              )}
+              {[, "luis.herrera", "isangster"].includes(username) &&
+                !financeReport.formSubmitted && (
+                  <Grid item xs={12} md={4} lg={3}>
+                    <Link
+                      to="/FinanceAndBudgetStatistics"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <FormCard
+                        formPreview="/form7.png"
+                        title="UB Finance and Budget Statistics"
+                      />
+                    </Link>
+                  </Grid>
+                )}
               {financeReport.formSubmitted && (
                 <Grid item xs={12} md={4} lg={3} sx={{ color: "#FFF" }}>
                   {" "}
@@ -630,18 +620,6 @@ export const Dashboard: React.FC = () => {
                   </Button>
                 </Grid>
               )}
-
-              {/* <Grid item xs={12} md={4} lg={3}>
-                <Link
-                  to="/UBFormChecks"
-                  style={{ textDecoration: "none" }}
-                >
-                  <FormCard
-                    formPreview="/form7.png"
-                    title="Testing"
-                  />
-                </Link>
-              </Grid> */}
             </Grid>
           </Container>
         </Box>

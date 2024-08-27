@@ -15,6 +15,7 @@ const useSaveAnnualFormHook = () => {
     const triggerSaveForm = async () => await saveForm(annualReport);
     triggerSaveForm();
     if (annualReport.formSubmitted) {
+      console.log(annualReport.formSubmitted)
       setTimeout(() => {
         navigate("/");
       }, 2000);
