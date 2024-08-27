@@ -449,9 +449,13 @@ const annualReportSlice = createSlice({
     setOtherComments: (state, action: PayloadAction<string>) => {
       state.otherComments = action.payload;
     },
-    setFormSubmitted: (state, _: PayloadAction<boolean>) => {
-      console.log("form submitted");
-      return { ...state, formSubmitted: true };
+    // setFormSubmitted: (state, _: PayloadAction<boolean>) => {
+    //   console.log("form submitted");
+    //   return { ...state, formSubmitted: true };
+    // },
+    setFormSubmitted: (state, action: PayloadAction<boolean>) => {
+      console.log("form submitted:", action.payload);
+      state.formSubmitted = action.payload; //
     },
   },
 });
