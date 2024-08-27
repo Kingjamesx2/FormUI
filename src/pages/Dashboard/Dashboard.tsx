@@ -441,6 +441,7 @@ export const Dashboard: React.FC = () => {
                 "bwatler",
                 "tusher",
                 "lthurton",
+                "ljohnson",
                 "aaguilar",
                 "vpalacio",
               ].includes(username) && !facultyReport.formSubmitted &&(

@@ -69,7 +69,7 @@ export const UBFacultyMeetings: React.FC = () => {
         ];
 
         if (annualReport.meetings[index].meetingMinutesURL) {
-          annualReport.meetings[index].meetingMinutesURL.map((r) => {
+          annualReport.meetings[index].meetingMinutesURL?.map((r) => {
             if (r.meetingURL)
               meetingMinutesURL.unshift({ meetingURL: r.meetingURL });
           });

@@ -69,7 +69,7 @@ export const UBDivisionMeeting: React.FC = () => {
         ];
 
         if (annualNonReport.meetings[index].meetingMinutesURL) {
-          annualNonReport.meetings[index].meetingMinutesURL.map((r) => {
+          annualNonReport.meetings[index].meetingMinutesURL?.map((r) => {
             if (r.meetingURL)
               meetingMinutesURL.unshift({ meetingURL: r.meetingURL });
           });
