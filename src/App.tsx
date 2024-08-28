@@ -1,6 +1,6 @@
 // App.tsx
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { store } from "./store/store";
 import { Provider } from "react-redux";
 import Login from "./pages/Login/Login";
@@ -45,6 +45,7 @@ const App: React.FC = () => {
               element={<RecordsAndAdmissions />}
             />
           </Route>
+          <Route path="/*" element={<Navigate to={'/Login'} />} />
         </Routes>
       </BrowserRouter>
     </Provider>
