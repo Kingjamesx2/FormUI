@@ -50,6 +50,7 @@ export const Login = () => {
    
     if (
       ![
+        "jfaber",
         "senriquez",
         "fpalma",
         "mteck",

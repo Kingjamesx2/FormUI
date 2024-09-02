@@ -15,6 +15,7 @@ export const annualNonReportAPI = baseAPI.injectEndpoints({
 
                     if(data?.data?.reportData)
                         dispatch(setAnnualNonReportState(data?.data?.reportData))
+                    console.log(data)
                 } catch(e) {
                     console.error(e)
                 }

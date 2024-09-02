@@ -122,6 +122,12 @@ export const AnnualNonAcademicReportStep1: React.FC = () => {
                 label:
                   "Director, Information, Communication and Technology Department",
               },
+              {
+                value:
+                  "Director, Research Office",
+                label:
+                  "Director, Research Office",
+              },
             ]}
             SetAnswer={(e) => dispatch(setDepartment(e.target.value as string))}
             value={annualNonReport.department}
