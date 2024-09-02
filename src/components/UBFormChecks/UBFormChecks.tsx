@@ -43,19 +43,19 @@ const columns: GridColDef[] = [
     headerAlign: "center",
     align: "center",
     renderCell: (params) => {
-      const { isSubmitted, _id } = params.row;
+      const { formSubmitted, id } = params.row;
       return (
         <Button
           variant="contained"
           size="small"
-          onClick={() => handleDownloadPDF(_id)}
-          disabled={!isSubmitted}
+          onClick={() => handleDownloadPDF(id)}
+          disabled={!formSubmitted}
           sx={{
-            backgroundColor: isSubmitted ? "blue" : "gray",
-            cursor: isSubmitted ? "pointer" : "not-allowed",
+            backgroundColor: formSubmitted ? "blue" : "gray",
+            cursor: formSubmitted ? "pointer" : "not-allowed",
           }}
         >
-          {isSubmitted ? "Download PDF" : "Not Available"}
+          {formSubmitted ? "Download PDF" : "Not Available"}
         </Button>
       );
     },
@@ -104,11 +104,12 @@ export const UBFormsChecks: React.FC = () => {
 
   // Map the fetched data to the DataGrid rows format
   const rows = reports.map((report) => ({
-    id: report._id,
+    id: report._id,  // Ensure the id field is correctly set
     name: report.name,
     reportType: report.reportType,
-    isSubmitted: report.isSubmitted, // Add isSubmitted property
+    formSubmitted: report.formSubmitted, // Add formSubmitted property
   }));
+  console.log(rows);
 
   return (
     <Box

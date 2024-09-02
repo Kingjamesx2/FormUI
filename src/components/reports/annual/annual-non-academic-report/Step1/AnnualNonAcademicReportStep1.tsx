@@ -76,9 +76,7 @@ export const AnnualNonAcademicReportStep1: React.FC = () => {
                 value: "Quality Assurance Office",
                 label: "Quality Assurance Office",
               },
-              { value: "Student Affairs ", 
-                label: "Student Affairs " 
-              },
+              { value: "Student Affairs ", label: "Student Affairs " },
               {
                 value: "Environmental Research Institute (ERI) ",
                 label: "Environmental Research Institute (ERI) ",
@@ -124,10 +122,20 @@ export const AnnualNonAcademicReportStep1: React.FC = () => {
                   "Director, Information, Communication and Technology Department",
               },
               {
-                value:
-                  "Director, Research Office",
-                label:
-                  "Director, Research Office",
+                value: "Director, Research Office",
+                label: "Director, Research Office",
+              },
+              {
+                value: "Coordinator of Intercultural Indigenous Language Institute",
+                label: "Coordinator of Intercultural Indigenous Language Institute",
+              },
+              {
+                value: "Coordinator, Institute of Banking & Finance",
+                label: "Coordinator, Institute of Banking & Finance",
+              },
+              {
+                value: "Director, Institutional Advancement",
+                label: "Director, Institutional Advancement",
               },
             ]}
             SetAnswer={(e) => dispatch(setDepartment(e.target.value as string))}
