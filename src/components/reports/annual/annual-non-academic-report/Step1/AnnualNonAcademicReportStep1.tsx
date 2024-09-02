@@ -76,8 +76,9 @@ export const AnnualNonAcademicReportStep1: React.FC = () => {
                 value: "Quality Assurance Office",
                 label: "Quality Assurance Office",
               },
-              { value: "Student Affairs ", label: "Student Affairs " },
-              { value: "Quality Assurance", label: "Quality Assurance" },
+              { value: "Student Affairs ", 
+                label: "Student Affairs " 
+              },
               {
                 value: "Environmental Research Institute (ERI) ",
                 label: "Environmental Research Institute (ERI) ",
