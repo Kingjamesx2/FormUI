@@ -56,8 +56,9 @@ export const UBCheckForm: React.FC = () => {
     if (report.name === "Rose Pineda" && report.reportType === "records") {
       return true;
     }
-  
+
     const facultyNames = [
+      // "James Faber",
       "Luis Herrera",
       "Bernard Watler",
       "Thisbe Usher",
@@ -66,7 +67,7 @@ export const UBCheckForm: React.FC = () => {
       "Apolonio Aguilar",
       "Stephanie Windsor",
     ];
-  
+
     const staffNames = [
       "Luis Herrera",
       "Francis Burns",
@@ -92,18 +93,14 @@ export const UBCheckForm: React.FC = () => {
       "Stephanie Windsor",
     ];
 
-    const financeNames = [
-      "Ian Sangster",
-    ]
+    const financeNames = ["Ian Sangster"];
 
-    const HrNames = [
-      "Caryn Guerrero",
-    ]
-  
+    const HrNames = ["Caryn Guerrero"];
+
     if (facultyNames.includes(report.name) && report.reportType === "faculty") {
       return true;
     }
-  
+
     if (staffNames.includes(report.name) && report.reportType === "staff") {
       return true;
     }
@@ -112,13 +109,16 @@ export const UBCheckForm: React.FC = () => {
       return true;
     }
 
-    if (HrNames.includes(report.name) && report.reportType === "HumanResources") {
+    if (
+      HrNames.includes(report.name) &&
+      report.reportType === "HumanResources"
+    ) {
       return true;
     }
-  
+
     return false;
   });
-  
+
   // Map the filtered data to DataGrid rows
   const rows = filteredReports.map((report) => ({
     id: report._id,
@@ -187,6 +187,9 @@ export const UBCheckForm: React.FC = () => {
         case "records":
           apiUrl = `https://api.ub.edu.bz/api/generateRecordsPdf/${id}`;
           break;
+        case "faculty":
+          apiUrl = `https://api.ub.edu.bz/api/generateFacultyPdf/${id}`;
+          break;
         case "staff":
           apiUrl = `https://api.ub.edu.bz/api/generateStaffPdf/${id}`;
           break;
@@ -199,7 +202,7 @@ export const UBCheckForm: React.FC = () => {
         default:
           throw new Error("Invalid report type");
       }
-  
+
       const response = await fetch(apiUrl, {
         method: "GET",
         headers: {
@@ -207,45 +210,44 @@ export const UBCheckForm: React.FC = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-  
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-  
+
       // Check if the response is a PDF
       const contentType = response.headers.get("Content-Type");
       if (contentType !== "application/pdf") {
         throw new Error(`Unexpected content type: ${contentType}`);
       }
-  
+
       // Convert the response to a blob
       const blob = await response.blob();
-  
+
       // Create a URL for the blob
       const url = window.URL.createObjectURL(blob);
-  
+
       // Create a temporary link element
       const a = document.createElement("a");
       a.href = url;
       a.download = fileName; // The filename the user will see
-  
+
       // Append the link to the body
       document.body.appendChild(a);
-  
+
       // Programmatically click the link to trigger the download
       a.click();
-  
+
       // Remove the link after triggering the download
       a.remove();
-  
+
       // Optionally, revoke the object URL after a short delay to release memory
       setTimeout(() => window.URL.revokeObjectURL(url), 100);
     } catch (error) {
       console.error("Error downloading the PDF:", error);
     }
   };
-  
-  
+
   return (
     <Box
       sx={{
