@@ -17,7 +17,7 @@ const CustomDataGrid = styled(DataGrid)(({ theme }) => ({
   },
 }));
 
-export const UBCheckForm: React.FC = () => {
+export const UBFormChecks: React.FC = () => {
   const [reports, setReports] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -286,4 +286,4 @@ export const UBCheckForm: React.FC = () => {
   );
 };
 
-export default UBCheckForm;
+export default UBFormChecks;

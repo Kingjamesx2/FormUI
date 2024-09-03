@@ -53,7 +53,7 @@ export const UBFacultyMeetings: React.FC = () => {
 
       const { data } = await response.json();
 
-      console.log(data);
+      // console.log(data);
       if (data) {
         const newFiles = data
           .filter((file: any) => file.generated_name) // Ensure the file has a valid name

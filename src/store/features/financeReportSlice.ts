@@ -99,7 +99,7 @@ const financeReportSlice = createSlice({
       return { ...state, investments: { ...state.investments, ...action.payload } };
     },
     setFormSubmitted: (state, _: PayloadAction<boolean>) => {
-      console.log('form submitted ', state)
+      // console.log('form submitted ', state)
       return {...state, formSubmitted: true}
     }
   },

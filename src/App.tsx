@@ -12,7 +12,7 @@ import PrivateRoute from "./components/UBPrivateRoute/UBPrivateRoute";
 import HumanResourceStatistics from "./pages/Reports/HumanResourceStatistics";
 import RecordsAndAdmissions from "./pages/Reports/RecordsAndAdmissions";
 import FinanceAndBudgetStatistics from "./pages/Reports/FinanceAndBudgetStatistics";
-import { UBFormsChecks } from "./components/UBFormChecks/UBFormChecks";
+import { UBFormChecks } from "./components/UBFormChecks/UBFormChecks";
 
 const App: React.FC = () => {
   return (
@@ -20,7 +20,7 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/Login" element={<Login />} />
-          <Route path="/UBFormChecks" element={<UBFormsChecks />} />
+          <Route path="/UBFormChecks" element={<UBFormChecks />} />
           <Route element={<PrivateRoute />}>
             <Route index element={<Dashboard />} />
             <Route
