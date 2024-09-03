@@ -69,6 +69,7 @@ export const UBFormChecks: React.FC = () => {
     ];
 
     const staffNames = [
+      "James Faber",
       "Luis Herrera",
       "Francis Burns",
       "akantun",
@@ -126,7 +127,7 @@ export const UBFormChecks: React.FC = () => {
     reportType: report.reportType,
     formSubmitted: report.formSubmitted,
   }));
-
+ console.log(reports)
   // Define columns for DataGrid
   const columns: GridColDef[] = [
     {
