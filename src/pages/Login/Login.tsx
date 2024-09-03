@@ -81,6 +81,7 @@ export const Login = () => {
         "dconorquie",
         "egbert.irving",
         "vpalacio",
+        "swindsor"
       ].includes(data.username)
     ) {
       setConsoleMessage("Login disallowed, contact ICT");

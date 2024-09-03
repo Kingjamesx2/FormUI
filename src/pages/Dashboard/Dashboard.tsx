@@ -412,6 +412,7 @@ export const Dashboard: React.FC = () => {
                 "mteck",
                 "vpalacio",
                 "senriquez",
+                "swindsor"
               ].includes(username) && (
                 <Grid item xs={12} md={12} lg={12}>
                   <UBFormChecks />
@@ -453,6 +454,7 @@ export const Dashboard: React.FC = () => {
                 "lthurton",
                 "ljohnson",
                 "aaguilar",
+                "swindsor"
               ].includes(username) &&
                 !facultyReport.formSubmitted && (
                   <Grid item xs={12} md={4} lg={3}>
@@ -506,6 +508,7 @@ export const Dashboard: React.FC = () => {
                 "delmer.tzib",
                 "dconorquie",
                 "egbert.irving",
+                "swindsor"
               ].includes(username) &&
                 !staffReport.formSubmitted && (
                   <Grid item xs={12} md={4} lg={3}>
@@ -592,7 +595,7 @@ export const Dashboard: React.FC = () => {
                   </Button>
                 </Grid>
               )}
-              {[, "luis.herrera", "isangster"].includes(username) &&
+              {["jfaber" , "luis.herrera", "isangster"].includes(username) &&
                 !financeReport.formSubmitted && (
                   <Grid item xs={12} md={4} lg={3}>
                     <Link
