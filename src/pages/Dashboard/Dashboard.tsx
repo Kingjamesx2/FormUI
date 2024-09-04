@@ -454,7 +454,7 @@ export const Dashboard: React.FC = () => {
                 "lthurton",
                 "ljohnson",
                 "aaguilar",
-                "swindsor"
+                "swindsor",
               ].includes(username) &&
                 !facultyReport.formSubmitted && (
                   <Grid item xs={12} md={4} lg={3}>
@@ -484,13 +484,11 @@ export const Dashboard: React.FC = () => {
                 </Grid>
               )}
               {[
-                "jfaber",
+                // "jfaber",
                 "luis.herrera",
                 "fburns",
                 "akantun",
-                "egbert.irving",
                 "carisa.carrillo",
-                "twilliams",
                 "lcruz",
                 "fpalma",
                 "rpineda",
@@ -503,12 +501,11 @@ export const Dashboard: React.FC = () => {
                 "cguerrero",
                 "isangster",
                 "jsalam",
-                "fburns",
                 "jbabb",
                 "delmer.tzib",
                 "dconorquie",
                 "egbert.irving",
-                "swindsor"
+                // "swindsor"
               ].includes(username) &&
                 !staffReport.formSubmitted && (
                   <Grid item xs={12} md={4} lg={3}>

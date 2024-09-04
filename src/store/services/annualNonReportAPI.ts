@@ -13,7 +13,7 @@ export const annualNonReportAPI = baseAPI.injectEndpoints({
                 try {
                     const { data } = await queryFulfilled
 
-                    if(data?.data?.reportData)
+                    if(data?.data?.reportData._id)
                         dispatch(setAnnualNonReportState(data?.data?.reportData))
                     // console.log(data)
                 } catch(e) {

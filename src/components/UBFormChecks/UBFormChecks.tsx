@@ -65,17 +65,16 @@ export const UBFormChecks: React.FC = () => {
       "Lydia Thurton",
       "Lisa Johnson",
       "Apolonio Aguilar",
-      "Stephanie Windsor",
+      // "Stephanie Windsor",
     ];
 
     const staffNames = [
-      "James Faber",
+      // "James Faber",
       "Luis Herrera",
       "Francis Burns",
-      "akantun",
-      "egbert.irving",
-      "carisa.carrillo",
-      "twilliams",
+      "Arnulfo Kanton",
+      "Egbert Irving",
+      "Carisa Carrillo",
       "Lugie Cruz",
       "Freida Palma",
       "Rose Pindea",
@@ -83,15 +82,15 @@ export const UBFormChecks: React.FC = () => {
       "Martin Cuellar",
       "Jake Snaddon",
       "Roy Polonio",
-      "Trevelee Williams",
+      "Trevelee S. Williams",
       "Maximilliano Ortega",
       "Caryn Guerrero",
       "Ian Sangster",
       "John Salam",
       "Joyanne De Four-Babb",
-      "Delmer Tzib",
+      "Delmar Tzib",
       "Derrick Conorqui",
-      "Stephanie Windsor",
+      // "Stephanie Windsor",
     ];
 
     const financeNames = ["Ian Sangster"];
