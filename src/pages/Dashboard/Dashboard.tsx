@@ -447,8 +447,8 @@ export const Dashboard: React.FC = () => {
           >
             <Grid container spacing={3}>
               {[
-                "jfaber",
-                "luis.herrera",
+                // "jfaber",
+                // "luis.herrera",
                 "bwatler",
                 "tusher",
                 "lthurton",
