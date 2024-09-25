@@ -24,6 +24,7 @@ import { selectRecordReport } from "../../store/features/recordsReportSlice";
 import { selectHRReport } from "../../store/features/HRReportSlice";
 import { selectAnnualNonReport } from "../../store/features/annualNonReportSlice";
 import { RootState } from "../../store/store";
+import { selectDateSubmitted } from "../../store/features/HRReportSlice";
 import UBFormChecks from "../../components/UBFormChecks/UBFormChecks";
 import UBLogo from "../../components/icons/UB_Logo.png";
 
@@ -72,6 +73,7 @@ export const Dashboard: React.FC = () => {
   const facultyReport = useSelector(selectAnnualReport);
   const recordReport = useSelector(selectRecordReport);
   const HRReport = useSelector(selectHRReport);
+  const dateSubmitted = useSelector(selectDateSubmitted);
   //-------------------------------------------------------------
 
   //----------------------------------path ID-------------------------
@@ -246,9 +248,12 @@ export const Dashboard: React.FC = () => {
   //----------------------------------------------Fetch Human Statistics Report-----------------------------------------------------------
   const downloadHRPDF = async (id: string) => {
     try {
+      // Format the date to be sent as a query parameter
+      const formattedDate = dateSubmitted ? dateSubmitted.toISOString() : "";
+
       // Fetch the PDF file
       const response = await fetch(
-        `https://api.ub.edu.bz/api/generateHRPdf/${id}`,
+        `https://api.ub.edu.bz/api/generateHRPdf/${id}?dateSubmitted=${formattedDate}`,
         {
           method: "GET",
           headers: {
@@ -412,7 +417,7 @@ export const Dashboard: React.FC = () => {
                 "mteck",
                 "vpalacio",
                 "senriquez",
-                "swindsor"
+                "swindsor",
               ].includes(username) && (
                 <Grid item xs={12} md={12} lg={12}>
                   <UBFormChecks />
@@ -592,7 +597,7 @@ export const Dashboard: React.FC = () => {
                   </Button>
                 </Grid>
               )}
-              {["jfaber" , "luis.herrera", "isangster"].includes(username) &&
+              {["jfaber", "luis.herrera", "isangster"].includes(username) &&
                 !financeReport.formSubmitted && (
                   <Grid item xs={12} md={4} lg={3}>
                     <Link

@@ -22,6 +22,7 @@ export interface IHRReportState {
   department: string;
   deadline: string;
   numberOfStaff: INumberOfStaff;
+  dateSubmitted: Date | null;
   formSubmitted: boolean;
 }
 
@@ -32,6 +33,7 @@ const HRReportInitialState: IHRReportState = {
   academicYearID: "",
   department: "",
   deadline: "",
+
   numberOfStaff: {
     FulltimeFaculty: {
       EducationAndArts: 0,
@@ -55,6 +57,7 @@ const HRReportInitialState: IHRReportState = {
       Total: 0,
     },
   },
+  dateSubmitted: null,
   formSubmitted: false,
 };
 
@@ -80,6 +83,9 @@ const hrReportSlice = createSlice({
     setNumberOfStaff: (state, action: PayloadAction<INumberOfStaff>) => {
       return { ...state, numberOfStaff: { ...action.payload } };
     },
+    setDateSubmitted: (state, action: PayloadAction<Date | null>) => {
+      return { ...state, dateSubmitted: action.payload };
+    },
     setFormSubmitted: (state, _: PayloadAction<boolean>) => {
       return { ...state, formSubmitted: true };
     },
@@ -94,6 +100,7 @@ export const {
   setDeadline,
   setNumberOfStaff,
   setFormSubmitted,
+  setDateSubmitted,
 } = hrReportSlice.actions;
 
 export const selectHRReport = (state: RootState) => state.hrReport;
@@ -103,8 +110,8 @@ export const selectAcademicYearID = (state: RootState) =>
   state.hrReport.academicYearID;
 export const selectDepartment = (state: RootState) => state.hrReport.department;
 export const selectDeadline = (state: RootState) => state.hrReport.deadline;
-export const selectNumberOfStaff = (state: RootState) =>
-  state.hrReport.numberOfStaff;
+export const selectNumberOfStaff = (state: RootState) => state.hrReport.numberOfStaff;
+export const selectDateSubmitted = (state: RootState) => state.hrReport.dateSubmitted;
 // export const selectFulltimeFaculty = (state: RootState) => state.hrReport.numberOfStaff.FulltimeFaculty;
 // export const selectAdjunctFaculty = (state: RootState) => state.hrReport.numberOfStaff.AdjunctFaculty;
 // export const selectNonTeachingStaff = (state: RootState) => state.hrReport.numberOfStaff.NonTeachingStaff;

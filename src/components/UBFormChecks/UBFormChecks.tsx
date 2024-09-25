@@ -77,7 +77,7 @@ export const UBFormChecks: React.FC = () => {
       "Carisa Carrillo",
       "Lugie Cruz",
       "Freida Palma",
-      "Rose Pindea",
+      "Rose Pineda",
       "Marcia Commissiong",
       "Martin Cuellar",
       "Jake Snaddon",
@@ -87,7 +87,7 @@ export const UBFormChecks: React.FC = () => {
       "Caryn Guerrero",
       "Ian Sangster",
       "John Salam",
-      "Joyanne De Four-Babb",
+      "Joyanne Babb",
       "Delmar Tzib",
       "Derrick Conorqui",
       // "Stephanie Windsor",
@@ -126,7 +126,7 @@ export const UBFormChecks: React.FC = () => {
     reportType: report.reportType,
     formSubmitted: report.formSubmitted,
   }));
- console.log(reports)
+  console.log(reports);
   // Define columns for DataGrid
   const columns: GridColDef[] = [
     {
@@ -212,7 +212,7 @@ export const UBFormChecks: React.FC = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTPs error! status: ${response.status}`);
       }
 
       // Check if the response is a PDF

@@ -7,7 +7,6 @@ import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import AnnualAcademicReport from "./pages/Reports/AnnualAcademicReport";
 import AnnualNonAcademicReport from "./pages/Reports/AnnualNonAcademicReport";
-// import KeyStatisticsReport from './pages/Reports/KeyStatisticsReport';
 import PrivateRoute from "./components/UBPrivateRoute/UBPrivateRoute";
 import HumanResourceStatistics from "./pages/Reports/HumanResourceStatistics";
 import RecordsAndAdmissions from "./pages/Reports/RecordsAndAdmissions";
